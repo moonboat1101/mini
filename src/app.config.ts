@@ -5,6 +5,7 @@ export default defineAppConfig({
     "pages/TurtleSoup/index",
     "pages/Wish/index",
     "pages/Pokemon/index",
+     "pages/ScriptRecord/index",
   ],
   window: {
     backgroundTextStyle: "light",

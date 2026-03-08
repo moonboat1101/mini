@@ -1,0 +1,130 @@
+.scriptRecord {
+  padding: 24px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: #f6f7fb;
+
+  .sortBar {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    font-size: 28px;
+
+    .sortItem {
+      padding: 8px 20px;
+      border-radius: 999px;
+      background-color: #e4ecf7;
+      color: #555;
+    }
+
+    .sortItemActive {
+      background: linear-gradient(
+        135deg,
+        rgba(227, 242, 253, 0.9) 0%,
+        rgba(243, 229, 245, 0.9) 50%,
+        rgba(252, 228, 236, 0.9) 100%
+      );
+      color: #222;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  .cardList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .cover {
+    width: 160px;
+    height: 220px;
+    border-radius: 14px;
+    background-color: #e0e0e0;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .cardRight {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .cardHeaderRow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .cardTitle {
+    font-size: 32px;
+    font-weight: 600;
+    color: #222;
+    flex: 1;
+  }
+
+  .cardHeaderRight {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .playTime {
+    font-weight: 500;
+    font-size: 26px;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+  }
+
+  .starIcon {
+    color: #f5a623;
+    font-size: 30px;
+  }
+
+  .ratingValue {
+    font-size: 26px;
+  }
+
+  .description {
+    font-size: 26px;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  .descriptionCollapsed {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .descriptionExpanded {
+    display: block;
+  }
+
+  .toggleArrow {
+    margin-top: 8px;
+    text-align: left;
+    font-size: 24px;
+    color: #999999;
+  }
+}

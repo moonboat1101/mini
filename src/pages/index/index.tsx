@@ -25,6 +25,10 @@ export default function Index() {
       title: "海龟汤",
       url: "/pages/TurtleSoup/index",
     },
+    {
+      title: "剧本杀记录",
+      url: "/pages/ScriptRecord/index",
+    },
   ];
 
   return (
