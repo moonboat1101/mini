@@ -1,3 +1,5 @@
+@import "../../styles/theme.less";
+
 .turtleSoupContainer {
   display: flex;
   flex-direction: column;
@@ -5,16 +7,19 @@
   height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
+  background: radial-gradient(circle at top, fade(@color-gold, 18%), transparent 55%),
+    linear-gradient(160deg, @color-bg-page 0%, @color-bg-page 40%, @color-bg-page 100%);
 
   .title {
     font-size: 36px;
     margin-bottom: 12px;
+    color: @color-gold;
   }
 
   .contentArea {
     flex: 1;
     font-size: 28px;
-    color: #222;
+    color: @color-text-primary;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -22,34 +27,36 @@
     padding-right: 18px;
 
     .scenarioBox {
-      background: #f6fafd;
-      border-radius: 14px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      background: @color-bg-card;
+      border-radius: @radius-md;
+      box-shadow: @shadow-card;
       padding: 16px 12px 8px 12px;
       display: flex;
       flex-direction: column;
       margin-bottom: 8px;
+      border: 1px solid @color-border-subtle;
 
       .scenarioTitle {
         font-size: 32px;
         font-weight: bold;
-        color: #3a7ca5;
+        color: @color-gold;
         margin-bottom: 6px;
       }
     }
 
     .solutionBox {
-      background: #f9f6fd;
-      border-radius: 14px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      background: @color-bg-card-soft;
+      border-radius: @radius-md;
+      box-shadow: @shadow-card;
       padding: 16px 12px 8px 12px;
       display: flex;
       flex-direction: column;
+      border: 1px solid @color-border-subtle;
 
       .solutionTitle {
         font-size: 32px;
         font-weight: bold;
-        color: #b66eb8;
+        color: lighten(@color-gold, 6%);
         margin-bottom: 6px;
       }
     }
@@ -67,14 +74,9 @@
       max-width: 420px;
       height: 68px;
       margin: 0 auto;
-      border-radius: 24px;
-      background: linear-gradient(
-        135deg,
-        rgba(227, 242, 253, 0.65) 0%,
-        rgba(243, 229, 245, 0.65) 50%,
-        rgba(252, 228, 236, 0.65) 100%
-      );
-      color: #222;
+      border-radius: @radius-pill;
+      background: linear-gradient(135deg, @color-gold 0%, @color-gold-deep 100%);
+      color: @color-bg-page;
       font-size: 32px;
       font-weight: bold;
       display: flex;
@@ -82,7 +84,9 @@
       justify-content: center;
       border: none !important;
       outline: none !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.09);
+      box-shadow:
+        0 0 0 1px fade(@color-gold, 30%),
+        0 14px 28px rgba(0, 0, 0, 0.8);
       &::after,
       &::before {
         border: none !important;
@@ -93,7 +97,7 @@
     }
     .btnChange:active {
       transform: translateY(2px);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
     }
   }
 }

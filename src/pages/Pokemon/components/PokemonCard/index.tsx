@@ -64,7 +64,7 @@ const PokemonCard: React.FC<Props> = (props) => {
               background:
                 data?.[i?.key] === ans?.[i?.key] &&
                 (data?.[i?.key] || data?.[i?.key] === false)
-                  ? "linear-gradient(135deg, #d1f0d9 0%, #f0fdf4 100%)"
+                  ? "linear-gradient(135deg, #f3b47a 0%, #db924b 100%)"
                   : "",
             }}
           >

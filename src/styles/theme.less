@@ -1,0 +1,82 @@
+// 全局 coffee（参考 daisyUI coffee）主题变量
+// 背景以深咖棕为主，强调色为略偏橙的咖色
+@color-bg-page: #20161f;
+@color-bg-page-soft: #2a1c24;
+@color-bg-card: #29181f;
+@color-bg-card-soft: #341f27;
+@color-bg-elevated: #3b252f;
+
+// 这里仍沿用 @color-gold 命名，但实际是 coffee 主题的 primary / accent
+@color-gold: #db924b; // coffee primary
+@color-gold-soft: #f3b47a;
+@color-gold-deep: #b46b2e;
+
+@color-text-primary: #f5eee7; // 浅奶油色文字
+@color-text-secondary: #d1c1b6;
+@color-text-muted: #a3897a;
+
+@color-border-subtle: #3a262f;
+@color-border-strong: #553544;
+
+@shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.8);
+@shadow-card: 0 10px 24px rgba(0, 0, 0, 0.7);
+
+@radius-lg: 32px;
+@radius-md: 24px;
+@radius-pill: 999px;
+
+// 页面基础样式（整体是深咖背景 + 轻微 vignette）
+page {
+  background: radial-gradient(
+    circle at top,
+    #2b1a22 0,
+    @color-bg-page 55%,
+    #120910 100%
+  );
+  color: @color-text-primary;
+}
+
+body {
+  background-color: transparent;
+  color: @color-text-primary;
+}
+
+// 通用卡片容器
+.moon-card {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(245, 208, 107, 0.18),
+      transparent 55%
+    ),
+    @color-bg-card;
+  border-radius: @radius-lg;
+  box-shadow: @shadow-card;
+  border: 1px solid rgba(245, 208, 107, 0.14);
+}
+
+// 通用按钮
+.moon-button-primary {
+  background: linear-gradient(135deg, @color-gold 0%, @color-gold-deep 100%);
+  color: #050608;
+  border-radius: @radius-pill;
+  border: none;
+  box-shadow:
+    0 0 0 1px rgba(245, 208, 107, 0.3),
+    0 14px 28px rgba(0, 0, 0, 0.8);
+}
+
+.moon-button-primary--ghost {
+  background: transparent;
+  color: @color-gold;
+  border-radius: @radius-pill;
+  border: 1px solid rgba(245, 208, 107, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+.moon-chip {
+  border-radius: @radius-pill;
+  background: rgba(21, 25, 40, 0.9);
+  border: 1px solid rgba(245, 208, 107, 0.26);
+  color: @color-text-secondary;
+}

@@ -1,11 +1,16 @@
+@import "../../../../styles/theme.less";
+
 .card {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 24px;
   width: 100%;
   box-sizing: border-box;
   padding: 24px;
   display: flex;
   flex-direction: column;
+  border-radius: @radius-lg;
+  background: radial-gradient(circle at top left, fade(@color-gold, 16%), transparent 55%),
+    @color-bg-card;
+  box-shadow: @shadow-card;
+  border: 1px solid fade(@color-gold, 18%);
 
   .cardHeader {
     display: flex;
@@ -20,8 +25,8 @@
 
     .cardHeaderRight {
       font-size: 24px;
-      color: #5d5fef;
-      border: 1px solid #5d5fef;
+      color: @color-gold;
+      border: 1px solid fade(@color-gold, 60%);
       padding: 2px 8px;
       border-radius: 12px;
     }
@@ -31,6 +36,7 @@
       height: 42px;
       border-radius: 12px;
       margin-right: 12px;
+      box-shadow: 0 0 0 1px fade(@color-gold, 25%);
     }
   }
 
@@ -45,10 +51,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
       border-radius: 24px;
       padding: 12px;
       font-size: 24px;
+      background: @color-bg-card-soft;
+      color: @color-text-primary;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
     }
   }
 }

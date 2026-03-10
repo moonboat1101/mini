@@ -1,3 +1,5 @@
+@import "../../styles/theme.less";
+
 .wish {
   padding: 24px;
   position: relative;
@@ -6,6 +8,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background: radial-gradient(circle at top, fade(@color-gold, 18%), transparent 55%),
+    linear-gradient(160deg, @color-bg-page 0%, @color-bg-page 40%, @color-bg-page 100%);
 
   .wishData {
     display: flex;
@@ -16,25 +20,27 @@
 
     .wishDataCard {
       flex: 1;
-      background: #fff;
-      border-radius: 12px;
+      background: @color-bg-card;
+      border-radius: @radius-md;
       padding: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+      box-shadow: @shadow-card;
+      border: 1px solid fade(@color-gold, 18%);
       transition: all 0.3s ease;
 
       .cardLabel {
         font-size: 0.7rem;
-        color: #666;
+        color: @color-text-muted;
         margin-bottom: 4px;
       }
 
       .cardValue {
         font-size: 1rem;
         font-weight: bold;
+        color: @color-text-primary;
       }
     }
   }
@@ -42,20 +48,22 @@
   .wishHistoryTitle {
     font-size: 36px;
     font-weight: bold;
-    color: #3a7ca5;
+    color: @color-gold;
     margin: 6px 0 12px 0;
   }
 
   .wishHistory {
     flex: 1;
-    background-color: #f6fafd;
-    border-radius: 14px;
+    background-color: @color-bg-card-soft;
+    border-radius: @radius-md;
     padding: 12px;
     overflow: auto;
+    box-shadow: @shadow-soft;
+    border: 1px solid @color-border-subtle;
 
     .wishHistoryTip {
       font-size: 24px;
-      color: rgba(0, 0, 0, 0.6);
+      color: @color-text-muted;
     }
   }
 
@@ -70,14 +78,9 @@
     .footerButton {
       margin: 0;
       width: 28%;
-      border-radius: 24px;
-      background: linear-gradient(
-        135deg,
-        rgba(227, 242, 253, 0.65) 0%,
-        rgba(243, 229, 245, 0.65) 50%,
-        rgba(252, 228, 236, 0.65) 100%
-      );
-      color: #222;
+      border-radius: @radius-pill;
+      background: linear-gradient(135deg, @color-gold 0%, @color-gold-deep 100%);
+      color: @color-bg-page;
       font-size: 32px;
       font-weight: bold;
       display: flex;
@@ -85,7 +88,9 @@
       justify-content: center;
       border: none !important;
       outline: none !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.09);
+      box-shadow:
+        0 0 0 1px fade(@color-gold, 30%),
+        0 14px 28px rgba(0, 0, 0, 0.8);
       &::after,
       &::before {
         border: none !important;
@@ -96,7 +101,7 @@
     }
     .footerButton:active {
       transform: translateY(2px);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
     }
   }
 }

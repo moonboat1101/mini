@@ -1,4 +1,4 @@
 export default {
-  navigationBarTitleText: "米池模拟器",
+  navigationBarTitleText: "剧本杀记录",
   enableShareAppMessage: true,
 };

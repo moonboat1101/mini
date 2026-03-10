@@ -21,7 +21,7 @@ const GoldTotal = (props: GoldTotalProps) => {
   }, 0);
   const goldPull = data?.reduce(
     (pre, cur) => (cur.name !== "已垫" ? pre + cur.count : pre),
-    0
+    0,
   );
   const avgGold = goldCount ? (goldPull / goldCount).toFixed(1) : "-";
   const avgLimit = limitCount ? (goldPull / limitCount).toFixed(1) : "-";
@@ -73,9 +73,7 @@ const GoldTotal = (props: GoldTotalProps) => {
               key={index}
               className={styles.listItem}
               style={{
-                background: role?.isNormal
-                  ? "linear-gradient(135deg, #ffffff 0%, #ffeef8 100%)"
-                  : "linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%)",
+                background: "linear-gradient(135deg, #f3b47a 0%, #db924b 100%)",
               }}
             >
               {role && !role?.englishName?.includes("NO-PIC-") ? (

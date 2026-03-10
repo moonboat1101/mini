@@ -1,3 +1,5 @@
+@import "../../styles/theme.less";
+
 .container {
   height: 100vh;
   box-sizing: border-box;
@@ -7,6 +9,50 @@
   padding: 24px;
   gap: 16px;
   position: relative;
+  background:
+    radial-gradient(circle at top, fade(@color-gold, 18%), transparent 55%),
+    linear-gradient(
+      160deg,
+      @color-bg-page 0%,
+      @color-bg-page 40%,
+      @color-bg-page 100%
+    );
+
+  .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 9999px;
+    object-fit: cover;
+    box-shadow:
+      0 0 0 2px fade(@color-gold, 50%),
+      0 12px 24px rgba(0, 0, 0, 0.85);
+  }
+
+  .titleGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .brandCn {
+    font-size: 40px;
+    font-weight: 700;
+    color: @color-text-primary;
+  }
+
+  .brandEn {
+    font-size: 26px;
+    color: @color-text-secondary;
+    letter-spacing: 0.12em;
+  }
 
   .cardList {
     flex: 1;
@@ -16,34 +62,42 @@
     align-items: center;
     gap: 24px;
     overflow: auto;
+    box-sizing: border-box;
 
     .card {
+      box-sizing: border-box;
       width: 100%;
       height: 120px;
-      border-radius: 24px;
+      border-radius: 48px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      font-size: 42px;
+      justify-content: space-between;
+      padding: 0 40px;
+      font-size: 40px;
       font-weight: bold;
-      background: linear-gradient(
-        135deg,
-        rgba(227, 242, 253, 0.6) 0%,
-        rgba(243, 229, 245, 0.6) 50%,
-        rgba(252, 228, 236, 0.6) 100%
+      color: @color-text-primary;
+      background: radial-gradient(
+        circle at top left,
+        @color-gold,
+        @color-gold-deep
       );
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+      box-shadow:
+        0 0 0 1px fade(@color-gold, 36%),
+        0 18px 32px rgba(0, 0, 0, 0.85);
+      transition: all 0.25s ease-out;
+
       &:active {
-        transform: translateY(2px);
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(2px) scale(0.99);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
       }
 
-      .cardIcon {
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
+      .cardTitle {
+        flex: 1;
+        text-align: left;
+      }
+
+      .cardArrow {
+        font-size: 40px;
       }
     }
   }
@@ -58,13 +112,19 @@
     .divider {
       width: 80%;
       height: 1px;
-      background: #ccc;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        fade(@color-gold, 65%),
+        transparent
+      );
       margin-top: 16px;
+      opacity: 0.9;
     }
 
     .contactText {
       font-size: 24px;
-      color: #999;
+      color: @color-text-secondary;
       text-align: center;
     }
   }
