@@ -5,6 +5,8 @@ export const PLAYER_PIC: Record<string, string> = {
   SZY: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3pJp2kTP8_vx-MtjKTyVibrSrcTkEAACGyAAAvda2Vaay0TfDgd3KTsE.jpg",
   CZH: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3p5p2kUDXhllRROPscUuqMnH8bDB7wACJyAAAvda2VY9dG4lPBoKSzsE.jpg",
   ZLW: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3p9p2kUVnT-QIvA-XrT-kvIoSgbAoAACKSAAAvda2VYu4nmHREmIbzsE.jpg",
+  YWL: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3zFp2lEKIOWe4ArXn7XUaiZtTlFacQAC-yAAAvda2Vbb0FlOUafkhzsE.jpg",
+  WGL: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES35Zp2lMI0dCw7tAT3_ZZWTNl7FBasgACaCEAAvda2VYPHlq9bgjd-zsE.jpg",
 };
 
 export const scriptGames = [
@@ -15,8 +17,8 @@ export const scriptGames = [
     score: 3,
     img: "https://kimi-web-img.moonshot.cn/img/picx.zhimg.com/d952c7b53fae0ec80bd74020e775c4a00bfd6dc6.jpg",
     comment:
-      "有点短了，戛然而止，而且这个崩坏，崩的我不是很爽，推翻再盘一轮可能更好，参考死幻",
-    players: ["WYZ", "TJJ", "WJL", "SZY", "CZH", "ZLW"],
+      "整体时间 5.5h 有点短了，戛然而止，而且这个崩坏不是很爽，推翻再盘一轮可能更好，参考死幻",
+    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "SZY"],
   },
   {
     name: "月落洼",
@@ -26,6 +28,7 @@ export const scriptGames = [
     img: "https://kimi-web-img.moonshot.cn/img/img1.gamersky.com/84a12c7a0beb9de95bc8405acfee17df94f4a779.jpg",
     comment:
       "玩的是凶手，没理乱争，藏住了杀人可行性！根据结果可以给到满分，但是客观来说，明凶本还是不如纯还原好，逻辑缜密度上也差一点",
+    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "YWL"],
   },
   {
     name: "须臾",
@@ -33,6 +36,7 @@ export const scriptGames = [
     desc: '我见到那载着麦草的马车，哥哥曾带我坐过。草堆软软的，我整个人都陷了进去。我听见哥哥慌乱地叫喊，黑暗中的我大笑。奇怪，他为何听不见我的笑声？我又听见了那奇怪的歌声：走马织草筐~筐里睡纸床~弥留间回望~须臾划阴阳~现代中式变格推理本，以道教理论为基础的世界观，融入佛教因果循环理论，充满"善恶阴阳、一念之差"的中式寓意，细思极恐的细节设计。',
     score: 4,
     img: "https://kimi-web-img.moonshot.cn/img/img1.gamersky.com/f505163a43de57535ae70b8b2b18c0eca4b310c0.jpg",
+    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "YWL"],
   },
   {
     name: "弥留",
@@ -40,6 +44,7 @@ export const scriptGames = [
     desc: "都市的某个夜晚，一曲凄婉的旋律、一滩殷红的血迹将一群看似平凡的人引入一个充满未知与恐惧的世界。命运如同周而复始的迷宫，人心则是深不可测的汪洋。现代硬核推理本，新本格与中式恐怖风格，4男3女可反串，约5.5小时。在探索真相的过程中，既感受到推理的乐趣，又体验到中式恐怖独有的氛围，关于命运与人心的深刻探讨。",
     score: 3,
     img: "https://kimi-web-img.moonshot.cn/img/img1.gamersky.com/d67edf2b7fc8a10fa8d97f95c4afcc890dc27ebb.jpg",
+    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "SZY", "WGL"],
   },
   {
     name: "安美纳斯DE死亡推想",
@@ -47,7 +52,9 @@ export const scriptGames = [
     desc: '记忆，像是从另一个世界倾倒而来的海水，等到风平浪静，"我们"便看到了水面中浮现着的"我们"的模样。这便是安美纳斯，这便是"我们"，一切的始源。被大雾包裹的季之馆，凶手和死者到底身在何处？布满探测装置的矩形馆，究竟如何打开别人已经关闭的房门？排布奇特的阴阳馆，是谁借由他人的城墙，铸造自己的壁垒？现代中式推理新本格，长逻辑链设定推理。',
     score: 5,
     img: "https://kimi-web-img.moonshot.cn/img/80larpnew-1251545914.cos.ap-guangzhou.myqcloud.com/87b1e33fc8498f57f5031a11712b65af8269721b.jpg",
-    comment: "降维打击！",
+    comment:
+      "降维打击！！！降维打击！！！降维打击！！！任何人不去玩玩都会伤心的好么",
+    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "YWL"],
   },
   {
     name: "猫岛谋杀循环",
@@ -55,6 +62,7 @@ export const scriptGames = [
     desc: '孤僻少年桃山优离奇自杀，为了追寻真相，心理教授将记载当年事件的六本日记启封，邀请了六位看似无关的客人来参加这场推理的饕餮晚宴。血缸中溺亡的人彘、铁架上残破的肢体、暴雨时离奇的断首、悬崖下模糊的头皮、熔炉里碳化的骨架、密室内蒸发的人影。无人生还的诅咒，是开启谋杀循环的源头。日式推理新本格，以"变态推理"与"逻辑循环"为核心。',
     score: 4,
     img: "https://kimi-web-img.moonshot.cn/img/80larpnew-1251545914.cos.ap-guangzhou.myqcloud.com/18f49981a6bd3047ffb3cedfb058c804c7800345.png",
+    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "SZY"],
   },
   {
     name: "极乐密室",
@@ -62,6 +70,7 @@ export const scriptGames = [
     desc: '一座浓雾环绕的小岛上，竟有一处犹如世外桃源一般的江南园林。然而，当你走进这座园林，你会发现这里空无一人，一片死寂。清朝末年，一位名叫唐志海的渔夫在遭遇海难之后，被海水冲到了这座孤岛上来，他无意之中看见了这处隐世园林，同时他还发现了这片美景之下所隐藏的十三口棺材……唐志海将园林取名为唐园，将自己封为这里的主人。民国四年（1915年），唐园的主人已换成唐志海的儿子唐伟杰。然而这唐园之内却并不太平，先有一男一女两名仆人失踪，尔后又有一名上岛游玩的富家小姐在园内人间蒸发，加之最近一年唐园不断地传出闹鬼事件。为了驱除厉鬼，唐伟杰请来了灵能教的教主万志龙前来捉鬼，同一天，上海赌场大亨的儿子赵文良也突然光临唐园，打算向唐伟杰的女儿唐雪漫提亲。然而，隐藏在岛上的"厉鬼"正静静地注视着这一切，地狱的罗网已经缓缓张开，两桩诡谲的密室杀人事件即将上演。民国本格硬核推理，双密室设计，逻辑严密，是五人本中的经典之作。',
     score: 3,
     img: "https://kimi-web-img.moonshot.cn/img/picx.zhimg.com/7649d5adf5f66d330b88c7653bd5fe994cad08d8.jpg",
+    players: ["WYZ", "TJJ", "WJL", "SZY", "WGL"],
   },
   {
     name: "病娇3:近乎正常的我们",
@@ -69,6 +78,7 @@ export const scriptGames = [
     desc: "我叫萧何，拥有七个孤独且热闹的分裂人格。我们的生活如架上落满灰尘的书本，平淡到毫无波澜，从未被血腥的手掌拾起，也并没有人喜欢。但我想，我们曾经失去的东西，也会很难过地想要找回我们吧。现代惊悚还原本，病娇系列第三部，剧情上包含第一部《精分日记》的彩蛋，在情感羁绊方面推荐先玩第一部再体验本作，宁浩与萧何的羁绊会更加丰满和深刻。",
     score: 3,
     img: "https://kimi-web-img.moonshot.cn/img/cdn.store-assets.com/39cc1d8a9d55c3e695aee80a40d9de1631a96170.jpeg",
+    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "SZY"],
   },
   {
     name: "雪乡连环杀人案件",

@@ -53,6 +53,37 @@ function ModalPlayersRow({ players }: { players: string[] }) {
   );
 }
 
+function CardPlayersRow({ players }: { players: string[] }) {
+  const { withPic, withoutPic } = splitPlayersByAvatar(players, PLAYER_PIC);
+  return (
+    <View className={styles.cardPlayersRow}>
+      {withPic.length ? (
+        <View className={styles.cardPlayersAvatars}>
+          {withPic.map((pid, i) => (
+            <View
+              key={pid}
+              className={styles.cardPlayerAvatarWrap}
+              style={{ zIndex: withPic.length - i }}
+            >
+              <Image
+                className={styles.cardPlayerAvatarImg}
+                src={PLAYER_PIC[pid]}
+                mode="aspectFill"
+              />
+            </View>
+          ))}
+        </View>
+      ) : null}
+      {withoutPic.length ? (
+        <Text className={styles.cardPlayersRest}>
+          {withPic.length ? ", " : ""}
+          {withoutPic.join(", ")}
+        </Text>
+      ) : null}
+    </View>
+  );
+}
+
 function measureModalScrollBodyPx(): Promise<number | undefined> {
   return new Promise((resolve) => {
     if (
@@ -135,24 +166,23 @@ export default function ScriptRecord() {
     }
 
     let cancelled = false;
+    let hasSet = false;
     const run = () => {
+      if (hasSet) return;
       measureModalScrollBodyPx().then((px) => {
-        if (!cancelled && px != null) {
+        if (!cancelled && px != null && !hasSet) {
+          hasSet = true;
           setModalScrollBodyPx(px);
         }
       });
     };
 
-    setModalScrollBodyPx(undefined);
     run();
-    Taro.nextTick(run);
     const t1 = setTimeout(run, 32);
-    const t2 = setTimeout(run, 120);
 
     return () => {
       cancelled = true;
       clearTimeout(t1);
-      clearTimeout(t2);
     };
   }, [activeItem]);
 
@@ -232,8 +262,16 @@ export default function ScriptRecord() {
                 </View>
               </View>
 
+              {item.players?.length ? (
+                <CardPlayersRow players={item.players} />
+              ) : null}
+
               <Text
-                className={`${styles.description} ${styles.descriptionPreview}`}
+                className={`${styles.description} ${
+                  item.players?.length
+                    ? styles.descriptionPreview
+                    : styles.descriptionPreviewFull
+                }`}
               >
                 {item.desc}
               </Text>
