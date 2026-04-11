@@ -63,6 +63,7 @@
       0 0 0 1px fade(@color-gold, 18%);
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     gap: 16px;
   }
 
@@ -78,16 +79,19 @@
 
   .cardRight {
     flex: 1;
+    align-self: stretch;
+    min-height: 220px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   .cardHeaderRow {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 8px;
+    flex-shrink: 0;
   }
 
   .cardTitle {
@@ -131,21 +135,205 @@
     line-height: 1.6;
   }
 
-  .descriptionCollapsed {
+  .descriptionPreview {
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .modalMask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  .modalPanel {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    max-height: 80vh;
+    min-height: 0;
+    background:
+      radial-gradient(
+        circle at top left,
+        fade(@color-gold, 14%),
+        transparent 50%
+      ),
+      @color-bg-card;
+    border-radius: @radius-md;
+    border: 1px solid fade(@color-gold, 24%);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.85);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .modalHeader {
+    grid-row: 1;
+    min-width: 0;
+    background:
+      radial-gradient(
+        circle at top left,
+        fade(@color-gold, 14%),
+        transparent 50%
+      ),
+      @color-bg-card;
+    border-bottom: 1px solid fade(@color-gold, 12%);
+  }
+
+  .modalTop {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px 20px 16px;
+  }
+
+  .modalCover {
+    width: 143px;
+    height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: @color-bg-page-soft;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.85);
+  }
+
+  .modalTopMeta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .modalTitle {
+    font-size: 34px;
+    font-weight: 600;
+    color: @color-text-primary;
+    line-height: 1.35;
+  }
+
+  .modalMetaRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .modalPlayTime {
+    font-size: 28px;
+    color: @color-text-secondary;
+    font-weight: 500;
+  }
+
+  .modalRating {
+    display: flex;
+    align-items: center;
+  }
+
+  @player-avatar-size: 48px;
+
+  .modalPlayersRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    margin-top: 8px;
+    min-width: 0;
+  }
+
+  .modalPlayersAvatars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .modalPlayerAvatarWrap {
+    position: relative;
+    width: @player-avatar-size;
+    height: @player-avatar-size;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    border: 2px solid fade(@color-bg-card, 96%);
+    background-color: @color-bg-page-soft;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+
+  .modalPlayerAvatarWrap + .modalPlayerAvatarWrap {
+    margin-left: -(@player-avatar-size * 0.2);
+  }
+
+  .modalPlayerAvatarImg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .modalPlayersRest {
+    flex: 1;
+    min-width: 0;
+    font-size: 26px;
+    line-height: 1.5;
+    color: @color-text-muted;
+    word-break: break-all;
+  }
+
+  .modalBody {
+    grid-row: 2;
+    min-width: 0;
+    min-height: 120px;
+    padding: 16px 20px 24px;
+    box-sizing: border-box;
     overflow: hidden;
   }
 
-  .descriptionExpanded {
+  .modalSectionTitle {
     display: block;
+    font-size: 26px;
+    font-weight: 600;
+    color: @color-text-secondary;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
   }
 
-  .toggleArrow {
-    margin-top: 8px;
-    text-align: left;
-    font-size: 24px;
-    color: @color-text-muted;
+  .modalSynopsis {
+    display: block;
+    font-size: 28px;
+    line-height: 1.65;
+    color: lighten(@color-text-muted, 10%);
+    white-space: pre-wrap;
+  }
+
+  .modalNoteBlock {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid fade(@color-gold, 14%);
+  }
+
+  .modalNoteText {
+    display: block;
+    font-size: 28px;
+    line-height: 1.65;
+    color: @color-text-secondary;
+    white-space: pre-wrap;
   }
 }
