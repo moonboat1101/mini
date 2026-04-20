@@ -7,13 +7,21 @@
   height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
-  background: radial-gradient(circle at top, fade(@color-gold, 18%), transparent 55%),
-    linear-gradient(160deg, @color-bg-page 0%, @color-bg-page 40%, @color-bg-page 100%);
+  background:
+    radial-gradient(circle at top, fade(@color-gold, 18%), transparent 55%),
+    linear-gradient(
+      160deg,
+      @color-bg-page 0%,
+      @color-bg-page 40%,
+      @color-bg-page 100%
+    );
 
   .title {
     font-size: 36px;
     margin-bottom: 12px;
     color: @color-gold;
+    font-weight: bold;
+    line-height: 1.35;
   }
 
   .contentArea {
@@ -30,34 +38,39 @@
       background: @color-bg-card;
       border-radius: @radius-md;
       box-shadow: @shadow-card;
-      padding: 16px 12px 8px 12px;
+      padding: 24px 20px 18px;
       display: flex;
       flex-direction: column;
       margin-bottom: 8px;
       border: 1px solid @color-border-subtle;
-
-      .scenarioTitle {
-        font-size: 32px;
-        font-weight: bold;
-        color: @color-gold;
-        margin-bottom: 6px;
-      }
     }
 
     .solutionBox {
       background: @color-bg-card-soft;
       border-radius: @radius-md;
       box-shadow: @shadow-card;
-      padding: 16px 12px 8px 12px;
+      padding: 24px 20px 18px;
       display: flex;
       flex-direction: column;
       border: 1px solid @color-border-subtle;
 
-      .solutionTitle {
-        font-size: 32px;
+      .solutionToggle {
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: @radius-md;
+        background: linear-gradient(
+          135deg,
+          fade(@color-gold, 10%) 0%,
+          fade(@color-gold, 4%) 100%
+        );
+      }
+
+      .solutionToggleText {
+        font-size: 30px;
         font-weight: bold;
-        color: lighten(@color-gold, 6%);
-        margin-bottom: 6px;
+        color: lighten(@color-gold, 10%);
       }
     }
   }
@@ -75,7 +88,11 @@
       height: 68px;
       margin: 0 auto;
       border-radius: @radius-pill;
-      background: linear-gradient(135deg, @color-gold 0%, @color-gold-deep 100%);
+      background: linear-gradient(
+        135deg,
+        @color-gold 0%,
+        @color-gold-deep 100%
+      );
       color: @color-bg-page;
       font-size: 32px;
       font-weight: bold;

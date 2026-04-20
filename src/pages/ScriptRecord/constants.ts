@@ -128,5 +128,6 @@ export const scriptGames = [
     desc: "夜里，一辆车行驶在国道上，不知驶往何方。车里坐着一家五口人，父母与孩子之间的关系异常紧张。妈妈嘴里一直念叨着什么数着车后面的人，爸爸失了神一般开着车，三个孩子不清楚发生了什么。这个家究竟怎么了，是从什么时候开始这个家就不再正常了？现代惊悚推理本，氛围紧张压抑，探索家庭的秘密与真相。",
     score: 3,
     img: "https://kimi-web-img.moonshot.cn/img/pic1.zhimg.com/ad527969f3b4de46dcd67f28ea027b61e559d58f.jpg",
+    players: ["WYZ", "TJJ", "WJL", "CZH", "SZY"],
   },
 ];
