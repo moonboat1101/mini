@@ -32,27 +32,48 @@
     flex-direction: column;
     gap: 16px;
     overflow: auto;
-    padding-right: 18px;
+    margin: -16px -24px 0;
+    padding: 16px 36px 44px;
+    box-sizing: border-box;
+
+    .soupText {
+      color: @color-text-secondary;
+      line-height: 1.65;
+    }
 
     .scenarioBox {
-      background: @color-bg-card;
+      background:
+        radial-gradient(
+          circle at top left,
+          fade(@color-gold, 16%),
+          transparent 55%
+        ),
+        @color-bg-card;
       border-radius: @radius-md;
-      box-shadow: @shadow-card;
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.9),
+        0 0 0 1px fade(@color-gold, 18%);
       padding: 24px 20px 18px;
       display: flex;
       flex-direction: column;
       margin-bottom: 8px;
-      border: 1px solid @color-border-subtle;
     }
 
     .solutionBox {
-      background: @color-bg-card-soft;
+      background:
+        radial-gradient(
+          circle at top left,
+          fade(@color-gold, 16%),
+          transparent 55%
+        ),
+        @color-bg-card;
       border-radius: @radius-md;
-      box-shadow: @shadow-card;
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.9),
+        0 0 0 1px fade(@color-gold, 18%);
       padding: 24px 20px 18px;
       display: flex;
       flex-direction: column;
-      border: 1px solid @color-border-subtle;
 
       .solutionToggle {
         min-height: 120px;

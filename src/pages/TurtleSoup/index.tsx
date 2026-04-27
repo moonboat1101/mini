@@ -36,12 +36,12 @@ export default function TurtleSoup() {
       <View className={styles.contentArea}>
         <View className={styles.scenarioBox}>
           <Text className={styles.title}>{curTurtleSoup?.title}</Text>
-          <Text>{curTurtleSoup?.scenario}</Text>
+          <Text className={styles.soupText}>{curTurtleSoup?.scenario}</Text>
         </View>
 
         <View className={styles.solutionBox}>
           {showSolution ? (
-            <Text>{curTurtleSoup?.solution}</Text>
+            <Text className={styles.soupText}>{curTurtleSoup?.solution}</Text>
           ) : (
             <View
               className={styles.solutionToggle}
