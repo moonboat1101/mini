@@ -32,7 +32,7 @@ export default function Wish() {
       // 4.根据是否出金给数组塞入合适内容：如果有定轨，则有50%概率为定轨角色，反之直接随机
       if (isGetGold) {
         const filteredList = roleList?.filter((i) =>
-          isNormal ? i?.isNormal : !i?.isNormal
+          isNormal ? i?.isNormal : !i?.isNormal,
         );
         const randomRole =
           filteredList[Math.floor(Math.random() * filteredList?.length)];
@@ -64,7 +64,10 @@ export default function Wish() {
           <View className={styles.cardLabel}>每限定抽数</View>
           <View
             className={styles.cardValue}
-            style={{ color: upPulls > 93.75 ? "red" : "green" }}
+            style={{
+              color:
+                upPulls > 93.75 ? "var(--color-error)" : "var(--color-success)",
+            }}
           >
             {upPulls}
           </View>
@@ -73,7 +76,12 @@ export default function Wish() {
           <View className={styles.cardLabel}>每金抽数</View>
           <View
             className={styles.cardValue}
-            style={{ color: goldPulls > 62.5 ? "red" : "green" }}
+            style={{
+              color:
+                goldPulls > 62.5
+                  ? "var(--color-error)"
+                  : "var(--color-success)",
+            }}
           >
             {goldPulls}
           </View>
@@ -84,22 +92,34 @@ export default function Wish() {
 
       <View className={styles.wishHistory}>
         {history?.map((i) => (
-          <View style={{ display: "flex", alignItems: "center" }}>
+          <View className={styles.historyRow}>
             <View>花费</View>
             <View
+              className={styles.historyPulls}
               style={{
-                width: 32,
-                textAlign: "center",
-                color: i?.pulls > 62.5 ? "red" : "green",
+                color:
+                  i?.pulls > 62.5
+                    ? "var(--color-error)"
+                    : "var(--color-success)",
               }}
             >
               {i?.pulls || 0}
             </View>
             <View style={{ marginRight: 8 }}>抽到了</View>
             {i?.isNormal ? (
-              <View style={{ color: "red" }}>{i?.role}</View>
+              <View
+                className={styles.historyRole}
+                style={{ color: "var(--color-error)" }}
+              >
+                {i?.role}
+              </View>
             ) : (
-              <View style={{ color: "green" }}>{i?.role}</View>
+              <View
+                className={styles.historyRole}
+                style={{ color: "var(--color-success)" }}
+              >
+                {i?.role}
+              </View>
             )}
           </View>
         ))}

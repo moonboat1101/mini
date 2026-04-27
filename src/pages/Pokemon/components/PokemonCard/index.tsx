@@ -59,14 +59,12 @@ const PokemonCard: React.FC<Props> = (props) => {
       <View className={styles.cardInfo}>
         {cardInfos.map((i) => (
           <View
-            className={styles.cardInfoItem}
-            style={{
-              background:
-                data?.[i?.key] === ans?.[i?.key] &&
-                (data?.[i?.key] || data?.[i?.key] === false)
-                  ? "linear-gradient(135deg, #f3b47a 0%, #db924b 100%)"
-                  : "",
-            }}
+            className={`${styles.cardInfoItem} ${
+              data?.[i?.key] === ans?.[i?.key] &&
+              (data?.[i?.key] || data?.[i?.key] === false)
+                ? styles.cardInfoItemMatched
+                : ""
+            }`}
           >
             <View style={{ fontWeight: "bold" }}>{i?.label}</View>
             <View>

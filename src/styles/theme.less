@@ -1,39 +1,87 @@
-// 全局 coffee（参考 daisyUI coffee）主题变量
-// 背景以深咖棕为主，强调色为略偏橙的咖色
-@color-bg-page: #20161f;
-@color-bg-page-soft: #2a1c24;
-@color-bg-card: #29181f;
-@color-bg-card-soft: #341f27;
-@color-bg-elevated: #3b252f;
+// Global coffee theme mapped from the daisyUI "coffee" palette.
+// Keep the existing semantic aliases so page-level styles can share one source of truth.
+@color-base-100: #392c35;
+@color-base-200: #32262f;
+@color-base-300: #261d24;
+@color-base-content: #e1c08b;
 
-// 这里仍沿用 @color-gold 命名，但实际是 coffee 主题的 primary / accent
-@color-gold: #db924b; // coffee primary
-@color-gold-soft: #f3b47a;
-@color-gold-deep: #b46b2e;
+@color-primary: #db924c;
+@color-primary-content: #231a14;
+@color-secondary: #324149;
+@color-secondary-content: #d8dfe1;
+@color-accent: #3e5b74;
+@color-accent-content: #e0e8ef;
+@color-neutral: #261d25;
+@color-neutral-content: #d4d2d4;
+@color-info: #98cbcf;
+@color-info-content: #213639;
+@color-success: #8fc48f;
+@color-success-content: #1f3321;
+@color-warning: #f1cf70;
+@color-warning-content: #3a2c10;
+@color-error: #ed8b76;
+@color-error-content: #3b1e19;
 
-@color-text-primary: #f5eee7; // 浅奶油色文字
-@color-text-secondary: #d1c1b6;
-@color-text-muted: #a3897a;
+@color-bg-page: @color-base-100;
+@color-bg-page-soft: mix(@color-base-100, @color-base-200, 55%);
+@color-bg-card: @color-base-200;
+@color-bg-card-soft: mix(@color-base-200, @color-base-300, 55%);
+@color-bg-elevated: mix(@color-base-100, @color-base-content, 88%);
 
-@color-border-subtle: #3a262f;
-@color-border-strong: #553544;
+@color-gold: @color-primary;
+@color-gold-soft: mix(#ffffff, @color-primary, 72%);
+@color-gold-deep: mix(@color-primary, @color-base-content, 74%);
 
-@shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.8);
-@shadow-card: 0 10px 24px rgba(0, 0, 0, 0.7);
+@color-text-primary: mix(#ffffff, @color-base-content, 82%);
+@color-text-secondary: mix(@color-text-primary, @color-base-content, 62%);
+@color-text-muted: mix(@color-base-300, @color-base-content, 38%);
+
+@color-border-subtle: mix(@color-base-300, @color-primary, 82%);
+@color-border-strong: mix(@color-base-200, @color-primary, 60%);
+
+@shadow-soft: 0 18px 44px rgba(0, 0, 0, 0.72);
+@shadow-card: 0 12px 30px rgba(0, 0, 0, 0.64);
 
 @radius-lg: 32px;
 @radius-md: 24px;
 @radius-pill: 999px;
 
-// 页面基础样式（整体是深咖背景 + 轻微 vignette）
+:root,
 page {
-  background: radial-gradient(
-    circle at top,
-    #2b1a22 0,
-    @color-bg-page 55%,
-    #120910 100%
-  );
+  --color-base-100: @color-base-100;
+  --color-base-200: @color-base-200;
+  --color-base-300: @color-base-300;
+  --color-base-content: @color-base-content;
+  --color-primary: @color-primary;
+  --color-primary-content: @color-primary-content;
+  --color-secondary: @color-secondary;
+  --color-secondary-content: @color-secondary-content;
+  --color-accent: @color-accent;
+  --color-accent-content: @color-accent-content;
+  --color-neutral: @color-neutral;
+  --color-neutral-content: @color-neutral-content;
+  --color-info: @color-info;
+  --color-info-content: @color-info-content;
+  --color-success: @color-success;
+  --color-success-content: @color-success-content;
+  --color-warning: @color-warning;
+  --color-warning-content: @color-warning-content;
+  --color-error: @color-error;
+  --color-error-content: @color-error-content;
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.1875rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+  color-scheme: dark;
   color: @color-text-primary;
+}
+
+page {
+  background: transparent;
 }
 
 body {
@@ -41,28 +89,26 @@ body {
   color: @color-text-primary;
 }
 
-// 通用卡片容器
 .moon-card {
   background:
     radial-gradient(
       circle at top left,
-      rgba(245, 208, 107, 0.18),
+      fade(@color-primary, 18%),
       transparent 55%
     ),
     @color-bg-card;
   border-radius: @radius-lg;
   box-shadow: @shadow-card;
-  border: 1px solid rgba(245, 208, 107, 0.14);
+  border: 1px solid fade(@color-primary, 14%);
 }
 
-// 通用按钮
 .moon-button-primary {
-  background: linear-gradient(135deg, @color-gold 0%, @color-gold-deep 100%);
-  color: #050608;
+  background: @color-gold;
+  color: @color-primary-content;
   border-radius: @radius-pill;
   border: none;
   box-shadow:
-    0 0 0 1px rgba(245, 208, 107, 0.3),
+    0 0 0 1px fade(@color-primary, 30%),
     0 14px 28px rgba(0, 0, 0, 0.8);
 }
 
@@ -70,13 +116,13 @@ body {
   background: transparent;
   color: @color-gold;
   border-radius: @radius-pill;
-  border: 1px solid rgba(245, 208, 107, 0.5);
+  border: 1px solid fade(@color-primary, 50%);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
 }
 
 .moon-chip {
   border-radius: @radius-pill;
-  background: rgba(21, 25, 40, 0.9);
-  border: 1px solid rgba(245, 208, 107, 0.26);
+  background: fade(@color-neutral, 92%);
+  border: 1px solid fade(@color-primary, 26%);
   color: @color-text-secondary;
 }
