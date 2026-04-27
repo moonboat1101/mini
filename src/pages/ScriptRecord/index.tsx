@@ -219,26 +219,29 @@ export default function ScriptRecord() {
   return (
     <View className={styles.scriptRecord}>
       <View className={styles.sortBar}>
-        <Text
-          className={
-            sortType === "time"
-              ? `${styles.sortItem} ${styles.sortItemActive}`
-              : styles.sortItem
-          }
-          onClick={() => setSortType("time")}
-        >
-          按游玩时间
-        </Text>
-        <Text
-          className={
-            sortType === "rating"
-              ? `${styles.sortItem} ${styles.sortItemActive}`
-              : styles.sortItem
-          }
-          onClick={() => setSortType("rating")}
-        >
-          按评分
-        </Text>
+        <View className={styles.sortSwitch}>
+          <View
+            className={`${styles.sortSwitchThumb} ${
+              sortType === "rating" ? styles.sortSwitchThumbRight : ""
+            }`}
+          />
+          <Text
+            className={`${styles.sortSwitchItem} ${
+              sortType === "time" ? styles.sortSwitchItemActive : ""
+            }`}
+            onClick={() => setSortType("time")}
+          >
+            按时间
+          </Text>
+          <Text
+            className={`${styles.sortSwitchItem} ${
+              sortType === "rating" ? styles.sortSwitchItemActive : ""
+            }`}
+            onClick={() => setSortType("rating")}
+          >
+            按评分
+          </Text>
+        </View>
       </View>
 
       <View className={styles.cardList}>
