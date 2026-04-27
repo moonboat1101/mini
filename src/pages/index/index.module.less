@@ -78,24 +78,24 @@
       align-items: center;
       justify-content: center;
       padding: 18px 10px 14px;
-      color: @color-primary-content;
+      color: @color-text-secondary;
       background:
         radial-gradient(
           circle at top left,
-          fade(@color-gold, 18%),
-          transparent 56%
+          fade(@color-gold, 24%),
+          transparent 55%
         ),
-        mix(#ffffff, @color-base-content, 68%);
+        mix(@color-bg-page, @color-gold, 78%);
       box-shadow:
-        0 14px 28px rgba(0, 0, 0, 0.46),
-        0 0 0 1px fade(#ffffff, 42%);
+        0 12px 28px rgba(0, 0, 0, 0.9),
+        0 0 0 1px fade(@color-gold, 22%);
       transition: all 0.25s ease-out;
 
       &:active {
         transform: translateY(2px) scale(0.99);
         box-shadow:
-          0 10px 20px rgba(0, 0, 0, 0.38),
-          0 0 0 1px fade(#ffffff, 36%);
+          0 10px 20px rgba(0, 0, 0, 0.78),
+          0 0 0 1px fade(@color-gold, 18%);
       }
 
       .cardIconWrap {
@@ -121,7 +121,7 @@
         width: 100%;
         font-size: 24px;
         font-weight: 700;
-        color: @color-primary-content;
+        color: @color-text-secondary;
         line-height: 1.25;
         text-align: center;
         white-space: nowrap;
