@@ -64,6 +64,7 @@
     align-content: flex-start;
     gap: 18px;
     overflow: visible;
+    margin-top: 18px;
     padding-bottom: 32px;
     box-sizing: border-box;
 
@@ -105,14 +106,15 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 14px;
-        background: mix(#ffffff, @color-gold, 58%);
+        overflow: hidden;
       }
 
-      .cardIcon {
-        font-size: 30px;
-        font-weight: 700;
-        color: @color-primary-content;
-        line-height: 1;
+      .cardIconImage {
+        width: 62px;
+        height: 62px;
+        display: block;
+        border-radius: 50%;
+        object-fit: cover;
       }
 
       .cardTitle {
@@ -125,22 +127,6 @@
         white-space: nowrap;
       }
 
-      .cardArrowWrap {
-        width: 28px;
-        height: 22px;
-        border-radius: @radius-pill;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 12px;
-        background: fade(@color-primary-content, 10%);
-      }
-
-      .cardArrow {
-        font-size: 20px;
-        color: fade(@color-primary-content, 72%);
-        line-height: 1;
-      }
     }
   }
 }
