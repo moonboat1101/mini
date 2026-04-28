@@ -1,4 +1,4 @@
-import { View, Input, Button } from "@tarojs/components";
+import { View, Input, Button, Text } from "@tarojs/components";
 import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
 
@@ -12,6 +12,28 @@ export default function Genshin() {
   const [tempData, setTempData] = useState<ObjectType[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
+  const exportCommand = `iex(irm 'https://img.lelaer.com/cn.ps1')`;
+
+  const copyExportCommand = () => {
+    Taro.setClipboardData({
+      data: exportCommand,
+      success: () => {
+        Taro.showToast({
+          title: "命令已复制",
+          icon: "success",
+        });
+      },
+    });
+  };
+
+  const startFetch = () => {
+    setAllGoldData([]);
+    setGachaParams({
+      endId: "0",
+      currentPage: 1,
+      gachaType: GachaTypeKey.ROLE,
+    });
+  };
 
   /** 接口请求操作 */
   const fetchData = async () => {
@@ -148,59 +170,41 @@ export default function Genshin() {
         </View>
       ) : null}
 
-      {/** 输入框 */}
+      {/** 输入区 */}
       <View
-        className={styles.inputContainer}
-        style={{ bottom: allGoldData.length ? "1.2rem" : "50%" }}
+        className={styles.entryPanel}
+        style={{
+          bottom: allGoldData.length ? "1.2rem" : "50%",
+        }}
       >
-        <Input
-          className={styles.genshinInput}
-          value={inputValue}
-          onInput={(e) => setInputValue(e.detail.value)}
-          placeholder="请输入导出链接"
-          maxlength={-1}
-        />
+        {!allGoldData.length ? (
+          <View className={styles.guideCard}>
+            <View className={styles.guideHeader}>
+              <Text className={styles.guideTitle}>如何获得导出链接</Text>
+              <Button className={styles.copyButton} onClick={copyExportCommand}>
+                复制命令
+              </Button>
+            </View>
+            <Text className={styles.guideText}>
+              打开原神游戏内抽卡记录页面并翻几页，然后打开电脑终端 Windows
+              PowerShell，运行复制的命令。命令结束后，导出链接会自动复制到剪贴板。
+            </Text>
+          </View>
+        ) : null}
 
-        {inputValue ? (
-          <Button
-            className={styles.genshinButton}
-            onClick={() => {
-              setAllGoldData([]);
-              setGachaParams({
-                endId: "0",
-                currentPage: 1,
-                gachaType: GachaTypeKey.ROLE,
-              });
-            }}
-          >
+        <View className={styles.inputContainer}>
+          <Input
+            className={styles.genshinInput}
+            value={inputValue}
+            onInput={(e) => setInputValue(e.detail.value)}
+            placeholder="请输入导出链接"
+            maxlength={-1}
+          />
+
+          <Button className={styles.genshinButton} onClick={startFetch}>
             开始获取
           </Button>
-        ) : (
-          <Button
-            className={styles.genshinButton}
-            onClick={() => {
-              Taro.showModal({
-                title: "如何获取导出链接？",
-                content: `打开原神游戏内抽卡记录页面并翻几页, 打开电脑终端 windows powershell, 输入 iex(irm 'https://img.lelaer.com/cn.ps1'), 命令运行结束时链接已经自动复制到剪贴板，直接使用即可`,
-                showCancel: false,
-                confirmText: "复制命令",
-                success: () => {
-                  Taro.setClipboardData({
-                    data: `iex(irm 'https://img.lelaer.com/cn.ps1')`,
-                    success: () => {
-                      Taro.showToast({
-                        title: "链接已复制",
-                        icon: "success",
-                      });
-                    },
-                  });
-                },
-              });
-            }}
-          >
-            如何获得?
-          </Button>
-        )}
+        </View>
       </View>
     </View>
   );

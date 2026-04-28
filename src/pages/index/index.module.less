@@ -8,23 +8,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 128px 36px 68px;
-  background:
-    radial-gradient(circle at 76% 28%, fade(@color-gold, 20%), transparent 28%),
-    radial-gradient(circle at 20% 18%, rgba(255, 244, 208, 0.08), transparent 24%),
-    linear-gradient(180deg, #221a22 0%, #392c35 46%, #241d25 100%);
+  padding: 104px 36px 68px;
+  .moon-page-background();
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background:
-      radial-gradient(circle at 53% 8%, fade(@color-gold, 52%) 0 2px, transparent 3px),
-      radial-gradient(circle at 48% 15%, fade(@color-gold, 38%) 0 2px, transparent 3px),
-      radial-gradient(circle at 64% 18%, fade(@color-gold, 44%) 0 2px, transparent 3px),
-      radial-gradient(circle at 74% 34%, fade(@color-gold, 34%) 0 2px, transparent 3px);
-    opacity: 0.72;
+    display: none;
   }
 }
 
@@ -37,7 +29,7 @@
   align-items: center;
   gap: 18px;
   padding: 0 8px;
-  margin-bottom: 48px;
+  margin-bottom: 88px;
 }
 
 .avatar {
@@ -198,7 +190,7 @@
   justify-content: center;
   gap: 22px;
   width: 100%;
-  margin-top: 54px;
+  margin-top: 64px;
   color: mix(@color-gold-soft, @color-base-content, 64%);
 }
 

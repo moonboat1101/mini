@@ -5,11 +5,14 @@ export default defineAppConfig({
     "pages/TurtleSoup/index",
     "pages/Wish/index",
     "pages/Pokemon/index",
-     "pages/ScriptRecord/index",
+    "pages/ScriptRecord/index",
   ],
   window: {
     backgroundTextStyle: "light",
-    navigationBarBackgroundColor: "#ffffff",
-    navigationBarTextStyle: "black",
+    backgroundColor: "#392c35",
+    backgroundColorTop: "#392c35",
+    backgroundColorBottom: "#ffffff",
+    navigationBarBackgroundColor: "#392c35",
+    navigationBarTextStyle: "white",
   },
 });

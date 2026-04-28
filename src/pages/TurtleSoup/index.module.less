@@ -7,14 +7,7 @@
   height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
-  background:
-    radial-gradient(circle at top, fade(@color-gold, 18%), transparent 55%),
-    linear-gradient(
-      160deg,
-      @color-bg-page 0%,
-      @color-bg-page 40%,
-      @color-bg-page 100%
-    );
+  .moon-page-background();
 
   .title {
     font-size: 36px;
@@ -109,8 +102,12 @@
       height: 68px;
       margin: 0 auto;
       border-radius: @radius-pill;
-      background: @color-gold;
-      color: @color-bg-page;
+      background: linear-gradient(
+        135deg,
+        fade(@color-gold-soft, 94%) 0%,
+        @color-gold 100%
+      );
+      color: @color-primary-content;
       font-size: 32px;
       font-weight: bold;
       display: flex;

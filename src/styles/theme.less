@@ -22,7 +22,7 @@
 @color-error: #ed8b76;
 @color-error-content: #3b1e19;
 
-@color-bg-page: @color-base-100;
+@color-bg-page: #392c35;
 @color-bg-page-soft: mix(@color-base-100, @color-base-200, 55%);
 @color-bg-card: @color-base-200;
 @color-bg-card-soft: mix(@color-base-200, @color-base-300, 55%);
@@ -45,6 +45,29 @@
 @radius-lg: 32px;
 @radius-md: 24px;
 @radius-pill: 999px;
+
+.moon-page-background() {
+  background:
+    radial-gradient(
+      ellipse at 18% 48%,
+      fade(@color-gold, 16%) 0%,
+      fade(@color-gold, 8%) 26%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse at 86% 46%,
+      rgba(255, 244, 208, 0.1) 0%,
+      rgba(255, 244, 208, 0.05) 30%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse at 42% 82%,
+      fade(@color-gold-soft, 10%) 0%,
+      fade(@color-gold-soft, 4%) 34%,
+      transparent 68%
+    ),
+    @color-bg-page;
+}
 
 :root,
 page {
