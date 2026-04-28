@@ -6,15 +6,15 @@ import styles from "./index.module.less";
 
 const CONTACT_EMAIL = "1025196468@qq.com";
 const GENSHIN_ICON =
-  "https://ts1.tc.mm.bing.net/th/id/ODF.9_NtgMCMkLHY0oSbrk3suQ?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2";
+  "https://s1.aigei.com/src/img/png/5d/5d23970a2f3f450eb3c8f6884c4e0e43.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:HGaSXiz-p67st8GrjLKsAJG8HLo=";
 const WISH_ICON =
-  "https://www.sj51.net/wp-content/uploads/2024/01/2024011209004216.png";
+  "https://bkimg.cdn.bcebos.com/pic/6c224f4a20a4462309f708ab127a650e0cf3d6ca79fb?x-bce-process=image/format,f_auto/quality,Q_70/resize,m_lfit,limit_1,w_536";
 const POKEMON_ICON =
-  "https://www.sj51.net/wp-content/uploads/2023/09/2023090316465875.png";
+  "https://s1.aigei.com/src/img/png/e6/e6f2fee753dc43bf84b0e0434069e631.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:oVtd8ZV69R_JJ-v236tW0fDxFh4=";
 const SCRIPT_RECORD_ICON =
   "https://bpic.588ku.com/element_pic/21/12/04/5abdb4cd5f5ba19679a3e393881eef60.jpg!/fh/350/unsharp/true/format/png";
 const CONTACT_ICON =
-  "https://bpic.588ku.com/element_origin_min_pic/19/06/18/5ada39c959c27ed3b5fee2d177c30648.jpg";
+  "https://s1.aigei.com/src/img/png/e6/e6e99018e7f44779a836f29770468694.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:RXCYi5fMmGzJgIOWYPKpE3OcfTg=";
 const TURTLE_SOUP_ICON =
   "https://bpic.588ku.com/element_pic/24/01/23/ebfb1bca94914b0793dc15de0b9ab1c3.png!/fh/350/unsharp/true/format/png";
 
