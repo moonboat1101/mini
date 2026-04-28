@@ -39,7 +39,6 @@ const GoldTotal = (props: GoldTotalProps) => {
             <View className={styles.statLabel}>每金抽数</View>
             <View
               className={styles.statValue}
-              style={{ color: Number(avgGold) > 62 ? "#ff4d4f" : "#52c41a" }}
             >
               {avgGold}
             </View>
@@ -48,7 +47,6 @@ const GoldTotal = (props: GoldTotalProps) => {
             <View className={styles.statLabel}>每限定抽数</View>
             <View
               className={styles.statValue}
-              style={{ color: Number(avgLimit) > 93 ? "#ff4d4f" : "#52c41a" }}
             >
               {avgLimit}
             </View>
@@ -57,7 +55,6 @@ const GoldTotal = (props: GoldTotalProps) => {
             <View className={styles.statLabel}>歪概率</View>
             <View
               className={styles.statValue}
-              style={{ color: Number(waiPercent) > 45 ? "#ff4d4f" : "#52c41a" }}
             >
               {waiPercent}%
             </View>
@@ -69,20 +66,16 @@ const GoldTotal = (props: GoldTotalProps) => {
         {data.map((item, index) => {
           const role = roleList.find((r) => r.name === item.name);
           return (
-            <View
-              key={index}
-              className={styles.listItem}
-              style={{
-                background: "linear-gradient(135deg, #f3b47a 0%, #db924b 100%)",
-              }}
-            >
+            <View key={index} className={styles.listItem}>
               {role && !role?.englishName?.includes("NO-PIC-") ? (
                 <Image
                   className={styles.roleImage}
                   src={`https://ys.appfeng.com/ui/avatar/UI_AvatarIcon_${role.englishName}.png`}
                   mode="aspectFit"
                 />
-              ) : null}
+              ) : (
+                <View className={styles.rolePlaceholder}>✦</View>
+              )}
               <View className={styles.itemName}>{item.name}</View>
               <View className={styles.itemCount}>{item.count}</View>
             </View>

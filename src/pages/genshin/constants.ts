@@ -64,7 +64,7 @@ export const roleList = [
   { name: "迪希雅", englishName: "Dehya", version: "3.5", isNormal: true },
   { name: "白术", englishName: "Baizhu", version: "3.6" },
 
-  { name: "林尼", englishName: "Lyney", version: "4.0" },
+  { name: "林尼", englishName: "Liney", version: "4.0" },
   { name: "莱欧斯利", englishName: "Wriothesley", version: "4.1" },
   { name: "那维莱特", englishName: "Neuvillette", version: "4.1" },
   { name: "芙宁娜", englishName: "Furina", version: "4.2" },
@@ -92,4 +92,8 @@ export const roleList = [
   { name: "菲林斯", englishName: "Flins", version: "6.0" },
   { name: "奈芙尔", englishName: "Nefer", version: "6.1" },
   { name: "杜林", englishName: "NO-PIC-Durin", version: "6.2" },
+  { name: "哥伦比娅", englishName: "Columbina", version: "6.3" },
+  { name: "兹白", englishName: "Zibai", version: "6.4" },
+  { name: "法尔伽", englishName: "Varka", version: "6.5" },
+  { name: "莉奈娅", englishName: "Linnea", version: "6.6" },
 ];

@@ -26,11 +26,6 @@ export default function Index() {
       url: "/pages/Genshin/index",
     },
     {
-      title: "米池模拟器",
-      iconImage: WISH_ICON,
-      url: "/pages/Wish/index",
-    },
-    {
       title: "剧本杀记录",
       iconImage: SCRIPT_RECORD_ICON,
       url: "/pages/ScriptRecord/index",
@@ -39,6 +34,11 @@ export default function Index() {
       title: "猜宝可梦",
       iconImage: POKEMON_ICON,
       url: "/pages/Pokemon/index",
+    },
+    {
+      title: "米池模拟器",
+      iconImage: WISH_ICON,
+      url: "/pages/Wish/index",
     },
     {
       title: "海龟汤",

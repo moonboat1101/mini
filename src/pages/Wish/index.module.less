@@ -95,8 +95,12 @@
       margin: 0;
       width: 28%;
       border-radius: @radius-pill;
-      background: @color-gold;
-      color: @color-bg-page;
+      background: linear-gradient(
+        135deg,
+        fade(@color-gold-soft, 94%) 0%,
+        @color-gold 100%
+      );
+      color: @color-primary-content;
       font-size: 32px;
       font-weight: bold;
       display: flex;
@@ -105,8 +109,8 @@
       border: none !important;
       outline: none !important;
       box-shadow:
-        0 0 0 1px fade(@color-gold, 30%),
-        0 14px 28px rgba(0, 0, 0, 0.8);
+        0 0 0 1px fade(@color-warning, 40%),
+        0 14px 28px rgba(0, 0, 0, 0.78);
       &::after,
       &::before {
         border: none !important;

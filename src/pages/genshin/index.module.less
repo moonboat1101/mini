@@ -4,17 +4,21 @@
   overflow: hidden;
   height: 100vh;
   box-sizing: border-box;
-  padding: 24px;
+  padding: 16px 8px 18px;
   position: relative;
-  background: radial-gradient(circle at top, fade(@color-gold, 18%), transparent 55%),
-    linear-gradient(160deg, @color-bg-page 0%, @color-bg-page 40%, @color-bg-page 100%);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 220, 152, 0.1), transparent 32%),
+    radial-gradient(circle at 90% 24%, rgba(219, 146, 76, 0.1), transparent 34%),
+    linear-gradient(180deg, #211b22 0%, #392c35 48%, #241d25 100%);
 
   .genshinBody {
     width: 100%;
-    margin-top: 10px;
+    box-sizing: border-box;
+    margin-top: 0;
+    padding: 10px 16px 104px;
     transition: all 0.3s;
     overflow-y: auto;
-    height: calc(100% - 64px);
+    height: calc(100% - 58px);
   }
 
   .inputContainer {
@@ -23,37 +27,44 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 12px;
     padding: 0 24px;
     width: calc(100% - 48px);
     transition: all 0.3s;
 
     .genshinInput {
       flex: 1;
-      font-size: 0.7rem;
-      border-radius: 12px;
+      font-size: 24px;
+      border-radius: 16px;
       padding: 0 0.8rem;
       border: 1px solid @color-border-subtle;
-      height: 1.8rem;
-      background: @color-bg-card-soft;
+      height: 64px;
+      background:
+        radial-gradient(circle at top left, fade(@color-gold, 12%), transparent 52%),
+        @color-bg-card-soft;
       color: @color-text-primary;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.42);
     }
 
     .genshinButton {
-      width: 5rem;
-      height: 1.8rem;
-      font-size: 0.7rem;
-      border-radius: 12px;
-      background: @color-gold;
-      color: @color-bg-page;
+      width: 156px;
+      height: 64px;
+      font-size: 24px;
+      border-radius: 16px;
+      background: linear-gradient(
+        135deg,
+        fade(@color-gold-soft, 94%) 0%,
+        @color-gold 100%
+      );
+      color: @color-primary-content;
       border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0;
       box-shadow:
-        0 0 0 1px fade(@color-gold, 30%),
-        0 12px 22px rgba(0, 0, 0, 0.9);
+        0 0 0 1px fade(@color-warning, 40%),
+        0 12px 22px rgba(0, 0, 0, 0.78);
 
       &:active {
         opacity: 0.85;
