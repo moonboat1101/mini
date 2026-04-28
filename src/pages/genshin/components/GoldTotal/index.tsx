@@ -70,7 +70,10 @@ const GoldTotal = (props: GoldTotalProps) => {
               {role && !role?.englishName?.includes("NO-PIC-") ? (
                 <Image
                   className={styles.roleImage}
-                  src={`https://ys.appfeng.com/ui/avatar/UI_AvatarIcon_${role.englishName}.png`}
+                  src={
+                    role.imageUrl ||
+                    `https://ys.appfeng.com/ui/avatar/UI_AvatarIcon_${role.englishName}.png`
+                  }
                   mode="aspectFit"
                 />
               ) : (

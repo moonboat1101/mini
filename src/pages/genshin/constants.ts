@@ -91,9 +91,39 @@ export const roleList = [
   { name: "菈乌玛", englishName: "Lauma", version: "6.0" },
   { name: "菲林斯", englishName: "Flins", version: "6.0" },
   { name: "奈芙尔", englishName: "Nefer", version: "6.1" },
-  { name: "杜林", englishName: "NO-PIC-Durin", version: "6.2" },
-  { name: "哥伦比娅", englishName: "Columbina", version: "6.3" },
-  { name: "兹白", englishName: "Zibai", version: "6.4" },
-  { name: "法尔伽", englishName: "Varka", version: "6.5" },
-  { name: "莉奈娅", englishName: "Linnea", version: "6.6" },
+  {
+    name: "杜林",
+    englishName: "Durin",
+    version: "6.2",
+    imageUrl:
+      "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2025/11/28/e3e2b8fcbff2f2f3cdcec6bbf04efa84_3327367670955368711.png",
+  },
+  {
+    name: "哥伦比娅",
+    englishName: "Columbina",
+    version: "6.3",
+    imageUrl:
+      "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/01/13/80fa97679c8d1828fdd96c6aa9638632_4327573591148809640.png",
+  },
+  {
+    name: "兹白",
+    englishName: "Zibai",
+    version: "6.4",
+    imageUrl:
+      "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/01/29/72161f01ff431c9f099710f92c811454_1654176825175164246.png",
+  },
+  {
+    name: "法尔伽",
+    englishName: "Varka",
+    version: "6.5",
+    imageUrl:
+      "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/02/21/553feb81c3bbc5e3bc69a765e157c33f_8250978205515428490.png",
+  },
+  {
+    name: "莉奈娅",
+    englishName: "Linnea",
+    version: "6.6",
+    imageUrl:
+      "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/04/03/b73622caa3750012312c72437295ace3_6973976776946504804.png",
+  },
 ];
