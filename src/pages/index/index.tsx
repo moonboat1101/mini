@@ -1,4 +1,4 @@
-import { View, Text, Image, Icon } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import profileSmall from "../../../assets/profile_small.jpg";
 
@@ -87,15 +87,22 @@ export default function Index() {
             }}
           >
             <View className={styles.cardIconWrap}>
-              {"iconImage" in i ? (
-                <Image src={i.iconImage} className={styles.cardIconImage} />
-              ) : (
-                <Icon type={i.icon} size={30} color="#231a14" />
-              )}
+              <Image src={i.iconImage} className={styles.cardIconImage} />
             </View>
             <Text className={styles.cardTitle}>{i.title}</Text>
+            <View className={styles.cardOrnament}>
+              <View className={styles.ornamentLine} />
+              <View className={styles.ornamentDot} />
+              <View className={styles.ornamentLine} />
+            </View>
           </View>
         ))}
+      </View>
+
+      <View className={styles.footerSlogan}>
+        <Text className={styles.footerMoon}>☾</Text>
+        <Text className={styles.footerText}>月光所至 · 梦想起航</Text>
+        <Text className={styles.footerMoon}>☽</Text>
       </View>
     </View>
   );

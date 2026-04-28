@@ -1,132 +1,238 @@
 @import "../../styles/theme.less";
 
 .container {
-  height: 100vh;
+  min-height: 100vh;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 36px;
-  gap: 20px;
-  position: relative;
+  padding: 128px 36px 68px;
   background:
-    radial-gradient(circle at top, fade(@color-gold, 18%), transparent 55%),
-    linear-gradient(
-      160deg,
-      @color-bg-page 0%,
-      @color-bg-page 40%,
-      @color-bg-page 100%
-    );
+    radial-gradient(circle at 76% 28%, fade(@color-gold, 20%), transparent 28%),
+    radial-gradient(circle at 20% 18%, rgba(255, 244, 208, 0.08), transparent 24%),
+    linear-gradient(180deg, #221a22 0%, #392c35 46%, #241d25 100%);
 
-  .header {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 0 12px;
-    margin-bottom: 16px;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 53% 8%, fade(@color-gold, 52%) 0 2px, transparent 3px),
+      radial-gradient(circle at 48% 15%, fade(@color-gold, 38%) 0 2px, transparent 3px),
+      radial-gradient(circle at 64% 18%, fade(@color-gold, 44%) 0 2px, transparent 3px),
+      radial-gradient(circle at 74% 34%, fade(@color-gold, 34%) 0 2px, transparent 3px);
+    opacity: 0.72;
+  }
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 8px;
+  margin-bottom: 48px;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 2px solid fade(@color-gold, 82%);
+  box-shadow:
+    0 0 22px fade(@color-gold, 18%),
+    0 14px 28px rgba(0, 0, 0, 0.74);
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brandCn {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.08;
+  color: @color-text-primary;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.58);
+}
+
+.brandEn {
+  margin-top: 10px;
+  font-size: 27px;
+  line-height: 1;
+  color: @color-text-primary;
+  letter-spacing: 0.12em;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.52);
+}
+
+.cardList {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px 24px;
+  box-sizing: border-box;
+}
+
+.card {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 210px;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 30px 12px 22px;
+  color: @color-text-secondary;
+  background:
+    radial-gradient(circle at 50% 5%, rgba(255, 231, 178, 0.2), transparent 44%),
+    linear-gradient(180deg, #6a4b3f 0%, #463036 58%, #30242c 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 235, 196, 0.18),
+    0 18px 32px rgba(0, 0, 0, 0.54),
+    0 0 0 1px rgba(238, 180, 103, 0.16);
+  transition: all 0.22s ease-out;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 34%);
+    opacity: 0.55;
   }
 
-  .avatar {
-    width: 96px;
-    height: 96px;
-    border-radius: 9999px;
-    object-fit: cover;
+  &:active {
+    transform: translateY(2px) scale(0.99);
     box-shadow:
-      0 0 0 2px fade(@color-gold, 50%),
-      0 12px 24px rgba(0, 0, 0, 0.85);
+      inset 0 1px 0 rgba(255, 235, 196, 0.12),
+      0 12px 24px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(238, 180, 103, 0.12);
   }
+}
 
-  .titleGroup {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.cardIconWrap {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  overflow: hidden;
+  background: #fffaf1;
+  box-shadow:
+    0 0 0 8px rgba(56, 39, 36, 0.7),
+    0 0 0 11px rgba(236, 182, 107, 0.22),
+    0 16px 26px rgba(234, 177, 87, 0.26);
+}
 
-  .brandCn {
-    font-size: 40px;
-    font-weight: 700;
-    color: @color-text-secondary;
-  }
+.cardIconImage {
+  width: 96px;
+  height: 96px;
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-  .brandEn {
-    font-size: 26px;
-    color: @color-text-secondary;
-    letter-spacing: 0.12em;
-  }
+.cardTitle {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  font-size: 27px;
+  font-weight: 700;
+  color: @color-text-primary;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.56);
+}
 
-  .cardList {
-    flex: 1;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    align-content: flex-start;
-    gap: 18px;
-    overflow: visible;
-    margin-top: 18px;
-    padding-bottom: 32px;
-    box-sizing: border-box;
+.cardOrnament {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 104px;
+  margin-top: 20px;
+}
 
-    .card {
-      box-sizing: border-box;
-      width: 100%;
-      height: 166px;
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 18px 10px 14px;
-      color: @color-text-secondary;
-      background:
-        radial-gradient(
-          circle at top left,
-          fade(@color-gold, 24%),
-          transparent 55%
-        ),
-        mix(@color-bg-page, @color-gold, 78%);
-      box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.9),
-        0 0 0 1px fade(@color-gold, 22%);
-      transition: all 0.25s ease-out;
+.ornamentLine {
+  width: 38px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, fade(@color-gold-soft, 72%), transparent);
+}
 
-      &:active {
-        transform: translateY(2px) scale(0.99);
-        box-shadow:
-          0 10px 20px rgba(0, 0, 0, 0.78),
-          0 0 0 1px fade(@color-gold, 18%);
-      }
+.ornamentDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: @color-gold-soft;
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px fade(@color-gold, 48%);
+}
 
-      .cardIconWrap {
-        width: 62px;
-        height: 62px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 14px;
-        overflow: hidden;
-      }
+.footerSlogan {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  width: 100%;
+  margin-top: 54px;
+  color: mix(@color-gold-soft, @color-base-content, 64%);
+}
 
-      .cardIconImage {
-        width: 62px;
-        height: 62px;
-        display: block;
-        border-radius: 50%;
-        object-fit: cover;
-      }
+.footerText {
+  font-size: 24px;
+  line-height: 1.2;
+  color: inherit;
+  letter-spacing: 0.12em;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+}
 
-      .cardTitle {
-        width: 100%;
-        font-size: 24px;
-        font-weight: 700;
-        color: @color-text-secondary;
-        line-height: 1.25;
-        text-align: center;
-        white-space: nowrap;
-      }
+.footerMoon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  overflow: hidden;
+  border-radius: 50%;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  background: linear-gradient(135deg, #f4d99d 0%, #db924c 100%);
+  box-shadow:
+    0 0 12px fade(@color-gold, 36%),
+    inset -3px -3px 6px rgba(82, 47, 24, 0.22);
 
-    }
+  &::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -5px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #241d25;
   }
 }
