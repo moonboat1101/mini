@@ -53,7 +53,7 @@ export const scriptGames = [
     score: 5,
     img: "https://kimi-web-img.moonshot.cn/img/80larpnew-1251545914.cos.ap-guangzhou.myqcloud.com/87b1e33fc8498f57f5031a11712b65af8269721b.jpg",
     comment:
-      "降维打击！！！降维打击！！！降维打击！！！任何人不去玩玩都会伤心的好么",
+      "降维打击！！！降维打击！！！降维打击！！！任何人不去玩我都会伤心的好么",
     players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "YWL"],
   },
   {
