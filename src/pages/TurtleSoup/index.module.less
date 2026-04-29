@@ -35,13 +35,7 @@
     }
 
     .scenarioBox {
-      background:
-        radial-gradient(
-          circle at top left,
-          fade(@color-gold, 16%),
-          transparent 55%
-        ),
-        @color-bg-card;
+      background: @color-bg-card;
       border-radius: @radius-md;
       box-shadow:
         0 12px 28px rgba(0, 0, 0, 0.9),
@@ -53,13 +47,7 @@
     }
 
     .solutionBox {
-      background:
-        radial-gradient(
-          circle at top left,
-          fade(@color-gold, 16%),
-          transparent 55%
-        ),
-        @color-bg-card;
+      background: @color-bg-card;
       border-radius: @radius-md;
       box-shadow:
         0 12px 28px rgba(0, 0, 0, 0.9),
@@ -74,11 +62,8 @@
         align-items: center;
         justify-content: center;
         border-radius: @radius-md;
-        background: linear-gradient(
-          135deg,
-          fade(@color-gold, 10%) 0%,
-          fade(@color-gold, 4%) 100%
-        );
+        background: fade(@color-gold, 6%);
+        border: 1px solid fade(@color-gold, 14%);
       }
 
       .solutionToggleText {

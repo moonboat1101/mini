@@ -4,6 +4,7 @@ import Taro from "@tarojs/taro";
 
 import GoldTotal from "./components/GoldTotal";
 import { GachaType, GachaTypeKey } from "./constants";
+import { mockData } from "./mockData";
 
 import styles from "./index.module.less";
 
@@ -11,7 +12,7 @@ export default function Genshin() {
   const [gachaParams, setGachaParams] = useState<ObjectType | undefined>();
   const [tempData, setTempData] = useState<ObjectType[]>([]);
   const [inputValue, setInputValue] = useState("");
-  const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
+  const [allGoldData, setAllGoldData] = useState<ObjectType[]>(mockData);
   const exportCommand = `iex(irm 'https://img.lelaer.com/cn.ps1')`;
 
   const copyExportCommand = () => {
