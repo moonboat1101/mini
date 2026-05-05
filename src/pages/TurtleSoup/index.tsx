@@ -39,14 +39,14 @@ export default function TurtleSoup() {
           <Text className={styles.soupText}>{curTurtleSoup?.scenario}</Text>
         </View>
 
-        <View className={styles.solutionBox}>
+        <View
+          className={styles.solutionBox}
+          onClick={() => setShowSolution((visible) => !visible)}
+        >
           {showSolution ? (
             <Text className={styles.soupText}>{curTurtleSoup?.solution}</Text>
           ) : (
-            <View
-              className={styles.solutionToggle}
-              onClick={() => setShowSolution(true)}
-            >
+            <View className={styles.solutionToggle}>
               <Text className={styles.solutionToggleText}>
                 {"\u70b9\u51fb\u67e5\u770b\u6c64\u5e95"}
               </Text>
