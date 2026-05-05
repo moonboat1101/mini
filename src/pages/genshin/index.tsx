@@ -3,11 +3,17 @@ import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
 
 import GoldTotal from "./components/GoldTotal";
+import { usePageShare } from "../../hooks/usePageShare";
 import { GachaType, GachaTypeKey } from "./constants";
 
 import styles from "./index.module.less";
 
 export default function Genshin() {
+  usePageShare({
+    title: "原神抽卡记录",
+    path: "/pages/Genshin/index",
+  });
+
   const [gachaParams, setGachaParams] = useState<ObjectType | undefined>();
   const [tempData, setTempData] = useState<ObjectType[]>([]);
   const [inputValue, setInputValue] = useState("");

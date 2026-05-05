@@ -3,8 +3,14 @@ import { View, Button } from "@tarojs/components";
 import styles from "./index.module.less";
 import { useState } from "react";
 import { roleList } from "../Genshin/constants";
+import { usePageShare } from "../../hooks/usePageShare";
 
 export default function Wish() {
+  usePageShare({
+    title: "米池模拟器",
+    path: "/pages/Wish/index",
+  });
+
   const [history, setHistory] = useState<ObjectType[]>([]);
   const [level, setLevel] = useState(0);
 

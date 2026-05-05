@@ -2,6 +2,7 @@ import { View, Text, Image, ScrollView } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { PLAYER_PIC, scriptGames } from "./constants";
+import { usePageShare } from "../../hooks/usePageShare";
 
 import styles from "./index.module.less";
 
@@ -153,6 +154,11 @@ const parsePlayTime = (time: string) => {
 };
 
 export default function ScriptRecord() {
+  usePageShare({
+    title: "剧本杀记录",
+    path: "/pages/ScriptRecord/index",
+  });
+
   const [sortType, setSortType] = useState<SortType>("time");
   const [activeItem, setActiveItem] = useState<ScriptRecordItem | null>(null);
   const [modalScrollBodyPx, setModalScrollBodyPx] = useState<

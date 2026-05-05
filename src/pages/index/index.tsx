@@ -1,6 +1,7 @@
 import { View, Text, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import profileSmall from "../../../assets/profile_small.jpg";
+import { usePageShare } from "../../hooks/usePageShare";
 
 import styles from "./index.module.less";
 
@@ -19,6 +20,11 @@ const TURTLE_SOUP_ICON =
   "https://bpic.588ku.com/element_pic/24/01/23/ebfb1bca94914b0793dc15de0b9ab1c3.png!/fh/350/unsharp/true/format/png";
 
 export default function Index() {
+  usePageShare({
+    title: "月舟",
+    path: "/pages/Index/index",
+  });
+
   const cards = [
     {
       title: "原神抽卡记录",

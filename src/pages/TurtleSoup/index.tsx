@@ -3,9 +3,15 @@ import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 
 import { turtleSoups } from "./constants";
+import { usePageShare } from "../../hooks/usePageShare";
 import styles from "./index.module.less";
 
 export default function TurtleSoup() {
+  usePageShare({
+    title: "海龟汤",
+    path: "/pages/TurtleSoup/index",
+  });
+
   const [curTurtleSoup, setCurTurtleSoup] = useState<Record<string, any>>({});
   const [history, setHistory] = useState<string[]>([]);
   const [showSolution, setShowSolution] = useState(false);

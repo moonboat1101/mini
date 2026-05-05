@@ -2,10 +2,16 @@ import { View, Input, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useEffect, useState } from "react";
 import PokemonCard from "./components/PokemonCard";
+import { usePageShare } from "../../hooks/usePageShare";
 
 import styles from "./index.module.less";
 
 export default function Pokemon() {
+  usePageShare({
+    title: "猜宝可梦",
+    path: "/pages/Pokemon/index",
+  });
+
   const [fullList, setFullList] = useState<ObjectType[]>([]);
   const [ans, setAns] = useState<ObjectType>();
   const [userAns, setUserAns] = useState<ObjectType>({});
