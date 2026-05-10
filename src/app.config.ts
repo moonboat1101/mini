@@ -6,6 +6,7 @@ export default defineAppConfig({
     "pages/Wish/index",
     "pages/Pokemon/index",
     "pages/ScriptRecord/index",
+    "pages/QrCode/index",
   ],
   window: {
     backgroundTextStyle: "light",

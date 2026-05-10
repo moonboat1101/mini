@@ -18,6 +18,8 @@ const CONTACT_ICON =
   "https://s1.aigei.com/src/img/png/e6/e6e99018e7f44779a836f29770468694.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:RXCYi5fMmGzJgIOWYPKpE3OcfTg=";
 const TURTLE_SOUP_ICON =
   "https://bpic.588ku.com/element_pic/24/01/23/ebfb1bca94914b0793dc15de0b9ab1c3.png!/fh/350/unsharp/true/format/png";
+const QRCODE_ICON =
+  "https://gd-hbimg.huaban.com/07c6686e680086ee3c92eb48e10df3325832fac568d-uvzROb_fw658";
 
 export default function Index() {
   usePageShare({
@@ -42,9 +44,9 @@ export default function Index() {
       url: "/pages/Pokemon/index",
     },
     {
-      title: "米池模拟器",
-      iconImage: WISH_ICON,
-      url: "/pages/Wish/index",
+      title: "生成二维码",
+      iconImage: QRCODE_ICON,
+      url: "/pages/QrCode/index",
     },
     {
       title: "海龟汤",
@@ -52,11 +54,51 @@ export default function Index() {
       url: "/pages/TurtleSoup/index",
     },
     {
+      title: "米池模拟器",
+      iconImage: WISH_ICON,
+      url: "/pages/Wish/index",
+    },
+    {
       title: "联系作者",
       iconImage: CONTACT_ICON,
       email: CONTACT_EMAIL,
     },
   ];
+  const primaryCards = cards.slice(0, 2);
+  const secondaryCards = cards.slice(2);
+
+  const handleCardClick = (i: (typeof cards)[number]) => {
+    if ("email" in i) {
+      Taro.setClipboardData({
+        data: i.email,
+        success: () => {
+          Taro.showToast({
+            title: "已复制邮箱",
+            icon: "success",
+          });
+        },
+      });
+      return;
+    }
+
+    Taro.navigateTo({
+      url: i.url,
+    });
+  };
+
+  const renderCard = (i: (typeof cards)[number]) => (
+    <View key={i.title} className={styles.card} onClick={() => handleCardClick(i)}>
+      <View className={styles.cardIconWrap}>
+        <Image src={i.iconImage} className={styles.cardIconImage} />
+      </View>
+      <Text className={styles.cardTitle}>{i.title}</Text>
+      <View className={styles.cardOrnament}>
+        <View className={styles.ornamentLine} />
+        <View className={styles.ornamentDot} />
+        <View className={styles.ornamentLine} />
+      </View>
+    </View>
+  );
 
   return (
     <View className={styles.container}>
@@ -68,41 +110,20 @@ export default function Index() {
         </View>
       </View>
 
-      <View className={styles.cardList}>
-        {cards.map((i) => (
-          <View
-            key={i.title}
-            className={styles.card}
-            onClick={() => {
-              if ("email" in i) {
-                Taro.setClipboardData({
-                  data: i.email,
-                  success: () => {
-                    Taro.showToast({
-                      title: "已复制邮箱",
-                      icon: "success",
-                    });
-                  },
-                });
-                return;
-              }
+      <View className={styles.cardSections}>
+        <View className={`${styles.cardList} ${styles.primaryCardList}`}>
+          {primaryCards.map(renderCard)}
+        </View>
 
-              Taro.navigateTo({
-                url: i.url,
-              });
-            }}
-          >
-            <View className={styles.cardIconWrap}>
-              <Image src={i.iconImage} className={styles.cardIconImage} />
-            </View>
-            <Text className={styles.cardTitle}>{i.title}</Text>
-            <View className={styles.cardOrnament}>
-              <View className={styles.ornamentLine} />
-              <View className={styles.ornamentDot} />
-              <View className={styles.ornamentLine} />
-            </View>
-          </View>
-        ))}
+        <View className={styles.sectionDivider}>
+          <View className={styles.dividerLine} />
+          <View className={styles.dividerDot} />
+          <View className={styles.dividerLine} />
+        </View>
+
+        <View className={`${styles.cardList} ${styles.secondaryCardList}`}>
+          {secondaryCards.map(renderCard)}
+        </View>
       </View>
 
       <View className={styles.footerSlogan}>

@@ -66,14 +66,55 @@
   text-shadow: 0 3px 10px rgba(0, 0, 0, 0.52);
 }
 
-.cardList {
+.cardSections {
   position: relative;
   z-index: 1;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  box-sizing: border-box;
+}
+
+.cardList {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px 24px;
   box-sizing: border-box;
+}
+
+.primaryCardList {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.secondaryCardList {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sectionDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.dividerLine {
+  height: 2px;
+  flex: 1;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, fade(@color-gold-soft, 42%), transparent);
+}
+
+.dividerDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: fade(@color-gold-soft, 86%);
+  transform: rotate(45deg);
+  box-shadow: 0 0 12px fade(@color-gold, 42%);
 }
 
 .card {

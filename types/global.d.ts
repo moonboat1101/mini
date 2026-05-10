@@ -11,6 +11,23 @@ declare module "*.scss";
 declare module "*.sass";
 declare module "*.styl";
 
+declare module "weapp-qrcode" {
+  type DrawQrcodeOptions = {
+    width: number;
+    height: number;
+    canvasId?: string;
+    ctx?: unknown;
+    text: string;
+    typeNumber?: number;
+    correctLevel?: 0 | 1 | 2 | 3;
+    background?: string;
+    foreground?: string;
+    callback?: () => void;
+  };
+
+  export default function drawQrcode(options: DrawQrcodeOptions): void;
+}
+
 declare namespace NodeJS {
   interface ProcessEnv {
     /** NODE 内置环境变量, 会影响到最终构建生成产物 */
