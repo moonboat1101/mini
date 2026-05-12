@@ -1,4 +1,4 @@
-import { View, Text, Image } from "@tarojs/components";
+﻿import { View, Text, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import profileSmall from "../../../assets/profile_small.jpg";
 import { usePageShare } from "../../hooks/usePageShare";
@@ -20,6 +20,8 @@ const TURTLE_SOUP_ICON =
   "https://bpic.588ku.com/element_pic/24/01/23/ebfb1bca94914b0793dc15de0b9ab1c3.png!/fh/350/unsharp/true/format/png";
 const QRCODE_ICON =
   "https://gd-hbimg.huaban.com/07c6686e680086ee3c92eb48e10df3325832fac568d-uvzROb_fw658";
+const HANDOU_ICON =
+  "https://img95.699pic.com/element/40146/8048.png_300.png";
 
 export default function Index() {
   usePageShare({
@@ -37,6 +39,11 @@ export default function Index() {
       title: "剧本杀记录",
       iconImage: SCRIPT_RECORD_ICON,
       url: "/pages/ScriptRecord/index",
+    },
+    {
+      title: "汉兜",
+      iconImage: HANDOU_ICON,
+      url: "/pages/HanDou/index",
     },
     {
       title: "猜宝可梦",
@@ -128,3 +135,4 @@ export default function Index() {
     </View>
   );
 }
+
