@@ -41,7 +41,7 @@ export default function QrCode() {
         text,
         correctLevel: 0,
         background: "#ffffff",
-        foreground: "#1d171c",
+        foreground: "#1b120e",
         callback: () => {
           setIsDrawing(false);
           setHasQrCode(true);

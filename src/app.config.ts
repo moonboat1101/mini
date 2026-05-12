@@ -10,10 +10,10 @@ export default defineAppConfig({
   ],
   window: {
     backgroundTextStyle: "light",
-    backgroundColor: "#392c35",
-    backgroundColorTop: "#392c35",
-    backgroundColorBottom: "#ffffff",
-    navigationBarBackgroundColor: "#392c35",
+    backgroundColor: "#30231d",
+    backgroundColorTop: "#30231d",
+    backgroundColorBottom: "#30231d",
+    navigationBarBackgroundColor: "#30231d",
     navigationBarTextStyle: "white",
   },
 });

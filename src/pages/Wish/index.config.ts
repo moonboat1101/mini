@@ -1,6 +1,6 @@
 export default {
   navigationBarTitleText: "米池模拟器",
-  navigationBarBackgroundColor: "#392c35",
+  navigationBarBackgroundColor: "#30231d",
   navigationBarTextStyle: "white",
   enableShareAppMessage: true,
   enableShareTimeline: true,

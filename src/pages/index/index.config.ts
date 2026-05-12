@@ -1,6 +1,6 @@
 export default {
   navigationBarTitleText: "",
-  navigationBarBackgroundColor: "#392c35",
+  navigationBarBackgroundColor: "#30231d",
   navigationBarTextStyle: "white",
   enableShareAppMessage: true,
   enableShareTimeline: true,

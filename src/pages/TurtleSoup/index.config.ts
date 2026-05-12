@@ -1,6 +1,6 @@
 export default {
   navigationBarTitleText: "海龟汤",
-  navigationBarBackgroundColor: "#392c35",
+  navigationBarBackgroundColor: "#30231d",
   navigationBarTextStyle: "white",
   enableShareAppMessage: true,
   enableShareTimeline: true,
