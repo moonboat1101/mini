@@ -24,14 +24,14 @@ const QRCODE_ICON =
 export default function Index() {
   usePageShare({
     title: "月舟",
-    path: "/pages/Index/index",
+    path: "/pages/index/index",
   });
 
   const cards = [
     {
       title: "原神抽卡记录",
       iconImage: GENSHIN_ICON,
-      url: "/pages/Genshin/index",
+      url: "/pages/genshin/index",
     },
     {
       title: "剧本杀记录",
@@ -113,12 +113,6 @@ export default function Index() {
       <View className={styles.cardSections}>
         <View className={`${styles.cardList} ${styles.primaryCardList}`}>
           {primaryCards.map(renderCard)}
-        </View>
-
-        <View className={styles.sectionDivider}>
-          <View className={styles.dividerLine} />
-          <View className={styles.dividerDot} />
-          <View className={styles.dividerLine} />
         </View>
 
         <View className={`${styles.cardList} ${styles.secondaryCardList}`}>

@@ -8,16 +8,73 @@ import { GachaType, GachaTypeKey } from "./constants";
 
 import styles from "./index.module.less";
 
+const GENSHIN_GOLD_DATA_CACHE_KEY = "genshinGoldDisplayData";
+const GENSHIN_GOLD_DATA_CACHE_TIME_KEY = "genshinGoldDisplayDataTime";
+const PITY_NAME = "已垫";
+
+const formatCacheDate = (date: Date) =>
+  `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
+
+const isSameGoldItem = (left: ObjectType, right: ObjectType) =>
+  left?.name === right?.name &&
+  left?.count === right?.count &&
+  left?.gacha_type === right?.gacha_type;
+
+const findOverlapCount = (newData: ObjectType[], oldData: ObjectType[]) => {
+  const maxLength = Math.min(newData.length, oldData.length);
+
+  for (let length = maxLength; length > 0; length -= 1) {
+    const newTail = newData.slice(newData.length - length);
+    const oldHead = oldData.slice(0, length);
+
+    if (newTail.every((item, index) => isSameGoldItem(item, oldHead[index]))) {
+      return length;
+    }
+  }
+
+  return 0;
+};
+
+const mergeGoldDisplayData = (
+  newData: ObjectType[],
+  oldData: ObjectType[],
+) => {
+  const mergedData: ObjectType[] = [];
+  const getGachaGroupData = (data: ObjectType[], type: GachaTypeKey) =>
+    data.filter((item) => {
+      if (type === GachaTypeKey.ROLE) {
+        return ["301", "400"].includes(item.gacha_type);
+      }
+
+      return item.gacha_type === GachaType[type].code;
+    });
+
+  Object.keys(GachaType).forEach((key) => {
+    const type = key as GachaTypeKey;
+    const newGroup = getGachaGroupData(newData, type);
+    const oldGroup = getGachaGroupData(oldData, type).filter(
+      (item) => item.name !== PITY_NAME,
+    );
+    const overlapCount = findOverlapCount(newGroup, oldGroup);
+
+    mergedData.push(...newGroup, ...oldGroup.slice(overlapCount));
+  });
+
+  return mergedData;
+};
+
 export default function Genshin() {
   usePageShare({
     title: "原神抽卡记录",
-    path: "/pages/Genshin/index",
+    path: "/pages/genshin/index",
   });
 
   const [gachaParams, setGachaParams] = useState<ObjectType | undefined>();
   const [tempData, setTempData] = useState<ObjectType[]>([]);
+  const [fetchGoldData, setFetchGoldData] = useState<ObjectType[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
+  const [cacheTime, setCacheTime] = useState("");
   const exportCommand = `iex(irm 'https://img.lelaer.com/cn.ps1')`;
 
   const copyExportCommand = () => {
@@ -33,11 +90,40 @@ export default function Genshin() {
   };
 
   const startFetch = () => {
-    setAllGoldData([]);
+    setFetchGoldData([]);
+    setTempData([]);
     setGachaParams({
       endId: "0",
       currentPage: 1,
       gachaType: GachaTypeKey.ROLE,
+    });
+  };
+
+  const removeCache = () => {
+    setAllGoldData([]);
+    setCacheTime("");
+    setFetchGoldData([]);
+    setTempData([]);
+    setGachaParams(undefined);
+    Taro.removeStorageSync(GENSHIN_GOLD_DATA_CACHE_KEY);
+    Taro.removeStorageSync(GENSHIN_GOLD_DATA_CACHE_TIME_KEY);
+    Taro.showToast({
+      title: "缓存已清除",
+      icon: "success",
+    });
+  };
+
+  const clearCache = () => {
+    Taro.showModal({
+      title: "确认清除缓存？",
+      content: "清除后将无法恢复",
+      confirmText: "清除",
+      confirmColor: "#ed8b76",
+      success: (res) => {
+        if (res.confirm) {
+          removeCache();
+        }
+      },
     });
   };
 
@@ -93,7 +179,7 @@ export default function Genshin() {
           endId: res?.data?.data?.list[res.data.data.list.length - 1]?.id || "",
           currentPage: gachaParams.currentPage + 1,
         });
-        setTempData([...tempData, ...res?.data?.data?.list]);
+        setTempData((prev) => [...prev, ...res?.data?.data?.list]);
         return;
       }
 
@@ -112,7 +198,7 @@ export default function Genshin() {
           } else {
             if (acc.length === 0) {
               acc.push({
-                name: "已垫",
+                name: PITY_NAME,
                 count: 0,
                 gacha_type: rawData[0]?.gacha_type,
               });
@@ -123,10 +209,21 @@ export default function Genshin() {
         }, []);
       };
 
-      setAllGoldData((prev) => [...prev, ...handleRawData(tempData)]);
+      const nextFetchGoldData = [...fetchGoldData, ...handleRawData(tempData)];
+      setFetchGoldData(nextFetchGoldData);
       setTempData([]);
 
       if (curIndex === gachaList?.length - 1) {
+        const mergedGoldData = mergeGoldDisplayData(
+          nextFetchGoldData,
+          allGoldData,
+        );
+
+        setAllGoldData(mergedGoldData);
+        Taro.setStorageSync(GENSHIN_GOLD_DATA_CACHE_KEY, mergedGoldData);
+        const nextCacheTime = formatCacheDate(new Date());
+        setCacheTime(nextCacheTime);
+        Taro.setStorageSync(GENSHIN_GOLD_DATA_CACHE_TIME_KEY, nextCacheTime);
         setGachaParams(undefined);
         Taro.showToast({
           title: "获取成功！",
@@ -146,6 +243,21 @@ export default function Genshin() {
       });
     }
   };
+
+  useEffect(() => {
+    const cachedGoldData = Taro.getStorageSync(GENSHIN_GOLD_DATA_CACHE_KEY);
+    const cachedCacheTime = Taro.getStorageSync(
+      GENSHIN_GOLD_DATA_CACHE_TIME_KEY,
+    );
+
+    if (Array.isArray(cachedGoldData) && cachedGoldData.length) {
+      setAllGoldData(cachedGoldData);
+    }
+
+    if (typeof cachedCacheTime === "string") {
+      setCacheTime(cachedCacheTime);
+    }
+  }, []);
 
   useEffect(() => {
     if (gachaParams) {
@@ -173,6 +285,12 @@ export default function Genshin() {
               <GoldTotal key={i} type={i as GachaTypeKey} data={data} />
             ) : null;
           })}
+          <View className={styles.cacheFooter}>
+            <Text className={styles.cacheTime}>截止 {cacheTime || "--"}</Text>
+            <Button className={styles.clearCacheButton} onClick={clearCache}>
+              清除缓存
+            </Button>
+          </View>
         </View>
       ) : null}
 
@@ -211,6 +329,7 @@ export default function Genshin() {
             开始获取
           </Button>
         </View>
+
       </View>
     </View>
   );

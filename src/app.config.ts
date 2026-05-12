@@ -1,7 +1,7 @@
 export default defineAppConfig({
   pages: [
-    "pages/Index/index",
-    "pages/Genshin/index",
+    "pages/index/index",
+    "pages/genshin/index",
     "pages/TurtleSoup/index",
     "pages/Wish/index",
     "pages/Pokemon/index",
