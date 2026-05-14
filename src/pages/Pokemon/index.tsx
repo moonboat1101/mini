@@ -3,6 +3,7 @@ import Taro from "@tarojs/taro";
 import { useEffect, useState } from "react";
 import PokemonCard from "./components/PokemonCard";
 import { usePageShare } from "../../hooks/usePageShare";
+import { useKeyboardFloating } from "../../hooks/useKeyboardFloating";
 
 import styles from "./index.module.less";
 
@@ -17,6 +18,7 @@ export default function Pokemon() {
   const [userAns, setUserAns] = useState<ObjectType>({});
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<ObjectType[]>([]);
+  const keyboardFloating = useKeyboardFloating("pokemon-footer-keyboard");
 
   useEffect(() => {
     Taro.request({
@@ -38,11 +40,16 @@ export default function Pokemon() {
         ))}
       </View>
 
-      <View className={styles.footer}>
+      <View
+        id={keyboardFloating.targetId}
+        className={styles.footer}
+        style={keyboardFloating.floatingStyle}
+      >
         {ans?.id !== userAns?.id && (
           <Input
             className={styles.footerInput}
             value={input}
+            {...keyboardFloating.inputKeyboardProps}
             onInput={(e) => setInput(e.detail.value)}
             placeholder="请输入宝可梦名称"
           />

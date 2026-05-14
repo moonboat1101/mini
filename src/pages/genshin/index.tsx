@@ -4,6 +4,7 @@ import Taro from "@tarojs/taro";
 
 import GoldTotal from "./components/GoldTotal";
 import { usePageShare } from "../../hooks/usePageShare";
+import { useKeyboardFloating } from "../../hooks/useKeyboardFloating";
 import { GachaType, GachaTypeKey } from "./constants";
 
 import styles from "./index.module.less";
@@ -76,6 +77,7 @@ export default function Genshin() {
   const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
   const [cacheTime, setCacheTime] = useState("");
   const exportCommand = `iex(irm 'https://img.lelaer.com/cn.ps1')`;
+  const keyboardFloating = useKeyboardFloating("genshin-input-keyboard");
 
   const copyExportCommand = () => {
     Taro.setClipboardData({
@@ -316,10 +318,15 @@ export default function Genshin() {
           </View>
         ) : null}
 
-        <View className={styles.inputContainer}>
+        <View
+          id={keyboardFloating.targetId}
+          className={styles.inputContainer}
+          style={keyboardFloating.floatingStyle}
+        >
           <Input
             className={styles.genshinInput}
             value={inputValue}
+            {...keyboardFloating.inputKeyboardProps}
             onInput={(e) => setInputValue(e.detail.value)}
             placeholder="请输入导出链接"
             maxlength={-1}

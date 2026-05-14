@@ -3,6 +3,7 @@ import Taro from "@tarojs/taro";
 import { useEffect, useMemo, useState } from "react";
 import drawQrcode from "weapp-qrcode";
 import { usePageShare } from "../../hooks/usePageShare";
+import { useKeyboardFloating } from "../../hooks/useKeyboardFloating";
 
 import styles from "./index.module.less";
 
@@ -24,6 +25,7 @@ export default function QrCode() {
   const [generatedText, setGeneratedText] = useState("");
   const [isDrawing, setIsDrawing] = useState(false);
   const [hasQrCode, setHasQrCode] = useState(false);
+  const keyboardFloating = useKeyboardFloating("qrcode-textarea-keyboard");
 
   const byteLength = useMemo(() => getUtf8ByteLength(content), [content]);
   const isContentReady = content.trim().length > 0;
@@ -152,8 +154,11 @@ export default function QrCode() {
       <View className={styles.panel}>
         <Text className={styles.panelTitle}>输入内容</Text>
         <Textarea
+          id={keyboardFloating.targetId}
           className={styles.textarea}
           value={content}
+          style={keyboardFloating.floatingStyle}
+          {...keyboardFloating.inputKeyboardProps}
           maxlength={-1}
           placeholder="输入文字、链接或其他需要编码的内容"
           placeholderClass={styles.placeholder}

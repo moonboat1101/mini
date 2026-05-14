@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { idioms } from "./constants";
 import { usePageShare } from "../../hooks/usePageShare";
+import { useKeyboardFloating } from "../../hooks/useKeyboardFloating";
 import styles from "./index.module.less";
 
 type FeedbackStatus = "correct" | "present" | "absent" | "pending";
@@ -233,6 +234,7 @@ export default function HanDou() {
   const [gameState, setGameState] = useState<"playing" | "won" | "lost">("playing");
   const [isMasked, setIsMasked] = useState(false);
   const [showHints, setShowHints] = useState(false);
+  const keyboardFloating = useKeyboardFloating("handou-footer-keyboard");
 
   const answer = createGuess(idioms[answerIndex]);
   const initialHintStatuses = getHintStatuses(guesses, "initial");
@@ -375,12 +377,17 @@ export default function HanDou() {
         ))}
       </View>
 
-      <View className={`${styles.footer} ${gameState !== "playing" ? styles.endFooter : ""}`}>
+      <View
+        id={keyboardFloating.targetId}
+        className={`${styles.footer} ${gameState !== "playing" ? styles.endFooter : ""}`}
+        style={keyboardFloating.floatingStyle}
+      >
         {gameState === "playing" ? (
           <>
             <Input
               className={styles.input}
               value={input}
+              {...keyboardFloating.inputKeyboardProps}
               confirmType="done"
               placeholder="输入四字成语"
               onInput={(event) => setInput(event.detail.value)}
