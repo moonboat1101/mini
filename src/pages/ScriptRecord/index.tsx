@@ -3,6 +3,7 @@ import Taro from "@tarojs/taro";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { PLAYER_PIC, scriptGames } from "./constants";
 import { usePageShare } from "../../hooks/usePageShare";
+import { useTheme } from "../../hooks/useTheme";
 
 import styles from "./index.module.less";
 
@@ -164,6 +165,7 @@ export default function ScriptRecord() {
   const [modalScrollBodyPx, setModalScrollBodyPx] = useState<
     number | undefined
   >(undefined);
+  const { themeClassName } = useTheme();
 
   useLayoutEffect(() => {
     if (!activeItem) {
@@ -223,7 +225,7 @@ export default function ScriptRecord() {
   });
 
   return (
-    <View className={styles.scriptRecord}>
+    <View className={`${styles.scriptRecord} ${themeClassName}`}>
       <View className={styles.sortBar}>
         <View className={styles.sortSwitch}>
           <View

@@ -5,7 +5,7 @@
   box-sizing: border-box;
   min-height: 100vh;
   .moon-page-background();
-  color: @color-text-primary;
+  color: var(--color-text-primary);
 
   .sortBar {
     display: flex;
@@ -24,7 +24,7 @@
           fade(@color-gold, 12%),
           transparent 62%
         ),
-        @color-bg-card;
+        var(--color-bg-card);
       box-shadow:
         inset 0 0 0 1px fade(@color-gold, 22%),
         0 10px 24px rgba(0, 0, 0, 0.68);
@@ -66,7 +66,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: @color-text-secondary;
+      color: var(--color-text-secondary);
       font-weight: 500;
       transition:
         color 0.2s ease,
@@ -74,7 +74,7 @@
     }
 
     .sortSwitchItemActive {
-      color: @color-bg-page;
+      color: var(--color-bg-page);
       font-weight: 700;
     }
   }
@@ -92,7 +92,7 @@
         fade(@color-gold, 16%),
         transparent 55%
       ),
-      @color-bg-card;
+      var(--color-bg-card);
     border-radius: @radius-md;
     padding: 16px;
     box-shadow:
@@ -108,7 +108,7 @@
     width: 160px;
     height: 220px;
     border-radius: 14px;
-    background-color: @color-bg-page-soft;
+    background-color: var(--color-bg-page-soft);
     object-fit: cover;
     flex-shrink: 0;
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.85);
@@ -134,7 +134,7 @@
   .cardTitle {
     font-size: 32px;
     font-weight: 600;
-    color: @color-text-primary;
+    color: var(--color-text-primary);
     flex: 1;
   }
 
@@ -147,7 +147,7 @@
   .playTime {
     font-weight: 500;
     font-size: 26px;
-    color: @color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
   .rating {
@@ -157,13 +157,13 @@
   }
 
   .starIcon {
-    color: @color-gold;
+    color: var(--color-gold);
     font-size: 30px;
   }
 
   .ratingValue {
     font-size: 26px;
-    color: @color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
   @card-player-avatar-size: 40px;
@@ -194,7 +194,7 @@
     flex-shrink: 0;
     box-sizing: border-box;
     border: 2px solid fade(@color-bg-card, 96%);
-    background-color: @color-bg-page-soft;
+    background-color: var(--color-bg-page-soft);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   }
 
@@ -214,7 +214,7 @@
     min-width: 0;
     font-size: 24px;
     line-height: 1.5;
-    color: @color-text-muted;
+    color: var(--color-text-muted);
     word-break: break-all;
   }
 
@@ -267,7 +267,7 @@
         fade(@color-gold, 14%),
         transparent 50%
       ),
-      @color-bg-card;
+      var(--color-bg-card);
     border-radius: @radius-md;
     border: 1px solid fade(@color-gold, 24%);
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.85);
@@ -287,7 +287,7 @@
         fade(@color-gold, 14%),
         transparent 50%
       ),
-      @color-bg-card;
+      var(--color-bg-card);
     border-bottom: 1px solid fade(@color-gold, 12%);
   }
 
@@ -305,7 +305,7 @@
     border-radius: 12px;
     object-fit: cover;
     flex-shrink: 0;
-    background-color: @color-bg-page-soft;
+    background-color: var(--color-bg-page-soft);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.85);
   }
 
@@ -321,7 +321,7 @@
   .modalTitle {
     font-size: 34px;
     font-weight: 600;
-    color: @color-text-primary;
+    color: var(--color-text-primary);
     line-height: 1.35;
   }
 
@@ -333,7 +333,7 @@
 
   .modalPlayTime {
     font-size: 28px;
-    color: @color-text-secondary;
+    color: var(--color-text-secondary);
     font-weight: 500;
   }
 
@@ -370,7 +370,7 @@
     flex-shrink: 0;
     box-sizing: border-box;
     border: 2px solid fade(@color-bg-card, 96%);
-    background-color: @color-bg-page-soft;
+    background-color: var(--color-bg-page-soft);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   }
 
@@ -390,7 +390,7 @@
     min-width: 0;
     font-size: 26px;
     line-height: 1.5;
-    color: @color-text-muted;
+    color: var(--color-text-muted);
     word-break: break-all;
   }
 
@@ -407,7 +407,7 @@
     display: block;
     font-size: 26px;
     font-weight: 600;
-    color: @color-text-secondary;
+    color: var(--color-text-secondary);
     margin-bottom: 10px;
     letter-spacing: 0.02em;
   }
@@ -432,5 +432,41 @@
     line-height: 1.65;
     color: lighten(@color-text-muted, 10%);
     white-space: pre-wrap;
+  }
+}
+
+:global(.moon-theme-light).scriptRecord {
+  .sortBar {
+    .sortSwitch {
+      background: #ffffff;
+      box-shadow:
+        inset 0 0 0 1px rgba(198, 155, 94, 0.22),
+        0 8px 18px rgba(149, 116, 65, 0.08);
+    }
+
+    .sortSwitchThumb {
+      background: linear-gradient(135deg, #dcc598 0%, #b78947 100%);
+      box-shadow: 0 6px 12px rgba(149, 116, 65, 0.16);
+    }
+
+    .sortSwitchItemActive {
+      color: #fffaf1;
+    }
+  }
+
+  .card {
+    background: #ffffff;
+    border: 1px solid rgba(198, 155, 94, 0.18);
+    box-shadow: 0 10px 22px rgba(149, 116, 65, 0.1);
+  }
+
+  .cover {
+    background-color: #fffaf1;
+    box-shadow: 0 8px 16px rgba(149, 116, 65, 0.12);
+  }
+
+  .cardPlayerAvatarWrap {
+    border-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(149, 116, 65, 0.12);
   }
 }

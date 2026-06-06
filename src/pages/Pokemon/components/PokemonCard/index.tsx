@@ -50,7 +50,9 @@ const PokemonCard: React.FC<Props> = (props) => {
             }
             className={styles.cardIcon}
           />
-          <View>{data?.id ? `${data?.name}#${data?.id}` : "???"}</View>
+          <View className={styles.cardName}>
+            {data?.id ? `${data?.name}#${data?.id}` : "???"}
+          </View>
         </View>
 
         {isQuestion && <View className={styles.cardHeaderRight}>题目</View>}

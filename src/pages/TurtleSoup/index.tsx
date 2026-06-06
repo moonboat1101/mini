@@ -4,6 +4,7 @@ import Taro from "@tarojs/taro";
 
 import { turtleSoups } from "./constants";
 import { usePageShare } from "../../hooks/usePageShare";
+import { useTheme } from "../../hooks/useTheme";
 import styles from "./index.module.less";
 
 export default function TurtleSoup() {
@@ -15,6 +16,7 @@ export default function TurtleSoup() {
   const [curTurtleSoup, setCurTurtleSoup] = useState<Record<string, any>>({});
   const [history, setHistory] = useState<string[]>([]);
   const [showSolution, setShowSolution] = useState(false);
+  const { themeClassName } = useTheme();
 
   const getRandomTurtleSoup = () => {
     const filteredList = turtleSoups?.filter((i) => !history.includes(i.title));
@@ -38,7 +40,7 @@ export default function TurtleSoup() {
   }, []);
 
   return (
-    <View className={styles.turtleSoupContainer}>
+    <View className={`${styles.turtleSoupContainer} ${themeClassName}`}>
       <View className={styles.contentArea}>
         <View className={styles.scenarioBox}>
           <Text className={styles.title}>{curTurtleSoup?.title}</Text>

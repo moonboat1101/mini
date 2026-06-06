@@ -12,7 +12,7 @@
   .title {
     font-size: 36px;
     margin-bottom: 12px;
-    color: @color-gold;
+    color: var(--color-gold);
     font-weight: bold;
     line-height: 1.35;
   }
@@ -20,7 +20,7 @@
   .contentArea {
     flex: 1;
     font-size: 28px;
-    color: @color-text-primary;
+    color: var(--color-text-primary);
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -30,15 +30,15 @@
     box-sizing: border-box;
 
     .soupText {
-      color: @color-text-secondary;
+      color: var(--color-text-secondary);
       line-height: 1.65;
     }
 
     .scenarioBox {
-      background: @color-bg-card;
+      background: var(--color-bg-card);
       border-radius: @radius-md;
       box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.9),
+        var(--shadow-card),
         0 0 0 1px fade(@color-gold, 18%);
       padding: 24px 20px 18px;
       display: flex;
@@ -47,10 +47,10 @@
     }
 
     .solutionBox {
-      background: @color-bg-card;
+      background: var(--color-bg-card);
       border-radius: @radius-md;
       box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.9),
+        var(--shadow-card),
         0 0 0 1px fade(@color-gold, 18%);
       padding: 24px 20px 18px;
       display: flex;
@@ -92,7 +92,7 @@
         fade(@color-gold-soft, 94%) 0%,
         @color-gold 100%
       );
-      color: @color-primary-content;
+      color: var(--color-primary-content);
       font-size: 32px;
       font-weight: bold;
       display: flex;
@@ -114,6 +114,44 @@
     .btnChange:active {
       transform: translateY(2px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+    }
+  }
+}
+
+:global(.moon-theme-light).turtleSoupContainer {
+  .title {
+    color: var(--color-gold-deep);
+  }
+
+  .contentArea {
+    .scenarioBox,
+    .solutionBox {
+      background: #ffffff;
+      box-shadow: 0 10px 22px rgba(149, 116, 65, 0.1);
+      border: 1px solid rgba(198, 155, 94, 0.18);
+    }
+
+    .solutionBox {
+      .solutionToggle {
+        background: #fff6e8;
+        border: 1px solid rgba(198, 155, 94, 0.18);
+      }
+
+      .solutionToggleText {
+        color: var(--color-gold-deep);
+      }
+    }
+  }
+
+  .footerButtonBar {
+    .btnChange {
+      background: linear-gradient(135deg, #dcc598 0%, #b78947 100%);
+      color: #fffaf1;
+      box-shadow: 0 8px 16px rgba(149, 116, 65, 0.16);
+    }
+
+    .btnChange:active {
+      box-shadow: 0 6px 12px rgba(149, 116, 65, 0.14);
     }
   }
 }

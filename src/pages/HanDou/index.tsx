@@ -6,6 +6,7 @@ import { useState } from "react";
 import { idioms } from "./constants";
 import { usePageShare } from "../../hooks/usePageShare";
 import { useKeyboardFloating } from "../../hooks/useKeyboardFloating";
+import { useTheme } from "../../hooks/useTheme";
 import styles from "./index.module.less";
 
 type FeedbackStatus = "correct" | "present" | "absent" | "pending";
@@ -235,6 +236,7 @@ export default function HanDou() {
   const [isMasked, setIsMasked] = useState(false);
   const [showHints, setShowHints] = useState(false);
   const keyboardFloating = useKeyboardFloating("handou-footer-keyboard");
+  const { themeClassName } = useTheme();
 
   const answer = createGuess(idioms[answerIndex]);
   const initialHintStatuses = getHintStatuses(guesses, "initial");
@@ -319,7 +321,7 @@ export default function HanDou() {
   };
 
   return (
-    <View className={styles.hanDou}>
+    <View className={`${styles.hanDou} ${themeClassName}`}>
       <View className={styles.ruleBox}>
         <View className={styles.ruleHeader} onClick={() => setShowHints((visible) => !visible)}>
           <Text className={styles.ruleTitle}>提示</Text>

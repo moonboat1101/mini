@@ -2,6 +2,7 @@
 import Taro from "@tarojs/taro";
 import profileSmall from "../../../assets/profile_small.jpg";
 import { usePageShare } from "../../hooks/usePageShare";
+import { useTheme } from "../../hooks/useTheme";
 
 import styles from "./index.module.less";
 
@@ -28,6 +29,7 @@ export default function Index() {
     title: "月舟",
     path: "/pages/index/index",
   });
+  const { theme, themeClassName, toggleTheme } = useTheme();
 
   const cards = [
     {
@@ -108,12 +110,35 @@ export default function Index() {
   );
 
   return (
-    <View className={styles.container}>
+    <View className={`${styles.container} ${themeClassName}`}>
       <View className={styles.header}>
         <Image src={profileSmall} className={styles.avatar} />
         <View className={styles.titleGroup}>
           <Text className={styles.brandCn}>月舟</Text>
           <Text className={styles.brandEn}>moonboat</Text>
+        </View>
+        <View className={styles.themeSwitch} onClick={toggleTheme}>
+          <View
+            className={`${styles.themeSwitchThumb} ${
+              theme === "light" ? styles.themeSwitchThumbRight : ""
+            }`}
+          />
+          <View
+            className={`${styles.themeSwitchItem} ${
+              theme === "dark" ? styles.themeSwitchItemActive : ""
+            }`}
+          >
+            <Text className={styles.themeSwitchIcon}>☾</Text>
+            <Text className={styles.themeSwitchText}>深</Text>
+          </View>
+          <View
+            className={`${styles.themeSwitchItem} ${
+              theme === "light" ? styles.themeSwitchItemActive : ""
+            }`}
+          >
+            <Text className={styles.themeSwitchIcon}>☀</Text>
+            <Text className={styles.themeSwitchText}>浅</Text>
+          </View>
         </View>
       </View>
 

@@ -19,27 +19,27 @@
 
     .wishDataCard {
       flex: 1;
-      background: @color-bg-card;
+      background: var(--color-bg-card);
       border-radius: @radius-md;
       padding: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: @shadow-card;
+      box-shadow: var(--shadow-card);
       border: 1px solid fade(@color-gold, 18%);
       transition: all 0.3s ease;
 
       .cardLabel {
         font-size: 0.7rem;
-        color: @color-text-muted;
+        color: var(--color-text-muted);
         margin-bottom: 4px;
       }
 
       .cardValue {
         font-size: 1rem;
         font-weight: bold;
-        color: @color-text-primary;
+        color: var(--color-text-primary);
       }
     }
   }
@@ -47,28 +47,28 @@
   .wishHistoryTitle {
     font-size: 36px;
     font-weight: bold;
-    color: @color-gold;
+    color: var(--color-gold);
     margin: 6px 0 12px 0;
   }
 
   .wishHistory {
     flex: 1;
-    background-color: @color-bg-card-soft;
+    background-color: var(--color-bg-card-soft);
     border-radius: @radius-md;
     padding: 12px;
     overflow: auto;
-    box-shadow: @shadow-soft;
-    border: 1px solid @color-border-subtle;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--color-border-subtle);
 
     .wishHistoryTip {
       font-size: 24px;
-      color: @color-text-muted;
+      color: var(--color-text-muted);
     }
 
     .historyRow {
       display: flex;
       align-items: center;
-      color: @color-text-secondary;
+      color: var(--color-text-secondary);
     }
 
     .historyPulls {
@@ -99,7 +99,7 @@
         fade(@color-gold-soft, 94%) 0%,
         @color-gold 100%
       );
-      color: @color-primary-content;
+      color: var(--color-primary-content);
       font-size: 32px;
       font-weight: bold;
       display: flex;
@@ -121,6 +121,38 @@
     .footerButton:active {
       transform: translateY(2px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+    }
+  }
+}
+
+:global(.moon-theme-light).wish {
+  .wishData {
+    .wishDataCard {
+      background: #ffffff;
+      border: 1px solid rgba(198, 155, 94, 0.18);
+      box-shadow: 0 8px 18px rgba(149, 116, 65, 0.1);
+    }
+  }
+
+  .wishHistoryTitle {
+    color: var(--color-gold-deep);
+  }
+
+  .wishHistory {
+    background-color: #ffffff;
+    border: 1px solid rgba(198, 155, 94, 0.18);
+    box-shadow: 0 10px 22px rgba(149, 116, 65, 0.1);
+  }
+
+  .wishFooter {
+    .footerButton {
+      background: linear-gradient(135deg, #dcc598 0%, #b78947 100%);
+      color: #fffaf1;
+      box-shadow: 0 8px 16px rgba(149, 116, 65, 0.16);
+    }
+
+    .footerButton:active {
+      box-shadow: 0 6px 12px rgba(149, 116, 65, 0.14);
     }
   }
 }

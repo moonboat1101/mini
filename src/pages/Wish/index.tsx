@@ -4,6 +4,7 @@ import styles from "./index.module.less";
 import { useState } from "react";
 import { roleList } from "../Genshin/constants";
 import { usePageShare } from "../../hooks/usePageShare";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function Wish() {
   usePageShare({
@@ -13,6 +14,7 @@ export default function Wish() {
 
   const [history, setHistory] = useState<ObjectType[]>([]);
   const [level, setLevel] = useState(0);
+  const { themeClassName } = useTheme();
 
   const sum = history.reduce((pre, cur) => pre + cur?.pulls, 0);
   const goldCount = history.length || 0;
@@ -60,7 +62,7 @@ export default function Wish() {
   };
 
   return (
-    <View className={styles.wish}>
+    <View className={`${styles.wish} ${themeClassName}`}>
       <View className={styles.wishData}>
         <View className={styles.wishDataCard}>
           <View className={styles.cardLabel}>当前水位</View>

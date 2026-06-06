@@ -41,6 +41,8 @@
 
 @shadow-soft: 0 18px 44px rgba(0, 0, 0, 0.72);
 @shadow-card: 0 12px 30px rgba(0, 0, 0, 0.64);
+@shadow-soft-light: 0 18px 44px rgba(138, 109, 62, 0.18);
+@shadow-card-light: 0 12px 30px rgba(149, 116, 65, 0.16);
 
 @radius-lg: 32px;
 @radius-md: 24px;
@@ -50,29 +52,29 @@
   background:
     radial-gradient(
       ellipse at 16% 38%,
-      fade(@color-gold, 6%) 0%,
-      fade(@color-gold, 2%) 22%,
+      var(--color-page-glow-primary) 0%,
+      var(--color-page-glow-primary-soft) 22%,
       transparent 46%
     ),
     radial-gradient(
       ellipse at 88% 52%,
-      rgba(255, 244, 208, 0.04) 0%,
-      rgba(255, 244, 208, 0.016) 26%,
+      var(--color-page-glow-cream) 0%,
+      var(--color-page-glow-cream-soft) 26%,
       transparent 52%
     ),
     radial-gradient(
       ellipse at 36% 82%,
-      fade(@color-gold-soft, 7%) 0%,
-      fade(@color-gold-soft, 3%) 34%,
+      var(--color-page-glow-gold-soft) 0%,
+      var(--color-page-glow-gold-softer) 34%,
       transparent 66%
     ),
     radial-gradient(
       ellipse at 78% 92%,
-      fade(@color-accent, 10%) 0%,
-      fade(@color-accent, 4%) 30%,
+      var(--color-page-glow-accent) 0%,
+      var(--color-page-glow-accent-soft) 30%,
       transparent 64%
     ),
-    @color-bg-page;
+    var(--color-bg-page);
 }
 
 :root,
@@ -97,6 +99,30 @@ page {
   --color-warning-content: @color-warning-content;
   --color-error: @color-error;
   --color-error-content: @color-error-content;
+  --color-bg-page: @color-bg-page;
+  --color-bg-page-soft: @color-bg-page-soft;
+  --color-bg-card: @color-bg-card;
+  --color-bg-card-soft: @color-bg-card-soft;
+  --color-bg-elevated: @color-bg-elevated;
+  --color-gold: @color-gold;
+  --color-gold-soft: @color-gold-soft;
+  --color-gold-deep: @color-gold-deep;
+  --color-text-primary: @color-text-primary;
+  --color-text-secondary: @color-text-secondary;
+  --color-text-muted: @color-text-muted;
+  --color-border-subtle: @color-border-subtle;
+  --color-border-strong: @color-border-strong;
+  --color-card-gradient: radial-gradient(circle at top left, rgba(200, 133, 62, 0.18), transparent 55%);
+  --color-page-glow-primary: rgba(200, 133, 62, 0.06);
+  --color-page-glow-primary-soft: rgba(200, 133, 62, 0.02);
+  --color-page-glow-cream: rgba(255, 244, 208, 0.04);
+  --color-page-glow-cream-soft: rgba(255, 244, 208, 0.016);
+  --color-page-glow-gold-soft: rgba(237, 215, 189, 0.07);
+  --color-page-glow-gold-softer: rgba(237, 215, 189, 0.03);
+  --color-page-glow-accent: rgba(104, 72, 44, 0.1);
+  --color-page-glow-accent-soft: rgba(104, 72, 44, 0.04);
+  --shadow-soft: @shadow-soft;
+  --shadow-card: @shadow-card;
   --radius-selector: 1rem;
   --radius-field: 0.5rem;
   --radius-box: 1rem;
@@ -106,34 +132,78 @@ page {
   --depth: 0;
   --noise: 0;
   color-scheme: dark;
-  color: @color-text-primary;
+  color: var(--color-text-primary);
 }
 
 page {
-  background: transparent;
+  background: var(--color-bg-page);
 }
 
 body {
-  background-color: transparent;
-  color: @color-text-primary;
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+
+.moon-theme-light {
+  --color-base-100: #fffaf1;
+  --color-base-200: #fff6e8;
+  --color-base-300: #ece1d0;
+  --color-base-content: #5a4632;
+  --color-primary: #b78947;
+  --color-primary-content: #fffaf1;
+  --color-secondary: #eadcc8;
+  --color-secondary-content: #5f4b35;
+  --color-accent: #d2ac72;
+  --color-accent-content: #4c3924;
+  --color-neutral: #efe7da;
+  --color-neutral-content: #6e573d;
+  --color-info: #4c8c96;
+  --color-info-content: #f8ffff;
+  --color-success: #4f8c5f;
+  --color-success-content: #f5fff6;
+  --color-warning: #b9892f;
+  --color-warning-content: #fff9ed;
+  --color-error: #c65f4c;
+  --color-error-content: #fff7f4;
+  --color-bg-page: #fffaf1;
+  --color-bg-page-soft: #fff6e8;
+  --color-bg-card: #fffaf1;
+  --color-bg-card-soft: #f5eddf;
+  --color-bg-elevated: #ffffff;
+  --color-gold: #b78947;
+  --color-gold-soft: #dfc79d;
+  --color-gold-deep: #956b34;
+  --color-text-primary: #3d3024;
+  --color-text-secondary: #6f5a42;
+  --color-text-muted: #967f60;
+  --color-border-subtle: #e5d2b2;
+  --color-border-strong: #c69b5e;
+  --color-card-gradient: radial-gradient(circle at top left, rgba(222, 194, 146, 0.36), transparent 55%);
+  --color-page-glow-primary: transparent;
+  --color-page-glow-primary-soft: transparent;
+  --color-page-glow-cream: transparent;
+  --color-page-glow-cream-soft: transparent;
+  --color-page-glow-gold-soft: transparent;
+  --color-page-glow-gold-softer: transparent;
+  --color-page-glow-accent: transparent;
+  --color-page-glow-accent-soft: transparent;
+  --shadow-soft: @shadow-soft-light;
+  --shadow-card: @shadow-card-light;
+  color-scheme: light;
 }
 
 .moon-card {
   background:
-    radial-gradient(
-      circle at top left,
-      fade(@color-primary, 18%),
-      transparent 55%
-    ),
-    @color-bg-card;
+    var(--color-card-gradient),
+    var(--color-bg-card);
   border-radius: @radius-lg;
-  box-shadow: @shadow-card;
-  border: 1px solid fade(@color-primary, 14%);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-subtle);
 }
 
 .moon-button-primary {
-  background: @color-gold;
-  color: @color-primary-content;
+  background: var(--color-gold);
+  color: var(--color-primary-content);
   border-radius: @radius-pill;
   border: none;
   box-shadow:
@@ -143,15 +213,15 @@ body {
 
 .moon-button-primary--ghost {
   background: transparent;
-  color: @color-gold;
+  color: var(--color-gold);
   border-radius: @radius-pill;
-  border: 1px solid fade(@color-primary, 50%);
+  border: 1px solid var(--color-border-strong);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
 }
 
 .moon-chip {
   border-radius: @radius-pill;
-  background: fade(@color-neutral, 92%);
-  border: 1px solid fade(@color-primary, 26%);
-  color: @color-text-secondary;
+  background: var(--color-neutral);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
 }

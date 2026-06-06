@@ -32,7 +32,7 @@
   .cacheTime {
     flex: 1;
     min-width: 0;
-    color: @color-text-muted;
+    color: var(--color-text-muted);
     font-size: 23px;
     line-height: 1.2;
   }
@@ -79,9 +79,9 @@
       width: 100%;
       padding: 20px;
       border-radius: @radius-md;
-      background: @color-bg-card;
+      background: var(--color-bg-card);
       border: 1px solid fade(@color-gold, 18%);
-      box-shadow: @shadow-card;
+      box-shadow: var(--shadow-card);
     }
 
     .guideHeader {
@@ -103,7 +103,7 @@
     }
 
     .guideText {
-      color: @color-text-secondary;
+      color: var(--color-text-secondary);
       font-size: 24px;
       line-height: 1.65;
     }
@@ -147,10 +147,10 @@
       font-size: 24px;
       border-radius: 16px;
       padding: 0 0.8rem;
-      border: 1px solid @color-border-subtle;
+      border: 1px solid var(--color-border-subtle);
       height: 64px;
-      background: @color-bg-card-soft;
-      color: @color-text-primary;
+      background: var(--color-bg-card-soft);
+      color: var(--color-text-primary);
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.42);
     }
 
@@ -164,7 +164,7 @@
         fade(@color-gold-soft, 94%) 0%,
         @color-gold 100%
       );
-      color: @color-primary-content;
+      color: var(--color-primary-content);
       border: none;
       display: flex;
       align-items: center;
@@ -177,6 +177,53 @@
       &:active {
         opacity: 0.85;
       }
+    }
+  }
+}
+
+:global(.moon-theme-light).genshin {
+  .cacheTime {
+    color: var(--color-text-muted);
+  }
+
+  .clearCacheButton {
+    background: #ffffff;
+    color: var(--color-gold-deep);
+    border: 1px solid rgba(198, 155, 94, 0.34);
+    box-shadow: none;
+  }
+
+  .entryPanel {
+    .guideCard {
+      background: #ffffff;
+      border: 1px solid rgba(198, 155, 94, 0.2);
+      box-shadow: 0 10px 24px rgba(149, 116, 65, 0.1);
+    }
+
+    .guideTitle {
+      color: var(--color-gold-deep);
+      text-shadow: none;
+    }
+
+    .copyButton {
+      background: #ffffff;
+      color: var(--color-gold-deep);
+      border: 1px solid rgba(198, 155, 94, 0.34);
+      box-shadow: none;
+    }
+  }
+
+  .inputContainer {
+    .genshinInput {
+      background: #ffffff;
+      border: 1px solid rgba(198, 155, 94, 0.24);
+      box-shadow: 0 8px 18px rgba(149, 116, 65, 0.08);
+    }
+
+    .genshinButton {
+      background: linear-gradient(135deg, #d8bd8c 0%, #b78947 100%);
+      color: #fffaf1;
+      box-shadow: 0 8px 16px rgba(149, 116, 65, 0.16);
     }
   }
 }

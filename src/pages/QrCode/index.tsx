@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import drawQrcode from "weapp-qrcode";
 import { usePageShare } from "../../hooks/usePageShare";
 import { useKeyboardFloating } from "../../hooks/useKeyboardFloating";
+import { useTheme } from "../../hooks/useTheme";
 
 import styles from "./index.module.less";
 
@@ -26,6 +27,7 @@ export default function QrCode() {
   const [isDrawing, setIsDrawing] = useState(false);
   const [hasQrCode, setHasQrCode] = useState(false);
   const keyboardFloating = useKeyboardFloating("qrcode-textarea-keyboard");
+  const { themeClassName } = useTheme();
 
   const byteLength = useMemo(() => getUtf8ByteLength(content), [content]);
   const isContentReady = content.trim().length > 0;
@@ -150,7 +152,7 @@ export default function QrCode() {
   };
 
   return (
-    <View className={styles.qrCodePage}>
+    <View className={`${styles.qrCodePage} ${themeClassName}`}>
       <View className={styles.panel}>
         <Text className={styles.panelTitle}>输入内容</Text>
         <Textarea
