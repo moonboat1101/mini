@@ -112,6 +112,37 @@
   color: inherit;
 }
 
+.themeRevealLayer {
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  transition: clip-path 0.56s cubic-bezier(0.18, 0.86, 0.24, 1);
+
+  .themeSwitchThumb,
+  .themeSwitchItem {
+    transition: none;
+  }
+}
+
+.themeTransitioning {
+  .avatar,
+  .brandCn,
+  .brandEn,
+  .themeSwitch,
+  .themeSwitchThumb,
+  .themeSwitchItem,
+  .card,
+  .cardIconWrap,
+  .cardTitle,
+  .footerText,
+  .footerMoon {
+    transition: none;
+  }
+}
+
 .avatar {
   width: 96px;
   height: 96px;

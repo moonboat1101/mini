@@ -5,6 +5,7 @@ export type MoonTheme = "dark" | "light";
 
 const THEME_STORAGE_KEY = "moonboatTheme";
 const LIGHT_THEME_CLASS = "moon-theme-light";
+const DARK_THEME_CLASS = "moon-theme-dark";
 const LIGHT_THEME_BACKGROUND = "#fffaf1";
 const DARK_THEME_BACKGROUND = "#30231d";
 
@@ -17,8 +18,7 @@ const getStoredTheme = (): MoonTheme => {
 };
 
 const applyNavigationTheme = (theme: MoonTheme) => {
-  const backgroundColor =
-    theme === "light" ? LIGHT_THEME_BACKGROUND : DARK_THEME_BACKGROUND;
+  const backgroundColor = getThemeBackground(theme);
 
   Taro.setNavigationBarColor({
     frontColor: theme === "light" ? "#000000" : "#ffffff",
@@ -32,12 +32,23 @@ const applyNavigationTheme = (theme: MoonTheme) => {
   });
 };
 
+export const getThemeBackground = (theme: MoonTheme) =>
+  theme === "light" ? LIGHT_THEME_BACKGROUND : DARK_THEME_BACKGROUND;
+
+export const getThemeClassName = (theme: MoonTheme) =>
+  theme === "light" ? LIGHT_THEME_CLASS : DARK_THEME_CLASS;
+
 export function useTheme() {
   const [theme, setTheme] = useState<MoonTheme>(getStoredTheme);
 
   useEffect(() => {
     applyNavigationTheme(theme);
   }, [theme]);
+
+  const setMoonTheme = (nextTheme: MoonTheme) => {
+    Taro.setStorageSync(THEME_STORAGE_KEY, nextTheme);
+    setTheme(nextTheme);
+  };
 
   const toggleTheme = () => {
     setTheme((current) => {
@@ -49,7 +60,8 @@ export function useTheme() {
 
   return {
     theme,
-    themeClassName: theme === "light" ? LIGHT_THEME_CLASS : "",
+    themeClassName: getThemeClassName(theme),
+    setTheme: setMoonTheme,
     toggleTheme,
   };
 }
