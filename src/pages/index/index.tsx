@@ -68,6 +68,11 @@ export default function Index() {
       url: "/pages/HanDou/index",
     },
     {
+      title: "数独",
+      iconKind: "sudoku",
+      url: "/pages/Sudoku/index",
+    },
+    {
       title: "猜宝可梦",
       iconImage: POKEMON_ICON,
       url: "/pages/Pokemon/index",
@@ -187,7 +192,17 @@ export default function Index() {
       onClick={readonly ? undefined : () => handleCardClick(i)}
     >
       <View className={styles.cardIconWrap}>
-        <Image src={i.iconImage} className={styles.cardIconImage} />
+        {"iconKind" in i && i.iconKind === "sudoku" ? (
+          <View className={styles.sudokuIcon}>
+            {Array.from({ length: 9 }, (_, index) => (
+              <View key={index} className={styles.sudokuIconCell}>
+                {index % 2 === 0 ? index + 1 : ""}
+              </View>
+            ))}
+          </View>
+        ) : (
+          <Image src={i.iconImage} className={styles.cardIconImage} />
+        )}
       </View>
       <Text className={styles.cardTitle}>{i.title}</Text>
       <View className={styles.cardOrnament}>
