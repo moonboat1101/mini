@@ -126,4 +126,18 @@ export const roleList = [
     imageUrl:
       "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/04/03/b73622caa3750012312c72437295ace3_6973976776946504804.png",
   },
+  {
+    name: "尼可",
+    englishName: "Nick",
+    version: "6.7",
+    imageUrl:
+      "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/05/18/5e875ee63bca70ebeda64e6fa409d31b_5921156294699298125.png",
+  },
+  {
+    name: "洛恩",
+    englishName: "Lorne",
+    version: "6.8",
+    imageUrl:
+      "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/06/05/7fced903c930ab16fd333755c1aef7e9_9169127423158726160.png",
+  },
 ];
