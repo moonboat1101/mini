@@ -38,7 +38,7 @@ export const scriptGames = [
     img: "https://kimi-web-img.moonshot.cn/img/img1.gamersky.com/84a12c7a0beb9de95bc8405acfee17df94f4a779.jpg",
     comment:
       "玩的是凶手，没理乱争，藏住了杀人可行性！根据结果可以给到满分，但是客观来说，明凶本还是不如纯还原好，逻辑缜密度上也差一点",
-    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "YWL"],
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "YWL"],
   },
   {
     name: "须臾",

@@ -15,11 +15,11 @@ const WISH_ICON =
 const POKEMON_ICON =
   "https://s1.aigei.com/src/img/png/e6/e6f2fee753dc43bf84b0e0434069e631.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:oVtd8ZV69R_JJ-v236tW0fDxFh4=";
 const SCRIPT_RECORD_ICON =
-  "https://bpic.588ku.com/element_pic/21/12/04/5abdb4cd5f5ba19679a3e393881eef60.jpg!/fh/350/unsharp/true/format/png";
+  "https://ts1.tc.mm.bing.net/th/id/OIP-C.66t7nMF0i-oUPJ9qVhzmfwHaHa";
 const CONTACT_ICON =
   "https://s1.aigei.com/src/img/png/e6/e6e99018e7f44779a836f29770468694.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:RXCYi5fMmGzJgIOWYPKpE3OcfTg=";
 const TURTLE_SOUP_ICON =
-  "https://bpic.588ku.com/element_pic/24/01/23/ebfb1bca94914b0793dc15de0b9ab1c3.png!/fh/350/unsharp/true/format/png";
+  "https://pp.myapp.com/ma_icon/0/icon_54113753_1722405739/256";
 const QRCODE_ICON =
   "https://gd-hbimg.huaban.com/07c6686e680086ee3c92eb48e10df3325832fac568d-uvzROb_fw658";
 const HANDOU_ICON =
