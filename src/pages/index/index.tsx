@@ -7,7 +7,7 @@ import { getThemeClassName, MoonTheme, useTheme } from "../../hooks/useTheme";
 
 import styles from "./index.module.less";
 
-const CONTACT_EMAIL = "1025196468@qq.com";
+const REPO_URL = "https://github.com/moonboat1101/moonboat-mini";
 const GENSHIN_ICON =
   "https://s1.aigei.com/src/img/png/5d/5d23970a2f3f450eb3c8f6884c4e0e43.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:HGaSXiz-p67st8GrjLKsAJG8HLo=";
 const WISH_ICON =
@@ -16,8 +16,6 @@ const POKEMON_ICON =
   "https://s1.aigei.com/src/img/png/e6/e6f2fee753dc43bf84b0e0434069e631.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:oVtd8ZV69R_JJ-v236tW0fDxFh4=";
 const SCRIPT_RECORD_ICON =
   "https://ts1.tc.mm.bing.net/th/id/OIP-C.66t7nMF0i-oUPJ9qVhzmfwHaHa";
-const CONTACT_ICON =
-  "https://s1.aigei.com/src/img/png/e6/e6e99018e7f44779a836f29770468694.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:RXCYi5fMmGzJgIOWYPKpE3OcfTg=";
 const TURTLE_SOUP_ICON =
   "https://pp.myapp.com/ma_icon/0/icon_54113753_1722405739/256";
 const QRCODE_ICON =
@@ -92,31 +90,25 @@ export default function Index() {
       iconImage: WISH_ICON,
       url: "/pages/Wish/index",
     },
-    {
-      title: "联系作者",
-      iconImage: CONTACT_ICON,
-      email: CONTACT_EMAIL,
-    },
   ];
   const primaryCards = cards.slice(0, 2);
   const secondaryCards = cards.slice(2);
 
   const handleCardClick = (i: (typeof cards)[number]) => {
-    if ("email" in i) {
-      Taro.setClipboardData({
-        data: i.email,
-        success: () => {
-          Taro.showToast({
-            title: "已复制邮箱",
-            icon: "success",
-          });
-        },
-      });
-      return;
-    }
-
     Taro.navigateTo({
       url: i.url,
+    });
+  };
+
+  const handleLogoClick = () => {
+    Taro.setClipboardData({
+      data: REPO_URL,
+      success: () => {
+        Taro.showToast({
+          title: "已复制 GitHub 链接",
+          icon: "success",
+        });
+      },
     });
   };
 
@@ -216,10 +208,15 @@ export default function Index() {
   const renderHomeContent = (displayTheme: MoonTheme, readonly = false) => (
     <>
       <View className={styles.header}>
-        <Image src={profileSmall} className={styles.avatar} />
-        <View className={styles.titleGroup}>
-          <Text className={styles.brandCn}>月舟</Text>
-          <Text className={styles.brandEn}>moonboat</Text>
+        <View
+          className={styles.logoButton}
+          onClick={readonly ? undefined : handleLogoClick}
+        >
+          <Image src={profileSmall} className={styles.avatar} />
+          <View className={styles.titleGroup}>
+            <Text className={styles.brandCn}>月舟</Text>
+            <Text className={styles.brandEn}>moonboat</Text>
+          </View>
         </View>
         <View
           id={readonly ? undefined : THEME_SWITCH_ID}
