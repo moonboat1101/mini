@@ -137,6 +137,7 @@ type ScriptRecordItem = {
   score: number;
   img: string;
   comment?: string;
+  role?: string;
   players?: string[];
 };
 
@@ -266,10 +267,8 @@ export default function ScriptRecord() {
                 <Text className={styles.cardTitle}>{item.name}</Text>
                 <View className={styles.cardHeaderRight}>
                   <Text className={styles.playTime}>{item.time}</Text>
-                  <View className={styles.rating}>
-                    <Text className={styles.starIcon}>★</Text>
-                    <Text className={styles.ratingValue}>{item.score}</Text>
-                  </View>
+                  <Text className={styles.metaDivider}>|</Text>
+                  <Text className={styles.playTime}>{item.score}</Text>
                 </View>
               </View>
 
@@ -314,12 +313,18 @@ export default function ScriptRecord() {
                     <Text className={styles.modalPlayTime}>
                       {activeItem.time}
                     </Text>
-                    <View className={styles.modalRating}>
-                      <Text className={styles.starIcon}>★</Text>
-                      <Text className={styles.ratingValue}>
-                        {activeItem.score}
-                      </Text>
-                    </View>
+                    <Text className={styles.modalMetaDivider}>|</Text>
+                    <Text className={styles.modalPlayTime}>
+                      {activeItem.score}
+                    </Text>
+                    {activeItem.role?.trim() ? (
+                      <>
+                        <Text className={styles.modalMetaDivider}>|</Text>
+                        <Text className={styles.modalPlayTime}>
+                          {activeItem.role.trim()}
+                        </Text>
+                      </>
+                    ) : null}
                   </View>
                   {activeItem.players?.length ? (
                     <ModalPlayersRow players={activeItem.players} />
