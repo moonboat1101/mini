@@ -56,7 +56,7 @@ export default function Index() {
       url: "/pages/genshin/index",
     },
     {
-      title: "剧本杀记录",
+      title: "剧本杀",
       iconImage: SCRIPT_RECORD_ICON,
       url: "/pages/ScriptRecord/index",
     },

@@ -1,7 +1,7 @@
 import { View, Text, Image, ScrollView } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { PLAYER_PIC, scriptGames } from "./constants";
+import { PLAYER_PIC, scriptGames, wishlist } from "./constants";
 import { usePageShare } from "../../hooks/usePageShare";
 import { useTheme } from "../../hooks/useTheme";
 
@@ -10,7 +10,6 @@ import styles from "./index.module.less";
 const MODAL_PANEL_ID = "script-record-modal-panel";
 const MODAL_HEADER_ID = "script-record-modal-header";
 
-/** 保持 players 顺序：有头像在前，无头像在后 */
 function splitPlayersByAvatar(
   players: string[],
   picMap: Record<string, string>,
@@ -126,10 +125,10 @@ function measureModalScrollBodyPx(): Promise<number | undefined> {
   });
 }
 
-type SortType = "time" | "rating";
+type FilterType = "time" | "rating" | "wishlist";
 
-/** 与 scriptGames 单条字段一致；id 为列表用 */
 type ScriptRecordItem = {
+  type: "played";
   id: string;
   name: string;
   time: string;
@@ -141,11 +140,29 @@ type ScriptRecordItem = {
   players?: string[];
 };
 
+type WishlistItem = {
+  type: "wishlist";
+  id: string;
+  name: string;
+  desc: string;
+  people: number;
+  img: string;
+};
+
+type ScriptListItem = ScriptRecordItem | WishlistItem;
+
 const DEFAULT_COVER = "https://via.placeholder.com/160x220.png?text=Script";
 
 const scriptList: ScriptRecordItem[] = scriptGames.map((game, index) => ({
+  type: "played",
   id: String(index + 1),
   ...game,
+}));
+
+const wishlistItems: WishlistItem[] = wishlist.map((item, index) => ({
+  type: "wishlist",
+  id: `wishlist-${index + 1}`,
+  ...item,
 }));
 
 const parsePlayTime = (time: string) => {
@@ -157,12 +174,12 @@ const parsePlayTime = (time: string) => {
 
 export default function ScriptRecord() {
   usePageShare({
-    title: "剧本杀记录",
+    title: "剧本杀",
     path: "/pages/ScriptRecord/index",
   });
 
-  const [sortType, setSortType] = useState<SortType>("time");
-  const [activeItem, setActiveItem] = useState<ScriptRecordItem | null>(null);
+  const [filterType, setFilterType] = useState<FilterType>("time");
+  const [activeItem, setActiveItem] = useState<ScriptListItem | null>(null);
   const [modalScrollBodyPx, setModalScrollBodyPx] = useState<
     number | undefined
   >(undefined);
@@ -212,7 +229,7 @@ export default function ScriptRecord() {
   }, [activeItem]);
 
   const sortedList = [...scriptList].sort((a, b) => {
-    if (sortType === "time") {
+    if (filterType === "time") {
       return parsePlayTime(b.time) - parsePlayTime(a.time);
     }
 
@@ -221,9 +238,76 @@ export default function ScriptRecord() {
       return ratingDiff;
     }
 
-    // 评分相同时，按时间倒序（最新在上）
     return parsePlayTime(b.time) - parsePlayTime(a.time);
   });
+
+  const visibleList: ScriptListItem[] =
+    filterType === "wishlist" ? wishlistItems : sortedList;
+
+  const renderCardMeta = (item: ScriptListItem) => {
+    if (item.type === "wishlist") {
+      return <Text className={styles.playTime}>{item.people}人</Text>;
+    }
+
+    return (
+      <>
+        <Text className={styles.playTime}>{item.time}</Text>
+        <Text className={styles.metaDivider}>|</Text>
+        <Text className={styles.playTime}>{item.score}</Text>
+      </>
+    );
+  };
+
+  const renderModalMeta = (item: ScriptListItem) => {
+    if (item.type === "wishlist") {
+      return <Text className={styles.modalPlayTime}>{item.people}人</Text>;
+    }
+
+    return (
+      <>
+        <Text className={styles.modalPlayTime}>{item.time}</Text>
+        <Text className={styles.modalMetaDivider}>|</Text>
+        <Text className={styles.modalPlayTime}>{item.score}</Text>
+        {item.role?.trim() ? (
+          <>
+            <Text className={styles.modalMetaDivider}>|</Text>
+            <Text className={styles.modalPlayTime}>{item.role.trim()}</Text>
+          </>
+        ) : null}
+      </>
+    );
+  };
+
+  const renderScriptCard = (item: ScriptListItem) => (
+    <View
+      key={item.id}
+      className={styles.card}
+      onClick={() => setActiveItem(item)}
+    >
+      <Image className={styles.cover} src={item.img || DEFAULT_COVER} />
+
+      <View className={styles.cardRight}>
+        <View className={styles.cardHeaderRow}>
+          <Text className={styles.cardTitle}>{item.name}</Text>
+          <View className={styles.cardHeaderRight}>{renderCardMeta(item)}</View>
+        </View>
+
+        {item.type === "played" && item.players?.length ? (
+          <CardPlayersRow players={item.players} />
+        ) : null}
+
+        <Text
+          className={`${styles.description} ${
+            item.type === "played" && item.players?.length
+              ? styles.descriptionPreview
+              : styles.descriptionPreviewFull
+          }`}
+        >
+          {item.desc}
+        </Text>
+      </View>
+    </View>
+  );
 
   return (
     <View className={`${styles.scriptRecord} ${themeClassName}`}>
@@ -231,63 +315,42 @@ export default function ScriptRecord() {
         <View className={styles.sortSwitch}>
           <View
             className={`${styles.sortSwitchThumb} ${
-              sortType === "rating" ? styles.sortSwitchThumbRight : ""
+              filterType === "rating"
+                ? styles.sortSwitchThumbMiddle
+                : filterType === "wishlist"
+                  ? styles.sortSwitchThumbRight
+                  : ""
             }`}
           />
-          <Text
+          <View
             className={`${styles.sortSwitchItem} ${
-              sortType === "time" ? styles.sortSwitchItemActive : ""
+              filterType === "time" ? styles.sortSwitchItemActive : ""
             }`}
-            onClick={() => setSortType("time")}
+            onClick={() => setFilterType("time")}
           >
             按时间
-          </Text>
-          <Text
+          </View>
+          <View
             className={`${styles.sortSwitchItem} ${
-              sortType === "rating" ? styles.sortSwitchItemActive : ""
+              filterType === "rating" ? styles.sortSwitchItemActive : ""
             }`}
-            onClick={() => setSortType("rating")}
+            onClick={() => setFilterType("rating")}
           >
             按评分
-          </Text>
+          </View>
+          <View
+            className={`${styles.sortSwitchItem} ${
+              filterType === "wishlist" ? styles.sortSwitchItemActive : ""
+            }`}
+            onClick={() => setFilterType("wishlist")}
+          >
+            想玩
+          </View>
         </View>
       </View>
 
       <View className={styles.cardList}>
-        {sortedList.map((item) => (
-          <View
-            key={item.id}
-            className={styles.card}
-            onClick={() => setActiveItem(item)}
-          >
-            <Image className={styles.cover} src={item.img || DEFAULT_COVER} />
-
-            <View className={styles.cardRight}>
-              <View className={styles.cardHeaderRow}>
-                <Text className={styles.cardTitle}>{item.name}</Text>
-                <View className={styles.cardHeaderRight}>
-                  <Text className={styles.playTime}>{item.time}</Text>
-                  <Text className={styles.metaDivider}>|</Text>
-                  <Text className={styles.playTime}>{item.score}</Text>
-                </View>
-              </View>
-
-              {item.players?.length ? (
-                <CardPlayersRow players={item.players} />
-              ) : null}
-
-              <Text
-                className={`${styles.description} ${
-                  item.players?.length
-                    ? styles.descriptionPreview
-                    : styles.descriptionPreviewFull
-                }`}
-              >
-                {item.desc}
-              </Text>
-            </View>
-          </View>
-        ))}
+        {visibleList.map((item) => renderScriptCard(item))}
       </View>
 
       {activeItem && (
@@ -310,23 +373,9 @@ export default function ScriptRecord() {
                 <View className={styles.modalTopMeta}>
                   <Text className={styles.modalTitle}>{activeItem.name}</Text>
                   <View className={styles.modalMetaRow}>
-                    <Text className={styles.modalPlayTime}>
-                      {activeItem.time}
-                    </Text>
-                    <Text className={styles.modalMetaDivider}>|</Text>
-                    <Text className={styles.modalPlayTime}>
-                      {activeItem.score}
-                    </Text>
-                    {activeItem.role?.trim() ? (
-                      <>
-                        <Text className={styles.modalMetaDivider}>|</Text>
-                        <Text className={styles.modalPlayTime}>
-                          {activeItem.role.trim()}
-                        </Text>
-                      </>
-                    ) : null}
+                    {renderModalMeta(activeItem)}
                   </View>
-                  {activeItem.players?.length ? (
+                  {activeItem.type === "played" && activeItem.players?.length ? (
                     <ModalPlayersRow players={activeItem.players} />
                   ) : null}
                 </View>
@@ -345,7 +394,7 @@ export default function ScriptRecord() {
               <Text className={styles.modalSectionTitle}>简介</Text>
               <Text className={styles.modalSynopsis}>{activeItem.desc}</Text>
 
-              {activeItem.comment?.trim() ? (
+              {activeItem.type === "played" && activeItem.comment?.trim() ? (
                 <View className={styles.modalNoteBlock}>
                   <Text className={styles.modalSectionTitle}>备注</Text>
                   <Text className={styles.modalNoteText}>

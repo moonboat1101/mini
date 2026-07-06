@@ -9,6 +9,33 @@ export const PLAYER_PIC: Record<string, string> = {
   WGL: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES35Zp2lMI0dCw7tAT3_ZZWTNl7FBasgACaCEAAvda2VYPHlq9bgjd-zsE.jpg",
 };
 
+export const wishlist = [
+  {
+    name: "芥子：须陀界河",
+    desc: "在那弥望山岭深处，有一座村子名唤弥岭村。村前有一条大河，是为须陀河。据传，这弥岭村乃是由数百年前一支战败的明军所建立。他们为了躲避清军追捕而误入此地，却再也没能离开，只能在那松柏山头，日夜远望回不去的故乡。直到某日，从那须陀河里走出来一位菩萨。村民问菩萨要去往何处？菩萨曰：须弥山巅六欲天。村民请求菩萨带他们一起离开，菩萨摇了摇头。村民又问那他们该去往何处？菩萨答：你们当入无间地狱，历千万亿劫，求出无期。诡语三部曲终章下部，与上部《弥望之川》共同构成完整故事。",
+    people: 8,
+    img: "https://kimi-web-img.moonshot.cn/img/pic3.zhimg.com/5d13a42359920a2ccdc6e052e4b802bc63827ecd.jpg",
+  },
+  {
+    name: "此时彼刻之人",
+    desc: "九十九封未寄出的信件，九十九次无声的思念。风间七树，一位以爱为名的推理者，为了追寻亡妻铃鸟死亡的真相，向莲山夏莉发起了推理对决。莲山夏莉，一位以逻辑为武器的侦探，为了守护心中的正义，接受了这场挑战。在虚构的设定中，用真实的推理，找到唯一的真相。纯爱与推理的交织，真相与谎言的碰撞，一切答案都将在此时彼刻揭晓。",
+    people: 6,
+    img: "https://kimi-web-img.moonshot.cn/img/picx.zhimg.com/a1f39bddde78d1f1c86ca5e83458be47c93e9bb4.jpg",
+  },
+  {
+    name: "八十七仙图",
+    desc: "1937年，一场看似普通的画展即将在紫金港的威尔逊展馆举行。《八十七神仙卷》位列展品之首，一时间轰动全港。相传此画卷为唐代吴道子真迹，白描绘画巅峰之作，千百年来颠沛流离，几经辗转终于现世。今天，六名培英中学的学生随老师参加画展，却意外卷入了一场谋划千年的历史迷局之中。",
+    people: 6,
+    img: "https://kimi-web-img.moonshot.cn/img/80larpnew-1251545914.cos.ap-guangzhou.myqcloud.com/308a957e5ead2b69fe634aecc6c8d3e62f37e8bc.jpg",
+  },
+  {
+    name: "北宋奇案·汴京",
+    desc: "一段北宋时期耻辱的历史，两个南宋同朝为官的叔侄，三位曾经纠葛种种的帝王，竟与那四起未曾结案的密室斩首案深深牵扯。而那尘封于汴京城下的秘密，亦随着它的陨落，或被深埋，或欲出土。以本格密室为面、长逻辑推理为底，四起斩首密室案件环环相扣，在破解诡计之后，一条悖论将引出整段历史中被隐藏的权谋故事。",
+    people: 6,
+    img: "https://kimi-web-img.moonshot.cn/img/k.sinaimg.cn/6b630c953002bb19e1f692c04f7eea7e329f4501.jpg",
+  },
+];
+
 export const scriptGames = [
   {
     name: "虚构推理",

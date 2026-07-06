@@ -15,7 +15,7 @@
 
     .sortSwitch {
       position: relative;
-      width: 300px;
+      width: 390px;
       height: 68px;
       border-radius: @radius-pill;
       background:
@@ -37,10 +37,10 @@
 
     .sortSwitchThumb {
       position: absolute;
-      top: 8px;
-      left: 8px;
-      width: calc(50% - 8px);
-      height: calc(100% - 16px);
+      top: 5px;
+      left: 5px;
+      width: calc((100% - 10px) / 3);
+      height: calc(100% - 10px);
       border-radius: @radius-pill;
       background: linear-gradient(
         135deg,
@@ -54,8 +54,12 @@
       z-index: 0;
     }
 
-    .sortSwitchThumbRight {
+    .sortSwitchThumbMiddle {
       transform: translateX(100%);
+    }
+
+    .sortSwitchThumbRight {
+      transform: translateX(200%);
     }
 
     .sortSwitchItem {
@@ -66,6 +70,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      box-sizing: border-box;
+      text-align: center;
       color: var(--color-text-secondary);
       font-weight: 500;
       transition:
