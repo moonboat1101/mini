@@ -9,6 +9,7 @@ export default defineAppConfig({
     "pages/Pokemon/index",
     "pages/ScriptRecord/index",
     "pages/QrCode/index",
+    "pages/Mbti/index",
   ],
   window: {
     backgroundTextStyle: "light",

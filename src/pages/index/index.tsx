@@ -71,6 +71,11 @@ export default function Index() {
       url: "/pages/Sudoku/index",
     },
     {
+      title: "MBTI 测试",
+      iconKind: "mbti",
+      url: "/pages/Mbti/index",
+    },
+    {
       title: "猜宝可梦",
       iconImage: POKEMON_ICON,
       url: "/pages/Pokemon/index",
@@ -191,6 +196,11 @@ export default function Index() {
                 {index % 2 === 0 ? index + 1 : ""}
               </View>
             ))}
+          </View>
+        ) : "iconKind" in i && i.iconKind === "mbti" ? (
+          <View className={styles.mbtiIcon}>
+            <Text>MB</Text>
+            <Text>TI</Text>
           </View>
         ) : (
           <Image src={i.iconImage} className={styles.cardIconImage} />
