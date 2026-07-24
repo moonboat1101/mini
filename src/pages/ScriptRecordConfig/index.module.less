@@ -1,0 +1,67 @@
+@import "../../styles/theme.less";
+
+.page {
+  min-height: 100vh;
+  padding: 28px 24px 48px;
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  .moon-page-background();
+}
+
+.intro { margin-bottom: 24px; }
+.topNotice { display: block; padding: 16px 20px; border-radius: 14px; font-size: 24px; line-height: 1.55; color: var(--color-text-secondary); background: fade(@color-gold, 8%); border: 1px solid fade(@color-gold, 18%); }
+.helper { display: block; margin-top: 8px; font-size: 24px; line-height: 1.55; color: var(--color-text-muted); }
+.tabs { display: flex; gap: 12px; margin-bottom: 18px; }
+.tab { flex: 1; padding: 17px 12px; text-align: center; border-radius: @radius-pill; background: var(--color-bg-card); color: var(--color-text-secondary); box-shadow: inset 0 0 0 1px fade(@color-gold, 20%); }
+.tabActive { color: var(--color-primary-content); font-weight: 700; background: linear-gradient(135deg, @color-gold-soft, @color-gold); }
+.primaryButton, .secondaryButton { margin: 0; min-height: 72px; line-height: 72px; border-radius: @radius-pill; font-size: 28px; }
+.primaryButton { color: var(--color-primary-content); background: linear-gradient(135deg, @color-gold-soft, @color-gold); border: none; }
+.secondaryButton { color: var(--color-text-primary); background: var(--color-bg-card); border: 1px solid fade(@color-gold, 24%); }
+.bulkPanel, .examplePanel { padding: 24px 20px; border-radius: @radius-md; background: var(--color-bg-card); box-shadow: inset 0 0 0 1px fade(@color-gold, 18%); }
+.examplePanel { margin-top: 14px; }
+.clearConfigButton { display: block; width: 100%; margin: 18px 0 0; min-height: 68px; line-height: 68px; border-radius: @radius-pill; color: #d97970; background: transparent; border: 1px solid rgba(217, 121, 112, 0.45); font-size: 25px; }
+.editorMask { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(0, 0, 0, 0.72); }
+.editor { width: 100%; max-width: 720px; max-height: 90vh; overflow: hidden; border-radius: @radius-md; background: var(--color-bg-card); box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7), inset 0 0 0 1px fade(@color-gold, 22%); }
+.editorScroll { max-height: 90vh; }
+.editorContent { padding: 26px 22px 30px; box-sizing: border-box; }
+.sectionTitle { display: block; margin-bottom: 18px; font-size: 30px; font-weight: 700; color: var(--color-gold-soft); }
+.bulkTitle { display: block; font-size: 28px; font-weight: 600; color: var(--color-text-primary); }
+.exampleCode { display: block; margin-top: 10px; padding: 16px; border-radius: 12px; white-space: pre-wrap; word-break: break-all; background: var(--color-bg-page-soft); color: var(--color-text-secondary); border: 1px solid fade(@color-gold, 14%); font-family: monospace; font-size: 20px; line-height: 1.5; }
+.field { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
+.fieldRow { display: flex; gap: 16px; .field { flex: 1; min-width: 0; } }
+.label { flex: 0 0 auto; width: 116px; font-size: 24px; color: var(--color-text-secondary); }
+.requiredMark { margin-right: 6px; color: #db887c; font-size: 28px; font-weight: 700; }
+.input, .textarea, .bulkTextarea { display: block; width: 100%; padding: 14px 16px; box-sizing: border-box; border-radius: 12px; background: var(--color-bg-page-soft); color: var(--color-text-primary) !important; font-size: 26px; line-height: 1.5; border: 1px solid fade(@color-gold, 16%); caret-color: var(--color-gold-soft); }
+.input, .textarea { flex: 1; min-width: 0; }
+.input { height: 76px; line-height: 76px; }
+.textarea { min-height: 120px; }
+.textareaField { align-items: flex-start; .label { margin-top: 16px; } }
+.editorActions, .bulkActions { display: flex; gap: 14px; margin-top: 22px; .primaryButton, .secondaryButton { flex: 1; font-size: 25px; } }
+.editorActions { justify-content: flex-end; .primaryButton, .secondaryButton { flex: 0 0 160px; min-height: 60px; line-height: 60px; font-size: 24px; } }
+.listSection { margin-top: 30px; }
+.listSectionHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.listSectionHeader .sectionTitle { margin: 0; }
+.addAction { padding: 8px 18px; border-radius: @radius-pill; color: var(--color-primary-content); background: linear-gradient(135deg, @color-gold-soft, @color-gold); font-size: 24px; font-weight: 600; }
+.list { display: flex; flex-direction: column; gap: 12px; }
+.listRow { display: flex; min-width: 0; align-items: stretch; gap: 14px; height: 64px; }
+.listItem { flex: 1; min-width: 0; display: flex; align-items: center; padding: 0 20px; border-radius: @radius-md; background: var(--color-bg-card); box-shadow: inset 0 0 0 1px fade(@color-gold, 14%); }
+.listItemText { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.listItemTitle { display: block; flex: 1; min-width: 0; font-size: 27px; font-weight: 600; color: var(--color-text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.listItemMeta { display: block; flex-shrink: 0; font-size: 22px; color: var(--color-text-muted); }
+.listActions { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.actionButton { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border-radius: 18px; color: var(--color-gold-soft); background: fade(@color-gold, 10%); border: 1px solid fade(@color-gold, 22%); font-size: 34px; line-height: 1; }
+.editAction { transform: rotate(90deg); }
+.deleteAction { color: #db887c; background: rgba(219, 136, 124, 0.1); border-color: rgba(219, 136, 124, 0.24); font-size: 38px; }
+.bulkTextarea { min-height: 260px; margin-top: 16px; font-family: monospace; font-size: 22px; }
+
+:global(.moon-theme-light).page {
+  .sectionTitle { color: var(--color-gold-deep); }
+  .actionButton { color: var(--color-gold-deep); background: #fff6e8; border-color: rgba(198, 155, 94, 0.18); }
+  .deleteAction { color: #c76e63; background: #fff2ef; border-color: rgba(199, 110, 99, 0.2); }
+  .topNotice { background: #fff6e8; border-color: rgba(198, 155, 94, 0.18); }
+  .addAction { color: #fffaf1; background: linear-gradient(135deg, #dcc598, #b78947); }
+  .tab, .secondaryButton, .editor, .bulkPanel, .examplePanel, .listItem { background: #ffffff; }
+  .input, .textarea, .bulkTextarea { background: #fffaf1; }
+  .exampleCode { background: #fffaf1; }
+  .tabActive, .primaryButton { color: #fffaf1; background: linear-gradient(135deg, #dcc598, #b78947); }
+}

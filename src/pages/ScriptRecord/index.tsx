@@ -1,7 +1,12 @@
 import { View, Text, Image, ScrollView } from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import Taro, { useDidShow } from "@tarojs/taro";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { PLAYER_PIC, scriptGames, wishlist } from "./constants";
+import { PLAYER_PIC } from "./constants";
+import {
+  loadScriptRecordData,
+  type PlayedScriptRecord,
+  type WishlistRecord,
+} from "./data";
 import { usePageShare } from "../../hooks/usePageShare";
 import { useTheme } from "../../hooks/useTheme";
 
@@ -10,15 +15,26 @@ import styles from "./index.module.less";
 const MODAL_PANEL_ID = "script-record-modal-panel";
 const MODAL_HEADER_ID = "script-record-modal-header";
 
+type AvatarPlayer = {
+  id: string;
+  src: string;
+};
+
+function getPlayerAvatarSrc(player: string, picMap: Record<string, string>) {
+  if (picMap[player]) return picMap[player];
+  return /^https?:\/\//i.test(player) ? player : "";
+}
+
 function splitPlayersByAvatar(
   players: string[],
   picMap: Record<string, string>,
-): { withPic: string[]; withoutPic: string[] } {
-  const withPic: string[] = [];
+): { withPic: AvatarPlayer[]; withoutPic: string[] } {
+  const withPic: AvatarPlayer[] = [];
   const withoutPic: string[] = [];
-  for (const id of players) {
-    if (picMap[id]) withPic.push(id);
-    else withoutPic.push(id);
+  for (const player of players) {
+    const src = getPlayerAvatarSrc(player, picMap);
+    if (src) withPic.push({ id: player, src });
+    else withoutPic.push(player);
   }
   return { withPic, withoutPic };
 }
@@ -29,15 +45,15 @@ function ModalPlayersRow({ players }: { players: string[] }) {
     <View className={styles.modalPlayersRow}>
       {withPic.length ? (
         <View className={styles.modalPlayersAvatars}>
-          {withPic.map((pid, i) => (
+          {withPic.map((player, i) => (
             <View
-              key={pid}
+              key={`${player.id}-${i}`}
               className={styles.modalPlayerAvatarWrap}
               style={{ zIndex: withPic.length - i }}
             >
               <Image
                 className={styles.modalPlayerAvatarImg}
-                src={PLAYER_PIC[pid]}
+                src={player.src}
                 mode="aspectFill"
               />
             </View>
@@ -60,15 +76,15 @@ function CardPlayersRow({ players }: { players: string[] }) {
     <View className={styles.cardPlayersRow}>
       {withPic.length ? (
         <View className={styles.cardPlayersAvatars}>
-          {withPic.map((pid, i) => (
+          {withPic.map((player, i) => (
             <View
-              key={pid}
+              key={`${player.id}-${i}`}
               className={styles.cardPlayerAvatarWrap}
               style={{ zIndex: withPic.length - i }}
             >
               <Image
                 className={styles.cardPlayerAvatarImg}
-                src={PLAYER_PIC[pid]}
+                src={player.src}
                 mode="aspectFill"
               />
             </View>
@@ -127,43 +143,12 @@ function measureModalScrollBodyPx(): Promise<number | undefined> {
 
 type FilterType = "time" | "rating" | "wishlist";
 
-type ScriptRecordItem = {
-  type: "played";
-  id: string;
-  name: string;
-  time: string;
-  desc: string;
-  score: number;
-  img: string;
-  comment?: string;
-  role?: string;
-  players?: string[];
-};
-
-type WishlistItem = {
-  type: "wishlist";
-  id: string;
-  name: string;
-  desc: string;
-  people: number;
-  img: string;
-};
+type ScriptRecordItem = PlayedScriptRecord & { type: "played" };
+type WishlistItem = WishlistRecord & { type: "wishlist" };
 
 type ScriptListItem = ScriptRecordItem | WishlistItem;
 
-const DEFAULT_COVER = "https://via.placeholder.com/160x220.png?text=Script";
-
-const scriptList: ScriptRecordItem[] = scriptGames.map((game, index) => ({
-  type: "played",
-  id: String(index + 1),
-  ...game,
-}));
-
-const wishlistItems: WishlistItem[] = wishlist.map((item, index) => ({
-  type: "wishlist",
-  id: `wishlist-${index + 1}`,
-  ...item,
-}));
+const DEFAULT_COVER = "https://ts1.tc.mm.bing.net/th/id/OIP-C.66t7nMF0i-oUPJ9qVhzmfwHaHa";
 
 const parsePlayTime = (time: string) => {
   const [yearStr, monthStr] = time.split(".");
@@ -183,7 +168,12 @@ export default function ScriptRecord() {
   const [modalScrollBodyPx, setModalScrollBodyPx] = useState<
     number | undefined
   >(undefined);
+  const [recordData, setRecordData] = useState(loadScriptRecordData);
   const { themeClassName } = useTheme();
+
+  useDidShow(() => {
+    setRecordData(loadScriptRecordData());
+  });
 
   useLayoutEffect(() => {
     if (!activeItem) {
@@ -228,6 +218,14 @@ export default function ScriptRecord() {
     };
   }, [activeItem]);
 
+  const scriptList: ScriptRecordItem[] = recordData.played.map((item) => ({
+    ...item,
+    type: "played",
+  }));
+  const wishlistItems: WishlistItem[] = recordData.wishlist.map((item) => ({
+    ...item,
+    type: "wishlist",
+  }));
   const sortedList = [...scriptList].sort((a, b) => {
     if (filterType === "time") {
       return parsePlayTime(b.time) - parsePlayTime(a.time);
@@ -246,34 +244,38 @@ export default function ScriptRecord() {
 
   const renderCardMeta = (item: ScriptListItem) => {
     if (item.type === "wishlist") {
-      return <Text className={styles.playTime}>{item.people}人</Text>;
+      return <Text className={styles.playTime}>{item.people ? `${item.people}人` : "人数待补充"}</Text>;
     }
 
+    const meta = [item.time?.trim(), item.score ? String(item.score) : ""].filter(Boolean);
+    if (!meta.length) return <Text className={styles.playTime}>信息待补充</Text>;
     return (
       <>
-        <Text className={styles.playTime}>{item.time}</Text>
-        <Text className={styles.metaDivider}>|</Text>
-        <Text className={styles.playTime}>{item.score}</Text>
+        {meta.map((value, index) => (
+          <View key={value} className={styles.cardHeaderRight}>
+            {index ? <Text className={styles.metaDivider}>·</Text> : null}
+            <Text className={styles.playTime}>{value}</Text>
+          </View>
+        ))}
       </>
     );
   };
 
   const renderModalMeta = (item: ScriptListItem) => {
     if (item.type === "wishlist") {
-      return <Text className={styles.modalPlayTime}>{item.people}人</Text>;
+      return <Text className={styles.modalPlayTime}>{item.people ? `${item.people}人` : "人数待补充"}</Text>;
     }
 
+    const meta = [item.time?.trim(), item.score ? String(item.score) : "", item.role?.trim()].filter(Boolean);
+    if (!meta.length) return <Text className={styles.modalPlayTime}>信息待补充</Text>;
     return (
       <>
-        <Text className={styles.modalPlayTime}>{item.time}</Text>
-        <Text className={styles.modalMetaDivider}>|</Text>
-        <Text className={styles.modalPlayTime}>{item.score}</Text>
-        {item.role?.trim() ? (
-          <>
-            <Text className={styles.modalMetaDivider}>|</Text>
-            <Text className={styles.modalPlayTime}>{item.role.trim()}</Text>
-          </>
-        ) : null}
+        {meta.map((value, index) => (
+          <View key={value} className={styles.modalMetaRow}>
+            {index ? <Text className={styles.modalMetaDivider}>·</Text> : null}
+            <Text className={styles.modalPlayTime}>{value}</Text>
+          </View>
+        ))}
       </>
     );
   };
@@ -288,7 +290,7 @@ export default function ScriptRecord() {
 
       <View className={styles.cardRight}>
         <View className={styles.cardHeaderRow}>
-          <Text className={styles.cardTitle}>{item.name}</Text>
+          <Text className={styles.cardTitle}>{item.name?.trim() || "未命名剧本"}</Text>
           <View className={styles.cardHeaderRight}>{renderCardMeta(item)}</View>
         </View>
 
@@ -303,7 +305,7 @@ export default function ScriptRecord() {
               : styles.descriptionPreviewFull
           }`}
         >
-          {item.desc}
+          {item.desc?.trim() || "暂无简介"}
         </Text>
       </View>
     </View>
@@ -347,6 +349,12 @@ export default function ScriptRecord() {
             想玩
           </View>
         </View>
+        <View
+          className={styles.settingsButton}
+          onClick={() => Taro.navigateTo({ url: "/pages/ScriptRecordConfig/index" })}
+        >
+          <Text>⚙</Text>
+        </View>
       </View>
 
       <View className={styles.cardList}>
@@ -371,7 +379,7 @@ export default function ScriptRecord() {
                   src={activeItem.img || DEFAULT_COVER}
                 />
                 <View className={styles.modalTopMeta}>
-                  <Text className={styles.modalTitle}>{activeItem.name}</Text>
+                  <Text className={styles.modalTitle}>{activeItem.name?.trim() || "未命名剧本"}</Text>
                   <View className={styles.modalMetaRow}>
                     {renderModalMeta(activeItem)}
                   </View>
@@ -392,7 +400,7 @@ export default function ScriptRecord() {
               }
             >
               <Text className={styles.modalSectionTitle}>简介</Text>
-              <Text className={styles.modalSynopsis}>{activeItem.desc}</Text>
+              <Text className={styles.modalSynopsis}>{activeItem.desc?.trim() || "暂无简介"}</Text>
 
               {activeItem.type === "played" && activeItem.comment?.trim() ? (
                 <View className={styles.modalNoteBlock}>

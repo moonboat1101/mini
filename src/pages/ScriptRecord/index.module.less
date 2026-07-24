@@ -9,7 +9,9 @@
 
   .sortBar {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
+    gap: 16px;
     margin-bottom: 24px;
     font-size: 28px;
 
@@ -83,6 +85,24 @@
       color: var(--color-bg-page);
       font-weight: 700;
     }
+
+    .settingsButton {
+      width: 68px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      border-radius: 50%;
+      color: var(--color-gold-soft);
+      background: var(--color-bg-card);
+      box-shadow:
+        inset 0 0 0 1px fade(@color-gold, 22%),
+        0 10px 24px rgba(0, 0, 0, 0.68);
+      font-size: 38px;
+      line-height: 1;
+    }
   }
 
   .cardList {
@@ -122,22 +142,30 @@
 
   .cardRight {
     flex: 1;
+    min-width: 0;
     align-self: stretch;
     min-height: 220px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 6px;
   }
 
   .cardHeaderRow {
     display: flex;
+    min-width: 0;
+    width: 100%;
     align-items: flex-start;
     justify-content: space-between;
     flex-shrink: 0;
   }
 
   .cardTitle {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-size: 32px;
     font-weight: 600;
     color: var(--color-text-primary);
@@ -160,7 +188,6 @@
   .metaDivider {
     font-size: 26px;
     color: var(--color-text-secondary);
-    opacity: 0.55;
   }
 
   @card-player-avatar-size: 40px;
@@ -316,6 +343,10 @@
   }
 
   .modalTitle {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     font-size: 34px;
     font-weight: 600;
     color: var(--color-text-primary);
@@ -450,6 +481,12 @@
 
     .sortSwitchItemActive {
       color: #fffaf1;
+    }
+
+    .settingsButton {
+      color: var(--color-gold-deep);
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(198, 155, 94, 0.22);
     }
   }
 
