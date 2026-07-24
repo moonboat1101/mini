@@ -140,4 +140,11 @@ export const roleList = [
     imageUrl:
       "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/06/05/7fced903c930ab16fd333755c1aef7e9_9169127423158726160.png",
   },
+  {
+    name: "桑多涅",
+    englishName: "Sandrone",
+    version: "6.8",
+    imageUrl:
+      "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/06/29/4ee285b198b7bb8dba2a0a63aa9ffc9f_7866102664638374858.png",
+  },
 ];

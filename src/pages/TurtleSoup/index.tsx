@@ -16,9 +16,13 @@ export default function TurtleSoup() {
   const [curTurtleSoup, setCurTurtleSoup] = useState<Record<string, any>>({});
   const [history, setHistory] = useState<string[]>([]);
   const [showSolution, setShowSolution] = useState(false);
+  const [incomingSoup, setIncomingSoup] = useState<Record<string, any> | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const { themeClassName } = useTheme();
 
   const getRandomTurtleSoup = () => {
+    if (isTransitioning) return;
+
     const filteredList = turtleSoups?.filter((i) => !history.includes(i.title));
     if (filteredList.length <= 1) {
       Taro.showToast({
@@ -30,9 +34,21 @@ export default function TurtleSoup() {
 
     const randomIndex = Math.floor(Math.random() * filteredList.length);
     const newTurtleSoup = filteredList[randomIndex];
-    setHistory([...history, newTurtleSoup?.title]);
-    setCurTurtleSoup(newTurtleSoup);
-    setShowSolution(false);
+    if (!Object.keys(curTurtleSoup).length) {
+      setHistory([...history, newTurtleSoup?.title]);
+      setCurTurtleSoup(newTurtleSoup);
+      return;
+    }
+
+    setIsTransitioning(true);
+    setIncomingSoup(newTurtleSoup);
+    setTimeout(() => {
+      setHistory((previous) => [...previous, newTurtleSoup?.title]);
+      setCurTurtleSoup(newTurtleSoup);
+      setShowSolution(false);
+      setIncomingSoup(null);
+      setIsTransitioning(false);
+    }, 340);
   };
 
   useEffect(() => {
@@ -42,29 +58,46 @@ export default function TurtleSoup() {
   return (
     <View className={`${styles.turtleSoupContainer} ${themeClassName}`}>
       <View className={styles.contentArea}>
-        <View className={styles.scenarioBox}>
-          <Text className={styles.title}>{curTurtleSoup?.title}</Text>
-          <Text className={styles.soupText}>{curTurtleSoup?.scenario}</Text>
-        </View>
-
-        <View
-          className={styles.solutionBox}
-          onClick={() => setShowSolution((visible) => !visible)}
-        >
-          {showSolution ? (
-            <Text className={styles.soupText}>{curTurtleSoup?.solution}</Text>
-          ) : (
-            <View className={styles.solutionToggle}>
-              <Text className={styles.solutionToggleText}>
-                {"\u70b9\u51fb\u67e5\u770b\u6c64\u5e95"}
-              </Text>
+        <View className={styles.contentStage}>
+          <View className={`${styles.soupContent} ${isTransitioning ? styles.soupLeaving : ""}`}>
+            <View className={styles.scenarioBox}>
+              <Text className={styles.title}>{curTurtleSoup?.title}</Text>
+              <Text className={styles.soupText}>{curTurtleSoup?.scenario}</Text>
             </View>
-          )}
+
+            <View
+              className={styles.solutionBox}
+              onClick={() => !isTransitioning && setShowSolution((visible) => !visible)}
+            >
+              {showSolution ? (
+                <Text className={styles.soupText}>{curTurtleSoup?.solution}</Text>
+              ) : (
+                <View className={styles.solutionToggle}>
+                  <Text className={styles.solutionToggleText}>
+                    {"\u70b9\u51fb\u67e5\u770b\u6c64\u5e95"}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </View>
+          {incomingSoup ? (
+            <View className={`${styles.soupContent} ${styles.soupEntering}`}>
+              <View className={styles.scenarioBox}>
+                <Text className={styles.title}>{incomingSoup.title}</Text>
+                <Text className={styles.soupText}>{incomingSoup.scenario}</Text>
+              </View>
+              <View className={styles.solutionBox}>
+                <View className={styles.solutionToggle}>
+                  <Text className={styles.solutionToggleText}>{"\u70b9\u51fb\u67e5\u770b\u6c64\u5e95"}</Text>
+                </View>
+              </View>
+            </View>
+          ) : null}
         </View>
       </View>
 
       <View className={styles.footerButtonBar}>
-        <Button className={styles.btnChange} onClick={getRandomTurtleSoup}>
+        <Button className={styles.btnChange} disabled={isTransitioning} onClick={getRandomTurtleSoup}>
           {"\u6362\u4e00\u6362"}
         </Button>
       </View>

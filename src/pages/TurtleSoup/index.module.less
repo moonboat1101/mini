@@ -29,6 +29,31 @@
     padding: 16px 36px 44px;
     box-sizing: border-box;
 
+    .contentStage {
+      display: grid;
+      position: relative;
+      overflow: hidden;
+      margin: -2px;
+      padding: 2px;
+    }
+
+    .soupContent {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      grid-area: 1 / 1;
+    }
+
+    .soupLeaving {
+      animation: soup-leave .34s cubic-bezier(.4, 0, .7, .2) both;
+      pointer-events: none;
+    }
+
+    .soupEntering {
+      animation: soup-enter .34s cubic-bezier(.18, .8, .25, 1) both;
+      pointer-events: none;
+    }
+
     .soupText {
       color: var(--color-text-secondary);
       line-height: 1.65;
@@ -37,9 +62,7 @@
     .scenarioBox {
       background: var(--color-bg-card);
       border-radius: @radius-md;
-      box-shadow:
-        var(--shadow-card),
-        0 0 0 1px fade(@color-gold, 18%);
+      box-shadow: 0 0 0 1px fade(@color-gold, 18%);
       padding: 24px 20px 18px;
       display: flex;
       flex-direction: column;
@@ -49,9 +72,7 @@
     .solutionBox {
       background: var(--color-bg-card);
       border-radius: @radius-md;
-      box-shadow:
-        var(--shadow-card),
-        0 0 0 1px fade(@color-gold, 18%);
+      box-shadow: 0 0 0 1px fade(@color-gold, 18%);
       padding: 24px 20px 18px;
       display: flex;
       flex-direction: column;
@@ -118,6 +139,16 @@
   }
 }
 
+@keyframes soup-leave {
+  from { opacity: 1; transform: translateX(0) scale(1); }
+  to { opacity: .2; transform: translateX(-44%) scale(.9); }
+}
+
+@keyframes soup-enter {
+  from { opacity: .35; transform: translateX(68%) scale(.86); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
 :global(.moon-theme-light).turtleSoupContainer {
   .title {
     color: var(--color-gold-deep);
@@ -127,7 +158,7 @@
     .scenarioBox,
     .solutionBox {
       background: #ffffff;
-      box-shadow: 0 10px 22px rgba(149, 116, 65, 0.1);
+      box-shadow: none;
       border: 1px solid rgba(198, 155, 94, 0.18);
     }
 
