@@ -191,6 +191,13 @@ export default function ScriptRecordConfig() {
     Taro.setClipboardData({ data: text, success: () => Taro.showToast({ title: "已复制到剪贴板", icon: "success" }) });
   };
 
+  const copyImportExample = () => {
+    Taro.setClipboardData({
+      data: IMPORT_EXAMPLE,
+      success: () => Taro.showToast({ title: "示例已复制", icon: "success" }),
+    });
+  };
+
   const importData = () => {
     try {
       const next = normalizeScriptRecordData(JSON.parse(bulkText));
@@ -347,7 +354,13 @@ export default function ScriptRecordConfig() {
           </View>
         </View>
         <View className={styles.examplePanel}>
-          <Text className={styles.bulkTitle}>数据结构示例</Text>
+          <View className={styles.exampleHeader}>
+            <Text className={styles.bulkTitle}>数据结构示例</Text>
+            <View className={styles.copyExampleButton} onClick={copyImportExample}>
+              <View className={styles.copyIconBack} />
+              <View className={styles.copyIconFront} />
+            </View>
+          </View>
           <Text className={styles.exampleCode}>{IMPORT_EXAMPLE}</Text>
         </View>
         <Button className={styles.clearConfigButton} onClick={clearConfig}>清空配置</Button>

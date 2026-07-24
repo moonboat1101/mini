@@ -19,6 +19,11 @@
 .secondaryButton { color: var(--color-text-primary); background: var(--color-bg-card); border: 1px solid fade(@color-gold, 24%); }
 .bulkPanel, .examplePanel { padding: 24px 20px; border-radius: @radius-md; background: var(--color-bg-card); box-shadow: inset 0 0 0 1px fade(@color-gold, 18%); }
 .examplePanel { margin-top: 14px; }
+.exampleHeader { display: flex; align-items: center; justify-content: space-between; }
+.copyExampleButton { position: relative; width: 48px; height: 48px; flex-shrink: 0; }
+.copyIconBack, .copyIconFront { position: absolute; width: 22px; height: 26px; border: 2px solid var(--color-gold-soft); border-radius: 4px; box-sizing: border-box; }
+.copyIconBack { top: 10px; left: 9px; opacity: 0.55; }
+.copyIconFront { top: 5px; left: 15px; background: var(--color-bg-card); }
 .clearConfigButton { display: block; width: 100%; margin: 18px 0 0; min-height: 68px; line-height: 68px; border-radius: @radius-pill; color: #d97970; background: transparent; border: 1px solid rgba(217, 121, 112, 0.45); font-size: 25px; }
 .editorMask { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(0, 0, 0, 0.72); }
 .editor { width: 100%; max-width: 720px; max-height: 90vh; overflow: hidden; border-radius: @radius-md; background: var(--color-bg-card); box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7), inset 0 0 0 1px fade(@color-gold, 22%); }
