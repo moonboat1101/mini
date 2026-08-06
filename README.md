@@ -1,11 +1,11 @@
-# moonboat-mini
+# moonboat
 
 一个基于 Taro + React + TypeScript 的微信小程序项目。当前定位是个人兴趣工具箱，首页聚合了抽卡、记录、小游戏和轻量工具等功能。
 
 点击首页顶部的头像/标题区域，可以复制项目 GitHub 链接：
 
 ```text
-https://github.com/moonboat1101/moonboat-mini
+https://github.com/moonboat1101/mini
 ```
 
 ## 功能概览
