@@ -147,4 +147,11 @@ export const roleList = [
     imageUrl:
       "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/06/29/4ee285b198b7bb8dba2a0a63aa9ffc9f_7866102664638374858.png",
   },
+  {
+    name: "奥黛塔",
+    englishName: "Odette",
+    version: "7.0",
+    imageUrl:
+      "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/08/07/963982ad49601f7de6a5ab1a364989f7_3689152522029267720.png",
+  },
 ];
