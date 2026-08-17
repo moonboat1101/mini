@@ -22,6 +22,8 @@ const QRCODE_ICON =
   "https://gd-hbimg.huaban.com/07c6686e680086ee3c92eb48e10df3325832fac568d-uvzROb_fw658";
 const HANDOU_ICON =
   "https://img95.699pic.com/element/40146/8048.png_300.png";
+const CARD_EXCHANGE_ICON =
+  "https://patchwiki.biligame.com/images/ys/8/8f/13zuc1pn9n7c42kniz2woqfxhivdtbu.png";
 const THEME_SWITCH_ID = "moonboat-theme-switch";
 const THEME_RIPPLE_GROW_DELAY = 16;
 const THEME_REVEAL_DURATION = 560;
@@ -50,6 +52,11 @@ export default function Index() {
   const [themeRipple, setThemeRipple] = useState<ThemeRippleState | null>(null);
 
   const cards = [
+    {
+      title: "月谕圣牌",
+      iconImage: CARD_EXCHANGE_ICON,
+      url: "/pages/CardExchangeMarket/index",
+    },
     {
       title: "原神抽卡记录",
       iconImage: GENSHIN_ICON,
@@ -203,7 +210,7 @@ export default function Index() {
             <Text>TI</Text>
           </View>
         ) : (
-          <Image src={i.iconImage} className={styles.cardIconImage} />
+          <Image src={i.iconImage} className={styles.cardIconImage} mode="aspectFill" />
         )}
       </View>
       <Text className={styles.cardTitle}>{i.title}</Text>

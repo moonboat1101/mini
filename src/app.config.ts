@@ -11,6 +11,8 @@ export default defineAppConfig({
     "pages/ScriptRecordConfig/index",
     "pages/QrCode/index",
     "pages/Mbti/index",
+    "pages/CardExchangeMarket/index",
+    "pages/CardExchangeMine/index",
   ],
   window: {
     backgroundTextStyle: "light",
