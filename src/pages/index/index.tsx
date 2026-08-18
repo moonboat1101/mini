@@ -73,19 +73,14 @@ export default function Index() {
       url: "/pages/HanDou/index",
     },
     {
-      title: "数独",
-      iconKind: "sudoku",
-      url: "/pages/Sudoku/index",
-    },
-    {
-      title: "MBTI 测试",
-      iconKind: "mbti",
-      url: "/pages/Mbti/index",
-    },
-    {
       title: "猜宝可梦",
       iconImage: POKEMON_ICON,
       url: "/pages/Pokemon/index",
+    },
+    {
+      title: "数独",
+      iconKind: "sudoku",
+      url: "/pages/Sudoku/index",
     },
     {
       title: "生成二维码",
@@ -98,9 +93,19 @@ export default function Index() {
       url: "/pages/TurtleSoup/index",
     },
     {
+      title: "MBTI 测试",
+      iconKind: "mbti",
+      url: "/pages/Mbti/index",
+    },
+    {
       title: "米池模拟器",
       iconImage: WISH_ICON,
       url: "/pages/Wish/index",
+    },
+    {
+      title: "关于",
+      iconKind: "about",
+      url: "/pages/About/index",
     },
   ];
   const primaryCards = cards.slice(0, 2);
@@ -208,6 +213,10 @@ export default function Index() {
           <View className={styles.mbtiIcon}>
             <Text>MB</Text>
             <Text>TI</Text>
+          </View>
+        ) : "iconKind" in i && i.iconKind === "about" ? (
+          <View className={styles.aboutIcon}>
+            <Text>i</Text>
           </View>
         ) : (
           <Image src={i.iconImage} className={styles.cardIconImage} mode="aspectFill" />

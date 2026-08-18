@@ -13,6 +13,7 @@ export default defineAppConfig({
     "pages/Mbti/index",
     "pages/CardExchangeMarket/index",
     "pages/CardExchangeMine/index",
+    "pages/About/index",
   ],
   window: {
     backgroundTextStyle: "light",

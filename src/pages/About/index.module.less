@@ -1,0 +1,45 @@
+@import "../../styles/theme.less";
+
+.aboutPage {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 32px;
+  color: var(--color-text-primary);
+  .moon-page-background();
+}
+
+.contentCard {
+  padding: 0;
+}
+
+.section {
+  padding: 28px 0;
+}
+
+.sectionTitle,
+.sectionContent {
+  display: block;
+}
+
+.sectionTitle {
+  color: var(--color-gold-soft);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.sectionContent {
+  margin-top: 16px;
+  color: var(--color-text-secondary);
+  font-size: 25px;
+  line-height: 1.8;
+  text-indent: 2em;
+  white-space: pre-wrap;
+}
+
+:global(.moon-theme-light).aboutPage {
+  .sectionTitle {
+    color: var(--color-gold-deep);
+  }
+
+}
