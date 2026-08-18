@@ -1,6 +1,7 @@
 {
   "miniprogramRoot": "dist/",
   "projectname": "moonboat",
+  "cloudfunctionRoot": "cloudfunctions/",
   "description": "",
   "appid": "wx3a190daf68ef9ed5",
   "setting": {

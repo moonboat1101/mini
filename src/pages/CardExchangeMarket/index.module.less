@@ -22,11 +22,11 @@
 .loadHint { display: block; padding: 28px 0 10px; color: var(--color-text-muted); font-size: 19px; text-align: center; }
 .postCard { padding: 24px; border: 1px solid rgba(238,180,103,.16); border-radius: 24px; background: var(--color-bg-card); box-shadow: 0 12px 28px rgba(0,0,0,.22); }
 .postMeta, .nameRow { display: flex; align-items: center; }
-.userInfo { flex: 1; }
-.nameRow { gap: 12px; }
-.nickname { color: var(--color-text-primary); font-size: 25px; font-weight: 700; }
-.uid { color: var(--color-text-muted); font-size: 17px; }
-.activeTime { margin-left: auto; color: var(--color-text-secondary); font-size: 19px; }
+.userInfo { flex: 1; min-width: 0; }
+.nameRow { width: 100%; min-width: 0; gap: 12px; }
+.nickname { min-width: 0; overflow: hidden; color: var(--color-text-primary); font-size: 25px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.uid { flex: 0 0 auto; color: var(--color-text-muted); font-size: 17px; white-space: nowrap; }
+.activeTime { flex: 0 1 40%; min-width: 0; margin-left: auto; overflow: hidden; color: var(--color-text-secondary); font-size: 19px; text-align: right; text-overflow: ellipsis; white-space: nowrap; }
 .exchangeBox { margin-top: 20px; padding: 18px; border-radius: 18px; background: rgba(211,162,95,.1); }
 .wantBox { background: rgba(123,94,168,.16); }
 .exchangeLabel { display: block; margin-bottom: 14px; color: var(--color-gold-soft); font-size: 22px; font-weight: 800; }
