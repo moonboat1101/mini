@@ -1,6 +1,7 @@
 import { Button, Input, Switch, Text, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
+import { useTheme } from "../../hooks/useTheme";
 import { cardCatalog } from "../CardExchangeMarket/mockData";
 import CardTile from "../CardExchangeMarket/components/CardTile";
 import { getCardExchangeProfile, saveCardExchangeProfile } from "../CardExchangeMarket/profileStore";
@@ -23,6 +24,7 @@ export default function CardExchangeMine() {
   const [pickerIds, setPickerIds] = useState<string[]>([]);
   const [, setUpdatedAt] = useState(() => new Date().toISOString());
   const [loggedIn, setLoggedIn] = useState(getCardExchangeLoginCache);
+  const { themeClassName } = useTheme();
 
   const applyCloudProfile = (profile: CloudCardExchangeProfile | null) => {
       if (!profile) return;
@@ -100,7 +102,7 @@ export default function CardExchangeMine() {
       Taro.showToast({ title: "保存失败，请检查云开发配置", icon: "none" });
     }
   };
-  return <View className={`${styles.mineRoot} ${!loggedIn ? styles.loginOnly : ""}`}>
+  return <View className={`${styles.mineRoot} ${themeClassName} ${!loggedIn ? styles.loginOnly : ""}`}>
     {!loggedIn ? <View className={styles.loginBar}><View><Text className={styles.loginTitle}>登录后可同步资料</Text><Text className={styles.loginHint}>仅使用微信身份进行认证，不获取任何资料</Text></View><Button className={styles.loginButton} onClick={login}>微信登录</Button></View> : <>
       <View className={styles.profilePanel}>
       <View className={styles.field}><Text>UID</Text><Input value={uid} type="number" maxlength={9} className={styles.input} placeholder="请输入 9 位 UID" onInput={(event) => setUid(event.detail.value)} /></View>

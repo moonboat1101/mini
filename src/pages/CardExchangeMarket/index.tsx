@@ -2,6 +2,7 @@ import { Button, Text, View } from "@tarojs/components";
 import Taro, { useDidShow, useReachBottom } from "@tarojs/taro";
 import { useEffect, useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
+import { useTheme } from "../../hooks/useTheme";
 import CardTile from "./components/CardTile";
 import { cardCatalog, getCardById } from "./mockData";
 import { getCardExchangeProfile } from "./profileStore";
@@ -21,6 +22,11 @@ const MARKET_NOTICES = [
     text: "谨防诈骗！换牌不需要提供任何账密或验证码！",
     variant: "safety",
   },
+  {
+    icon: "✦",
+    text: "建议配置我的圣牌，可以自动回填筛选，不用每次手动填。",
+    variant: "friendly",
+  },
 ] as const;
 
 export default function CardExchangeMarket() {
@@ -33,6 +39,7 @@ export default function CardExchangeMarket() {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [noticeIndex, setNoticeIndex] = useState(0);
   const [noticeAnimating, setNoticeAnimating] = useState(false);
+  const { themeClassName } = useTheme();
   const selectedFilterIds = filterPickerIds;
   const toggleFilterCard = (id: string) => {
     const update = (ids: string[]) => ids.includes(id) ? ids.filter((item) => item !== id) : [...ids, id];
@@ -82,7 +89,7 @@ export default function CardExchangeMarket() {
   usePageShare({ title: "圣牌市场", path: "/pages/CardExchangeMarket/index" });
 
   return (
-    <View className={styles.marketRoot}>
+    <View className={`${styles.marketRoot} ${themeClassName}`}>
       <View className={styles.noticeViewport}>
         <View
           className={`${styles.noticeTrack} ${noticeAnimating ? styles.noticeTrackAnimating : ""}`}
