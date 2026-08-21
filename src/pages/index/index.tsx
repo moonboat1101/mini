@@ -93,16 +93,6 @@ export default function Index() {
       url: "/pages/TurtleSoup/index",
     },
     {
-      title: "MBTI 测试",
-      iconKind: "mbti",
-      url: "/pages/Mbti/index",
-    },
-    {
-      title: "米池模拟器",
-      iconImage: WISH_ICON,
-      url: "/pages/Wish/index",
-    },
-    {
       title: "关于",
       iconKind: "about",
       url: "/pages/About/index",

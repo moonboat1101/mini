@@ -1,6 +1,6 @@
 import { Button, Text, View } from "@tarojs/components";
 import Taro, { useDidShow, useReachBottom } from "@tarojs/taro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
 import CardTile from "./components/CardTile";
 import { cardCatalog, getCardById } from "./mockData";
@@ -10,6 +10,18 @@ import styles from "./index.module.less";
 
 type FilterTarget = "owned" | "wanted" | null;
 const PAGE_SIZE = 10;
+const MARKET_NOTICES = [
+  {
+    icon: "✦",
+    text: "友好换卡，双方加游戏好友自行协商，完成后及时下架。",
+    variant: "friendly",
+  },
+  {
+    icon: "!",
+    text: "谨防诈骗！换牌不需要提供任何账密或验证码！",
+    variant: "safety",
+  },
+] as const;
 
 export default function CardExchangeMarket() {
   const [posts, setPosts] = useState<CloudCardExchangeProfile[]>([]);
@@ -19,6 +31,8 @@ export default function CardExchangeMarket() {
   const [filterTarget, setFilterTarget] = useState<FilterTarget>(null);
   const [filterPickerIds, setFilterPickerIds] = useState<string[]>([]);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [noticeIndex, setNoticeIndex] = useState(0);
+  const [noticeAnimating, setNoticeAnimating] = useState(false);
   const selectedFilterIds = filterPickerIds;
   const toggleFilterCard = (id: string) => {
     const update = (ids: string[]) => ids.includes(id) ? ids.filter((item) => item !== id) : [...ids, id];
@@ -39,6 +53,17 @@ export default function CardExchangeMarket() {
   );
   const visiblePosts = filteredPosts.slice(0, visibleCount);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setNoticeAnimating(true), 3000);
+    return () => clearTimeout(timer);
+  }, [noticeIndex]);
+
+  const completeNoticeTransition = () => {
+    if (!noticeAnimating) return;
+    setNoticeIndex((index) => (index + 1) % MARKET_NOTICES.length);
+    setNoticeAnimating(false);
+  };
+
   useDidShow(() => {
     const profile = getCardExchangeProfile();
     setOwnedFilterIds(profile.ownedIds);
@@ -58,13 +83,21 @@ export default function CardExchangeMarket() {
 
   return (
     <View className={styles.marketRoot}>
-      <View className={styles.notice}>
-        <Text className={styles.noticeIcon}>✦</Text>
-        <Text>友好换卡，双方加游戏好友自行协商，完成后及时下架。</Text>
-      </View>
-      <View className={styles.safetyNotice}>
-        <Text className={styles.safetyIcon}>!</Text>
-        <Text>谨防诈骗！换牌不需要提供任何账密或验证码！</Text>
+      <View className={styles.noticeViewport}>
+        <View
+          className={`${styles.noticeTrack} ${noticeAnimating ? styles.noticeTrackAnimating : ""}`}
+          onTransitionEnd={completeNoticeTransition}
+        >
+          {[noticeIndex, (noticeIndex + 1) % MARKET_NOTICES.length].map((index) => {
+            const notice = MARKET_NOTICES[index];
+            return (
+              <View key={`${notice.variant}-${index}`} className={`${styles.notice} ${styles[notice.variant]}`}>
+                <Text className={styles.noticeIcon}>{notice.icon}</Text>
+                <Text className={styles.noticeText}>{notice.text}</Text>
+              </View>
+            );
+          })}
+        </View>
       </View>
 
       <Text className={styles.filterIntro}>填写信息自动匹配：</Text>
