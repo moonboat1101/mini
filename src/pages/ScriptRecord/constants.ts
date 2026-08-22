@@ -7,6 +7,7 @@ export const PLAYER_PIC: Record<string, string> = {
   ZLW: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3p9p2kUVnT-QIvA-XrT-kvIoSgbAoAACKSAAAvda2VYu4nmHREmIbzsE.jpg",
   YWL: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3zFp2lEKIOWe4ArXn7XUaiZtTlFacQAC-yAAAvda2Vbb0FlOUafkhzsE.jpg",
   WGL: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES35Zp2lMI0dCw7tAT3_ZZWTNl7FBasgACaCEAAvda2VYPHlq9bgjd-zsE.jpg",
+  JJM: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEZqAZqia4fzg3566HHc5-ME_DTM0YXNAACuyMAAkreSVQWQTz-ToE2iT0E.jpg",
 };
 
 export type WishlistGame = {
@@ -55,6 +56,17 @@ export const wishlist: WishlistGame[] = [
 ];
 
 export const scriptGames: ScriptGame[] = [
+  {
+    name: "山鬼母",
+    time: "2026.8",
+    desc: "山鬼母，披花布，背着麻袋山后住；山鬼母，勿惹怒，惹怒掐脖摔下路！许多年前，南方数省都在流传这首儿歌，据传见过山鬼母的人都会在不久之后失踪或死亡。1914年10月11日，浙江金华山麓的台麓村中，一户姓甘的人家住在离地十多米的峭壁上，随着峭壁上传来碰的声响，有人坠落！民国背景下的豪门惊情系列第46部，以山鬼母传说为引，围绕甘家与村中各户错综复杂的关系展开，失忆、拐童旧案与多具尸体的真相等待被揭开。",
+    score: 6,
+    img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/771d77b17df34228134b6da15cb3bb0991e5417d.jpg",
+    comment:
+      "线索非常多非常散，逻辑不是很缜密，很多内容需要靠猜，再加上明凶基本会藏一些对自己不利的线索，整体体验一般，没有梳理完一条线那种成就感。",
+    role: "罗",
+    players: ["WYZ", "TJJ", "CZH", "SZY", "JJM"],
+  },
   {
     name: "虚构推理",
     time: "2026.7",
