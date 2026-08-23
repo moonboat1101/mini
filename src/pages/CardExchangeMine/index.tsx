@@ -5,7 +5,7 @@ import { useTheme } from "../../hooks/useTheme";
 import { cardCatalog, getCardById } from "../CardExchangeMarket/mockData";
 import CardTile from "../CardExchangeMarket/components/CardTile";
 import { getCardExchangeProfile, saveCardExchangeProfile } from "../CardExchangeMarket/profileStore";
-import { cacheCardExchangeLogin, CloudCardExchangeProfile, getCachedCardExchangeProfile, getCardExchangeLoginCache, getPublishedCardExchangeProfiles, loginCardExchangeUser, saveMyCardExchangeProfile } from "../../services/cardExchangeCloud";
+import { cacheCardExchangeLogin, CloudCardExchangeProfile, getCachedCardExchangeProfile, getCardExchangeLoginCache, getPublishedCardExchangeProfilesPage, loginCardExchangeUser, saveMyCardExchangeProfile } from "../../services/cardExchangeCloud";
 import styles from "./index.module.less";
 
 type PickerTarget = "owned" | "wanted" | null;
@@ -79,10 +79,12 @@ export default function CardExchangeMine() {
     }
     let cancelled = false;
     setMatching(true);
-    getPublishedCardExchangeProfiles().then((profiles) => {
-      if (cancelled) return;
-      setMatchedProfile(profiles.find((profile) => profile._id !== cloudProfile?._id && profile.uid !== uid && profile.wantedIds.some((id) => ownedIds.includes(id)) && profile.ownedIds.some((id) => wantedIds.includes(id))) || null);
-    }).catch(() => {
+    const findMatch = async () => {
+      const result = await getPublishedCardExchangeProfilesPage(0, 1, ownedIds, wantedIds);
+      const matched = result.profiles.find((profile) => profile._id !== cloudProfile?._id && profile.uid !== uid) || null;
+      if (!cancelled) setMatchedProfile(matched);
+    };
+    findMatch().catch(() => {
       if (!cancelled) setMatchedProfile(null);
     }).finally(() => {
       if (!cancelled) setMatching(false);

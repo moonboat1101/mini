@@ -6,7 +6,7 @@ import { useTheme } from "../../hooks/useTheme";
 import CardTile from "./components/CardTile";
 import { cardCatalog, getCardById } from "./mockData";
 import { getCardExchangeProfile } from "./profileStore";
-import { CloudCardExchangeProfile, getPublishedCardExchangeProfiles } from "../../services/cardExchangeCloud";
+import { CloudCardExchangeProfile, getPublishedCardExchangeProfilesPage } from "../../services/cardExchangeCloud";
 import styles from "./index.module.less";
 
 type FilterTarget = "owned" | "wanted" | null;
@@ -50,11 +50,13 @@ const MARKET_NOTICES = [
 export default function CardExchangeMarket() {
   const [posts, setPosts] = useState<CloudCardExchangeProfile[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [nextPage, setNextPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   const [ownedFilterIds, setOwnedFilterIds] = useState<string[]>(() => getCardExchangeProfile().ownedIds);
   const [wantedFilterIds, setWantedFilterIds] = useState<string[]>(() => getCardExchangeProfile().wantedIds);
   const [filterTarget, setFilterTarget] = useState<FilterTarget>(null);
   const [filterPickerIds, setFilterPickerIds] = useState<string[]>([]);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [noticeIndex, setNoticeIndex] = useState(0);
   const [noticeAnimating, setNoticeAnimating] = useState(false);
   const { themeClassName } = useTheme();
@@ -67,16 +69,21 @@ export default function CardExchangeMarket() {
     setFilterPickerIds([...(target === "owned" ? ownedFilterIds : wantedFilterIds)]);
     setFilterTarget(target);
   };
-  const confirmFilterPicker = () => {
-    if (filterTarget === "owned") setOwnedFilterIds(filterPickerIds);
-    if (filterTarget === "wanted") setWantedFilterIds(filterPickerIds);
-    setFilterTarget(null);
+  const loadPage = async (page: number, replace = false, ownedFilters = ownedFilterIds, wantedFilters = wantedFilterIds) => {
+    if (replace) setLoading(true);
+    else setLoadingMore(true);
+    try {
+      const result = await getPublishedCardExchangeProfilesPage(page, PAGE_SIZE, ownedFilters, wantedFilters);
+      setPosts((current) => replace ? result.profiles : [...current, ...result.profiles]);
+      setNextPage(page + 1);
+      setHasMore(result.hasMore);
+    } catch {
+      Taro.showToast({ title: "市场数据加载失败", icon: "none" });
+    } finally {
+      if (replace) setLoading(false);
+      else setLoadingMore(false);
+    }
   };
-  const filteredPosts = posts.filter((post) =>
-    (!ownedFilterIds.length || post.wantedIds.some((id) => ownedFilterIds.includes(id)))
-    && (!wantedFilterIds.length || post.ownedIds.some((id) => wantedFilterIds.includes(id))),
-  );
-  const visiblePosts = filteredPosts.slice(0, visibleCount);
 
   useEffect(() => {
     const timer = setTimeout(() => setNoticeAnimating(true), 3000);
@@ -93,15 +100,14 @@ export default function CardExchangeMarket() {
     const profile = getCardExchangeProfile();
     setOwnedFilterIds(profile.ownedIds);
     setWantedFilterIds(profile.wantedIds);
-    setVisibleCount(PAGE_SIZE);
-    setLoading(true);
-    getPublishedCardExchangeProfiles().then(setPosts).catch(() => {
-      Taro.showToast({ title: "市场数据加载失败", icon: "none" });
-    }).finally(() => setLoading(false));
+    setPosts([]);
+    setNextPage(0);
+    setHasMore(true);
+    loadPage(0, true, profile.ownedIds, profile.wantedIds);
   });
 
   useReachBottom(() => {
-    setVisibleCount((count) => Math.min(count + PAGE_SIZE, filteredPosts.length));
+    if (!loading && !loadingMore && hasMore) loadPage(nextPage);
   });
 
   usePageShare({ title: "圣牌市场", path: "/pages/CardExchangeMarket/index" });
@@ -129,11 +135,11 @@ export default function CardExchangeMarket() {
         <Text className={styles.filterIntro}>筛选匹配：</Text>
         <Button className={styles.filterButton} onClick={() => openFilterPicker("owned")}>我多余 / 他想要{ownedFilterIds.length ? <Text className={styles.filterCount}>{ownedFilterIds.length}</Text> : null}</Button>
         <Button className={styles.filterButton} onClick={() => openFilterPicker("wanted")}>我想要 / 他多余{wantedFilterIds.length ? <Text className={styles.filterCount}>{wantedFilterIds.length}</Text> : null}</Button>
-        <Button className={styles.resetButton} onClick={() => { setOwnedFilterIds([]); setWantedFilterIds([]); setVisibleCount(PAGE_SIZE); }}>重置</Button>
+        <Button className={styles.resetButton} onClick={() => { setOwnedFilterIds([]); setWantedFilterIds([]); loadPage(0, true, [], []); }}>重置</Button>
       </View>
 
       <View className={styles.postList}>
-        {visiblePosts.map((post) => (
+        {posts.map((post) => (
           <View className={styles.postCard} key={post._id || post.uid}>
               <View className={styles.postMeta}>
                 <View className={styles.userInfo}>
@@ -161,13 +167,13 @@ export default function CardExchangeMarket() {
 
           </View>
         ))}
-        {!loading && !filteredPosts.length ? <View className={styles.emptyState}><Text>暂时还没有符合条件的交换意愿</Text><Text className={styles.emptyStateHint}>完善并发布你的圣牌资料后，会出现在这里</Text></View> : null}
+        {!loading && !posts.length ? <View className={styles.emptyState}><Text>暂时还没有符合条件的交换意愿</Text><Text className={styles.emptyStateHint}>完善并发布你的圣牌资料后，会出现在这里</Text></View> : null}
         {loading ? <View className={styles.emptyState}><Text>正在加载市场资料…</Text></View> : null}
       </View>
-      {filteredPosts.length > PAGE_SIZE ? <Text className={styles.loadHint}>{visiblePosts.length < filteredPosts.length ? "继续下滑加载更多" : "已加载全部"}</Text> : null}
+      {!loading && (loadingMore ? <Text className={styles.loadHint}>正在加载更多市场资料…</Text> : hasMore ? <Text className={styles.loadHint}>继续下滑加载更多</Text> : <Text className={styles.loadHint}>已加载全部</Text>)}
       <Button className={styles.myButton} onClick={() => Taro.navigateTo({ url: "/pages/CardExchangeMine/index" })}>我的圣牌</Button>
 
-      {filterTarget ? <View className={styles.mask} catchMove onClick={() => setFilterTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{filterTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text><Text className={styles.sheetHint}>可多选，列表将匹配任意一张所选卡牌。</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedFilterIds.includes(card.id)} onClick={() => toggleFilterCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={() => { confirmFilterPicker(); setVisibleCount(PAGE_SIZE); }}>完成选择</Button></View></View> : null}
+      {filterTarget ? <View className={styles.mask} catchMove onClick={() => setFilterTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{filterTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text><Text className={styles.sheetHint}>可多选，列表将匹配任意一张所选卡牌。</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedFilterIds.includes(card.id)} onClick={() => toggleFilterCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={() => { const nextOwned = filterTarget === "owned" ? filterPickerIds : ownedFilterIds; const nextWanted = filterTarget === "wanted" ? filterPickerIds : wantedFilterIds; setOwnedFilterIds(nextOwned); setWantedFilterIds(nextWanted); setFilterTarget(null); loadPage(0, true, nextOwned, nextWanted); }}>完成选择</Button></View></View> : null}
 
     </View>
   );

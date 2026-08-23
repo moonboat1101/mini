@@ -1,7 +1,6 @@
 import Taro from "@tarojs/taro";
 import type { CardExchangeProfile } from "../pages/CardExchangeMarket/profileStore";
 
-const COLLECTION = "users";
 const LOCAL_PROFILE_KEY = "moonboat-card-exchange-profile-v3";
 const LOGIN_CACHE_KEY = "moonboat-card-exchange-authenticated-v1";
 
@@ -9,6 +8,11 @@ export type CloudCardExchangeProfile = CardExchangeProfile & {
   _id?: string;
   avatarUrl: string;
   createdAt?: number;
+};
+
+export type CardExchangeProfilePage = {
+  profiles: CloudCardExchangeProfile[];
+  hasMore: boolean;
 };
 
 let initialized = false;
@@ -81,10 +85,16 @@ export const saveMyCardExchangeProfile = async (profile: CloudCardExchangeProfil
   return next;
 };
 
-export const getPublishedCardExchangeProfiles = async (): Promise<CloudCardExchangeProfile[]> => {
-  if (!initCardExchangeCloud()) return [];
-  const result = await cloud().database().collection(COLLECTION).where({ isPublished: true }).orderBy("updatedAt", "desc").limit(999).get();
-  return (result.data || []) as CloudCardExchangeProfile[];
+export const getPublishedCardExchangeProfilesPage = async (page = 0, pageSize = 10, ownedFilterIds: string[] = [], wantedFilterIds: string[] = []): Promise<CardExchangeProfilePage> => {
+  if (!initCardExchangeCloud()) return { profiles: [], hasMore: false };
+  const result = await cloud().callFunction({
+    name: "cardExchangeMarket",
+    data: { action: "market", page, pageSize, ownedFilterIds, wantedFilterIds },
+  });
+  return {
+    profiles: (result.result?.profiles || []) as CloudCardExchangeProfile[],
+    hasMore: Boolean(result.result?.hasMore),
+  };
 };
 
 /** 仅验证当前微信身份；不申请昵称、头像或其他个人资料。 */
