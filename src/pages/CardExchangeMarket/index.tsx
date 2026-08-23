@@ -11,6 +11,24 @@ import styles from "./index.module.less";
 
 type FilterTarget = "owned" | "wanted" | null;
 const PAGE_SIZE = 10;
+const formatUpdatedAt = (updatedAt: string) => {
+  const date = new Date(updatedAt);
+  const timestamp = date.getTime();
+  if (Number.isNaN(timestamp)) return "";
+
+  const elapsed = Math.max(0, Date.now() - timestamp);
+  const minutes = Math.floor(elapsed / 60_000);
+  if (minutes < 1) return "刚刚";
+  if (minutes < 60) return `${minutes} 分钟前`;
+
+  const hours = Math.floor(elapsed / 3_600_000);
+  if (hours < 24) return `${hours} 小时前`;
+
+  const monthDay = `${date.getMonth() + 1}.${date.getDate()}`;
+  return date.getFullYear() === new Date().getFullYear()
+    ? monthDay
+    : `${date.getFullYear()}.${monthDay}`;
+};
 const MARKET_NOTICES = [
   {
     icon: "✦",
@@ -107,8 +125,8 @@ export default function CardExchangeMarket() {
         </View>
       </View>
 
-      <Text className={styles.filterIntro}>填写信息自动匹配：</Text>
       <View className={styles.filterBar}>
+        <Text className={styles.filterIntro}>筛选匹配：</Text>
         <Button className={styles.filterButton} onClick={() => openFilterPicker("owned")}>我多余 / 他想要{ownedFilterIds.length ? <Text className={styles.filterCount}>{ownedFilterIds.length}</Text> : null}</Button>
         <Button className={styles.filterButton} onClick={() => openFilterPicker("wanted")}>我想要 / 他多余{wantedFilterIds.length ? <Text className={styles.filterCount}>{wantedFilterIds.length}</Text> : null}</Button>
         <Button className={styles.resetButton} onClick={() => { setOwnedFilterIds([]); setWantedFilterIds([]); setVisibleCount(PAGE_SIZE); }}>重置</Button>
@@ -116,18 +134,18 @@ export default function CardExchangeMarket() {
 
       <View className={styles.postList}>
         {visiblePosts.map((post) => (
-          <View className={styles.postCard} key={post.id}>
-            <View className={styles.postMeta}>
-              <View className={styles.userInfo}>
-                <View className={styles.nameRow}>
-                  <Text className={styles.nickname}>{post.name || "旅行者"}</Text>
-                  <Text className={styles.uid}>{post.uid}</Text>
-                  <Text className={styles.activeTime}>{post.activeTime}</Text>
+          <View className={styles.postCard} key={post._id || post.uid}>
+              <View className={styles.postMeta}>
+                <View className={styles.userInfo}>
+                  <View className={styles.nameRow}>
+                    <Text className={styles.nickname}>{post.name || "旅行者"}</Text>
+                    <Text className={styles.uid}>{post.uid}</Text>
+                  </View>
                 </View>
+                {formatUpdatedAt(post.updatedAt) ? <Text className={styles.updatedTime}>更新于 {formatUpdatedAt(post.updatedAt)}</Text> : null}
               </View>
-            </View>
 
-            <View className={styles.exchangeBox}>
+              <View className={styles.exchangeBox}>
               <Text className={styles.exchangeLabel}>我多余</Text>
               <View className={styles.cardGrid}>
                 {post.ownedIds.map((cardId) => <CardTile key={cardId} card={getCardById(cardId)} />)}
@@ -139,6 +157,7 @@ export default function CardExchangeMarket() {
                 {post.wantedIds.map((cardId) => <CardTile key={cardId} card={getCardById(cardId)} />)}
               </View>
             </View>
+            {post.activeTime ? <Text className={styles.activeTime}>{post.activeTime}</Text> : null}
 
           </View>
         ))}

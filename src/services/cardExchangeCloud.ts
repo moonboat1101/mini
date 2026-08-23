@@ -83,7 +83,7 @@ export const saveMyCardExchangeProfile = async (profile: CloudCardExchangeProfil
 
 export const getPublishedCardExchangeProfiles = async (): Promise<CloudCardExchangeProfile[]> => {
   if (!initCardExchangeCloud()) return [];
-  const result = await cloud().database().collection(COLLECTION).where({ isPublished: true }).orderBy("updatedAt", "desc").limit(100).get();
+  const result = await cloud().database().collection(COLLECTION).where({ isPublished: true }).orderBy("updatedAt", "desc").limit(999).get();
   return (result.data || []) as CloudCardExchangeProfile[];
 };
 
