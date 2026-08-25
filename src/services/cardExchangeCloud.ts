@@ -15,6 +15,11 @@ export type CardExchangeProfilePage = {
   hasMore: boolean;
 };
 
+export type CardRarityRanking = {
+  totalProfiles: number;
+  scores: Record<string, number>;
+};
+
 let initialized = false;
 
 const cloud = () => (globalThis as any).wx?.cloud;
@@ -94,6 +99,15 @@ export const getPublishedCardExchangeProfilesPage = async (page = 0, pageSize = 
   return {
     profiles: (result.result?.profiles || []) as CloudCardExchangeProfile[],
     hasMore: Boolean(result.result?.hasMore),
+  };
+};
+
+export const getCardRarityRanking = async (): Promise<CardRarityRanking> => {
+  if (!initCardExchangeCloud()) return { totalProfiles: 0, scores: {} };
+  const result = await cloud().callFunction({ name: "cardRarityRanking" });
+  return {
+    totalProfiles: Number(result.result?.totalProfiles) || 0,
+    scores: result.result?.scores || {},
   };
 };
 

@@ -1,0 +1,28 @@
+@import "../../styles/theme.less";
+
+.rankingRoot { min-height: 100vh; padding: 34px 28px 48px; box-sizing: border-box; color: var(--color-text-secondary); .moon-page-background(); }
+.noticeViewport { --notice-gap: 12px; height: 60px; overflow: hidden; }
+.noticeTrack { display: flex; flex-direction: column; gap: var(--notice-gap); transform: translateY(0); }
+.noticeTrackAnimating { transform: translateY(calc(-50% - 6px)); transition: transform 420ms ease-in-out; }
+.notice { height: 60px; padding: 0 20px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; border-radius: 16px; color: #f3d4a1; font-size: 20px; background: rgba(202,137,65,.13); }
+.noticeIcon { width: 25px; height: 25px; flex: 0 0 25px; color: var(--color-gold); font-size: 20px; line-height: 25px; text-align: center; }
+.noticeText { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rankingList { margin-top: 18px; padding: 8px 24px; border: 2px solid rgba(238,180,103,.38); border-radius: 26px; background: var(--color-bg-card); box-shadow: 0 14px 30px rgba(0,0,0,.22); }
+.rankCard { position: relative; min-height: 120px; padding: 14px 0; box-sizing: border-box; display: flex; align-items: center; gap: 18px; }
+.rankCard:not(:last-child)::after { content: ""; position: absolute; right: .5%; bottom: 0; left: .5%; height: 1px; background: rgba(238,180,103,.2); }
+.rank { width: 42px; flex: 0 0 42px; color: var(--color-text-muted); font-size: 32px; font-weight: 800; text-align: center; }
+.top1 { color: #f5cc67; }.top2 { color: #d4d7dc; }.top3 { color: #d89b69; }
+.cardArtwork { width: 60px; height: 86px; flex: 0 0 60px; display: block; border-radius: 6px; }
+.cardInfo { flex: 1; min-width: 0; }
+.cardName { display: block; }
+.cardName { color: var(--color-text-primary); font-size: 26px; font-weight: 800; }
+.ownedMark { width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%; color: #3a2618; font-size: 20px; font-weight: 800; line-height: 30px; text-align: center; background: var(--color-gold-soft); }
+.rarityValue { flex: 0 0 76px; text-align: right; }
+.rarityNumber { display: block; color: var(--color-gold-soft); font-size: 31px; font-weight: 800; }
+.state { padding: 70px 0; color: var(--color-text-muted); font-size: 22px; text-align: center; }
+
+:global(.moon-theme-light).rankingRoot {
+  .rankingList { border-color: #c69b5e; box-shadow: 0 14px 30px rgba(149, 116, 65, .14); }
+  .rankCard:not(:last-child)::after { background: rgba(198, 155, 94, .24); }
+  .notice { color: #76572e; background: rgba(183, 137, 71, .14); }
+}

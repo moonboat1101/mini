@@ -12,6 +12,7 @@ export default defineAppConfig({
     "pages/QrCode/index",
     "pages/Mbti/index",
     "pages/CardExchangeMarket/index",
+    "pages/CardRarityRanking/index",
     "pages/CardExchangeMine/index",
     "pages/About/index",
   ],
