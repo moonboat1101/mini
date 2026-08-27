@@ -72,6 +72,12 @@ export default function CardExchangeMine() {
       success: () => Taro.showToast({ title: "已复制请求文案", icon: "success" }),
     });
   };
+  const copyMatchedUid = (profile: CloudCardExchangeProfile) => {
+    Taro.setClipboardData({
+      data: profile.uid,
+      success: () => Taro.showToast({ title: "已复制 UID", icon: "success" }),
+    });
+  };
   useEffect(() => {
     if (!canMatch) {
       setMatchedProfile(null);
@@ -159,7 +165,7 @@ export default function CardExchangeMine() {
             <Text className={styles.exchangeIcon}>⇄</Text>
             <View className={styles.matchCardBox}>{renderMatchedCards(wantedIds.filter((id) => matchedProfile.ownedIds.includes(id)))}</View>
           </View>
-          <View className={styles.matchFooter}>{matchedProfile.activeTime ? <Text className={styles.matchActiveTime}>{matchedProfile.activeTime}</Text> : <View />}<Text className={styles.copyRequest} onClick={() => copyExchangeRequest(matchedProfile)}>复制请求文案</Text></View>
+          <View className={styles.matchFooter}>{matchedProfile.activeTime ? <Text className={styles.matchActiveTime}>{matchedProfile.activeTime}</Text> : <View />}<View className={styles.matchActions}><Text className={styles.copyRequest} onClick={() => copyExchangeRequest(matchedProfile)}>复制请求文案</Text><Text className={styles.copyRequest} onClick={() => copyMatchedUid(matchedProfile)}>复制 UID</Text></View></View>
         </> : <Text className={styles.matchHint}>暂未找到可直接交换的旅行者</Text>}
       </View> : null}
       {pickerTarget ? <View className={styles.mask} catchMove onClick={() => setPickerTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{pickerTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text><Text className={styles.sheetHint}>可多选，新增卡牌会自动出现在这里。</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedIds.includes(card.id)} onClick={() => toggleCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={confirmPicker}>完成选择</Button></View></View> : null}

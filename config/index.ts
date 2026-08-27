@@ -20,7 +20,12 @@ export default defineConfig<"vite">(async (merge) => {
     plugins: [],
     defineConstants: {},
     copy: {
-      patterns: [],
+      patterns: [
+        {
+          from: "assets/profile_small.jpg",
+          to: "assets/profile_small.jpg",
+        },
+      ],
       options: {},
     },
     framework: "react",

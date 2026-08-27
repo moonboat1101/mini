@@ -1,13 +1,13 @@
 ﻿import { View, Text, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
-import profileSmall from "../../../assets/profile_small.jpg";
 import { usePageShare } from "../../hooks/usePageShare";
 import { getThemeClassName, MoonTheme, useTheme } from "../../hooks/useTheme";
 
 import styles from "./index.module.less";
 
 const REPO_URL = "https://github.com/moonboat1101/moonboat-mini";
+const PROFILE_SMALL = "/assets/profile_small.jpg";
 const GENSHIN_ICON =
   "https://s1.aigei.com/src/img/png/5d/5d23970a2f3f450eb3c8f6884c4e0e43.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:HGaSXiz-p67st8GrjLKsAJG8HLo=";
 const WISH_ICON =
@@ -228,7 +228,7 @@ export default function Index() {
           className={styles.logoButton}
           onClick={readonly ? undefined : handleLogoClick}
         >
-          <Image src={profileSmall} className={styles.avatar} />
+          <Image src={PROFILE_SMALL} className={styles.avatar} />
           <View className={styles.titleGroup}>
             <Text className={styles.brandCn}>月舟</Text>
             <Text className={styles.brandEn}>moonboat</Text>

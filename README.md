@@ -66,12 +66,34 @@ npm run build:weapp
 
 当前项目的 `project.config.json` 已包含微信小程序项目配置，可直接配合微信开发者工具使用。
 
+## 圣牌市场云开发配置
+
+圣牌市场与稀有度排行使用微信云开发；未配置云环境时，其云端数据功能不可用。配置步骤如下：
+
+1. 在微信开发者工具中打开“云开发”，按引导开通环境，并设为当前小程序环境。
+2. 在“数据库”创建集合 `users`。每条记录对应一名微信用户的圣牌资料，`isPublished: true` 的记录会出现在市场列表中。
+3. 分别上传并部署下列云函数，选择“上传并部署：云端安装依赖”：
+   - `cloudfunctions/cardExchangeUser`：登录、读取与保存个人资料；
+   - `cloudfunctions/cardExchangeMarket`：读取市场公开资料；
+   - `cloudfunctions/cardRarityRanking`：统计圣牌稀有度。
+4. 为 `users` 集合设置权限：
+
+```json
+{
+  "read": "doc.isPublished == true",
+  "write": false
+}
+```
+
+云函数以服务端身份按 `_openid` 读取和写入用户资料；应用会调用 `wx.cloud.init()` 使用当前绑定环境，无需在代码中写死环境 ID。
+
 ## 目录结构
 
 ```text
 .
 ├── assets/                 静态资源
 ├── config/                 Taro 构建配置
+├── cloudfunctions/          圣牌市场云函数
 ├── src/
 │   ├── hooks/              复用 hooks
 │   ├── pages/              页面与页面组件

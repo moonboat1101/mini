@@ -33,7 +33,12 @@
 .nameRow { width: 100%; min-width: 0; gap: 12px; }
 .nickname { min-width: 0; overflow: hidden; color: var(--color-text-primary); font-size: 25px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
 .uid { flex: 0 0 auto; color: var(--color-text-muted); font-size: 17px; white-space: nowrap; }
-.activeTime { display: block; margin-top: 16px; overflow: hidden; color: var(--color-text-secondary); font-size: 19px; text-overflow: ellipsis; white-space: nowrap; }
+.postFooter { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+.activeTime { flex: 1; min-width: 0; overflow: hidden; color: var(--color-text-secondary); font-size: 19px; text-overflow: ellipsis; white-space: nowrap; }
+.postActions { display: flex; flex: 0 0 auto; gap: 10px; }
+.copyRequest, .copyUid { height: 50px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-radius: 14px; color: #3a2618; font-size: 18px; font-weight: 700; white-space: nowrap; background: linear-gradient(135deg,var(--color-gold-soft),var(--color-gold)); }
+.copyRequest { width: 142px; }
+.copyUid { width: 104px; }
 .updatedTime { flex: 0 0 auto; color: var(--color-text-muted); font-size: 17px; white-space: nowrap; }
 .exchangeBox { margin-top: 20px; padding: 18px; border-radius: 18px; background: rgba(211,162,95,.1); }
 .wantBox { background: rgba(123,94,168,.16); }

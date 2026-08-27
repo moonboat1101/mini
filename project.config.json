@@ -8,9 +8,9 @@
     "urlCheck": true,
     "es6": false,
     "enhance": false,
-    "compileHotReLoad": true,
+    "compileHotReLoad": false,
     "postcss": false,
-    "minified": false,
+    "minified": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],

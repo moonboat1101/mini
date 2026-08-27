@@ -55,12 +55,36 @@ export default function CardExchangeMarket() {
   const [hasMore, setHasMore] = useState(true);
   const [ownedFilterIds, setOwnedFilterIds] = useState<string[]>(() => getCardExchangeProfile().ownedIds);
   const [wantedFilterIds, setWantedFilterIds] = useState<string[]>(() => getCardExchangeProfile().wantedIds);
+  const [hasConfiguredCards, setHasConfiguredCards] = useState(() => {
+    const profile = getCardExchangeProfile();
+    return profile.ownedIds.length > 0 && profile.wantedIds.length > 0;
+  });
   const [filterTarget, setFilterTarget] = useState<FilterTarget>(null);
   const [filterPickerIds, setFilterPickerIds] = useState<string[]>([]);
   const [noticeIndex, setNoticeIndex] = useState(0);
   const [noticeAnimating, setNoticeAnimating] = useState(false);
   const { themeClassName } = useTheme();
   const selectedFilterIds = filterPickerIds;
+  const copyExchangeRequest = (post: CloudCardExchangeProfile) => {
+    const profile = getCardExchangeProfile();
+    const myCards = profile.ownedIds.filter((id) => post.wantedIds.includes(id)).map((id) => getCardById(id).name).join("/");
+    const theirCards = profile.wantedIds.filter((id) => post.ownedIds.includes(id)).map((id) => getCardById(id).name).join("/");
+    Taro.setClipboardData({
+      data: `请问可以用我的月谕圣牌【${myCards}】交换你的【${theirCards}】吗？-- by 月舟 moonboat`,
+      success: () => Taro.showToast({ title: "已复制请求文案", icon: "success" }),
+    });
+  };
+  const copyUid = (post: CloudCardExchangeProfile) => {
+    Taro.setClipboardData({
+      data: post.uid,
+      success: () => Taro.showToast({ title: "已复制 UID", icon: "success" }),
+    });
+  };
+  const canCopyExchangeRequest = (post: CloudCardExchangeProfile) => {
+    const profile = getCardExchangeProfile();
+    return profile.ownedIds.some((id) => post.wantedIds.includes(id))
+      && profile.wantedIds.some((id) => post.ownedIds.includes(id));
+  };
   const toggleFilterCard = (id: string) => {
     const update = (ids: string[]) => ids.includes(id) ? ids.filter((item) => item !== id) : [...ids, id];
     setFilterPickerIds(update);
@@ -100,6 +124,7 @@ export default function CardExchangeMarket() {
     const profile = getCardExchangeProfile();
     setOwnedFilterIds(profile.ownedIds);
     setWantedFilterIds(profile.wantedIds);
+    setHasConfiguredCards(profile.ownedIds.length > 0 && profile.wantedIds.length > 0);
     setPosts([]);
     setNextPage(0);
     setHasMore(true);
@@ -163,7 +188,13 @@ export default function CardExchangeMarket() {
                 {post.wantedIds.map((cardId) => <CardTile key={cardId} card={getCardById(cardId)} />)}
               </View>
             </View>
-            {post.activeTime ? <Text className={styles.activeTime}>{post.activeTime}</Text> : null}
+            <View className={styles.postFooter}>
+              {post.activeTime ? <Text className={styles.activeTime}>{post.activeTime}</Text> : <View className={styles.activeTime} />}
+              <View className={styles.postActions}>
+                {hasConfiguredCards && canCopyExchangeRequest(post) ? <Text className={styles.copyRequest} onClick={() => copyExchangeRequest(post)}>复制请求文案</Text> : null}
+                <Text className={styles.copyUid} onClick={() => copyUid(post)}>复制 UID</Text>
+              </View>
+            </View>
 
           </View>
         ))}
