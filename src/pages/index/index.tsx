@@ -103,7 +103,8 @@ export default function Index() {
   ];
   const primaryCards = cards.slice(0, 2);
   const wideCards = cards.slice(2, 3);
-  const secondaryCards = cards.slice(3);
+  const funCards = cards.slice(3, 6);
+  const aboutCard = cards[7];
 
   const handleCardClick = (i: (typeof cards)[number]) => {
     Taro.navigateTo({
@@ -255,6 +256,42 @@ export default function Index() {
     </View>;
   };
 
+  const renderFunCard = (i: (typeof cards)[number], readonly = false) => {
+    const imageSrc = "iconImage" in i ? i.iconImage : "";
+
+    return <View
+      key={i.title}
+      className={styles.funEntry}
+      onClick={readonly ? undefined : () => handleCardClick(i)}
+    >
+      <View className={styles.funIconWrap}>
+        {"iconKind" in i && i.iconKind === "sudoku" ? (
+          <View className={styles.funSudokuIcon}>
+            {Array.from({ length: 9 }, (_, index) => (
+              <View key={index} className={styles.funSudokuCell}>
+                {index % 2 === 0 ? index + 1 : ""}
+              </View>
+            ))}
+          </View>
+        ) : <Image src={imageSrc} className={styles.funIconImage} mode="aspectFill" />}
+      </View>
+      <View className={styles.funEntryCopy}>
+        <Text className={styles.funEntryTitle}>{i.title}</Text>
+        <Text className={styles.funEntryArrow}>→</Text>
+      </View>
+    </View>;
+  };
+
+  const renderAboutCard = (i: (typeof cards)[number], readonly = false) => (
+    <View
+      className={styles.aboutBanner}
+      onClick={readonly ? undefined : () => handleCardClick(i)}
+    >
+      <View className={styles.aboutBannerIcon}><Text>i</Text></View>
+      <Text className={styles.aboutBannerTitle}>关于 月舟</Text>
+    </View>
+  );
+
   const renderHomeContent = (displayTheme: MoonTheme, readonly = false) => (
     <>
       <View className={styles.header}>
@@ -306,16 +343,15 @@ export default function Index() {
           {wideCards.map((card) => renderCard(card, "wide", readonly))}
         </View>
 
-        <View className={`${styles.cardList} ${styles.secondaryCardList}`}>
-          {secondaryCards.map((card) => renderCard(card, "compact", readonly))}
+        <View className={styles.funHub}>
+          <Text className={styles.funHubTitle}>轻松一刻</Text>
+          <View className={styles.funEntryList}>
+            {funCards.map((card) => renderFunCard(card, readonly))}
+          </View>
         </View>
 
-      </View>
+        {renderAboutCard(aboutCard, readonly)}
 
-      <View className={styles.footerSlogan}>
-        <Text className={styles.footerMoon}>☾</Text>
-        <Text className={styles.footerText}>月光所至 · 梦想起航</Text>
-        <Text className={styles.footerMoon}>☽</Text>
       </View>
     </>
   );

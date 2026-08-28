@@ -2,7 +2,7 @@
 .marketRoot .pickerList{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
 
 .exchangeHub { min-height: 100vh; }
-.panelStage { animation: panelEnter 280ms cubic-bezier(.2,.75,.3,1); }
+.panelStage { animation: panelEnter 180ms ease-out; }
 .marketRoot { min-height: 100vh; padding: 38px 28px 170px; box-sizing: border-box; color: var(--color-text-secondary); .moon-page-background(); }
 .filterIntro { flex: 0 0 auto; color: var(--color-text-secondary); font-size: 20px; white-space: nowrap; }
 .filterBar { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
@@ -53,7 +53,7 @@
 .islandTabActive { color: #3a2618; font-weight: 800; }
 .islandTab:active { transform: scale(.96); }
 
-@keyframes panelEnter { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes panelEnter { from { opacity: 0; } to { opacity: 1; } }
 
 :global(.moon-theme-light).marketRoot {
   .filterButton,

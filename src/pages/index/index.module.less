@@ -219,6 +219,192 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.funHub {
+  min-height: 194px;
+  padding: 22px;
+  box-sizing: border-box;
+  border-radius: 24px;
+  color: var(--color-text-secondary);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 214, 140, 0.12), transparent 42%),
+    var(--color-bg-card);
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(238, 180, 103, 0.16);
+}
+
+.funHubTitle {
+  display: block;
+  color: var(--color-gold-soft);
+  font-size: 29px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.funEntryList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.funEntry {
+  min-width: 0;
+  height: 104px;
+  padding: 12px 18px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 18px;
+  background: rgba(255, 244, 223, 0.055);
+  transition: transform 0.2s ease, background 0.2s ease;
+
+  &:active {
+    transform: scale(.97);
+    background: rgba(255, 244, 223, 0.11);
+  }
+}
+
+.funIconWrap {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fffaf1;
+  box-shadow: 0 0 0 4px rgba(238, 180, 103, 0.22);
+}
+
+.funIconImage {
+  width: 100%;
+  height: 100%;
+}
+
+.funEntryCopy {
+  min-width: 0;
+  height: 64px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.funEntryTitle {
+  display: block;
+  overflow: hidden;
+  color: var(--color-text-primary);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.funEntryArrow {
+  display: block;
+  align-self: flex-end;
+  color: var(--color-gold-soft);
+  font-size: 25px;
+  font-weight: 500;
+  line-height: .8;
+}
+
+.funSudokuIcon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 2px solid #31231a;
+  border-radius: 5px;
+  background: #fffaf1;
+}
+
+.funSudokuCell {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  color: #31231a;
+  font-size: 10px;
+  font-weight: 800;
+  border-right: 1px solid #31231a;
+  border-bottom: 1px solid #31231a;
+
+  &:nth-child(3n) { border-right: 0; }
+  &:nth-child(n + 7) { border-bottom: 0; }
+}
+
+.aboutBanner {
+  position: relative;
+  height: 82px;
+  padding: 0 18px 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  overflow: hidden;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 75% 26%, rgba(255, 219, 151, 0.74) 0 2px, transparent 3px),
+    radial-gradient(circle at 86% 68%, rgba(255, 219, 151, 0.4) 0 1px, transparent 2px),
+    radial-gradient(circle at 67% 74%, rgba(255, 219, 151, 0.28) 0 1px, transparent 2px),
+    radial-gradient(circle at 100% 0%, rgba(255, 214, 140, .09), transparent 44%),
+    var(--color-bg-card);
+  box-shadow:
+    0 13px 25px rgba(0, 0, 0, .32),
+    0 0 0 1px rgba(238, 180, 103, .2);
+  transition: transform .2s ease;
+
+  &:active { transform: scale(.99); }
+}
+
+.aboutBannerIcon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-gold-soft);
+  border-radius: 50%;
+  color: var(--color-gold-soft);
+
+  text {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+    font-size: 31px;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1;
+    transform: translateY(1px);
+  }
+}
+
+.aboutBannerTitle {
+  position: relative;
+  z-index: 1;
+  color: var(--color-gold-soft);
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
 
 .card {
   box-sizing: border-box;
@@ -236,7 +422,6 @@
     radial-gradient(circle at 100% 100%, rgba(105, 70, 40, 0.12), transparent 42%),
     var(--color-bg-card);
   box-shadow:
-    inset 0 1px 0 rgba(255, 235, 196, 0.18),
     0 18px 32px rgba(0, 0, 0, 0.54),
     0 0 0 1px rgba(238, 180, 103, 0.16);
   transition: transform 0.22s ease-out, box-shadow 0.22s ease-out;
@@ -253,7 +438,6 @@
   &:active {
     transform: translateY(2px) scale(0.99);
     box-shadow:
-      inset 0 1px 0 rgba(255, 235, 196, 0.12),
       0 12px 24px rgba(0, 0, 0, 0.5),
       0 0 0 1px rgba(238, 180, 103, 0.12);
   }
@@ -703,6 +887,14 @@
       radial-gradient(circle at 50% 0%, rgba(223, 199, 157, 0.36), transparent 38%),
       radial-gradient(circle at 100% 100%, rgba(183, 137, 71, 0.12), transparent 42%),
       var(--color-bg-card);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.88),
+      0 16px 28px rgba(149, 116, 65, 0.16),
+      0 0 0 1px rgba(198, 155, 94, 0.2);
+  }
+
+  .funHub,
+  .aboutBanner {
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.88),
       0 16px 28px rgba(149, 116, 65, 0.16),
