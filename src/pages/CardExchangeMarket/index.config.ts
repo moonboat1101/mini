@@ -1,5 +1,5 @@
 export default definePageConfig({
-  navigationBarTitleText: "月舟 | 圣牌市场",
+  navigationBarTitleText: "月谕圣牌",
   navigationBarBackgroundColor: "#30231d",
   navigationBarTextStyle: "white",
   enableShareAppMessage: true,

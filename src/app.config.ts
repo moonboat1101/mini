@@ -9,12 +9,9 @@ export default defineAppConfig({
     "pages/Wish/index",
     "pages/Pokemon/index",
     "pages/ScriptRecord/index",
-    "pages/ScriptRecordConfig/index",
     "pages/QrCode/index",
     "pages/Mbti/index",
     "pages/CardExchangeMarket/index",
-    "pages/CardRarityRanking/index",
-    "pages/CardExchangeMine/index",
     "pages/About/index",
   ],
   window: {

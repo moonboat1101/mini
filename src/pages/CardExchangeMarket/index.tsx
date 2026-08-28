@@ -1,8 +1,10 @@
 import { Button, Text, View } from "@tarojs/components";
-import Taro, { useDidShow, useReachBottom } from "@tarojs/taro";
+import Taro, { useReachBottom } from "@tarojs/taro";
 import { useEffect, useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
 import { useTheme } from "../../hooks/useTheme";
+import CardExchangeMine from "../CardExchangeMine";
+import CardRarityRanking from "../CardRarityRanking";
 import CardTile from "./components/CardTile";
 import { cardCatalog, getCardById } from "./mockData";
 import { getCardExchangeProfile } from "./profileStore";
@@ -10,6 +12,7 @@ import { CloudCardExchangeProfile, getPublishedCardExchangeProfilesPage } from "
 import styles from "./index.module.less";
 
 type FilterTarget = "owned" | "wanted" | null;
+type MarketTab = "market" | "ranking" | "mine";
 const PAGE_SIZE = 10;
 const formatUpdatedAt = (updatedAt: string) => {
   const date = new Date(updatedAt);
@@ -48,6 +51,27 @@ const MARKET_NOTICES = [
 ] as const;
 
 export default function CardExchangeMarket() {
+  const [activeTab, setActiveTab] = useState<MarketTab>("market");
+  const { themeClassName } = useTheme();
+
+  return (
+    <View className={`${styles.exchangeHub} ${themeClassName}`}>
+      <View className={styles.panelStage} key={activeTab}>
+        {activeTab === "market" ? <MarketPanel /> : null}
+        {activeTab === "ranking" ? <CardRarityRanking /> : null}
+        {activeTab === "mine" ? <CardExchangeMine /> : null}
+      </View>
+      <View className={styles.marketActions}>
+        <View className={styles.islandIndicator} style={{ transform: `translateX(${activeTab === "market" ? "0" : activeTab === "mine" ? "100%" : "200%"})` }} />
+        <Button className={`${styles.islandTab} ${activeTab === "market" ? styles.islandTabActive : ""}`} onClick={() => setActiveTab("market")}>交换市场</Button>
+        <Button className={`${styles.islandTab} ${activeTab === "mine" ? styles.islandTabActive : ""}`} onClick={() => setActiveTab("mine")}>我的圣牌</Button>
+        <Button className={`${styles.islandTab} ${activeTab === "ranking" ? styles.islandTabActive : ""}`} onClick={() => setActiveTab("ranking")}>稀有排行</Button>
+      </View>
+    </View>
+  );
+}
+
+function MarketPanel() {
   const [posts, setPosts] = useState<CloudCardExchangeProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -70,7 +94,7 @@ export default function CardExchangeMarket() {
     const myCards = profile.ownedIds.filter((id) => post.wantedIds.includes(id)).map((id) => getCardById(id).name).join("/");
     const theirCards = profile.wantedIds.filter((id) => post.ownedIds.includes(id)).map((id) => getCardById(id).name).join("/");
     Taro.setClipboardData({
-      data: `请问可以用我的月谕圣牌【${myCards}】交换你的【${theirCards}】吗？-- by 月舟 moonboat`,
+      data: `请问可以用我的月谕圣牌【${myCards}】交换你的【${theirCards}】吗？-- by 月舟`,
       success: () => Taro.showToast({ title: "已复制请求文案", icon: "success" }),
     });
   };
@@ -120,7 +144,7 @@ export default function CardExchangeMarket() {
     setNoticeAnimating(false);
   };
 
-  useDidShow(() => {
+  useEffect(() => {
     const profile = getCardExchangeProfile();
     setOwnedFilterIds(profile.ownedIds);
     setWantedFilterIds(profile.wantedIds);
@@ -129,7 +153,8 @@ export default function CardExchangeMarket() {
     setNextPage(0);
     setHasMore(true);
     loadPage(0, true, profile.ownedIds, profile.wantedIds);
-  });
+  // 面板每次切换时重新挂载，确保市场筛选与资料保持同步。
+  }, []);
 
   useReachBottom(() => {
     if (!loading && !loadingMore && hasMore) loadPage(nextPage);
@@ -202,11 +227,6 @@ export default function CardExchangeMarket() {
         {loading ? <View className={styles.emptyState}><Text>正在加载市场资料…</Text></View> : null}
       </View>
       {!loading && (loadingMore ? <Text className={styles.loadHint}>正在加载更多市场资料…</Text> : hasMore ? <Text className={styles.loadHint}>继续下滑加载更多</Text> : <Text className={styles.loadHint}>已加载全部</Text>)}
-      <View className={styles.marketActions}>
-        <Button className={styles.rarityButton} onClick={() => Taro.navigateTo({ url: "/pages/CardRarityRanking/index" })}>稀有度排行</Button>
-        <Button className={styles.myButton} onClick={() => Taro.navigateTo({ url: "/pages/CardExchangeMine/index" })}>我的圣牌</Button>
-      </View>
-
       {filterTarget ? <View className={styles.mask} catchMove onClick={() => setFilterTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{filterTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text><Text className={styles.sheetHint}>可多选，列表将匹配任意一张所选卡牌。</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedFilterIds.includes(card.id)} onClick={() => toggleFilterCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={() => { const nextOwned = filterTarget === "owned" ? filterPickerIds : ownedFilterIds; const nextWanted = filterTarget === "wanted" ? filterPickerIds : wantedFilterIds; setOwnedFilterIds(nextOwned); setWantedFilterIds(nextWanted); setFilterTarget(null); loadPage(0, true, nextOwned, nextWanted); }}>完成选择</Button></View></View> : null}
 
     </View>

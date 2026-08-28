@@ -1,5 +1,4 @@
 import { Image, Text, View } from "@tarojs/components";
-import { useDidShow } from "@tarojs/taro";
 import { useEffect, useState } from "react";
 import { getCardRarityRanking } from "../../services/cardExchangeCloud";
 import { useTheme } from "../../hooks/useTheme";
@@ -29,7 +28,7 @@ export default function CardRarityRanking() {
     setNoticeAnimating(false);
   };
 
-  useDidShow(() => {
+  useEffect(() => {
     let cancelled = false;
     setWantedCardIds(getCardExchangeProfile().wantedIds);
     setLoading(true);
@@ -43,7 +42,7 @@ export default function CardRarityRanking() {
       })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
-  });
+  }, []);
 
   return (
     <View className={`${styles.rankingRoot} ${themeClassName}`}>

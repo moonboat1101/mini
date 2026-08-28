@@ -29,7 +29,7 @@
   align-items: center;
   gap: 18px;
   padding: 0 8px;
-  margin-bottom: 72px;
+  margin-bottom: 54px;
 }
 
 .themeSwitch {
@@ -196,14 +196,14 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 30px;
   box-sizing: border-box;
 }
 
 .cardList {
   width: 100%;
   display: grid;
-  gap: 32px 24px;
+  gap: 22px 18px;
   box-sizing: border-box;
 }
 
@@ -211,14 +211,18 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.wideCardList {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .secondaryCardList {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+
 .card {
   box-sizing: border-box;
   width: 100%;
-  min-height: 210px;
   border-radius: 24px;
   position: relative;
   overflow: hidden;
@@ -226,7 +230,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 30px 12px 22px;
   color: var(--color-text-secondary);
   background:
     radial-gradient(circle at 50% 0%, rgba(255, 231, 178, 0.14), transparent 36%),
@@ -236,7 +239,7 @@
     inset 0 1px 0 rgba(255, 235, 196, 0.18),
     0 18px 32px rgba(0, 0, 0, 0.54),
     0 0 0 1px rgba(238, 180, 103, 0.16);
-  transition: all 0.22s ease-out;
+  transition: transform 0.22s ease-out, box-shadow 0.22s ease-out;
 
   &::before {
     content: "";
@@ -254,6 +257,28 @@
       0 12px 24px rgba(0, 0, 0, 0.5),
       0 0 0 1px rgba(238, 180, 103, 0.12);
   }
+}
+
+.primaryCard {
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  padding: 22px;
+  overflow: hidden;
+}
+
+.wideCard {
+  min-height: 0;
+  aspect-ratio: 2.74 / 1;
+  padding: 26px;
+  overflow: hidden;
+}
+
+
+.compactCard {
+  min-height: 0;
+  aspect-ratio: 1;
+  padding: 16px 8px;
+  justify-content: space-evenly;
 }
 
 .cardIconWrap {
@@ -274,12 +299,155 @@
     0 16px 26px rgba(234, 177, 87, 0.26);
 }
 
+.primaryCard .cardIconWrap {
+  position: absolute;
+  top: -48px;
+  left: 50%;
+  width: 96px;
+  height: 96px;
+  margin: 0;
+  transform: translateX(-50%);
+}
+
+.wideCard .cardIconWrap {
+  position: absolute;
+  top: -48px;
+  left: 50%;
+  width: 96px;
+  height: 96px;
+  margin: 0;
+  transform: translateX(-50%);
+}
+
+.featureArtwork {
+  position: absolute;
+  z-index: 0;
+  right: -26px;
+  bottom: -28px;
+  width: 166px;
+  height: 166px;
+  display: block;
+  border-radius: 28px;
+  opacity: .5;
+  object-fit: cover;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, .24);
+  transform: rotate(-6deg);
+}
+
+.primaryCard .featureArtwork {
+  top: 8px;
+  right: -6px;
+  bottom: auto;
+  width: 50%;
+  height: 100%;
+  border-radius: 0;
+  object-fit: contain;
+  object-position: right bottom;
+  opacity: .9;
+  box-shadow: none;
+  transform: rotate(10deg);
+  transform-origin: right center;
+}
+
+.primaryCard .gachaFeatureArtwork {
+  top: -9%;
+  right: -10%;
+  width: 70%;
+  height: 132%;
+}
+
+.primaryCard .cardExchangeFeatureArtwork {
+  top: auto;
+  right: -2px;
+  bottom: -2px;
+  width: 46%;
+  height: 92%;
+  transform: none;
+}
+
+.featureBackground,
+.featureBackdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+}
+
+.featureBackground {
+  z-index: 0;
+  object-fit: cover;
+  opacity: .76;
+  box-shadow: none;
+}
+
+.featureBackdrop {
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(35, 22, 15, .96) 0%, rgba(35, 22, 15, .84) 32%, rgba(35, 22, 15, .34) 67%, rgba(35, 22, 15, .06) 100%);
+}
+
+.wideCard .featureArtwork {
+  right: -30px;
+  bottom: -48px;
+  width: 246px;
+  height: 246px;
+  border-radius: 34px;
+  opacity: .46;
+  transform: rotate(-5deg);
+}
+
+.featureCopy {
+  position: relative;
+  z-index: 2;
+  width: 58%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 14px;
+  box-sizing: border-box;
+}
+
+.wideCard .featureCopy {
+  width: 54%;
+}
+
+.featureCopy .cardTitle {
+  text-align: left;
+  white-space: normal;
+}
+
+.featureHint {
+  display: block;
+  margin-top: 12px;
+  color: var(--color-text-secondary);
+  font-size: 20px;
+  line-height: 1.45;
+  letter-spacing: .12em;
+  white-space: pre-line;
+}
+
+
+.compactCard .cardIconWrap {
+  width: 86px;
+  height: 86px;
+  margin-bottom: 0;
+}
+
 .cardIconImage {
   width: 96px;
   height: 96px;
   display: block;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.compactCard .cardIconImage {
+  width: 86px;
+  height: 86px;
 }
 
 .sudokuIcon {
@@ -398,15 +566,27 @@
   text-shadow: 0 3px 10px rgba(0, 0, 0, 0.56);
 }
 
-.cardOrnament {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: 104px;
-  margin-top: 20px;
+.primaryCard .cardTitle {
+  font-size: 30px;
+}
+
+.wideCard .cardTitle {
+  font-size: 35px;
+}
+
+.compactCard .cardOrnament {
+  width: 90px;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.compactCard .ornamentLine {
+  width: 33px;
+}
+
+.compactCard .ornamentDot {
+  width: 7px;
+  height: 7px;
 }
 
 .ornamentLine {
@@ -425,6 +605,21 @@
   box-shadow: 0 0 10px fade(@color-gold, 48%);
 }
 
+.compactCard .cardTitle {
+  font-size: 24px;
+}
+
+.cardOrnament {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 104px;
+  margin-top: 20px;
+}
+
 .footerSlogan {
   position: relative;
   z-index: 1;
@@ -433,7 +628,7 @@
   justify-content: center;
   gap: 22px;
   width: 100%;
-  margin-top: 64px;
+  margin-top: 52px;
   color: var(--color-gold-soft);
 }
 

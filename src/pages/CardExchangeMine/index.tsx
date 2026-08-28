@@ -68,7 +68,7 @@ export default function CardExchangeMine() {
     const myCards = ownedIds.filter((id) => profile.wantedIds.includes(id)).map((id) => getCardById(id).name).join("/");
     const theirCards = wantedIds.filter((id) => profile.ownedIds.includes(id)).map((id) => getCardById(id).name).join("/");
     Taro.setClipboardData({
-      data: `请问可以用我的月谕圣牌【${myCards}】交换你的【${theirCards}】吗？-- by 月舟 moonboat`,
+      data: `请问可以用我的月谕圣牌【${myCards}】交换你的【${theirCards}】吗？-- by 月舟`,
       success: () => Taro.showToast({ title: "已复制请求文案", icon: "success" }),
     });
   };
