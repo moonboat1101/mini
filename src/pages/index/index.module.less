@@ -566,6 +566,16 @@
   box-shadow: none;
 }
 
+.fixedBackgroundCard {
+  .cardTitle {
+    color: var(--color-gold-soft);
+  }
+
+  .featureHint {
+    color: var(--color-text-secondary);
+  }
+}
+
 .featureBackdrop {
   z-index: 1;
   background: linear-gradient(90deg, rgba(35, 22, 15, .96) 0%, rgba(35, 22, 15, .84) 32%, rgba(35, 22, 15, .34) 67%, rgba(35, 22, 15, .06) 100%);
@@ -861,6 +871,8 @@
   .brandCn,
   .brandEn,
   .cardTitle,
+  .funHubTitle,
+  .aboutBannerTitle,
   .footerText {
     color: var(--color-gold-deep);
     text-shadow: none;
@@ -899,6 +911,29 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.88),
       0 16px 28px rgba(149, 116, 65, 0.16),
       0 0 0 1px rgba(198, 155, 94, 0.2);
+  }
+
+  .funEntry {
+    background: #fffaf1;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      0 6px 14px rgba(149, 116, 65, 0.1),
+      0 0 0 1px rgba(198, 155, 94, 0.2);
+
+    &:active {
+      background: #fff4e2;
+    }
+  }
+
+  .fixedBackgroundCard {
+    .cardTitle {
+      color: #f0ddc9;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.56);
+    }
+
+    .featureHint {
+      color: #ebd9bf;
+    }
   }
 
   .cardIconWrap {

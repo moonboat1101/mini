@@ -207,7 +207,7 @@ export default function Index() {
           : variant === "wide"
             ? styles.wideCard
             : styles.compactCard
-      }`}
+      } ${backgroundImage ? styles.fixedBackgroundCard : ""}`}
       onClick={readonly ? undefined : () => handleCardClick(i)}
     >
       {isFeatureCard ? <>

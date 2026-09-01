@@ -53,6 +53,16 @@ const MARKET_NOTICES = [
 export default function CardExchangeMarket() {
   const [activeTab, setActiveTab] = useState<MarketTab>("market");
   const { themeClassName } = useTheme();
+  const switchTab = (tab: MarketTab) => {
+    if (tab === activeTab) return;
+
+    // 三个面板共用页面滚动容器，切换前归位以免沿用市场列表的触底位置。
+    Taro.pageScrollTo({
+      scrollTop: 0,
+      duration: 0,
+    });
+    setActiveTab(tab);
+  };
 
   return (
     <View className={`${styles.exchangeHub} ${themeClassName}`}>
@@ -63,9 +73,9 @@ export default function CardExchangeMarket() {
       </View>
       <View className={styles.marketActions}>
         <View className={styles.islandIndicator} style={{ transform: `translateX(${activeTab === "market" ? "0" : activeTab === "mine" ? "100%" : "200%"})` }} />
-        <Button className={`${styles.islandTab} ${activeTab === "market" ? styles.islandTabActive : ""}`} onClick={() => setActiveTab("market")}>交换市场</Button>
-        <Button className={`${styles.islandTab} ${activeTab === "mine" ? styles.islandTabActive : ""}`} onClick={() => setActiveTab("mine")}>我的圣牌</Button>
-        <Button className={`${styles.islandTab} ${activeTab === "ranking" ? styles.islandTabActive : ""}`} onClick={() => setActiveTab("ranking")}>稀有排行</Button>
+        <Button className={`${styles.islandTab} ${activeTab === "market" ? styles.islandTabActive : ""}`} onClick={() => switchTab("market")}>交换市场</Button>
+        <Button className={`${styles.islandTab} ${activeTab === "mine" ? styles.islandTabActive : ""}`} onClick={() => switchTab("mine")}>我的圣牌</Button>
+        <Button className={`${styles.islandTab} ${activeTab === "ranking" ? styles.islandTabActive : ""}`} onClick={() => switchTab("ranking")}>稀有排行</Button>
       </View>
     </View>
   );

@@ -1,7 +1,7 @@
 import { View, Text, Input, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { pinyin } from "pinyin-pro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { idioms } from "./constants";
 import { usePageShare } from "../../hooks/usePageShare";
@@ -28,7 +28,19 @@ type GuessCell = IdiomChar & {
   status: Record<FeedbackKey, FeedbackStatus>;
 };
 
+type GameState = "playing" | "won" | "lost";
+
+type SavedGame = {
+  answerIndex: number;
+  input: string;
+  guesses: GuessCell[][];
+  gameState: GameState;
+  isMasked: boolean;
+};
+
 const MAX_ATTEMPTS = 10;
+const HANDOU_GAME_STORAGE_KEY = "handou-game";
+const FOUR_HANZI_PATTERN = /^[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]{4}$/;
 const PINYIN_INITIALS = [
   "zh",
   "ch",
@@ -93,6 +105,42 @@ const PINYIN_FINALS = [
 ];
 
 const getRandomAnswerIndex = () => Math.floor(Math.random() * idioms.length);
+
+const getSavedGame = (): SavedGame | null => {
+  try {
+    const saved = Taro.getStorageSync(HANDOU_GAME_STORAGE_KEY) as Partial<SavedGame>;
+    const hasValidAnswerIndex =
+      typeof saved?.answerIndex === "number" &&
+      Number.isInteger(saved.answerIndex) &&
+      saved.answerIndex >= 0 &&
+      saved.answerIndex < idioms.length;
+    const hasValidGameState =
+      saved?.gameState === "playing" || saved?.gameState === "won" || saved?.gameState === "lost";
+
+    if (
+      !hasValidAnswerIndex ||
+      !hasValidGameState ||
+      typeof saved.input !== "string" ||
+      !Array.isArray(saved.guesses) ||
+      typeof saved.isMasked !== "boolean"
+    ) {
+      return null;
+    }
+
+    return saved as SavedGame;
+  } catch {
+    return null;
+  }
+};
+
+const saveGame = (game: SavedGame) => {
+  if (game.input || game.guesses.length > 0) {
+    Taro.setStorageSync(HANDOU_GAME_STORAGE_KEY, game);
+    return;
+  }
+
+  Taro.removeStorageSync(HANDOU_GAME_STORAGE_KEY);
+};
 
 const createStatus = (): Record<FeedbackKey, FeedbackStatus> => ({
   text: "pending",
@@ -229,14 +277,27 @@ export default function HanDou() {
     path: "/pages/HanDou/index",
   });
 
-  const [answerIndex, setAnswerIndex] = useState(getRandomAnswerIndex);
-  const [input, setInput] = useState("");
-  const [guesses, setGuesses] = useState<GuessCell[][]>([]);
-  const [gameState, setGameState] = useState<"playing" | "won" | "lost">("playing");
-  const [isMasked, setIsMasked] = useState(false);
+  const [savedGame] = useState(getSavedGame);
+  const [answerIndex, setAnswerIndex] = useState(
+    () => savedGame?.answerIndex ?? getRandomAnswerIndex()
+  );
+  const [input, setInput] = useState(() => savedGame?.input ?? "");
+  const [guesses, setGuesses] = useState<GuessCell[][]>(() => savedGame?.guesses ?? []);
+  const [gameState, setGameState] = useState<GameState>(() => savedGame?.gameState ?? "playing");
+  const [isMasked, setIsMasked] = useState(() => savedGame?.isMasked ?? false);
   const [showHints, setShowHints] = useState(false);
   const keyboardFloating = useKeyboardFloating("handou-footer-keyboard");
   const { themeClassName } = useTheme();
+
+  useEffect(() => {
+    saveGame({
+      answerIndex,
+      input,
+      guesses,
+      gameState,
+      isMasked,
+    });
+  }, [answerIndex, gameState, guesses, input, isMasked]);
 
   const answer = createGuess(idioms[answerIndex]);
   const initialHintStatuses = getHintStatuses(guesses, "initial");
@@ -275,20 +336,21 @@ export default function HanDou() {
 
   const submitGuess = () => {
     const guessText = input.trim();
-    const guess = createGuess(guessText);
 
     if (gameState !== "playing") {
       resetGame();
       return;
     }
 
-    if (Array.from(guessText).length !== 4) {
+    if (!FOUR_HANZI_PATTERN.test(guessText)) {
       Taro.showToast({
-        title: "请输入四字成语",
+        title: "请输入四个汉字",
         icon: "none",
       });
       return;
     }
+
+    const guess = createGuess(guessText);
 
     if (guesses.some((row) => row.map((cell) => cell.text).join("") === guessText)) {
       Taro.showToast({
@@ -318,6 +380,47 @@ export default function HanDou() {
         icon: "none",
       });
     }
+  };
+
+  const handleInput = (nextInput: string) => {
+    setInput(nextInput);
+    // 立即保存首次输入，避免用户刚开始玩就切后台时 React 状态尚未来得及落盘。
+    saveGame({
+      answerIndex,
+      input: nextInput,
+      guesses,
+      gameState,
+      isMasked,
+    });
+  };
+
+  const refreshQuestion = () => {
+    const hasStarted = input.trim().length > 0 || guesses.length > 0;
+
+    if (!hasStarted) {
+      resetGame();
+      return;
+    }
+
+    Taro.showModal({
+      title: "换一题？",
+      content: "当前输入和猜测记录将被清空。",
+      confirmText: "刷新",
+      confirmColor: "#c8853e",
+    }).then(({ confirm }) => {
+      if (confirm) {
+        resetGame();
+      }
+    });
+  };
+
+  const handlePrimaryAction = () => {
+    if (input.trim()) {
+      submitGuess();
+      return;
+    }
+
+    refreshQuestion();
   };
 
   return (
@@ -390,13 +493,13 @@ export default function HanDou() {
               className={styles.input}
               value={input}
               {...keyboardFloating.inputKeyboardProps}
-              confirmType="done"
-              placeholder="输入四字成语"
-              onInput={(event) => setInput(event.detail.value)}
-              onConfirm={submitGuess}
+              confirmType='done'
+              placeholder='输入四字成语'
+              onInput={(event) => handleInput(event.detail.value)}
+              onConfirm={handlePrimaryAction}
             />
-            <Button className={styles.submitButton} onClick={submitGuess}>
-              提交
+            <Button className={styles.submitButton} onClick={handlePrimaryAction}>
+              {input.trim() ? "提交" : "刷新"}
             </Button>
           </>
         ) : (
