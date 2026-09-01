@@ -3,6 +3,8 @@ import type { CardExchangeProfile } from "../pages/CardExchangeMarket/profileSto
 
 const LOCAL_PROFILE_KEY = "moonboat-card-exchange-profile-v3";
 const LOGIN_CACHE_KEY = "moonboat-card-exchange-authenticated-v1";
+const RARITY_RANKING_CACHE_KEY = "moonboat-card-rarity-ranking-v1";
+const RARITY_RANKING_CACHE_TTL_MS = 30 * 60 * 1000;
 
 export type CloudCardExchangeProfile = CardExchangeProfile & {
   _id?: string;
@@ -18,6 +20,11 @@ export type CardExchangeProfilePage = {
 export type CardRarityRanking = {
   totalProfiles: number;
   scores: Record<string, number>;
+};
+
+type CachedCardRarityRanking = {
+  ranking: CardRarityRanking;
+  expiresAt: number;
 };
 
 let initialized = false;
@@ -103,12 +110,30 @@ export const getPublishedCardExchangeProfilesPage = async (page = 0, pageSize = 
 };
 
 export const getCardRarityRanking = async (): Promise<CardRarityRanking> => {
+  const now = Date.now();
+  try {
+    const cached = Taro.getStorageSync(RARITY_RANKING_CACHE_KEY) as CachedCardRarityRanking | null;
+    if (cached?.ranking && Number(cached.expiresAt) > now) return cached.ranking;
+  } catch {
+    // 本地缓存不可用时继续走云函数。
+  }
+
   if (!initCardExchangeCloud()) return { totalProfiles: 0, scores: {} };
   const result = await cloud().callFunction({ name: "cardRarityRanking" });
-  return {
+  const ranking = {
     totalProfiles: Number(result.result?.totalProfiles) || 0,
     scores: result.result?.scores || {},
   };
+  try {
+    // 同一用户 30 分钟内重复打开排行时，直接复用本地统计结果。
+    Taro.setStorageSync(RARITY_RANKING_CACHE_KEY, {
+      ranking,
+      expiresAt: Date.now() + RARITY_RANKING_CACHE_TTL_MS,
+    } satisfies CachedCardRarityRanking);
+  } catch {
+    // 写本地缓存失败不影响正常展示。
+  }
+  return ranking;
 };
 
 /** 仅验证当前微信身份；不申请昵称、头像或其他个人资料。 */

@@ -13,7 +13,8 @@ import styles from "./index.module.less";
 
 type FilterTarget = "owned" | "wanted" | null;
 type MarketTab = "market" | "ranking" | "mine";
-const PAGE_SIZE = 10;
+// 云函数每页最多返回 20 条展示数据；比原先 10 条少一半翻页与云函数调用。
+const PAGE_SIZE = 20;
 const formatUpdatedAt = (updatedAt: string) => {
   const date = new Date(updatedAt);
   const timestamp = date.getTime();

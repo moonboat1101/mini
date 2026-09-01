@@ -20,8 +20,9 @@ exports.main = async (event) => {
   const result = await users.where(query)
     .orderBy("updatedAt", "desc")
     .skip(page * pageSize)
-    .limit(pageSize + 1)
+    .limit(pageSize)
     .get();
   const profiles = result.data || [];
-  return { profiles: profiles.slice(0, pageSize), hasMore: profiles.length > pageSize };
+  // 单次查询不超过 20 条。取满时保留“可能还有下一页”，由下一次触底请求确认是否到底。
+  return { profiles, hasMore: profiles.length === pageSize };
 };

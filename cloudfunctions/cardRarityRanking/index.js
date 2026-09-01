@@ -10,7 +10,8 @@ const users = db.collection("users");
  */
 exports.main = async () => {
   const scores = {};
-  const batchSize = 20;
+  // wx-server-sdk 云函数端单次查询最多可取 1,000 条；小程序端才是 20 条限制。
+  const batchSize = 1000;
   let offset = 0;
   let totalProfiles = 0;
 
