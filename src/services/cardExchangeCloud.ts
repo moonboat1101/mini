@@ -17,6 +17,8 @@ export type CardExchangeProfilePage = {
   hasMore: boolean;
 };
 
+export type CardExchangeServerFilter = "all" | "official" | "bilibili" | "overseas";
+
 export type CardRarityRanking = {
   totalProfiles: number;
   scores: Record<string, number>;
@@ -67,7 +69,8 @@ export const cacheCardExchangeLogin = () => {
 const cleanProfile = (profile: CloudCardExchangeProfile) => ({
   _id: profile._id,
   uid: profile.uid.trim(),
-  name: profile.name.trim(),
+  qq: profile.qq.trim(),
+  wechat: profile.wechat.trim(),
   avatarUrl: profile.avatarUrl || "",
   activeTime: profile.activeTime.trim(),
   ownedIds: profile.ownedIds,
@@ -97,11 +100,11 @@ export const saveMyCardExchangeProfile = async (profile: CloudCardExchangeProfil
   return next;
 };
 
-export const getPublishedCardExchangeProfilesPage = async (page = 0, pageSize = 10, ownedFilterIds: string[] = [], wantedFilterIds: string[] = []): Promise<CardExchangeProfilePage> => {
+export const getPublishedCardExchangeProfilesPage = async (page = 0, pageSize = 10, ownedFilterIds: string[] = [], wantedFilterIds: string[] = [], serverFilter: CardExchangeServerFilter = "all"): Promise<CardExchangeProfilePage> => {
   if (!initCardExchangeCloud()) return { profiles: [], hasMore: false };
   const result = await cloud().callFunction({
     name: "cardExchangeMarket",
-    data: { action: "market", page, pageSize, ownedFilterIds, wantedFilterIds },
+    data: { action: "market", page, pageSize, ownedFilterIds, wantedFilterIds, serverFilter },
   });
   return {
     profiles: (result.result?.profiles || []) as CloudCardExchangeProfile[],

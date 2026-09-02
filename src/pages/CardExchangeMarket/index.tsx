@@ -1,4 +1,4 @@
-import { Button, Text, View } from "@tarojs/components";
+import { Button, Image, Picker, Text, View } from "@tarojs/components";
 import Taro, { useReachBottom } from "@tarojs/taro";
 import { useEffect, useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
@@ -8,13 +8,25 @@ import CardRarityRanking from "../CardRarityRanking";
 import CardTile from "./components/CardTile";
 import { cardCatalog, getCardById } from "./mockData";
 import { getCardExchangeProfile } from "./profileStore";
-import { CloudCardExchangeProfile, getPublishedCardExchangeProfilesPage } from "../../services/cardExchangeCloud";
+import { CardExchangeServerFilter, CloudCardExchangeProfile, getPublishedCardExchangeProfilesPage } from "../../services/cardExchangeCloud";
 import styles from "./index.module.less";
+
+const WECHAT_ICON_URL = "https://img.remit.ee/api/file/CAACAgUAAyEGAASHRsPbAAEaWnJqmAq0bXTMWIsJU6g1fbFOBw3sVAAChzAAAm9BwFQjKLbCwgeSQD0E.webp";
+const QQ_ICON_URL = "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaWmZqmAi8McGR2sPkkPzIVvPHM-B80QACdzAAAm9BwFQh4jVNv_EOUD0E.jpg";
 
 type FilterTarget = "owned" | "wanted" | null;
 type MarketTab = "market" | "ranking" | "mine";
+type ServerType = "official" | "bilibili" | "overseas";
+type ServerFilter = CardExchangeServerFilter;
 // 云函数每页最多返回 20 条展示数据；比原先 10 条少一半翻页与云函数调用。
 const PAGE_SIZE = 20;
+const getServerType = (uid: string): ServerType => {
+  if (/^[1-4]\d{8}$/.test(uid)) return "official";
+  if (/^5\d{8}$/.test(uid)) return "bilibili";
+  return "overseas";
+};
+const getDefaultServerFilter = (uid: string): ServerFilter => /^\d{9,10}$/.test(uid) ? getServerType(uid) : "all";
+const SERVER_LABEL: Record<ServerFilter, string> = { all: "全部", official: "官服", bilibili: "B服", overseas: "外服" };
 const formatUpdatedAt = (updatedAt: string) => {
   const date = new Date(updatedAt);
   const timestamp = date.getTime();
@@ -46,7 +58,7 @@ const MARKET_NOTICES = [
   },
   {
     icon: "✦",
-    text: "建议配置我的圣牌，可以自动回填筛选，不用每次手动填。",
+    text: "配置我的圣牌后，市场筛选会自动回填。",
     variant: "friendly",
   },
 ] as const;
@@ -90,6 +102,7 @@ function MarketPanel() {
   const [hasMore, setHasMore] = useState(true);
   const [ownedFilterIds, setOwnedFilterIds] = useState<string[]>(() => getCardExchangeProfile().ownedIds);
   const [wantedFilterIds, setWantedFilterIds] = useState<string[]>(() => getCardExchangeProfile().wantedIds);
+  const [serverFilter, setServerFilter] = useState<ServerFilter>(() => getDefaultServerFilter(getCardExchangeProfile().uid));
   const [hasConfiguredCards, setHasConfiguredCards] = useState(() => {
     const profile = getCardExchangeProfile();
     return profile.ownedIds.length > 0 && profile.wantedIds.length > 0;
@@ -128,11 +141,11 @@ function MarketPanel() {
     setFilterPickerIds([...(target === "owned" ? ownedFilterIds : wantedFilterIds)]);
     setFilterTarget(target);
   };
-  const loadPage = async (page: number, replace = false, ownedFilters = ownedFilterIds, wantedFilters = wantedFilterIds) => {
+  const loadPage = async (page: number, replace = false, ownedFilters = ownedFilterIds, wantedFilters = wantedFilterIds, server = serverFilter) => {
     if (replace) setLoading(true);
     else setLoadingMore(true);
     try {
-      const result = await getPublishedCardExchangeProfilesPage(page, PAGE_SIZE, ownedFilters, wantedFilters);
+      const result = await getPublishedCardExchangeProfilesPage(page, PAGE_SIZE, ownedFilters, wantedFilters, server);
       setPosts((current) => replace ? result.profiles : [...current, ...result.profiles]);
       setNextPage(page + 1);
       setHasMore(result.hasMore);
@@ -159,11 +172,12 @@ function MarketPanel() {
     const profile = getCardExchangeProfile();
     setOwnedFilterIds(profile.ownedIds);
     setWantedFilterIds(profile.wantedIds);
+    setServerFilter(getDefaultServerFilter(profile.uid));
     setHasConfiguredCards(profile.ownedIds.length > 0 && profile.wantedIds.length > 0);
     setPosts([]);
     setNextPage(0);
     setHasMore(true);
-    loadPage(0, true, profile.ownedIds, profile.wantedIds);
+    loadPage(0, true, profile.ownedIds, profile.wantedIds, getDefaultServerFilter(profile.uid));
   // 面板每次切换时重新挂载，确保市场筛选与资料保持同步。
   }, []);
 
@@ -193,10 +207,11 @@ function MarketPanel() {
       </View>
 
       <View className={styles.filterBar}>
-        <Text className={styles.filterIntro}>筛选匹配：</Text>
+        <Text className={styles.filterIntro}>筛选：</Text>
         <Button className={styles.filterButton} onClick={() => openFilterPicker("owned")}>我多余 / 他想要{ownedFilterIds.length ? <Text className={styles.filterCount}>{ownedFilterIds.length}</Text> : null}</Button>
         <Button className={styles.filterButton} onClick={() => openFilterPicker("wanted")}>我想要 / 他多余{wantedFilterIds.length ? <Text className={styles.filterCount}>{wantedFilterIds.length}</Text> : null}</Button>
-        <Button className={styles.resetButton} onClick={() => { setOwnedFilterIds([]); setWantedFilterIds([]); loadPage(0, true, [], []); }}>重置</Button>
+        <Picker mode="selector" range={["全部", "官服", "B服", "外服"]} value={["all", "official", "bilibili", "overseas"].indexOf(serverFilter)} onChange={(event) => { const next = (["all", "official", "bilibili", "overseas"] as ServerFilter[])[Number(event.detail.value)]; setServerFilter(next); loadPage(0, true, ownedFilterIds, wantedFilterIds, next); }}><Button className={styles.serverFilterButton}>{SERVER_LABEL[serverFilter]}</Button></Picker>
+        <Button className={styles.resetButton} onClick={() => { setOwnedFilterIds([]); setWantedFilterIds([]); setServerFilter("all"); loadPage(0, true, [], [], "all"); }}>重置</Button>
       </View>
 
       <View className={styles.postList}>
@@ -205,14 +220,19 @@ function MarketPanel() {
               <View className={styles.postMeta}>
                 <View className={styles.userInfo}>
                   <View className={styles.nameRow}>
-                    <Text className={styles.nickname}>{post.name || "旅行者"}</Text>
                     <Text className={styles.uid}>{post.uid}</Text>
+                    <Text className={`${styles.serverTag} ${styles[`server${getServerType(post.uid)}`]}`}>{SERVER_LABEL[getServerType(post.uid)]}</Text>
                   </View>
                 </View>
                 {formatUpdatedAt(post.updatedAt) ? <Text className={styles.updatedTime}>更新于 {formatUpdatedAt(post.updatedAt)}</Text> : null}
               </View>
 
-              <View className={styles.exchangeBox}>
+            {post.qq || post.wechat || post.activeTime ? <View className={styles.contactBox}>
+              {post.qq ? <View className={styles.contactItem}><Image className={styles.qqIcon} src={QQ_ICON_URL} mode="aspectFit" /><Text>{post.qq}</Text></View> : null}
+              {post.wechat ? <View className={styles.contactItem}><Image className={styles.wechatIcon} src={WECHAT_ICON_URL} mode="aspectFit" /><Text>{post.wechat}</Text></View> : null}
+              {post.activeTime ? <View className={styles.contactItem}><Text className={`${styles.contactIcon} ${styles.clockIcon}`}>⏰</Text><Text>{post.activeTime}</Text></View> : null}
+            </View> : null}
+            <View className={styles.exchangeBox}>
               <Text className={styles.exchangeLabel}>我多余</Text>
               <View className={styles.cardGrid}>
                 {post.ownedIds.map((cardId) => <CardTile key={cardId} card={getCardById(cardId)} />)}
@@ -225,7 +245,7 @@ function MarketPanel() {
               </View>
             </View>
             <View className={styles.postFooter}>
-              {post.activeTime ? <Text className={styles.activeTime}>{post.activeTime}</Text> : <View className={styles.activeTime} />}
+              <View className={styles.footerSpacer} />
               <View className={styles.postActions}>
                 {hasConfiguredCards && canCopyExchangeRequest(post) ? <Text className={styles.copyRequest} onClick={() => copyExchangeRequest(post)}>复制请求文案</Text> : null}
                 <Text className={styles.copyUid} onClick={() => copyUid(post)}>复制 UID</Text>

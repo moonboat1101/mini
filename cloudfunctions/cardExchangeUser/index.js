@@ -28,8 +28,9 @@ exports.main = async (event, context) => {
   if (event.action === "save") {
     const data = {
       _openid: OPENID,
-      uid: String(profile.uid || "").trim(),
-      name: String(profile.name || "").trim(),
+      uid: String(profile.uid || "").trim().replace(/\D/g, "").slice(0, 10),
+      qq: String(profile.qq || "").trim().replace(/\D/g, "").slice(0, 16),
+      wechat: String(profile.wechat || "").trim().replace(/[\u3400-\u9fff]/g, "").slice(0, 32),
       avatarUrl: String(profile.avatarUrl || ""),
       activeTime: String(profile.activeTime || "").trim(),
       ownedIds: Array.isArray(profile.ownedIds) ? profile.ownedIds : [],
