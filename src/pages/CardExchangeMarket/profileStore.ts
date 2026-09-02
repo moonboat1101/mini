@@ -2,8 +2,6 @@ import Taro from "@tarojs/taro";
 
 export type CardExchangeProfile = {
   uid: string;
-  qq: string;
-  wechat: string;
   activeTime: string;
   ownedIds: string[];
   wantedIds: string[];
@@ -15,8 +13,6 @@ const STORAGE_KEY = "moonboat-card-exchange-profile-v2";
 
 export const defaultCardExchangeProfile: CardExchangeProfile = {
   uid: "",
-  qq: "",
-  wechat: "",
   activeTime: "",
   ownedIds: [],
   wantedIds: [],

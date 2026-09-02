@@ -83,8 +83,6 @@ export const cacheCardExchangeLogin = () => {
 const cleanProfile = (profile: CloudCardExchangeProfile) => ({
   _id: profile._id,
   uid: profile.uid.trim(),
-  qq: profile.qq.trim(),
-  wechat: profile.wechat.trim(),
   avatarUrl: profile.avatarUrl || "",
   activeTime: profile.activeTime.trim(),
   ownedIds: profile.ownedIds,

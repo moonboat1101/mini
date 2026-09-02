@@ -14,8 +14,6 @@ export default function CardExchangeMine() {
   const [savedProfile] = useState(getCardExchangeProfile);
   const [cloudProfile, setCloudProfile] = useState<CloudCardExchangeProfile | null>(getCachedCardExchangeProfile);
   const [uid, setUid] = useState(savedProfile.uid);
-  const [qq, setQq] = useState(savedProfile.qq);
-  const [wechat, setWechat] = useState(savedProfile.wechat);
   const [avatarUrl, setAvatarUrl] = useState("");
   const [activeTime, setActiveTime] = useState(savedProfile.activeTime);
   const [isPublished, setIsPublished] = useState(savedProfile.isPublished);
@@ -31,8 +29,6 @@ export default function CardExchangeMine() {
       if (!profile) return;
       setCloudProfile(profile);
       setUid(profile.uid);
-      setQq(profile.qq || "");
-      setWechat(profile.wechat || "");
       setAvatarUrl(profile.avatarUrl || "");
       setActiveTime(profile.activeTime);
       setIsPublished(profile.isPublished);
@@ -94,7 +90,7 @@ export default function CardExchangeMine() {
       Taro.showLoading({ title: "正在保存", mask: true });
       const updatedAt = new Date().toISOString();
       setUpdatedAt(updatedAt);
-      const profile = await saveMyCardExchangeProfile({ _id: cloudProfile?._id, uid, qq, wechat, avatarUrl, activeTime, ownedIds, wantedIds, isPublished, updatedAt });
+      const profile = await saveMyCardExchangeProfile({ _id: cloudProfile?._id, uid, avatarUrl, activeTime, ownedIds, wantedIds, isPublished, updatedAt });
       setCloudProfile(profile);
       saveCardExchangeProfile(profile);
       Taro.hideLoading();
@@ -106,12 +102,8 @@ export default function CardExchangeMine() {
   };
   const baseline = {
     ...(cloudProfile || savedProfile),
-    qq: cloudProfile?.qq || "",
-    wechat: cloudProfile?.wechat || "",
   };
   const hasChanges = uid !== baseline.uid
-    || qq !== baseline.qq
-    || wechat !== baseline.wechat
     || activeTime !== baseline.activeTime
     || isPublished !== baseline.isPublished
     || ownedIds.join(",") !== baseline.ownedIds.join(",")
@@ -120,8 +112,6 @@ export default function CardExchangeMine() {
     {!loggedIn ? <View className={styles.loginBar}><View><Text className={styles.loginTitle}>登录后可同步资料</Text><Text className={styles.loginHint}>仅使用微信身份进行认证，不获取任何资料</Text></View><Button className={styles.loginButton} onClick={login}>微信登录</Button></View> : <>
       <View className={styles.profilePanel}>
       <View className={styles.field}><Text>UID</Text><Input value={uid} type="number" maxlength={10} className={styles.input} placeholder="请输入 9 或 10 位 UID" onInput={(event) => setUid(event.detail.value)} /></View>
-      <View className={styles.field}><Text>QQ</Text><Input value={qq} type="number" maxlength={16} className={styles.input} placeholder="选填，注意隐私安全" onInput={(event) => setQq(event.detail.value.replace(/\D/g, ""))} /></View>
-      <View className={styles.field}><Text>微信</Text><Input value={wechat} maxlength={32} className={styles.input} placeholder="选填，注意隐私安全" onInput={(event) => setWechat(event.detail.value.replace(/[\u3400-\u9fff]/g, ""))} /></View>
       <View className={styles.field}><Text>活跃时间</Text><Input value={activeTime} placeholder="例如：晚上 8–12 点" maxlength={24} className={styles.input} onInput={(event) => setActiveTime(event.detail.value)} /></View>
       <View className={styles.field}><View className={styles.publishCopy}><Text>发布到市场</Text><Text className={styles.switchHint}>关闭后不会在市场展示</Text></View><Switch className={styles.publishSwitch} checked={isPublished} color="#c8853e" onChange={(event) => { setIsPublished(event.detail.value); setUpdatedAt(new Date().toISOString()); }} /></View>
       </View>

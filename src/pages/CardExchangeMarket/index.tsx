@@ -1,4 +1,4 @@
-import { Button, Image, Picker, Text, View } from "@tarojs/components";
+import { Button, Picker, Text, View } from "@tarojs/components";
 import Taro, { useReachBottom } from "@tarojs/taro";
 import { useEffect, useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
@@ -11,8 +11,6 @@ import { getCardExchangeProfile } from "./profileStore";
 import { CardExchangeServerFilter, CloudCardExchangeProfile, getCardExchangeLoginCache, getCardExchangeSubscriptionStatus, getPublishedCardExchangeProfilesPage, invalidateCardExchangeSubscriptionStatusCache, recordCardExchangeSubscription, sendCardExchangeNotification } from "../../services/cardExchangeCloud";
 import styles from "./index.module.less";
 
-const WECHAT_ICON_URL = "https://img.remit.ee/api/file/CAACAgUAAyEGAASHRsPbAAEaWnJqmAq0bXTMWIsJU6g1fbFOBw3sVAAChzAAAm9BwFQjKLbCwgeSQD0E.webp";
-const QQ_ICON_URL = "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaWmZqmAi8McGR2sPkkPzIVvPHM-B80QACdzAAAm9BwFQh4jVNv_EOUD0E.jpg";
 const EXCHANGE_NOTICE_TEMPLATE_ID = "oY82V5jBgWojqtCi07YJF_Hp_ED_6Z6wwUelaz8xKKA";
 const EXCHANGE_SUBSCRIPTION_AT_KEY = "moonboat-card-exchange-subscription-at-v1";
 
@@ -246,9 +244,7 @@ function MarketPanel() {
                 {formatUpdatedAt(post.updatedAt) ? <Text className={styles.updatedTime}>更新于 {formatUpdatedAt(post.updatedAt)}</Text> : null}
               </View>
 
-            {post.qq || post.wechat || post.activeTime ? <View className={styles.contactBox}>
-              {post.qq ? <View className={styles.contactItem}><Image className={styles.qqIcon} src={QQ_ICON_URL} mode="aspectFit" /><Text>{post.qq}</Text></View> : null}
-              {post.wechat ? <View className={styles.contactItem}><Image className={styles.wechatIcon} src={WECHAT_ICON_URL} mode="aspectFit" /><Text>{post.wechat}</Text></View> : null}
+            {post.activeTime ? <View className={styles.contactBox}>
               {post.activeTime ? <View className={styles.contactItem}><Text className={`${styles.contactIcon} ${styles.clockIcon}`}>⏰</Text><Text>{post.activeTime}</Text></View> : null}
             </View> : null}
             <View className={styles.exchangeBox}>
