@@ -5,11 +5,15 @@ const LOCAL_PROFILE_KEY = "moonboat-card-exchange-profile-v3";
 const LOGIN_CACHE_KEY = "moonboat-card-exchange-authenticated-v1";
 const RARITY_RANKING_CACHE_KEY = "moonboat-card-rarity-ranking-v1";
 const RARITY_RANKING_CACHE_TTL_MS = 30 * 60 * 1000;
+const SUBSCRIPTION_STATUS_CACHE_KEY = "moonboat-card-exchange-subscription-status-v1";
+const SUBSCRIPTION_STATUS_CACHE_TTL_MS = 30 * 60 * 1000;
 
 export type CloudCardExchangeProfile = CardExchangeProfile & {
   _id?: string;
   avatarUrl: string;
   createdAt?: number;
+  exchangeSubscriptionSubscribedAt?: string;
+  exchangeSubscriptionConsumedAt?: string;
 };
 
 export type CardExchangeProfilePage = {
@@ -26,6 +30,16 @@ export type CardRarityRanking = {
 
 type CachedCardRarityRanking = {
   ranking: CardRarityRanking;
+  expiresAt: number;
+};
+
+type CardExchangeSubscriptionStatus = {
+  subscribedAt: string;
+  consumedAt: string;
+};
+
+type CachedCardExchangeSubscriptionStatus = {
+  status: CardExchangeSubscriptionStatus;
   expiresAt: number;
 };
 
@@ -88,6 +102,36 @@ export const getMyCardExchangeProfile = async (): Promise<CloudCardExchangeProfi
   return profile;
 };
 
+/** 订阅页状态允许短暂缓存，避免每次切换页签都读取云端资料。 */
+export const getCardExchangeSubscriptionStatus = async (): Promise<CardExchangeSubscriptionStatus> => {
+  const now = Date.now();
+  try {
+    const cached = Taro.getStorageSync(SUBSCRIPTION_STATUS_CACHE_KEY) as CachedCardExchangeSubscriptionStatus | null;
+    if (cached?.status && Number(cached.expiresAt) > now) return cached.status;
+  } catch {
+    // 缓存不可用时直接读取云端。
+  }
+  const profile = await getMyCardExchangeProfile();
+  const status = {
+    subscribedAt: profile?.exchangeSubscriptionSubscribedAt || "",
+    consumedAt: profile?.exchangeSubscriptionConsumedAt || "",
+  };
+  try {
+    Taro.setStorageSync(SUBSCRIPTION_STATUS_CACHE_KEY, { status, expiresAt: now + SUBSCRIPTION_STATUS_CACHE_TTL_MS } satisfies CachedCardExchangeSubscriptionStatus);
+  } catch {
+    // 缓存写入失败不影响状态展示。
+  }
+  return status;
+};
+
+export const invalidateCardExchangeSubscriptionStatusCache = () => {
+  try {
+    Taro.removeStorageSync(SUBSCRIPTION_STATUS_CACHE_KEY);
+  } catch {
+    // 缓存不可用时无需处理。
+  }
+};
+
 export const saveMyCardExchangeProfile = async (profile: CloudCardExchangeProfile) => {
   const next = { ...profile, ...cleanProfile(profile), updatedAt: new Date().toISOString() };
   if (!initCardExchangeCloud()) {
@@ -111,6 +155,22 @@ export const getPublishedCardExchangeProfilesPage = async (page = 0, pageSize = 
     hasMore: Boolean(result.result?.hasMore),
   };
 };
+
+export const sendCardExchangeNotification = async (targetProfileId: string, requestContent: string) => {
+  if (!initCardExchangeCloud()) throw new Error("当前环境不支持发送通知");
+  const result = await cloud().callFunction({
+    name: "cardExchangeNotification",
+    data: { targetProfileId, requestContent },
+  });
+  if (!result.result?.sent) throw new Error(result.result?.message || "发送通知失败");
+};
+
+export const recordCardExchangeSubscription = async () => {
+  if (!initCardExchangeCloud()) throw new Error("当前环境不支持订阅通知");
+  const result = await cloud().callFunction({ name: "cardExchangeNotification", data: { action: "recordSubscription" } });
+  if (!result.result?.recorded) throw new Error(result.result?.message || "订阅状态保存失败");
+};
+
 
 export const getCardRarityRanking = async (): Promise<CardRarityRanking> => {
   const now = Date.now();
