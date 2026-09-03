@@ -100,11 +100,16 @@ export default function Index() {
       iconKind: "about",
       url: "/pages/About/index",
     },
+    {
+      title: "投币",
+      iconKind: "coin",
+      url: "/pages/Membership/index",
+    },
   ];
   const primaryCards = cards.slice(0, 2);
   const wideCards = cards.slice(2, 3);
   const funCards = cards.slice(3, 6);
-  const aboutCard = cards[7];
+  const aboutCards = cards.slice(7, 9);
 
   const handleCardClick = (i: (typeof cards)[number]) => {
     Taro.navigateTo({
@@ -287,8 +292,8 @@ export default function Index() {
       className={styles.aboutBanner}
       onClick={readonly ? undefined : () => handleCardClick(i)}
     >
-      <View className={styles.aboutBannerIcon}><Text>i</Text></View>
-      <Text className={styles.aboutBannerTitle}>关于 月舟</Text>
+      <View className={styles.aboutBannerIcon}><Text>{i.title === "投币" ? "¥" : "i"}</Text></View>
+      <Text className={styles.aboutBannerTitle}>{i.title === "投币" ? "投币" : "关于"}</Text>
     </View>
   );
 
@@ -350,7 +355,9 @@ export default function Index() {
           </View>
         </View>
 
-        {renderAboutCard(aboutCard, readonly)}
+        <View className={styles.aboutBannerList}>
+          {aboutCards.map((card) => renderAboutCard(card, readonly))}
+        </View>
 
       </View>
     </>

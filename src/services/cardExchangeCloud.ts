@@ -14,6 +14,7 @@ export type CloudCardExchangeProfile = CardExchangeProfile & {
   createdAt?: number;
   exchangeSubscriptionSubscribedAt?: string;
   exchangeSubscriptionConsumedAt?: string;
+  memberId?: number;
 };
 
 export type CardExchangeProfilePage = {

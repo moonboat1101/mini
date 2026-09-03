@@ -10,6 +10,7 @@ export default defineAppConfig({
     "pages/QrCode/index",
     "pages/CardExchangeMarket/index",
     "pages/About/index",
+    "pages/Membership/index",
   ],
   window: {
     backgroundTextStyle: "light",

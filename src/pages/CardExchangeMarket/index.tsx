@@ -239,6 +239,7 @@ function MarketPanel() {
                   <View className={styles.nameRow}>
                     <Text className={styles.uid}>{post.uid}</Text>
                     <Text className={`${styles.serverTag} ${styles[`server${getServerType(post.uid)}`]}`}>{SERVER_LABEL[getServerType(post.uid)]}</Text>
+                    {post.memberId ? <Text className={styles.memberTag} onClick={() => Taro.showToast({ title: "首页投币后获得", icon: "none" })}>♛ #{String(post.memberId).padStart(4, "0")}</Text> : null}
                   </View>
                 </View>
                 {formatUpdatedAt(post.updatedAt) ? <Text className={styles.updatedTime}>更新于 {formatUpdatedAt(post.updatedAt)}</Text> : null}
