@@ -29,6 +29,8 @@ exports.main = async (event, context) => {
     const data = {
       _openid: OPENID,
       uid: String(profile.uid || "").trim().replace(/\D/g, "").slice(0, 10),
+      contactA: String(profile.contactA || "").trim().replace(/\D/g, "").slice(0, 16),
+      contactB: String(profile.contactB || "").trim().slice(0, 32),
       avatarUrl: String(profile.avatarUrl || ""),
       activeTime: String(profile.activeTime || "").trim(),
       ownedIds: Array.isArray(profile.ownedIds) ? profile.ownedIds : [],

@@ -91,6 +91,8 @@ export const cacheCardExchangeLogin = () => {
 const cleanProfile = (profile: CloudCardExchangeProfile) => ({
   _id: profile._id,
   uid: profile.uid.trim(),
+  contactA: String(profile.contactA || "").trim().slice(0, 16),
+  contactB: String(profile.contactB || "").trim().slice(0, 32),
   avatarUrl: profile.avatarUrl || "",
   activeTime: profile.activeTime.trim(),
   ownedIds: profile.ownedIds,

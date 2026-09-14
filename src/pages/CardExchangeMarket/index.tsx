@@ -1,4 +1,4 @@
-import { Button, Picker, Text, View } from "@tarojs/components";
+import { Button, Image, Picker, Text, View } from "@tarojs/components";
 import Taro, { useReachBottom } from "@tarojs/taro";
 import { useEffect, useRef, useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
@@ -18,6 +18,8 @@ type ServerType = "official" | "bilibili" | "overseas";
 type ServerFilter = CardExchangeServerFilter;
 // 云函数每页最多返回 20 条展示数据；比原先 10 条少一半翻页与云函数调用。
 const PAGE_SIZE = 20;
+const QQ_ICON_URL = "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaWmZqmAi8McGR2sPkkPzIVvPHM-B80QACdzAAAm9BwFQh4jVNv_EOUD0E.jpg";
+const WECHAT_ICON_URL = "https://img.remit.ee/api/file/CAACAgUAAyEGAASHRsPbAAEaWnJqmAq0bXTMWIsJU6g1fbFOBw3sVAAChzAAAm9BwFQjKLbCwgeSQD0E.webp";
 const getServerType = (uid: string): ServerType => {
   if (/^[1-4]\d{8}$/.test(uid)) return "official";
   if (/^5\d{8}$/.test(uid)) return "bilibili";
@@ -279,7 +281,9 @@ function MarketPanel() {
                 {formatUpdatedAt(post.updatedAt) ? <Text className={styles.updatedTime}>更新于 {formatUpdatedAt(post.updatedAt)}</Text> : null}
               </View>
 
-            {post.activeTime ? <View className={styles.contactBox}>
+            {post.contactA || post.contactB || post.activeTime ? <View className={styles.contactBox}>
+              {post.contactA ? <View className={styles.contactItem}><Image className={styles.qqIcon} src={QQ_ICON_URL} mode="aspectFit" /><Text>{post.contactA}</Text></View> : null}
+              {post.contactB ? <View className={styles.contactItem}><Image className={styles.wechatIcon} src={WECHAT_ICON_URL} mode="aspectFit" /><Text>{post.contactB}</Text></View> : null}
               {post.activeTime ? <View className={styles.contactItem}><Text className={`${styles.contactIcon} ${styles.clockIcon}`}>⏰</Text><Text>{post.activeTime}</Text></View> : null}
             </View> : null}
             <View className={styles.exchangeBox}>
