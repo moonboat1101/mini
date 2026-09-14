@@ -31,14 +31,14 @@
 .postMeta { gap: 12px; }
 .userInfo { flex: 1; min-width: 0; }
 .nameRow { width: 100%; min-width: 0; gap: 12px; }
-.uid { flex: 0 0 auto; color: var(--color-text-primary); font-size: @font-size-body; font-weight: 700; white-space: nowrap; }
+.uid { flex: 0 0 auto; color: var(--color-text-primary); font-size: @font-size-title; font-weight: 700; white-space: nowrap; }
 .serverTag { flex: 0 0 auto; padding: 3px 9px; border-radius: 10px; font-size: @font-size-secondary; font-weight: 700; line-height: 1.35; }
 .serverofficial { color: #6f4a10; background: #e6bc62; }
 .serverbilibili { color: #8b3152; background: #f2a6bd; }
 .serveroverseas { color: #ece3ff; background: #7654a8; }
 .postFooter { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
 .contactBox { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; padding: 13px 16px; border-radius: 16px; background: var(--color-bg-card-soft); }
-.contactItem { display: flex; align-items: center; gap: 7px; max-width: 100%; overflow: hidden; color: var(--color-text-secondary); font-size: @font-size-secondary; text-overflow: ellipsis; white-space: nowrap; }
+.contactItem { display: flex; align-items: center; gap: 7px; max-width: 100%; overflow: hidden; color: var(--color-text-secondary); font-size: @font-size-body; text-overflow: ellipsis; white-space: nowrap; }
 .contactIcon { display: inline-flex; width: 25px; height: 25px; align-items: center; justify-content: center; flex: 0 0 25px; border-radius: 50%; color: #3a2618; font-size: 12px; font-weight: 800; line-height: 1; background: var(--color-gold-soft); }
 .clockIcon { width: 25px; height: 25px; flex-basis: 25px; color: var(--color-gold-deep); font-size: @font-size-body; font-weight: 400; background: transparent; }
 .footerSpacer { flex: 1; }
@@ -47,7 +47,7 @@
 .updatedTime { flex: 0 0 auto; color: var(--color-text-muted); font-size: @font-size-secondary; white-space: nowrap; }
 .exchangeBox { margin-top: 14px; padding: 16px; border-radius: 18px; background: rgba(211,162,95,.1); }
 .wantBox { background: var(--color-bg-card-soft); }
-.exchangeLabel { display: block; margin-bottom: 10px; color: var(--color-gold-deep); font-size: @font-size-secondary; font-weight: 800; }
+.exchangeLabel { display: block; margin-bottom: 10px; color: var(--color-gold-deep); font-size: @font-size-body; font-weight: 800; }
 .cardGrid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; }
 .marketActions { position: fixed; z-index: 30; bottom: 32px; left: 50%; width: 620px; max-width: calc(100% - 56px); height: 88px; padding: 7px; box-sizing: border-box; display: flex; border: 0; border-radius: 44px; overflow: hidden; background: var(--surface-navigation); box-shadow: var(--shadow-navigation); transform: translateX(-50%); -webkit-backdrop-filter: blur(20px) saturate(135%); backdrop-filter: blur(20px) saturate(135%); }
 .islandIndicator { position: absolute; z-index: -1; top: 7px; bottom: 7px; left: 7px; width: calc((100% - 14px) / 4); transition: transform 280ms cubic-bezier(.2,.75,.3,1); }
@@ -62,9 +62,9 @@
 .wantBox { background: #f7f3ed; }
 .marketActions { bottom: calc(24px + env(safe-area-inset-bottom)); box-shadow: var(--shadow-navigation); }
 
-.contactBox { background: rgba(245, 243, 241, .5); }
+.contactBox { background: #faf8f5; }
 .contactItem { color: #a69f97; }
 .clockIcon { color: #aaa39b; }
 .updatedTime { color: #a69f97; }
 .exchangeBox,
-.wantBox { background: rgba(232, 224, 242, .25); }
+.wantBox { background: #faf8f5; }

@@ -55,8 +55,9 @@
 
 .titleGroup {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 12px;
 }
 
 .brandCn {
@@ -68,9 +69,10 @@
 }
 
 .brandEn {
-  margin-top: 10px;
-  font-size: @font-size-body;
-  line-height: 1;
+  margin-top: 0;
+  font-size: 44px;
+  line-height: 1.08;
+  font-weight: 700;
   color: var(--color-gold-deep);
   letter-spacing: 0.12em;
   text-shadow: none;
@@ -481,7 +483,7 @@
 .header { margin-bottom: 48px; }
 .avatar { border: 0; box-shadow: none; }
 .brandCn { color: var(--color-text-primary); }
-.brandEn { color: var(--color-text-muted); font-size: @font-size-body; }
+.brandEn { color: var(--color-text-primary); font-size: 44px; font-weight: 700; letter-spacing: .06em; }
 .cardSections { gap: 32px; }
 .card { background: var(--color-bg-card); box-shadow: 0 6px 18px rgba(83, 66, 43, .07); border-radius: 30px; }
 .cardTitle { color: var(--color-primary-content); }
