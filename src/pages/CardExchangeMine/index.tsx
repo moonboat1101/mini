@@ -112,7 +112,7 @@ export default function CardExchangeMine() {
       <View className={styles.profilePanel}>
       <View className={styles.field}><Text>UID</Text><Input value={uid} type="number" maxlength={10} className={styles.input} placeholder="请输入 9 或 10 位 UID" onInput={(event) => setUid(event.detail.value)} /></View>
       <View className={styles.field}><Text>备注</Text><Input value={activeTime} placeholder="活跃时间等其他备注" maxlength={24} className={styles.input} onInput={(event) => setActiveTime(event.detail.value)} /></View>
-      <View className={styles.field}><View className={styles.publishCopy}><Text>发布到市场</Text><Text className={styles.switchHint}>关闭后不会在市场展示</Text></View><Switch className={styles.publishSwitch} checked={isPublished} color="#b89a68" onChange={(event) => { setIsPublished(event.detail.value); setUpdatedAt(new Date().toISOString()); }} /></View>
+      <View className={styles.field}><View className={styles.publishCopy}><Text>发布到市场</Text><Text className={styles.switchHint}>关闭后不会在市场展示</Text></View><Switch className={styles.publishSwitch} checked={isPublished} color="#666666" onChange={(event) => { setIsPublished(event.detail.value); setUpdatedAt(new Date().toISOString()); }} /></View>
       </View>
       <View className={styles.cardBox}><View className={styles.cardBoxHead}><Text className={styles.sectionTitle}>我多余</Text><Button className={styles.chooseButton} onClick={() => openPicker("owned")}>选择</Button></View>{renderCards(ownedIds, "还没有选择可交换的卡牌")}</View>
       <View className={`${styles.cardBox} ${styles.wantBox}`}><View className={styles.cardBoxHead}><Text className={styles.sectionTitle}>我想要</Text><Button className={styles.chooseButton} onClick={() => openPicker("wanted")}>选择</Button></View>{renderCards(wantedIds, "还没有选择我想要的卡牌")}</View>

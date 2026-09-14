@@ -14,10 +14,10 @@ export default defineAppConfig({
   ],
   window: {
     backgroundTextStyle: "dark",
-    backgroundColor: "#F7F3ED",
-    backgroundColorTop: "#F7F3ED",
-    backgroundColorBottom: "#F7F3ED",
-    navigationBarBackgroundColor: "#F7F3ED",
+    backgroundColor: "#FFFFFF",
+    backgroundColorTop: "#FFFFFF",
+    backgroundColorBottom: "#FFFFFF",
+    navigationBarBackgroundColor: "#FFFFFF",
     navigationBarTextStyle: "black",
   },
 });

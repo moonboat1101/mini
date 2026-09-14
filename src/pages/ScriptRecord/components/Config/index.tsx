@@ -221,7 +221,7 @@ export default function ScriptRecordConfig({ embedded = false }: { embedded?: bo
     Taro.showModal({
       title: "清空配置",
       content: "将清空已玩和想玩列表，且无法恢复，确定继续吗？",
-      confirmColor: "#b8574f",
+      confirmColor: "#222222",
     }).then(({ confirm }) => {
       if (!confirm) return;
       persist(getEmptyScriptRecordData());

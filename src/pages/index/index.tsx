@@ -6,22 +6,14 @@ import styles from "./index.module.less";
 
 const REPO_URL = "https://github.com/moonboat1101/moonboat-mini";
 const PROFILE_SMALL = "/assets/profile_small.jpg";
-const GENSHIN_ICON =
-  "https://s1.aigei.com/src/img/png/5d/5d23970a2f3f450eb3c8f6884c4e0e43.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:HGaSXiz-p67st8GrjLKsAJG8HLo=";
 const POKEMON_ICON =
   "https://s1.aigei.com/src/img/png/e6/e6f2fee753dc43bf84b0e0434069e631.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:oVtd8ZV69R_JJ-v236tW0fDxFh4=";
-const SCRIPT_RECORD_ICON =
-  "https://ts1.tc.mm.bing.net/th/id/OIP-C.66t7nMF0i-oUPJ9qVhzmfwHaHa";
+const HANDOU_ICON =
+  "https://img95.699pic.com/element/40146/8048.png_300.png";
 const SCRIPT_RECORD_HERO =
   "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaEnhqkZt-maeNLw-MbRC7GTcieiemvwACMSEAAmiKkVQEP-RhE-beCz0E.png";
 const GACHA_RECORD_HERO =
   "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaEmFqkZpV5c5ADtl8g-JBoe4aMbFrngACGiEAAmiKkVQ_BF7-Q-m-FD0E.png";
-const QRCODE_ICON =
-  "https://gd-hbimg.huaban.com/07c6686e680086ee3c92eb48e10df3325832fac568d-uvzROb_fw658";
-const HANDOU_ICON =
-  "https://img95.699pic.com/element/40146/8048.png_300.png";
-const CARD_EXCHANGE_ICON =
-  "https://patchwiki.biligame.com/images/ys/8/8f/13zuc1pn9n7c42kniz2woqfxhivdtbu.png";
 const CARD_EXCHANGE_HERO =
   "https://patchwiki.biligame.com/images/ys/8/89/jl5xwjp6en6umgfb4cikiobjn074b9l.png";
 export default function Index() {
@@ -32,22 +24,19 @@ export default function Index() {
   const cards = [
     {
       title: "月谕圣牌",
-      subtitle: "· 交换市场\n· 我的圣牌\n· 稀有度排行\n· 角色关联",
-      iconImage: CARD_EXCHANGE_ICON,
+      subtitle: "· 交换市场\n· 稀有度排行\n· 角色关联",
       heroImage: CARD_EXCHANGE_HERO,
       url: "/pages/CardExchangeMarket/index",
     },
     {
       title: "抽卡记录",
       subtitle: "· 统计\n· 分析\n· 本地缓存",
-      iconImage: GENSHIN_ICON,
       heroImage: GACHA_RECORD_HERO,
       url: "/pages/genshin/index",
     },
     {
       title: "剧本杀",
       subtitle: "· 剧本简介\n· 评分\n· 简要复盘",
-      iconImage: SCRIPT_RECORD_ICON,
       backgroundImage: SCRIPT_RECORD_HERO,
       url: "/pages/ScriptRecord/index",
     },
@@ -57,7 +46,7 @@ export default function Index() {
       url: "/pages/HanDou/index",
     },
     {
-      title: "猜宝可梦",
+      title: "宝可梦",
       iconImage: POKEMON_ICON,
       url: "/pages/Pokemon/index",
     },
@@ -68,12 +57,10 @@ export default function Index() {
     },
     {
       title: "生成二维码",
-      iconImage: QRCODE_ICON,
       url: "/pages/QrCode/index",
     },
     {
       title: "关于",
-      iconKind: "about",
       url: "/pages/About/index",
     },
   ];
@@ -104,9 +91,8 @@ export default function Index() {
     i: (typeof cards)[number],
     variant: "primary" | "wide",
   ) => {
-    const imageSrc = "iconImage" in i ? i.iconImage : "";
     const backgroundImage = "backgroundImage" in i ? i.backgroundImage : "";
-    const heroImage = "heroImage" in i ? i.heroImage : imageSrc;
+    const heroImage = "heroImage" in i ? i.heroImage : "";
     return <View
       key={i.title}
       className={`${styles.card} ${
@@ -165,7 +151,7 @@ export default function Index() {
       onClick={() => handleCardClick(i)}
     >
       <View className={styles.aboutBannerIcon}><Text>i</Text></View>
-      <Text className={styles.aboutBannerTitle}>关于 月舟</Text>
+      <Text className={styles.aboutBannerTitle}>关于</Text>
     </View>
   );
 

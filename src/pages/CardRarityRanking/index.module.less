@@ -4,19 +4,21 @@
 .noticeViewport { --notice-gap: 12px; height: 60px; overflow: hidden; }
 .noticeTrack { display: flex; flex-direction: column; gap: var(--notice-gap); transform: translateY(0); }
 .noticeTrackAnimating { transform: translateY(calc(-50% - 6px)); transition: transform 420ms ease-in-out; }
-.notice { height: 60px; padding: 0 20px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; border-radius: 16px; color: var(--color-gold-deep); font-size: @font-size-secondary; background: rgba(202,137,65,.13); }
+.notice { height: 60px; padding: 0 20px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; border-radius: 16px; color: var(--color-text-primary); font-size: @font-size-secondary; background: var(--color-highlight-soft); }
 .noticeIcon { width: 25px; height: 25px; flex: 0 0 25px; color: var(--color-gold); font-size: @font-size-secondary; line-height: 25px; text-align: center; }
 .noticeText { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.rankingList { margin-top: 14px; padding: 4px 20px; border: 0; border-radius: 26px; background: var(--color-bg-card); box-shadow: var(--shadow-card); }
-.rankCard { position: relative; min-height: 94px; padding: 8px 0; box-sizing: border-box; display: flex; align-items: center; gap: 14px; }
-.rankCard:not(:last-child)::after { content: ""; position: absolute; right: .5%; bottom: 0; left: .5%; height: 1px; background: rgba(238,180,103,.2); }
+.rankingList { margin-top: 14px; padding: 12px 20px; border: 0; border-radius: 26px; background: var(--color-bg-card); box-shadow: none; }
+.rankCard { position: relative; min-height: 94px; padding: 8px 12px; box-sizing: border-box; display: flex; align-items: center; gap: 14px; border-radius: 16px; background: #ffffff; }
+.rankCard:not(:last-child)::after { content: ""; position: absolute; right: .5%; bottom: 0; left: .5%; height: 1px; background: var(--color-border-subtle); }
 .rank { width: 42px; flex: 0 0 42px; color: var(--color-text-muted); font-size: @font-size-title; font-weight: 800; text-align: center; }
-.top1 { color: #806943; }.top2 { color: #897e73; }.top3 { color: #956d53; }
+.top1 { color: #806943; }
+.top2 { color: #897e73; }
+.top3 { color: #956d53; }
 .cardArtwork { width: 54px; height: 77px; flex: 0 0 54px; display: block; border-radius: 6px; }
 .cardInfo { flex: 1; min-width: 0; }
 .cardName { display: block; }
 .cardName { color: var(--color-text-primary); font-size: @font-size-body; font-weight: 800; }
-.ownedMark { width: 30px; height: 30px; flex: 0 0 30px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border-radius: 50%; color: #3a2618; font-size: @font-size-secondary; font-weight: 800; line-height: 1; text-align: center; background: var(--color-gold-soft); }
+.ownedMark { width: 30px; height: 30px; flex: 0 0 30px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border-radius: 50%; color: #3a2618; font-size: @font-size-secondary; font-weight: 800; line-height: 1; text-align: center; background: #d7c8ae; }
 .rarityValue { flex: 0 0 76px; text-align: right; }
 .rarityNumber { display: block; color: var(--color-gold-deep); font-size: @font-size-title; font-weight: 800; }
 .state { padding: 70px 0; color: var(--color-text-muted); font-size: @font-size-secondary; text-align: center; }

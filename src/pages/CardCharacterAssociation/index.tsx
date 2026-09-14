@@ -25,7 +25,7 @@ export default function CardCharacterAssociation() {
   return <View className={marketStyles.marketRoot}>
     <View className={`${marketStyles.notice} ${marketStyles.friendly}`}><Text className={marketStyles.noticeIcon}>✦</Text><Text className={marketStyles.noticeText}>出战角色可能影响卡牌产出，数据仅供参考</Text></View>
     <View className={styles.filterBar}>
-      <View className={styles.filters}>{elements.map((element) => <Button key={element.id} aria-label={`${element.name}元素${selected.includes(element.id) ? "，已选中" : "，未选中"}`} className={`${styles.elementButton} ${selected.includes(element.id) ? styles.elementSelected : ""}`} style={selected.includes(element.id) ? { backgroundColor: element.background } : undefined} onClick={() => toggle(element.id)}>
+      <View className={styles.filters}>{elements.map((element) => <Button key={element.id} aria-label={`${element.name}元素${selected.includes(element.id) ? "，已选中" : "，未选中"}`} className={`${styles.elementButton} ${selected.includes(element.id) ? styles.elementSelected : ""}`} style={selected.includes(element.id) ? { backgroundColor: element.color } : undefined} onClick={() => toggle(element.id)}>
         <ElementIcon element={element} />
       </Button>)}</View>
       <Button className={marketStyles.resetButton} onClick={() => setSelected(elements.map((element) => element.id))}>重置</Button>

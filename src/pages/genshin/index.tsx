@@ -119,7 +119,7 @@ export default function Genshin() {
       title: "确认清除缓存？",
       content: "清除后将无法恢复",
       confirmText: "清除",
-      confirmColor: "#ed8b76",
+      confirmColor: "#222222",
       success: (res) => {
         if (res.confirm) {
           removeCache();

@@ -10,11 +10,12 @@
 .embedded { min-height: 0; padding: 0 0 126px; background: transparent; }
 
 .intro { margin-bottom: 24px; }
-.topNotice { display: block; height: 60px; padding: 0 20px; box-sizing: border-box; border-radius: 16px; font-size: @font-size-secondary; line-height: 60px; color: var(--color-gold-deep); background: rgba(202,137,65,.13); border: 0; }
+.topNotice { display: block; height: 60px; padding: 0 20px; box-sizing: border-box; border-radius: 16px; font-size: @font-size-secondary; line-height: 60px; color: var(--color-text-primary); background: var(--color-highlight-soft); border: 0; }
 .primaryButton, .secondaryButton { margin: 0; min-height: 72px; line-height: 72px; border-radius: @radius-pill; font-size: @font-size-body; }
 .primaryButton { color: var(--color-primary-content); background: var(--surface-primary); border: none; }
 .secondaryButton { color: var(--color-text-primary); background: var(--color-bg-card); border: 0; }
-.bulkPanel, .examplePanel { padding: 24px 20px; border-radius: @radius-md; background: var(--color-bg-card); box-shadow: var(--shadow-card); }
+.bulkPanel { padding: 24px 20px; border-radius: @radius-md; background: var(--color-bg-card); }
+.examplePanel { padding: 24px 20px; border-radius: @radius-md; background: #ffffff; }
 .examplePanel { margin-top: 14px; }
 .exampleHeader { display: flex; align-items: center; justify-content: space-between; }
 .copyExampleButton { position: relative; width: 48px; height: 48px; flex-shrink: 0; }
@@ -22,8 +23,8 @@
 .copyIconBack { top: 10px; left: 9px; opacity: 0.55; }
 .copyIconFront { top: 5px; left: 15px; background: var(--color-bg-card); }
 .clearConfigButton { display: block; width: 100%; margin: 18px 0 0; min-height: 68px; line-height: 68px; border-radius: @radius-pill; color: var(--color-error); background: transparent; border: 0; font-size: @font-size-body; }
-.editorMask { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(48, 43, 39, .38); }
-.editor { width: 100%; max-width: 720px; max-height: 90vh; overflow: hidden; border-radius: @radius-md; background: var(--color-bg-card); box-shadow: var(--shadow-card); }
+.editorMask { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(34, 34, 34, .38); }
+.editor { width: 100%; max-width: 720px; max-height: 90vh; overflow: hidden; border-radius: @radius-md; background: var(--color-bg-card); }
 .editorScroll { max-height: 90vh; }
 .editorContent { padding: 26px 22px 30px; box-sizing: border-box; }
 .sectionTitle { display: block; margin-bottom: 18px; font-size: @font-size-title; font-weight: 700; color: var(--color-gold-deep); }
@@ -32,7 +33,7 @@
 .field { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
 .label { flex: 0 0 auto; width: 116px; font-size: @font-size-body; color: var(--color-text-secondary); }
 .requiredMark { margin-right: 6px; color: var(--color-error); font-size: @font-size-title; font-weight: 700; }
-.input, .textarea, .bulkTextarea { display: block; width: 100%; padding: 14px 16px; box-sizing: border-box; border-radius: 12px; background: var(--color-bg-page-soft); color: var(--color-text-primary) !important; font-size: @font-size-body; line-height: 1.5; border: 0; caret-color: var(--color-gold-deep); }
+.input, .textarea, .bulkTextarea { display: block; width: 100%; padding: 14px 16px; box-sizing: border-box; border-radius: 12px; background: #e8e8e8; color: var(--color-text-primary) !important; font-size: @font-size-body; line-height: 1.5; border: 0; box-shadow: none; caret-color: var(--color-gold-deep); }
 .input, .textarea { flex: 1; min-width: 0; }
 .input { height: 76px; line-height: 76px; }
 .textarea { min-height: 120px; }
@@ -45,17 +46,17 @@
 .addAction { padding: 8px 18px; border-radius: @radius-pill; color: var(--color-primary-content); background: var(--surface-primary); font-size: @font-size-body; font-weight: 400; }
 .list { display: flex; flex-direction: column; gap: 12px; }
 .listRow { display: flex; min-width: 0; align-items: stretch; gap: 14px; height: 64px; }
-.listItem { flex: 1; min-width: 0; display: flex; align-items: center; padding: 0 20px; border-radius: @radius-md; background: var(--color-bg-card); box-shadow: var(--shadow-card); }
+.listItem { flex: 1; min-width: 0; display: flex; align-items: center; padding: 0 20px; border-radius: @radius-md; background: #ffffff; }
 .listItemText { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .listItemTitle { display: block; flex: 1; min-width: 0; font-size: @font-size-body; font-weight: 600; color: var(--color-text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .listItemMeta { display: block; flex-shrink: 0; font-size: @font-size-secondary; color: var(--color-text-muted); }
 .listActions { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-.actionButton { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border-radius: 18px; color: var(--color-gold-deep); background: fade(@color-gold, 10%); border: 0; font-size: @font-size-page-title; line-height: 1; }
+.actionButton { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border-radius: 18px; color: var(--color-text-secondary); background: #ffffff; border: 0; font-size: @font-size-page-title; line-height: 1; }
 .editAction { transform: rotate(90deg); }
-.deleteAction { color: var(--color-error); background: rgba(219, 136, 124, 0.1); border-color: rgba(219, 136, 124, 0.24); }
+.deleteAction { color: var(--color-text-secondary); background: #ffffff; border-color: var(--color-border-subtle); }
 .bulkTextarea { min-height: 260px; margin-top: 16px; font-family: monospace; font-size: @font-size-body; }
 
-.copyIconBack, .copyIconFront { border: 2px solid var(--color-gold-deep); }
+.copyIconBack, .copyIconFront { border: 2px solid var(--color-border-strong); }
 
 .addAction,
 .bulkActions .secondaryButton,
@@ -64,7 +65,7 @@
   color: var(--color-primary-content);
   background: var(--surface-primary);
   border: 0;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 .bulkActions .secondaryButton::after,
@@ -86,7 +87,7 @@
   color: var(--color-primary-content);
   background: var(--surface-primary);
   border: 0;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 .editorActions .secondaryButton::after,
