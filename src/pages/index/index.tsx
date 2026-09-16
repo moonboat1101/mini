@@ -1,18 +1,15 @@
 import { View, Text, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { usePageShare } from "../../hooks/usePageShare";
+import pokeballIcon from "../../assets/icons/pokeball.svg";
 
 import styles from "./index.module.less";
 
 const REPO_URL = "https://github.com/moonboat1101/moonboat-mini";
 const PROFILE_SMALL = "/assets/profile_small.jpg";
-const POKEMON_ICON =
-  "https://s1.aigei.com/src/img/png/e6/e6f2fee753dc43bf84b0e0434069e631.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:oVtd8ZV69R_JJ-v236tW0fDxFh4=";
 const SCRIPT_RECORD_HERO =
   "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaEnhqkZt-maeNLw-MbRC7GTcieiemvwACMSEAAmiKkVQEP-RhE-beCz0E.png";
 const GACHA_RECORD_HERO = "https://img.remit.ee/i/VLKwKe6kgCCD";
-const HANDOU_ICON =
-  "https://img95.699pic.com/element/40146/8048.png_300.png";
 const CARD_EXCHANGE_HERO = "https://img.remit.ee/i/Nwt54gYGpSao";
 export default function Index() {
   usePageShare({
@@ -40,17 +37,17 @@ export default function Index() {
     },
     {
       title: "汉兜",
-      iconImage: HANDOU_ICON,
+      icon: "\ue604",
       url: "/pages/HanDou/index",
     },
     {
       title: "宝可梦",
-      iconImage: POKEMON_ICON,
+      iconImage: pokeballIcon,
       url: "/pages/Pokemon/index",
     },
     {
       title: "数独",
-      iconKind: "sudoku",
+      icon: "\ue648",
       url: "/pages/Sudoku/index",
     },
     {
@@ -118,7 +115,8 @@ export default function Index() {
   };
 
   const renderFunCard = (i: (typeof cards)[number]) => {
-    const imageSrc = "iconImage" in i ? i.iconImage : "";
+    const icon = "icon" in i ? i.icon : "";
+    const iconImage = "iconImage" in i ? i.iconImage : "";
 
     return <View
       key={i.title}
@@ -126,15 +124,7 @@ export default function Index() {
       onClick={() => handleCardClick(i)}
     >
       <View className={styles.funIconWrap}>
-        {"iconKind" in i && i.iconKind === "sudoku" ? (
-          <View className={styles.funSudokuIcon}>
-            {Array.from({ length: 9 }, (_, index) => (
-              <View key={index} className={styles.funSudokuCell}>
-                {index % 2 === 0 ? index + 1 : ""}
-              </View>
-            ))}
-          </View>
-        ) : <Image src={imageSrc} className={styles.funIconImage} mode="aspectFill" />}
+        {iconImage ? <Image className={styles.funIconImage} src={iconImage} mode="aspectFit" /> : <Text className={`iconfont ${styles.funIcon} ${i.title === "汉兜" ? styles.funHandouIcon : ""}`}>{icon}</Text>}
       </View>
       <View className={styles.funEntryCopy}>
         <Text className={styles.funEntryTitle}>{i.title}</Text>

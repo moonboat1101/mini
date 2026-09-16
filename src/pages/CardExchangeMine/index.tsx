@@ -116,7 +116,7 @@ export default function CardExchangeMine() {
     || wantedIds.join(",") !== baseline.wantedIds.join(",");
   return <View className={`${styles.mineRoot} ${!loggedIn ? styles.loginOnly : ""}`}>
     {!loggedIn ? <View className={styles.loginBar}><View><Text className={styles.loginTitle}>登录后可同步资料</Text><Text className={styles.loginHint}>仅使用微信身份进行认证，不获取任何资料</Text></View><Button className={styles.loginButton} onClick={login}>微信登录</Button></View> : <>
-      <View className={styles.field}><View className={styles.publishCopy}><Text>发布到市场</Text><Text className={styles.switchHint}>关闭后不会在市场展示</Text></View><Switch className={styles.publishSwitch} checked={isPublished} color="#666666" onChange={(event) => { setIsPublished(event.detail.value); setUpdatedAt(new Date().toISOString()); }} /></View>
+      <View className={styles.field}><View className={styles.publishCopy}><Text>发布到市场</Text><Text className={styles.switchHint}>关闭后不会在市场展示</Text></View><Switch className={styles.publishSwitch} checked={isPublished} color="#806943" onChange={(event) => { setIsPublished(event.detail.value); setUpdatedAt(new Date().toISOString()); }} /></View>
       <View className={styles.profilePanel}>
       <View className={styles.field}><Text>UID</Text><Input value={uid} type="number" maxlength={10} className={styles.input} placeholder="请输入 9 或 10 位 UID" placeholderStyle="color: #e8e8e8;" onInput={(event) => setUid(event.detail.value)} /></View>
       <View className={styles.field}><Text>企鹅</Text><Input value={contactA} type="number" maxlength={16} className={styles.input} placeholder="注意隐私安全" placeholderStyle="color: #e8e8e8;" onInput={(event) => setContactA(event.detail.value.replace(/\D/g, ""))} /></View>

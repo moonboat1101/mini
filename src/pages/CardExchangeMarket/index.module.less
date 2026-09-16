@@ -4,7 +4,7 @@
 .exchangeHub { min-height: 100vh; background: var(--color-bg-page); }
 .panelStage { animation: panelEnter 180ms ease-out; }
 .marketRoot { min-height: 100vh; padding: 38px 28px 170px; box-sizing: border-box; color: var(--color-text-secondary); .moon-page-background(); }
-.filterIntro { flex: 0 0 auto; color: var(--color-text-secondary); font-size: @font-size-secondary; white-space: nowrap; }
+.filterIntro { flex: 0 0 auto; color: var(--color-text-secondary); font-size: 28px; line-height: 1; white-space: nowrap; }
 .filterBar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 24px; }
 .filterButton, .serverFilterButton, .resetButton { height: 58px; margin: 0; border-radius: 16px; font-size: @font-size-secondary; line-height: 58px; }
 .filterButton { position: relative; flex: 1; min-width: 0; color: var(--color-text-primary); border: 0; background: var(--color-bg-card); }
@@ -34,10 +34,7 @@
 .uid { flex: 0 0 auto; color: var(--color-text-primary); font-size: @font-size-title; font-weight: 700; white-space: nowrap; }
 .uidCopyButton { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; flex: 0 0 36px; margin-left: -10px; }
 .uidCopyButton:active { opacity: .6; }
-.uidCopyIcon { position: relative; width: 19px; height: 21px; }
-.uidCopyIcon::before, .uidCopyIcon::after { content: ""; position: absolute; width: 14px; height: 16px; box-sizing: border-box; border: 2px solid var(--color-text-muted); border-radius: 3px; }
-.uidCopyIcon::before { top: 4px; left: 0; opacity: .62; }
-.uidCopyIcon::after { top: 0; right: 0; background: #ffffff; }
+.uidCopyIcon { color: var(--color-text-muted); font-size: 24px; line-height: 1; }
 .serverTag { flex: 0 0 auto; margin-left: -5px; padding: 3px 9px; border-radius: 10px; font-size: @font-size-secondary; font-weight: 700; line-height: 1.35; }
 .serverofficial { color: #966516; background: #f8e8bd; }
 .serverbilibili { color: #9b4a67; background: #f8dce5; }
@@ -45,15 +42,11 @@
 .contactBox { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; padding: 0; border-radius: 0; background: transparent; }
 .contactTitle { display: flex; align-items: center; gap: 6px; margin-bottom: 0; color: #806943; font-size: @font-size-body; font-weight: 800; line-height: 1.3; }
 .contactItem { display: flex; align-items: center; gap: 7px; max-width: 100%; overflow: hidden; color: var(--color-text-secondary); font-size: @font-size-body; text-overflow: ellipsis; white-space: nowrap; }
-.qqIcon, .wechatIcon { width: 25px; height: 25px; flex: 0 0 25px; border-radius: 7px; }
-.contactIcon { display: inline-flex; width: 25px; height: 25px; align-items: center; justify-content: center; flex: 0 0 25px; border-radius: 50%; color: var(--color-text-secondary); font-size: 12px; font-weight: 800; line-height: 1; background: var(--color-bg-card-soft); }
-.clockIcon { width: 25px; height: 25px; flex-basis: 25px; color: var(--color-gold-deep); font-size: @font-size-body; font-weight: 400; background: transparent; }
+.contactIcon { display: inline-flex; width: 25px; height: 25px; align-items: center; justify-content: center; flex: 0 0 25px; color: var(--color-text-secondary); font-size: 24px; font-weight: 400; line-height: 1; }
+.clockIcon { color: var(--color-gold-deep); background: transparent; }
 .hidePost { width: 38px; height: 38px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; flex: 0 0 38px; border: 2px solid var(--color-error); border-radius: 10px; background: transparent; }
 .hidePost:active { opacity: .6; }
-.hidePostIcon { position: relative; width: 18px; height: 18px; }
-.hidePostIcon::before, .hidePostIcon::after { content: ""; position: absolute; top: 8px; left: 0; width: 18px; height: 2px; border-radius: 2px; background: var(--color-error); }
-.hidePostIcon::before { transform: rotate(45deg); }
-.hidePostIcon::after { transform: rotate(-45deg); }
+.hidePostIcon { color: var(--color-error); font-size: 24px; line-height: 1; }
 .updatedTime { flex: 0 0 auto; color: var(--color-text-muted); font-size: @font-size-secondary; white-space: nowrap; }
 .exchangeBox { margin-top: 20px; padding: 0; border-radius: 0; background: transparent; }
 .wantBox { background: transparent; }

@@ -18,8 +18,6 @@ type ServerType = "official" | "bilibili" | "overseas";
 type ServerFilter = CardExchangeServerFilter;
 // 云函数每页最多返回 20 条展示数据；比原先 10 条少一半翻页与云函数调用。
 const PAGE_SIZE = 20;
-const QQ_ICON_URL = "https://img.remit.ee/i/OqgHgES9iu9a";
-const WECHAT_ICON_URL = "https://img.remit.ee/api/file/CAACAgUAAyEGAASHRsPbAAEaWnJqmAq0bXTMWIsJU6g1fbFOBw3sVAAChzAAAm9BwFQjKLbCwgeSQD0E.webp";
 const getServerType = (uid: string): ServerType => {
   if (/^[1-4]\d{8}$/.test(uid)) return "official";
   if (/^5\d{8}$/.test(uid)) return "bilibili";
@@ -231,7 +229,7 @@ function MarketPanel() {
       </View>
 
       <View className={styles.filterBar}>
-        <Text className={styles.filterIntro}>筛选：</Text>
+        <Text className={`iconfont ${styles.filterIntro}`} aria-label="筛选">{"\ue68c"}</Text>
         <Button className={styles.filterButton} onClick={() => openFilterPicker("owned")}>我多余 / 他想要{ownedFilterIds.length ? <Text className={styles.filterCount}>{ownedFilterIds.length}</Text> : null}</Button>
         <Button className={styles.filterButton} onClick={() => openFilterPicker("wanted")}>我想要 / 他多余{wantedFilterIds.length ? <Text className={styles.filterCount}>{wantedFilterIds.length}</Text> : null}</Button>
         <Picker mode="selector" range={["全部", "官服", "B服", "外服"]} value={["all", "official", "bilibili", "overseas"].indexOf(serverFilter)} onChange={(event) => { const next = (["all", "official", "bilibili", "overseas"] as ServerFilter[])[Number(event.detail.value)]; setServerFilter(next); loadPage(0, true, ownedFilterIds, wantedFilterIds, next); }}><Button className={styles.serverFilterButton}>{SERVER_LABEL[serverFilter]}</Button></Picker>
@@ -245,9 +243,9 @@ function MarketPanel() {
                 <View className={styles.userInfo}>
                   <View className={styles.nameRow}>
                     <Text className={styles.uid} onClick={() => copyUid(post)}>{post.uid}</Text>
-                    <View className={styles.uidCopyButton} onClick={() => copyUid(post)} aria-label="复制 UID"><View className={styles.uidCopyIcon} /></View>
+                    <View className={styles.uidCopyButton} onClick={() => copyUid(post)} aria-label="复制 UID"><Text className={`iconfont ${styles.uidCopyIcon}`}>{"\ue636"}</Text></View>
                     <Text className={`${styles.serverTag} ${styles[`server${getServerType(post.uid)}`]}`}>{SERVER_LABEL[getServerType(post.uid)]}</Text>
-                    {isAdmin && post._id ? <View className={styles.hidePost} onClick={() => hidePost(post)} aria-label="隐藏"><View className={styles.hidePostIcon} /></View> : null}
+                    {isAdmin && post._id ? <View className={styles.hidePost} onClick={() => hidePost(post)} aria-label="隐藏"><Text className={`iconfont ${styles.hidePostIcon}`}>{"\ue65f"}</Text></View> : null}
                   </View>
                 </View>
                 {formatUpdatedAt(post.updatedAt) ? <Text className={styles.updatedTime}>更新于 {formatUpdatedAt(post.updatedAt)}</Text> : null}
@@ -255,9 +253,9 @@ function MarketPanel() {
 
             {post.contactA || post.contactB || post.activeTime ? <View className={styles.contactBox}>
               <View className={styles.contactTitle}><View className={styles.sectionTitleStar} /><Text>基础信息</Text></View>
-              {post.contactA ? <View className={styles.contactItem}><Image className={styles.qqIcon} src={QQ_ICON_URL} mode="aspectFit" /><Text>{post.contactA}</Text></View> : null}
-              {post.contactB ? <View className={styles.contactItem}><Image className={styles.wechatIcon} src={WECHAT_ICON_URL} mode="aspectFit" /><Text>{post.contactB}</Text></View> : null}
-              {post.activeTime ? <View className={styles.contactItem}><Text className={`${styles.contactIcon} ${styles.clockIcon}`}>⏰</Text><Text>{post.activeTime}</Text></View> : null}
+              {post.contactA ? <View className={styles.contactItem}><Text className={`iconfont ${styles.contactIcon}`}>{"\ue603"}</Text><Text>{post.contactA}</Text></View> : null}
+              {post.contactB ? <View className={styles.contactItem}><Text className={`iconfont ${styles.contactIcon}`}>{"\ue635"}</Text><Text>{post.contactB}</Text></View> : null}
+              {post.activeTime ? <View className={styles.contactItem}><Text className={`iconfont ${styles.contactIcon} ${styles.clockIcon}`}>{"\ue614"}</Text><Text>{post.activeTime}</Text></View> : null}
             </View> : null}
             <View className={styles.exchangeBox}>
               <View className={styles.exchangeLabel}><View className={styles.sectionTitleStar} /><Text>我多余</Text></View>

@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import { initCardExchangeCloud } from "./services/cardExchangeCloud";
+import "./styles/iconfont.less";
 import "./styles/theme.less";
 
 initCardExchangeCloud();

@@ -1,14 +1,14 @@
 import { CardCatalogItem } from "../CardExchangeMarket/mockData";
 
 export type ElementId = "pyro" | "hydro" | "anemo" | "electro" | "dendro" | "cryo" | "geo";
-export const elements: { id: ElementId; name: string; color: string; background: string; image: string }[] = [
-  { id: "pyro", name: "火", color: "#de7565", background: "rgba(222,117,101,.13)", image: "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2024/03/27/ac3123b42bf631685287e76c8c834a6c_564491877314389852.png" },
-  { id: "hydro", name: "水", color: "#579dd7", background: "rgba(87,157,215,.13)", image: "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2024/03/27/f54c8f0dae23fced358c28126f220a11_8997562060019157249.png" },
-  { id: "anemo", name: "风", color: "#59b59b", background: "rgba(89,181,155,.13)", image: "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2024/03/27/6b5c0d861fd1b4791bd602d3e7296598_8700657350379813969.png" },
-  { id: "electro", name: "雷", color: "#a387d3", background: "rgba(163,135,211,.13)", image: "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2024/03/27/16d344b6abbc369a2db9d46d6f31305b_7144738962629629573.png" },
-  { id: "dendro", name: "草", color: "#91ad55", background: "rgba(145,173,85,.13)", image: "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2024/03/27/bda7c6cf71ea059c6abc086405a7cdd5_1717146848708050949.png" },
-  { id: "cryo", name: "冰", color: "#7fbecb", background: "rgba(127,190,203,.13)", image: "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2024/03/27/157c22f5fd473d3c1684c6ee981540b6_1601711336893201442.png" },
-  { id: "geo", name: "岩", color: "#cda24e", background: "rgba(205,162,78,.13)", image: "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2024/03/27/9c4cd6e14b87fc262cca36e6d0e9bdb0_1526899214861833594.png" },
+export const elements: { id: ElementId; name: string; color: string; background: string; icon: string }[] = [
+  { id: "pyro", name: "火", color: "#de7565", background: "rgba(222,117,101,.13)", icon: "\ue613" },
+  { id: "hydro", name: "水", color: "#579dd7", background: "rgba(87,157,215,.13)", icon: "\ue612" },
+  { id: "anemo", name: "风", color: "#59b59b", background: "rgba(89,181,155,.13)", icon: "\ue60d" },
+  { id: "electro", name: "雷", color: "#a387d3", background: "rgba(163,135,211,.13)", icon: "\ue610" },
+  { id: "dendro", name: "草", color: "#91ad55", background: "rgba(145,173,85,.13)", icon: "\ue60f" },
+  { id: "cryo", name: "冰", color: "#7fbecb", background: "rgba(127,190,203,.13)", icon: "\ue60e" },
+  { id: "geo", name: "岩", color: "#cda24e", background: "rgba(205,162,78,.13)", icon: "\ue611" },
 ];
 
 // 来源：月谕牌.xlsx / Sheet1。保留原表角色名称，空/荧置首，其余角色保持原顺序；空单元格不生成角色。
