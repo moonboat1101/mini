@@ -1,7 +1,9 @@
 @import "../../styles/theme.less";
 
 .qrCodePage {
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 0;
   box-sizing: border-box;
   padding: 28px 24px 42px;
   display: flex;
@@ -15,11 +17,9 @@
 .previewPanel {
   box-sizing: border-box;
   border-radius: @radius-md;
-  background:
-    radial-gradient(circle at top left, fade(@color-gold, 14%), transparent 58%),
-    var(--color-bg-card);
+  background: var(--color-bg-card);
   border: 0;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   padding: 24px;
 }
 
@@ -38,13 +38,14 @@
   box-sizing: border-box;
   padding: 22px;
   border-radius: 20px;
-  background: fade(@color-base-300, 80%);
+  background: #e8e8e8;
   border: 0;
   color: var(--color-text-primary);
   font-size: @font-size-body;
   line-height: 1.45;
   transition: transform 0.07s ease-out;
   will-change: transform;
+  box-shadow: none;
 }
 
 .placeholder {
@@ -94,7 +95,7 @@
   align-items: center;
   justify-content: center;
   border: none !important;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 
   &::after,
   &::before {
@@ -128,7 +129,7 @@
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   position: relative;
   overflow: hidden;
 }
@@ -153,7 +154,7 @@
 .emptyTitle,
 .emptyText {
   display: block;
-  color: #2e2018;
+  color: #222222;
   line-height: 1.25;
 }
 
@@ -164,12 +165,12 @@
 
 .emptyText {
   font-size: @font-size-body;
-  color: rgba(46, 32, 24, 0.64);
+  color: rgba(34, 34, 34, 0.64);
 }
 
 .saveButton {
-  background: transparent;
-  color: var(--color-gold-deep);
+  background: var(--surface-primary);
+  color: var(--color-primary-content);
   border: 0;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }

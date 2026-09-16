@@ -8,7 +8,6 @@ import {
   type WishlistRecord,
 } from "./data";
 import { usePageShare } from "../../hooks/usePageShare";
-import ScriptRecordConfig from "./components/Config";
 
 import styles from "./index.module.less";
 
@@ -142,7 +141,7 @@ function measureModalScrollBodyPx(): Promise<number | undefined> {
 }
 
 type FilterType = "time" | "rating" | "wishlist";
-type ScriptRecordNav = FilterType | "config";
+type ScriptRecordNav = FilterType;
 
 type ScriptRecordItem = PlayedScriptRecord & { type: "played" };
 type WishlistItem = WishlistRecord & { type: "wishlist" };
@@ -325,16 +324,15 @@ export default function ScriptRecord() {
 
   return (
     <View className={styles.scriptRecord}>
-      {activeNav === "config" ? <ScriptRecordConfig embedded /> : <View className={styles.cardList}>
+      <View className={styles.cardList}>
         {visibleList.map((item) => renderScriptCard(item))}
-      </View>}
+      </View>
 
       <View className={styles.bottomNavigation}>
-        <View className={styles.bottomNavigationIndicator} style={{ transform: `translateX(${activeNav === "time" ? "0" : activeNav === "rating" ? "100%" : activeNav === "wishlist" ? "200%" : "300%"})` }} />
+        <View className={styles.bottomNavigationIndicator} style={{ transform: `translateX(${activeNav === "time" ? "0" : activeNav === "rating" ? "100%" : "200%"})` }} />
         <View className={`${styles.bottomNavigationItem} ${activeNav === "time" ? styles.bottomNavigationItemActive : ""}`} onClick={() => selectListTab("time")}>按时间</View>
         <View className={`${styles.bottomNavigationItem} ${activeNav === "rating" ? styles.bottomNavigationItemActive : ""}`} onClick={() => selectListTab("rating")}>按评分</View>
         <View className={`${styles.bottomNavigationItem} ${activeNav === "wishlist" ? styles.bottomNavigationItemActive : ""}`} onClick={() => selectListTab("wishlist")}>想玩</View>
-        <View className={`${styles.bottomNavigationItem} ${activeNav === "config" ? styles.bottomNavigationItemActive : ""}`} onClick={() => setActiveNav("config")}>我的配置</View>
       </View>
 
       {activeItem && (

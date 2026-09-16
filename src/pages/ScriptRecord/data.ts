@@ -97,11 +97,7 @@ export const loadCustomScriptRecordData = (): ScriptRecordData | null => {
 };
 
 export const loadScriptRecordData = (): ScriptRecordData => {
-  const customData = loadCustomScriptRecordData();
-  const hasCustomRecords = Boolean(
-    customData && (customData.played.length || customData.wishlist.length),
-  );
-  return hasCustomRecords ? customData! : getDefaultScriptRecordData();
+  return getDefaultScriptRecordData();
 };
 
 export const saveScriptRecordData = (data: ScriptRecordData) => {

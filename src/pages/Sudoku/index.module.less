@@ -28,11 +28,11 @@
   display: grid;
   grid-template-columns: repeat(9, minmax(0, 1fr));
   grid-template-rows: repeat(9, minmax(0, 1fr));
-  border: 4px solid #655e57;
+  border: 4px solid #444444;
   border-radius: 18px;
   overflow: hidden;
-  background: #655e57;
-  box-shadow: var(--shadow-card);
+  background: #444444;
+  box-shadow: none;
 }
 
 .cell {
@@ -43,16 +43,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fffdf8;
-  border-right: 1px solid #cfc6b7;
-  border-bottom: 1px solid #cfc6b7;
+  background: #FFFFFF;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
   transition:
-    background 0.12s ease,
-    box-shadow 0.12s ease;
+    background 0.12s ease;
 
   &:nth-child(3n) {
     border-right-width: 4px;
-    border-right-color: #655e57;
+    border-right-color: #444444;
   }
 
   &:nth-child(9n) {
@@ -62,7 +61,7 @@
   &:nth-child(n + 19):nth-child(-n + 27),
   &:nth-child(n + 46):nth-child(-n + 54) {
     border-bottom-width: 4px;
-    border-bottom-color: #655e57;
+    border-bottom-color: #444444;
   }
 
   &:nth-child(n + 73) {
@@ -71,69 +70,32 @@
 }
 
 .filledCell {
-  background: #fffaf1;
+  background: #FFFFFF;
 }
 
 .relatedCell {
-  background: #f4ecde;
+  background: #f2f2f2;
 }
 
 .answerPreviewCell {
-  background: #fff3c9;
-  box-shadow: inset 0 0 0 2px rgba(183, 137, 71, 0.36);
+  background: #e8e8e8;
 }
 
 .selectedCell {
-  background: #f7dba6;
-  box-shadow: inset 0 0 0 4px #b78947;
+  background: #d0d0d0;
 }
 
 .conflictCell {
-  background: #ffe0da;
-  box-shadow: inset 0 0 0 2px rgba(198, 95, 76, 0.62);
+  background: #d8d8d8;
 }
 
 .completeFlashCell {
   z-index: 8;
-  background: #fff7c7;
-  animation: complete-cell-flash 1.28s ease-out both;
+  background: #e8e8e8;
 
   &::before,
   &::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.9);
-  }
-
-  &::before {
-    width: 420%;
-    height: 420%;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.78) 0%,
-      rgba(255, 245, 181, 0.62) 18%,
-      rgba(255, 216, 99, 0.42) 42%,
-      rgba(255, 179, 60, 0.18) 64%,
-      rgba(255, 190, 73, 0) 82%
-    );
-    animation: complete-glow-expand 1.28s linear both;
-  }
-
-  &::after {
-    width: 440%;
-    height: 440%;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.72) 0%,
-      rgba(255, 236, 151, 0.48) 22%,
-      rgba(255, 196, 79, 0.22) 52%,
-      rgba(255, 188, 67, 0) 80%
-    );
-    animation: complete-ambient-glow 1.28s linear both;
+    content: none;
   }
 }
 
@@ -148,11 +110,11 @@
 }
 
 .givenText {
-  color: #302b27;
+  color: #222222;
 }
 
 .inputText {
-  color: #897e73;
+  color: #666666;
 }
 
 .numberPad {
@@ -175,10 +137,10 @@
   font-size: @font-size-title;
   font-weight: 800;
   line-height: 74px;
-  color: var(--color-primary-content);
-  background: var(--surface-primary);
+  color: var(--color-text-primary);
+  background: #e8e8e8;
   border: none !important;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 
   &::after,
   &::before {
@@ -224,13 +186,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary-content);
-  background: var(--surface-primary);
+  color: var(--color-text-primary);
+  background: var(--color-bg-card);
   font-size: @font-size-secondary;
   font-weight: 400;
   line-height: 64px;
   border: none !important;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 
   &::after,
   &::before {
@@ -247,7 +209,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  background: rgba(48, 43, 39, .38);
+  background: rgba(34, 34, 34, .38);
 }
 
 .modalPanel {
@@ -255,11 +217,9 @@
   box-sizing: border-box;
   border-radius: @radius-md;
   padding: 30px;
-  background:
-    radial-gradient(circle at top left, fade(@color-gold, 14%), transparent 58%),
-    var(--color-bg-card);
+  background: var(--color-bg-card);
   border: 0;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 .modalTitle {
@@ -287,11 +247,12 @@
   margin-top: 24px;
   padding: 0 22px;
   border-radius: 16px;
-  background: fade(@color-base-300, 82%);
+  background: #e8e8e8;
   border: 0;
   color: var(--color-text-primary);
   font-size: @font-size-body;
   font-weight: 800;
+  box-shadow: none;
 }
 
 .modalActions {
@@ -330,87 +291,6 @@
   border: 0;
 }
 
-@keyframes complete-cell-flash {
-  0% {
-    background: #ffffff;
-    box-shadow:
-      inset 0 0 0 9px rgba(255, 255, 255, 1),
-      0 0 44px rgba(255, 250, 214, 1),
-      0 0 96px rgba(255, 210, 80, 0.86),
-      0 0 136px rgba(255, 164, 44, 0.48);
-    transform: scale(1.09);
-  }
-
-  14% {
-    background: #ffffff;
-    box-shadow:
-      inset 0 0 0 9px rgba(255, 255, 255, 1),
-      0 0 50px rgba(255, 250, 214, 1),
-      0 0 112px rgba(255, 213, 82, 0.9),
-      0 0 152px rgba(255, 164, 44, 0.5);
-    transform: scale(1.08);
-  }
-
-  36% {
-    background: #fff3af;
-    box-shadow:
-      inset 0 0 0 5px rgba(255, 255, 255, 0.86),
-      0 0 34px rgba(255, 222, 116, 0.72),
-      0 0 82px rgba(255, 170, 45, 0.4);
-    transform: scale(1.03);
-  }
-
-  100% {
-    background: #fffaf1;
-    box-shadow: none;
-    transform: scale(1);
-  }
-}
-
-@keyframes complete-glow-expand {
-  0% {
-    opacity: 0.94;
-    transform: translate(-50%, -50%) scale(0.12);
-  }
-
-  30% {
-    opacity: 0.66;
-    transform: translate(-50%, -50%) scale(0.95);
-  }
-
-  62% {
-    opacity: 0.28;
-    transform: translate(-50%, -50%) scale(1.8);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(2.75);
-  }
-}
-
-@keyframes complete-ambient-glow {
-  0% {
-    opacity: 0.66;
-    transform: translate(-50%, -50%) scale(0.18);
-  }
-
-  30% {
-    opacity: 0.48;
-    transform: translate(-50%, -50%) scale(0.85);
-  }
-
-  62% {
-    opacity: 0.22;
-    transform: translate(-50%, -50%) scale(1.55);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(2.45);
-  }
-}
-
-.numberButton { background: var(--color-bg-card); color: var(--color-text-primary); box-shadow: 0 4px 12px rgba(83, 66, 43, .08); }
-.deleteButton { background: var(--color-bg-card); color: var(--color-text-secondary); box-shadow: 0 4px 12px rgba(83, 66, 43, .08); }
+.numberButton { background: var(--color-bg-card); color: var(--color-text-primary); box-shadow: none; }
+.deleteButton { background: var(--color-bg-card); color: var(--color-text-secondary); box-shadow: none; }
 .modalCancelButton { background: var(--color-bg-card-soft); color: var(--color-text-secondary); }

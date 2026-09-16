@@ -10,12 +10,10 @@ const POKEMON_ICON =
   "https://s1.aigei.com/src/img/png/e6/e6f2fee753dc43bf84b0e0434069e631.png?imageMogr2/auto-orient/thumbnail/!282x282r/gravity/Center/crop/282x282/quality/85/%7CimageView2/2/w/282&e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:oVtd8ZV69R_JJ-v236tW0fDxFh4=";
 const SCRIPT_RECORD_HERO =
   "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaEnhqkZt-maeNLw-MbRC7GTcieiemvwACMSEAAmiKkVQEP-RhE-beCz0E.png";
-const GACHA_RECORD_HERO =
-  "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaEmFqkZpV5c5ADtl8g-JBoe4aMbFrngACGiEAAmiKkVQ_BF7-Q-m-FD0E.png";
+const GACHA_RECORD_HERO = "https://img.remit.ee/i/VLKwKe6kgCCD";
 const HANDOU_ICON =
   "https://img95.699pic.com/element/40146/8048.png_300.png";
-const CARD_EXCHANGE_HERO =
-  "https://patchwiki.biligame.com/images/ys/8/89/jl5xwjp6en6umgfb4cikiobjn074b9l.png";
+const CARD_EXCHANGE_HERO = "https://img.remit.ee/i/Nwt54gYGpSao";
 export default function Index() {
   usePageShare({
     title: "月舟",
@@ -140,7 +138,7 @@ export default function Index() {
       </View>
       <View className={styles.funEntryCopy}>
         <Text className={styles.funEntryTitle}>{i.title}</Text>
-        <Text className={styles.funEntryArrow}>→</Text>
+        <View className={styles.funEntryArrow} />
       </View>
     </View>;
   };

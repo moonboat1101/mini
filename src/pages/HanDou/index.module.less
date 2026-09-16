@@ -14,10 +14,10 @@
 .ruleBox {
   margin-bottom: 18px;
   padding: 16px 18px;
-  border-radius: 24px;
-  background: fade(@color-base-300, 56%);
+  border-radius: 16px;
+  background: var(--color-bg-card);
   border: 0;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 .ruleHeader {
@@ -131,9 +131,9 @@
   gap: 10px;
   padding: 10px;
   border-radius: 14px;
-  background: fade(@color-base-300, 56%);
+  background: var(--color-bg-card);
   border: 0;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 .cell {
@@ -149,7 +149,7 @@
   justify-content: center;
   margin-top: 6px;
   color: var(--color-text-secondary);
-  background: fade(@color-base-200, 78%);
+  background: #ffffff;
   font-size: @font-size-page-title;
   font-weight: 800;
   line-height: 1;
@@ -169,7 +169,7 @@
   justify-content: center;
   overflow: hidden;
   color: var(--color-text-muted);
-  background: fade(@color-base-200, 82%);
+  background: #ffffff;
   font-size: @font-size-secondary;
   font-weight: 700;
   line-height: 1;
@@ -186,12 +186,12 @@
 }
 
 .absent {
-  background: #e8e2da;
-  color: #655e57;
+  background: var(--color-base-300);
+  color: var(--color-text-secondary);
 }
 
 .pending {
-  background: fade(@color-base-200, 78%);
+  background: #ffffff;
   color: var(--color-text-muted);
 }
 
@@ -226,10 +226,10 @@
   padding: 0 .8rem;
   border-radius: 16px;
   border: 0;
-  background: var(--color-bg-elevated);
+  background: #e8e8e8;
   color: var(--color-text-primary);
   font-size: @font-size-body;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 .submitButton {
@@ -246,7 +246,7 @@
   justify-content: center;
   font-size: @font-size-body;
   font-weight: 400;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 
   &::after,
   &::before {

@@ -403,7 +403,7 @@ export default function HanDou() {
       title: "换一题？",
       content: "当前输入和猜测记录将被清空。",
       confirmText: "刷新",
-      confirmColor: "#b89a68",
+      confirmColor: "#222222",
     }).then(({ confirm }) => {
       if (confirm) {
         resetGame();

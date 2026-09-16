@@ -55,7 +55,7 @@ export default function CardExchangeMine() {
   };
   const renderCards = (ids: string[], emptyText: string) => {
     const cards = cardsFor(ids);
-    return cards.length ? <View className={styles.cardList}>{cards.map((card) => <CardTile key={card.id} card={card} />)}</View> : <Text className={styles.emptyHint}>{emptyText}</Text>;
+    return cards.length ? <View className={styles.cardList}>{cards.map((card) => <CardTile key={card.id} card={card} light />)}</View> : <Text className={styles.emptyHint}>{emptyText}</Text>;
   };
   const login = async () => {
     Taro.showLoading({ title: "正在登录", mask: true });
@@ -115,19 +115,18 @@ export default function CardExchangeMine() {
     || ownedIds.join(",") !== baseline.ownedIds.join(",")
     || wantedIds.join(",") !== baseline.wantedIds.join(",");
   return <View className={`${styles.mineRoot} ${!loggedIn ? styles.loginOnly : ""}`}>
-    {loggedIn ? <View className={styles.pageActions}><Button className={styles.subscriptionButton} onClick={() => Taro.navigateTo({ url: "/pages/CardExchangeSubscription/index" })}>消息订阅</Button></View> : null}
     {!loggedIn ? <View className={styles.loginBar}><View><Text className={styles.loginTitle}>登录后可同步资料</Text><Text className={styles.loginHint}>仅使用微信身份进行认证，不获取任何资料</Text></View><Button className={styles.loginButton} onClick={login}>微信登录</Button></View> : <>
+      <View className={styles.field}><View className={styles.publishCopy}><Text>发布到市场</Text><Text className={styles.switchHint}>关闭后不会在市场展示</Text></View><Switch className={styles.publishSwitch} checked={isPublished} color="#666666" onChange={(event) => { setIsPublished(event.detail.value); setUpdatedAt(new Date().toISOString()); }} /></View>
       <View className={styles.profilePanel}>
-      <View className={styles.field}><Text>UID</Text><Input value={uid} type="number" maxlength={10} className={styles.input} placeholder="请输入 9 或 10 位 UID" onInput={(event) => setUid(event.detail.value)} /></View>
-      <View className={styles.field}><Text>企鹅</Text><Input value={contactA} type="number" maxlength={16} className={styles.input} placeholder="注意隐私安全" onInput={(event) => setContactA(event.detail.value.replace(/\D/g, ""))} /></View>
-      <View className={styles.field}><Text>绿泡泡</Text><Input value={contactB} maxlength={32} className={styles.input} placeholder="注意隐私安全" onInput={(event) => setContactB(event.detail.value.replace(/[\u3400-\u9fff]/g, ""))} /></View>
-      <View className={styles.field}><Text>备注</Text><Input value={activeTime} placeholder="活跃时间等其他备注" maxlength={24} className={styles.input} onInput={(event) => setActiveTime(event.detail.value)} /></View>
-      <View className={styles.field}><View className={styles.publishCopy}><Text>发布到市场</Text><Text className={styles.switchHint}>关闭后不会在市场展示</Text></View><Switch className={styles.publishSwitch} checked={isPublished} color="#b89a68" onChange={(event) => { setIsPublished(event.detail.value); setUpdatedAt(new Date().toISOString()); }} /></View>
+      <View className={styles.field}><Text>UID</Text><Input value={uid} type="number" maxlength={10} className={styles.input} placeholder="请输入 9 或 10 位 UID" placeholderStyle="color: #e8e8e8;" onInput={(event) => setUid(event.detail.value)} /></View>
+      <View className={styles.field}><Text>企鹅</Text><Input value={contactA} type="number" maxlength={16} className={styles.input} placeholder="注意隐私安全" placeholderStyle="color: #e8e8e8;" onInput={(event) => setContactA(event.detail.value.replace(/\D/g, ""))} /></View>
+      <View className={styles.field}><Text>绿泡泡</Text><Input value={contactB} maxlength={32} className={styles.input} placeholder="注意隐私安全" placeholderStyle="color: #e8e8e8;" onInput={(event) => setContactB(event.detail.value.replace(/[\u3400-\u9fff]/g, ""))} /></View>
+      <View className={styles.field}><Text>备注</Text><Input value={activeTime} placeholder="活跃时间等其他备注" maxlength={24} className={styles.input} placeholderStyle="color: #e8e8e8;" onInput={(event) => setActiveTime(event.detail.value)} /></View>
       </View>
       <View className={styles.cardBox}><View className={styles.cardBoxHead}><Text className={styles.sectionTitle}>我多余</Text><Button className={styles.chooseButton} onClick={() => openPicker("owned")}>选择</Button></View>{renderCards(ownedIds, "还没有选择可交换的卡牌")}</View>
       <View className={`${styles.cardBox} ${styles.wantBox}`}><View className={styles.cardBoxHead}><Text className={styles.sectionTitle}>我想要</Text><Button className={styles.chooseButton} onClick={() => openPicker("wanted")}>选择</Button></View>{renderCards(wantedIds, "还没有选择我想要的卡牌")}</View>
       {hasChanges ? <Button className={styles.saveButton} onClick={saveProfile}>保存资料</Button> : null}
-      {pickerTarget ? <View className={styles.mask} catchMove onClick={() => setPickerTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{pickerTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text><Text className={styles.sheetHint}>可多选，新增卡牌会自动出现在这里。</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedIds.includes(card.id)} onClick={() => toggleCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={confirmPicker}>完成选择</Button></View></View> : null}
+      {pickerTarget ? <View className={styles.mask} catchMove onClick={() => setPickerTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{pickerTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedIds.includes(card.id)} dimmed={!selectedIds.includes(card.id)} onClick={() => toggleCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={confirmPicker}>完成选择</Button></View></View> : null}
     </>}
   </View>;
 }

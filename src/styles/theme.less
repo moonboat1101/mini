@@ -1,39 +1,40 @@
-// One shared palette: cream, warm brown and moonlit platinum.
-@color-base-100: #f7f3ed;
-@color-base-200: #fffcf8;
-@color-base-300: #eae0d0;
-@color-base-content: #302b27;
-@color-primary: #b89a68;
-@color-primary-content: #3a2618;
-@color-secondary: #ede2d1;
-@color-secondary-content: #655e57;
-@color-accent: #7c514d;
-@color-accent-content: #fffcf8;
-@color-neutral: #f3ede4;
-@color-neutral-content: #655e57;
+// One shared palette: white, neutral gray and near-black actions.
+@color-base-100: #ffffff;
+@color-base-200: #f0f0f0;
+@color-base-300: #e8e8e8;
+@color-base-content: #222222;
+@color-primary: #222222;
+@color-primary-content: #ffffff;
+@color-secondary: #f2f2f2;
+@color-secondary-content: #666666;
+@color-accent: #444444;
+@color-accent-content: #ffffff;
+@color-neutral: #f5f5f5;
+@color-neutral-content: #666666;
 @color-info: #776951;
-@color-info-content: #fffcf8;
+@color-info-content: #ffffff;
 @color-success: #4f7659;
-@color-success-content: #fffcf8;
+@color-success-content: #ffffff;
 @color-warning: #926c32;
-@color-warning-content: #fffcf8;
+@color-warning-content: #ffffff;
 @color-error: #a14f46;
-@color-error-content: #fffcf8;
+@color-error-content: #ffffff;
 @color-bg-page: @color-base-100;
-@color-bg-page-soft: #f3ede4;
+@color-bg-page-soft: #f5f5f5;
 @color-bg-card: @color-base-200;
-@color-bg-card-soft: #f3ede4;
-@color-bg-elevated: #fffcf8;
+@color-bg-card-soft: #f5f5f5;
+@color-bg-elevated: #ffffff;
 @color-gold: @color-primary;
-@color-gold-soft: #d7c8ae;
-@color-gold-deep: #806943;
-@color-text-primary: #302b27;
-@color-text-secondary: #655e57;
-@color-text-muted: #897e73;
-@color-border-subtle: #e8e2da;
-@color-border-strong: #b89a68;
-@shadow-soft: 0 12px 36px rgba(83, 66, 43, .07);
-@shadow-card: 0 6px 24px rgba(83, 66, 43, .045);
+@color-gold-soft: #e8e8e8;
+@color-gold-deep: #222222;
+@color-text-primary: #222222;
+@color-text-secondary: #666666;
+@color-text-muted: #8a8a8a;
+@color-border-subtle: #dedede;
+@color-border-strong: #c8c8c8;
+@shadow-soft: none;
+@shadow-card: none;
+@shadow-input: 0 3px 10px rgba(34, 34, 34, .08);
 @radius-lg: 32px;
 @radius-md: 24px;
 @radius-pill: 999px;
@@ -81,29 +82,41 @@ page {
   --color-text-muted: @color-text-muted;
   --color-border-subtle: @color-border-subtle;
   --color-border-strong: @color-border-strong;
+  --color-highlight-soft: @color-gold-soft;
   --shadow-soft: @shadow-soft;
   --shadow-card: @shadow-card;
+  --shadow-input: @shadow-input;
   color-scheme: light;
   color: @color-text-primary;
   background: @color-bg-page;
-  --surface-navigation: rgba(255, 252, 248, .62);
-  --surface-navigation-active: rgba(215, 200, 174, .42);
-  --shadow-navigation: 0 8px 26px rgba(83, 66, 43, .12);
-  --surface-primary: radial-gradient(ellipse at 100% 0%, rgba(255, 255, 255, .6), transparent 55%), radial-gradient(ellipse at 0% 100%, rgba(255, 250, 238, .5), transparent 55%), linear-gradient(135deg, #eee3d0, #e3d3b7 50%, #ebdec7);
-  --color-card-gradient: radial-gradient(ellipse at 100% 0%, rgba(234, 224, 208, .22), transparent 60%);
+  --surface-navigation: rgba(255, 255, 255, .96);
+  --surface-navigation-active: rgba(236, 236, 236, .86);
+  --shadow-navigation: 0 4px 14px rgba(34, 34, 34, .12);
+  --surface-primary: #222222;
+  --color-card-gradient: none;
 }
 body {
   margin: 0;
   background: var(--color-bg-page);
   color: var(--color-text-primary);
 }
+button { box-shadow: none; }
 button::after { border: 0; }
 button[disabled] { opacity: .45; }
+input,
+textarea {
+  box-sizing: border-box;
+  background: #f2f2f2 !important;
+  border: 0;
+  color: var(--color-text-primary) !important;
+  caret-color: var(--color-text-primary);
+  box-shadow: var(--shadow-input) !important;
+}
 
 .moon-card {
   background: var(--color-bg-card);
   border-radius: @radius-lg;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   border: 0;
 }
 .moon-button-primary {
@@ -111,7 +124,7 @@ button[disabled] { opacity: .45; }
   color: var(--color-primary-content);
   border-radius: @radius-pill;
   border: 0;
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
 }
 .moon-button-primary--ghost,
 .moon-chip {

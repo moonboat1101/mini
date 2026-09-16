@@ -8,7 +8,7 @@ import CardRarityRanking from "../CardRarityRanking";
 import CardTile from "./components/CardTile";
 import { cardCatalog, getCardById } from "./mockData";
 import { getCardExchangeProfile } from "./profileStore";
-import { CardExchangeServerFilter, CloudCardExchangeProfile, getCardExchangeLoginCache, getPublishedCardExchangeProfilesPage, sendCardExchangeNotification } from "../../services/cardExchangeCloud";
+import { CardExchangeServerFilter, CloudCardExchangeProfile, getPublishedCardExchangeProfilesPage } from "../../services/cardExchangeCloud";
 import styles from "./index.module.less";
 import { getMyCardExchangeProfile, hideCardExchangeProfile } from "../../services/cardExchangeCloud";
 
@@ -18,7 +18,7 @@ type ServerType = "official" | "bilibili" | "overseas";
 type ServerFilter = CardExchangeServerFilter;
 // 云函数每页最多返回 20 条展示数据；比原先 10 条少一半翻页与云函数调用。
 const PAGE_SIZE = 20;
-const QQ_ICON_URL = "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaWmZqmAi8McGR2sPkkPzIVvPHM-B80QACdzAAAm9BwFQh4jVNv_EOUD0E.jpg";
+const QQ_ICON_URL = "https://img.remit.ee/i/OqgHgES9iu9a";
 const WECHAT_ICON_URL = "https://img.remit.ee/api/file/CAACAgUAAyEGAASHRsPbAAEaWnJqmAq0bXTMWIsJU6g1fbFOBw3sVAAChzAAAm9BwFQjKLbCwgeSQD0E.webp";
 const getServerType = (uid: string): ServerType => {
   if (/^[1-4]\d{8}$/.test(uid)) return "official";
@@ -119,45 +119,11 @@ function MarketPanel() {
   const [noticeIndex, setNoticeIndex] = useState(0);
   const [noticeAnimating, setNoticeAnimating] = useState(false);
   const selectedFilterIds = filterPickerIds;
-  const requestExchange = async (post: CloudCardExchangeProfile) => {
-    const profile = getCardExchangeProfile();
-    if (!getCardExchangeLoginCache() || !/^\d{9,10}$/.test(profile.uid) || !profile.ownedIds.length || !profile.wantedIds.length) {
-      Taro.showToast({ title: "该功能需先登录并配置", icon: "none" });
-      return;
-    }
-    if (!canCopyExchangeRequest(post)) {
-      Taro.showToast({ title: "双方无可交换卡牌", icon: "none" });
-      return;
-    }
-    const myCards = profile.ownedIds.filter((id) => post.wantedIds.includes(id)).map((id) => getCardById(id).name).join("/");
-    const theirCards = profile.wantedIds.filter((id) => post.ownedIds.includes(id)).map((id) => getCardById(id).name).join("/");
-    const requestContent = `用交换人的【${myCards}】交换你的【${theirCards}】`;
-    const confirmed = await Taro.showModal({
-      title: "确认发送请求",
-      content: "请确认您需要换牌且已经发送了好友请求，确认后将直接发送通知至对方微信",
-      confirmText: "确认发送",
-    });
-    if (!confirmed.confirm) return;
-    try {
-      Taro.showLoading({ title: "正在发送", mask: true });
-      await sendCardExchangeNotification(post._id || "", requestContent);
-      Taro.hideLoading();
-      Taro.showToast({ title: "通知已发送", icon: "success" });
-    } catch (error) {
-      Taro.hideLoading();
-      Taro.showToast({ title: error instanceof Error ? error.message : "发送失败，对方可能未订阅", icon: "none" });
-    }
-  };
   const copyUid = (post: CloudCardExchangeProfile) => {
     Taro.setClipboardData({
       data: post.uid,
       success: () => Taro.showToast({ title: "已复制 UID", icon: "success" }),
     });
-  };
-  const canCopyExchangeRequest = (post: CloudCardExchangeProfile) => {
-    const profile = getCardExchangeProfile();
-    return profile.ownedIds.some((id) => post.wantedIds.includes(id))
-      && profile.wantedIds.some((id) => post.ownedIds.includes(id));
   };
   const toggleFilterCard = (id: string) => {
     const update = (ids: string[]) => ids.includes(id) ? ids.filter((item) => item !== id) : [...ids, id];
@@ -169,7 +135,10 @@ function MarketPanel() {
   };
   const loadPage = async (page: number, replace = false, ownedFilters = ownedFilterIds, wantedFilters = wantedFilterIds, server = serverFilter) => {
     const version = ++loadVersion.current;
-    if (replace) setLoading(true);
+    if (replace) {
+      setLoading(true);
+      Taro.showLoading({ title: "加载市场资料", mask: true });
+    }
     else setLoadingMore(true);
     try {
       const result = await getPublishedCardExchangeProfilesPage(page, PAGE_SIZE, ownedFilters, wantedFilters, server);
@@ -184,6 +153,7 @@ function MarketPanel() {
       if (version === loadVersion.current) {
         setLoading(false);
         setLoadingMore(false);
+        if (replace) Taro.hideLoading();
       }
     }
   };
@@ -274,46 +244,40 @@ function MarketPanel() {
               <View className={styles.postMeta}>
                 <View className={styles.userInfo}>
                   <View className={styles.nameRow}>
-                    <Text className={styles.uid}>{post.uid}</Text>
+                    <Text className={styles.uid} onClick={() => copyUid(post)}>{post.uid}</Text>
+                    <View className={styles.uidCopyButton} onClick={() => copyUid(post)} aria-label="复制 UID"><View className={styles.uidCopyIcon} /></View>
                     <Text className={`${styles.serverTag} ${styles[`server${getServerType(post.uid)}`]}`}>{SERVER_LABEL[getServerType(post.uid)]}</Text>
+                    {isAdmin && post._id ? <View className={styles.hidePost} onClick={() => hidePost(post)} aria-label="隐藏"><View className={styles.hidePostIcon} /></View> : null}
                   </View>
                 </View>
                 {formatUpdatedAt(post.updatedAt) ? <Text className={styles.updatedTime}>更新于 {formatUpdatedAt(post.updatedAt)}</Text> : null}
               </View>
 
             {post.contactA || post.contactB || post.activeTime ? <View className={styles.contactBox}>
+              <View className={styles.contactTitle}><View className={styles.sectionTitleStar} /><Text>基础信息</Text></View>
               {post.contactA ? <View className={styles.contactItem}><Image className={styles.qqIcon} src={QQ_ICON_URL} mode="aspectFit" /><Text>{post.contactA}</Text></View> : null}
               {post.contactB ? <View className={styles.contactItem}><Image className={styles.wechatIcon} src={WECHAT_ICON_URL} mode="aspectFit" /><Text>{post.contactB}</Text></View> : null}
               {post.activeTime ? <View className={styles.contactItem}><Text className={`${styles.contactIcon} ${styles.clockIcon}`}>⏰</Text><Text>{post.activeTime}</Text></View> : null}
             </View> : null}
             <View className={styles.exchangeBox}>
-              <Text className={styles.exchangeLabel}>我多余</Text>
+              <View className={styles.exchangeLabel}><View className={styles.sectionTitleStar} /><Text>我多余</Text></View>
               <View className={styles.cardGrid}>
                 {post.ownedIds.map((cardId) => <CardTile key={cardId} card={getCardById(cardId)} />)}
               </View>
             </View>
             <View className={`${styles.exchangeBox} ${styles.wantBox}`}>
-              <Text className={styles.exchangeLabel}>我想要</Text>
+              <View className={styles.exchangeLabel}><View className={styles.sectionTitleStar} /><Text>我想要</Text></View>
               <View className={styles.cardGrid}>
                 {post.wantedIds.map((cardId) => <CardTile key={cardId} card={getCardById(cardId)} />)}
               </View>
             </View>
-            <View className={styles.postFooter}>
-              <View className={styles.footerSpacer} />
-              <View className={styles.postActions}>
-                {isAdmin && post._id ? <Text className={styles.hidePost} onClick={() => hidePost(post)}>隐藏</Text> : null}
-                <Text className={styles.copyRequest} onClick={() => requestExchange(post)}>发起请求</Text>
-                <Text className={styles.copyUid} onClick={() => copyUid(post)}>复制 UID</Text>
-              </View>
-            </View>
-
           </View>
         ))}
         {!loading && !posts.length ? <View className={styles.emptyState}><Text>暂时还没有符合条件的交换意愿</Text><Text className={styles.emptyStateHint}>完善并发布你的圣牌资料后，会出现在这里</Text></View> : null}
         {loading ? <View className={styles.emptyState}><Text>正在加载市场资料…</Text></View> : null}
       </View>
       {!loading && (loadingMore ? <Text className={styles.loadHint}>正在加载更多市场资料…</Text> : hasMore ? <Text className={styles.loadHint}>继续下滑加载更多</Text> : <Text className={styles.loadHint}>已加载全部</Text>)}
-      {filterTarget ? <View className={styles.mask} catchMove onClick={() => setFilterTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{filterTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text><Text className={styles.sheetHint}>可多选，列表将匹配任意一张所选卡牌。</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedFilterIds.includes(card.id)} onClick={() => toggleFilterCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={() => { const nextOwned = filterTarget === "owned" ? filterPickerIds : ownedFilterIds; const nextWanted = filterTarget === "wanted" ? filterPickerIds : wantedFilterIds; setOwnedFilterIds(nextOwned); setWantedFilterIds(nextWanted); setFilterTarget(null); loadPage(0, true, nextOwned, nextWanted); }}>完成选择</Button></View></View> : null}
+      {filterTarget ? <View className={styles.mask} catchMove onClick={() => setFilterTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{filterTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedFilterIds.includes(card.id)} dimmed={!selectedFilterIds.includes(card.id)} onClick={() => toggleFilterCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={() => { const nextOwned = filterTarget === "owned" ? filterPickerIds : ownedFilterIds; const nextWanted = filterTarget === "wanted" ? filterPickerIds : wantedFilterIds; setOwnedFilterIds(nextOwned); setWantedFilterIds(nextWanted); setFilterTarget(null); loadPage(0, true, nextOwned, nextWanted); }}>完成选择</Button></View></View> : null}
 
     </View>
   );

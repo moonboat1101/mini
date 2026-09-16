@@ -119,7 +119,7 @@ export default function Genshin() {
       title: "确认清除缓存？",
       content: "清除后将无法恢复",
       confirmText: "清除",
-      confirmColor: "#ed8b76",
+      confirmColor: "#222222",
       success: (res) => {
         if (res.confirm) {
           removeCache();
@@ -305,7 +305,7 @@ export default function Genshin() {
         {!allGoldData.length ? (
           <View className={styles.guideCard}>
             <View className={styles.guideHeader}>
-              <Text className={styles.guideTitle}>如何获得导出链接</Text>
+            <Text className={styles.guideTitle}>获取导出链接</Text>
               <Button className={styles.copyButton} onClick={copyExportCommand}>
                 复制命令
               </Button>
