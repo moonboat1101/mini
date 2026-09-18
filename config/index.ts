@@ -25,6 +25,10 @@ export default defineConfig<"vite">(async (merge) => {
           from: "assets/profile_small.jpg",
           to: "assets/profile_small.jpg",
         },
+        {
+          from: "assets/mini-program-code.jpg",
+          to: "assets/mini-program-code.jpg",
+        },
       ],
       options: {},
     },

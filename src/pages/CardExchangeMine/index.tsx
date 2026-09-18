@@ -1,13 +1,15 @@
-import { Button, Input, Switch, Text, View } from "@tarojs/components";
+import { Button, Canvas, Input, Switch, Text, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
 import { cardCatalog } from "../CardExchangeMarket/mockData";
 import CardTile from "../CardExchangeMarket/components/CardTile";
 import { getCardExchangeProfile, saveCardExchangeProfile } from "../CardExchangeMarket/profileStore";
 import { cacheCardExchangeLogin, CloudCardExchangeProfile, getCachedCardExchangeProfile, getCardExchangeLoginCache, loginCardExchangeUser, saveMyCardExchangeProfile } from "../../services/cardExchangeCloud";
+import { drawCardExchangePoster } from "../../utils/drawCardExchangePoster";
 import styles from "./index.module.less";
 
 type PickerTarget = "owned" | "wanted" | null;
+const POSTER_CANVAS_ID = "moonboat-card-exchange-poster";
 
 export default function CardExchangeMine() {
   const [savedProfile] = useState(getCardExchangeProfile);
@@ -24,6 +26,7 @@ export default function CardExchangeMine() {
   const [pickerIds, setPickerIds] = useState<string[]>([]);
   const [, setUpdatedAt] = useState(() => new Date().toISOString());
   const [loggedIn, setLoggedIn] = useState(getCardExchangeLoginCache);
+  const [isPosterCanvasMounted, setIsPosterCanvasMounted] = useState(false);
 
   const applyCloudProfile = (profile: CloudCardExchangeProfile | null) => {
       if (!profile) return;
@@ -107,6 +110,33 @@ export default function CardExchangeMine() {
     contactA: cloudProfile?.contactA || "",
     contactB: cloudProfile?.contactB || "",
   };
+  const hasValidUid = /^\d{9,10}$/.test(uid);
+  const createPoster = async () => {
+    if (!hasValidUid) return;
+    if (!ownedIds.length || !wantedIds.length) {
+      Taro.showToast({ title: "请先选择我多余和我想要的卡牌", icon: "none" });
+      return;
+    }
+    setIsPosterCanvasMounted(true);
+    Taro.showLoading({ title: "正在生成海报", mask: true });
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 60));
+      const path = await drawCardExchangePoster(POSTER_CANVAS_ID, { uid, contactA, contactB, activeTime, ownedCards: cardsFor(ownedIds), wantedCards: cardsFor(wantedIds) });
+      const wxApi = (globalThis as typeof globalThis & {
+        wx?: { showShareImageMenu?: (options: { path: string }) => void };
+      }).wx;
+      if (!wxApi?.showShareImageMenu) {
+        Taro.showToast({ title: "当前微信版本不支持图片分享", icon: "none" });
+        return;
+      }
+      wxApi.showShareImageMenu({ path });
+    } catch {
+      Taro.showToast({ title: "海报生成失败，请重试", icon: "none" });
+    } finally {
+      Taro.hideLoading();
+      setIsPosterCanvasMounted(false);
+    }
+  };
   const hasChanges = uid !== baseline.uid
     || contactA !== baseline.contactA
     || contactB !== baseline.contactB
@@ -126,7 +156,9 @@ export default function CardExchangeMine() {
       <View className={styles.cardBox}><View className={styles.cardBoxHead}><Text className={styles.sectionTitle}>我多余</Text><Button className={styles.chooseButton} onClick={() => openPicker("owned")}>选择</Button></View>{renderCards(ownedIds, "还没有选择可交换的卡牌")}</View>
       <View className={`${styles.cardBox} ${styles.wantBox}`}><View className={styles.cardBoxHead}><Text className={styles.sectionTitle}>我想要</Text><Button className={styles.chooseButton} onClick={() => openPicker("wanted")}>选择</Button></View>{renderCards(wantedIds, "还没有选择我想要的卡牌")}</View>
       {hasChanges ? <Button className={styles.saveButton} onClick={saveProfile}>保存资料</Button> : null}
+      {hasValidUid ? <Button className={styles.posterButton} onClick={createPoster}><Text className={`iconfont ${styles.posterButtonIcon}`}>{"\ue627"}</Text><Text>生成图片</Text></Button> : null}
       {pickerTarget ? <View className={styles.mask} catchMove onClick={() => setPickerTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{pickerTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedIds.includes(card.id)} dimmed={!selectedIds.includes(card.id)} onClick={() => toggleCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={confirmPicker}>完成选择</Button></View></View> : null}
     </>}
+    {isPosterCanvasMounted ? <Canvas className={styles.posterCanvas} id={POSTER_CANVAS_ID} type="2d" style="width: 360px; height: 720px;" /> : null}
   </View>;
 }
