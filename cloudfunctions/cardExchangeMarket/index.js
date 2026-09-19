@@ -3,6 +3,7 @@ const cloud = require("wx-server-sdk");
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 const db = cloud.database();
 const users = db.collection("users");
+const MARKET_WINDOW_DAYS = 32;
 
 const getServerType = (uid) => {
   const value = String(uid || "").trim();
@@ -11,7 +12,7 @@ const getServerType = (uid) => {
   return "overseas";
 };
 
-/** 返回已发布资料；服务器仅在查询时由 UID 计算，不写入数据库。 */
+/** 返回近 32 天更新过的已发布资料；服务器仅在查询时由 UID 计算，不写入数据库。 */
 exports.main = async (event = {}) => {
   let isAdmin = false;
   if (event.action === "hide") {
@@ -38,8 +39,9 @@ exports.main = async (event = {}) => {
   const ownedFilterIds = Array.isArray(event.ownedFilterIds) ? event.ownedFilterIds.filter(Boolean) : [];
   const wantedFilterIds = Array.isArray(event.wantedFilterIds) ? event.wantedFilterIds.filter(Boolean) : [];
   const serverFilter = ["official", "bilibili", "overseas"].includes(event.serverFilter) ? event.serverFilter : "all";
-  const query = { isPublished: true };
   const _ = db.command;
+  const cutoffAt = new Date(Date.now() - MARKET_WINDOW_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  const query = { isPublished: true, updatedAt: _.gte(cutoffAt) };
 
   // 对方“想要”包含我的多余牌，且对方“多余”包含我想要的牌。
   if (ownedFilterIds.length) query.wantedIds = _.in(ownedFilterIds);

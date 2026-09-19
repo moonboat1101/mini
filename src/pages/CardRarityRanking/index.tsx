@@ -9,31 +9,16 @@ type RankedCard = (typeof cardCatalog)[number] & { score: number };
 
 export default function CardRarityRanking() {
   const [cards, setCards] = useState<RankedCard[]>([]);
-  const [totalProfiles, setTotalProfiles] = useState(0);
   const [loading, setLoading] = useState(true);
   const [wantedCardIds, setWantedCardIds] = useState<string[]>(() => getCardExchangeProfile().wantedIds);
-  const [noticeIndex, setNoticeIndex] = useState(0);
-  const [noticeAnimating, setNoticeAnimating] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setNoticeAnimating(true), 3000);
-    return () => clearTimeout(timer);
-  }, [noticeIndex]);
-
-  const completeNoticeTransition = () => {
-    if (!noticeAnimating) return;
-    setNoticeIndex((index) => (index + 1) % 2);
-    setNoticeAnimating(false);
-  };
 
   useEffect(() => {
     let cancelled = false;
     setWantedCardIds(getCardExchangeProfile().wantedIds);
     setLoading(true);
     getCardRarityRanking()
-      .then(({ totalProfiles: total, scores }) => {
+      .then(({ scores }) => {
         if (cancelled) return;
-        setTotalProfiles(total);
         setCards(cardCatalog
           .map((card) => ({ ...card, score: scores[card.id] || 0 }))
           .sort((a, b) => a.score - b.score || a.name.localeCompare(b.name, "zh-CN")));
@@ -45,13 +30,11 @@ export default function CardRarityRanking() {
   return (
     <View className={styles.rankingRoot}>
       <View className={styles.noticeViewport}>
-        <View className={`${styles.noticeTrack} ${noticeAnimating ? styles.noticeTrackAnimating : ""}`} onTransitionEnd={completeNoticeTransition}>
-          {[noticeIndex, (noticeIndex + 1) % 2].map((index) => (
-            <View className={styles.notice} key={index}>
-              <Text className={styles.noticeIcon}>✦</Text>
-              <Text className={styles.noticeText}>{index === 0 ? "数字越小越稀有：有人想要 -1；有人多余 +1。" : `统计样本：${totalProfiles} 位市场发布者，实时更新`}</Text>
-            </View>
-          ))}
+        <View className={styles.noticeTrack}>
+          <View className={styles.notice}>
+            <Text className={styles.noticeIcon}>✦</Text>
+            <Text className={styles.noticeText}>数字越小越稀有，有人想要 -1，有人多余 +1，实时更新。</Text>
+          </View>
         </View>
       </View>
 
