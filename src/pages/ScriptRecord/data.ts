@@ -43,6 +43,7 @@ const normalizePlayed = (item: unknown, index: number): PlayedScriptRecord => {
     img: asString(value.img),
     comment: asString(value.comment),
     role: asString(value.role),
+    dm: asString(value.dm),
     players: asPlayers(value.players),
   };
 };

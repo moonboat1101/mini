@@ -272,10 +272,20 @@
   }
 
   .modalMetaItem {
+    position: relative;
     min-width: 0;
     display: flex;
     align-items: baseline;
     gap: 6px;
+  }
+
+  .modalMetaItemFullWidth {
+    grid-column: 1 / -1;
+
+    .modalMetaValue {
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
   }
 
   .modalMetaLabel {
@@ -298,6 +308,18 @@
   }
 
   @player-avatar-size: 48px;
+
+  .modalDmValue {
+    flex: 1;
+  }
+
+  .modalDmProbe {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+    width: max-content;
+    white-space: nowrap;
+  }
 
   .modalPlayersRow {
     display: flex;

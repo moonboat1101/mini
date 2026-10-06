@@ -13,6 +13,8 @@ import styles from "./index.module.less";
 
 const MODAL_PANEL_ID = "script-record-modal-panel";
 const MODAL_HEADER_ID = "script-record-modal-header";
+const DM_VALUE_ID = "script-record-dm-value";
+const DM_PROBE_ID = "script-record-dm-probe";
 
 type AvatarPlayer = {
   id: string;
@@ -166,6 +168,11 @@ export default function ScriptRecord() {
   const [filterType, setFilterType] = useState<FilterType>("time");
   const [activeNav, setActiveNav] = useState<ScriptRecordNav>("time");
   const [activeItem, setActiveItem] = useState<ScriptListItem | null>(null);
+  const [fullWidthDmItemId, setFullWidthDmItemId] = useState<string | null>(null);
+  const [measuredDmItemId, setMeasuredDmItemId] = useState<string | null>(null);
+  const dmFullWidth = Boolean(activeItem && fullWidthDmItemId === activeItem.id);
+  const dmLayoutReady = activeItem?.type !== "played" || !activeItem.dm?.trim()
+    || measuredDmItemId === activeItem.id;
   const [modalScrollBodyPx, setModalScrollBodyPx] = useState<
     number | undefined
   >(undefined);
@@ -175,10 +182,32 @@ export default function ScriptRecord() {
   });
 
   useLayoutEffect(() => {
+    if (activeItem?.type !== "played" || !activeItem.dm?.trim()) return;
+    let cancelled = false;
+    Taro.nextTick(() => {
+      if (cancelled) return;
+      const query = Taro.createSelectorQuery();
+      query.select(`#${DM_VALUE_ID}`).boundingClientRect();
+      query.select(`#${DM_PROBE_ID}`).boundingClientRect();
+      query.exec((results) => {
+        if (cancelled) return;
+        const available = results?.[0] as { width?: number } | null;
+        const natural = results?.[1] as { width?: number } | null;
+        const needsFullWidth = available?.width == null || natural?.width == null
+          || natural.width > available.width;
+        setFullWidthDmItemId(needsFullWidth ? activeItem.id : null);
+        setMeasuredDmItemId(activeItem.id);
+      });
+    });
+    return () => { cancelled = true; };
+  }, [activeItem]);
+
+  useLayoutEffect(() => {
     if (!activeItem) {
       setModalScrollBodyPx(undefined);
       return;
     }
+    if (!dmLayoutReady) return;
 
     let cancelled = false;
     let hasSet = false;
@@ -192,14 +221,14 @@ export default function ScriptRecord() {
       });
     };
 
-    run();
+    Taro.nextTick(run);
     const t1 = setTimeout(run, 32);
 
     return () => {
       cancelled = true;
       clearTimeout(t1);
     };
-  }, [activeItem]);
+  }, [activeItem, dmFullWidth, dmLayoutReady]);
 
   useEffect(() => {
     if (!activeItem) return;
@@ -272,6 +301,7 @@ export default function ScriptRecord() {
       : [
           { label: "游玩时间:", value: item.time?.trim() || "" },
           { label: "评分:", value: item.score ? `${item.score}分` : "" },
+          { label: "DM:", value: item.dm?.trim() || "" },
           { label: "角色:", value: item.role?.trim() || "" },
         ];
 
@@ -282,9 +312,22 @@ export default function ScriptRecord() {
     return (
       <View className={styles.modalMetaGrid}>
         {visibleMeta.map(({ label, value }) => (
-          <View key={label} className={styles.modalMetaItem}>
+          <View
+            key={label}
+            className={`${styles.modalMetaItem} ${
+              label === "DM:" && dmFullWidth
+                ? styles.modalMetaItemFullWidth
+                : ""
+            }`}
+          >
             <Text className={styles.modalMetaLabel}>{label}</Text>
-            <Text className={styles.modalMetaValue}>{value}</Text>
+            <Text
+              id={label === "DM:" ? DM_VALUE_ID : undefined}
+              className={`${styles.modalMetaValue} ${label === "DM:" ? styles.modalDmValue : ""}`}
+            >{value}</Text>
+            {label === "DM:" ? (
+              <Text id={DM_PROBE_ID} className={`${styles.modalMetaValue} ${styles.modalDmProbe}`}>{value}</Text>
+            ) : null}
           </View>
         ))}
       </View>
@@ -295,7 +338,12 @@ export default function ScriptRecord() {
     <View
       key={item.id}
       className={styles.card}
-      onClick={() => setActiveItem(item)}
+      onClick={() => {
+        setFullWidthDmItemId(null);
+        setMeasuredDmItemId(null);
+        setModalScrollBodyPx(undefined);
+        setActiveItem(item);
+      }}
     >
       <Image className={styles.cover} src={item.img || DEFAULT_COVER} />
 
@@ -343,7 +391,7 @@ export default function ScriptRecord() {
         >
           <View
             id={MODAL_PANEL_ID}
-            className={`${styles.modalPanel} ${modalScrollBodyPx != null ? styles.modalPanelOpening : ""}`}
+            className={`${styles.modalPanel} ${dmLayoutReady && modalScrollBodyPx != null ? styles.modalPanelOpening : ""}`}
             onClick={(e) => e.stopPropagation()}
           >
             <View id={MODAL_HEADER_ID} className={styles.modalHeader} catchMove>
