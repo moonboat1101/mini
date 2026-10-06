@@ -1,4 +1,4 @@
-import { Button, Canvas, Input, Switch, Text, View } from "@tarojs/components";
+import { AdCustom, Button, Canvas, Input, Switch, Text, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
 import { cardCatalog } from "../CardExchangeMarket/mockData";
@@ -27,6 +27,7 @@ export default function CardExchangeMine() {
   const [, setUpdatedAt] = useState(() => new Date().toISOString());
   const [loggedIn, setLoggedIn] = useState(getCardExchangeLoginCache);
   const [isPosterCanvasMounted, setIsPosterCanvasMounted] = useState(false);
+  const [adFailed, setAdFailed] = useState(false);
 
   const applyCloudProfile = (profile: CloudCardExchangeProfile | null) => {
       if (!profile) return;
@@ -157,6 +158,11 @@ export default function CardExchangeMine() {
       <View className={`${styles.cardBox} ${styles.wantBox}`}><View className={styles.cardBoxHead}><Text className={styles.sectionTitle}>我想要</Text><Button className={styles.chooseButton} onClick={() => openPicker("wanted")}>选择</Button></View>{renderCards(wantedIds, "还没有选择我想要的卡牌")}</View>
       {hasChanges ? <Button className={styles.saveButton} onClick={saveProfile}>保存资料</Button> : null}
       {hasValidUid ? <Button className={styles.posterButton} onClick={createPoster}><Text className={`iconfont ${styles.posterButtonIcon}`}>{"\ue627"}</Text><Text>生成图片</Text></Button> : null}
+      {process.env.TARO_ENV === "weapp" && !adFailed ? (
+        <View className={styles.bottomAd}>
+          <AdCustom unitId="adunit-2d549c75888612b9" onError={() => setAdFailed(true)} />
+        </View>
+      ) : null}
       {pickerTarget ? <View className={styles.mask} catchMove onClick={() => setPickerTarget(null)}><View className={styles.sheet} onClick={(event) => event.stopPropagation()}><View className={styles.sheetHead}><View><Text className={styles.sheetTitle}>选择{pickerTarget === "owned" ? "我多余的卡" : "我想要的卡"}</Text></View></View><View className={styles.pickerList}>{cardCatalog.map((card) => <CardTile key={card.id} card={card} selected={selectedIds.includes(card.id)} dimmed={!selectedIds.includes(card.id)} onClick={() => toggleCard(card.id)} />)}</View><Button className={styles.confirmButton} onClick={confirmPicker}>完成选择</Button></View></View> : null}
     </>}
     {isPosterCanvasMounted ? <Canvas className={styles.posterCanvas} id={POSTER_CANVAS_ID} type="2d" style="width: 360px; height: 720px;" /> : null}

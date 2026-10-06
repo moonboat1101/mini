@@ -1,4 +1,4 @@
-import { Image, Text, View } from "@tarojs/components";
+import { AdCustom, Image, Text, View } from "@tarojs/components";
 import { useEffect, useState } from "react";
 import { getCardRarityRanking } from "../../services/cardExchangeCloud";
 import { cardCatalog } from "../CardExchangeMarket/mockData";
@@ -10,6 +10,7 @@ type RankedCard = (typeof cardCatalog)[number] & { score: number };
 export default function CardRarityRanking() {
   const [cards, setCards] = useState<RankedCard[]>([]);
   const [loading, setLoading] = useState(true);
+  const [adFailed, setAdFailed] = useState(false);
   const [wantedCardIds, setWantedCardIds] = useState<string[]>(() => getCardExchangeProfile().wantedIds);
 
   useEffect(() => {
@@ -53,6 +54,11 @@ export default function CardRarityRanking() {
           </View>
         ))}
       </View>}
+      {!loading && process.env.TARO_ENV === "weapp" && !adFailed ? (
+        <View className={styles.bottomAd}>
+          <AdCustom unitId="adunit-28d7084013fe56c8" onError={() => setAdFailed(true)} />
+        </View>
+      ) : null}
     </View>
   );
 }

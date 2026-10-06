@@ -3,9 +3,9 @@
 .rankingRoot { min-height: 100vh; padding: 34px 28px 170px; box-sizing: border-box; color: var(--color-text-secondary); .moon-page-background(); }
 .noticeViewport { height: 60px; }
 .noticeTrack { display: flex; }
-.notice { height: 60px; padding: 0 20px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; border-radius: 16px; color: #806943; font-size: @font-size-secondary; background: rgba(202, 137, 65, .13); }
+.notice { flex: 1; min-width: 0; height: 60px; padding: 0 20px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; border-radius: 16px; color: #806943; font-size: @font-size-secondary; background: rgba(202, 137, 65, .13); }
 .noticeIcon { width: 25px; height: 25px; flex: 0 0 25px; color: #b89a68; font-size: @font-size-secondary; line-height: 25px; text-align: center; }
-.noticeText { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.noticeText { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .rankingList { margin-top: 14px; padding: 12px 20px; border: 0; border-radius: 26px; background: var(--color-bg-card-soft); box-shadow: none; }
 .rankCard { position: relative; min-height: 94px; padding: 8px 12px; box-sizing: border-box; display: flex; align-items: center; gap: 14px; border-radius: 16px; background: transparent; }
 .rankCard:not(:last-child)::after { content: ""; position: absolute; right: .5%; bottom: 0; left: .5%; height: 1px; background: var(--color-border-subtle); }
@@ -21,3 +21,4 @@
 .rarityValue { flex: 0 0 76px; text-align: right; }
 .rarityNumber { display: block; color: var(--color-gold-deep); font-size: @font-size-title; font-weight: 800; }
 .state { padding: 70px 0; color: var(--color-text-muted); font-size: @font-size-secondary; text-align: center; }
+.bottomAd { margin-top: 30px; width: 100%; }
