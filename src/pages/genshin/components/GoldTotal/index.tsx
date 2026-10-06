@@ -1,5 +1,5 @@
 import { View, Image } from "@tarojs/components";
-import { GachaType, GachaTypeKey, roleList } from "../../constants";
+import { GachaType, GachaTypeKey, roleList, fourStarRoleList } from "../../constants";
 
 import styles from "./index.module.less";
 
@@ -67,15 +67,15 @@ const GoldTotal = (props: GoldTotalProps) => {
 
       <View className={styles.listContainer}>
         {data.map((item, index) => {
-          const role = roleList.find((r) => r.name === item.name);
+          const role = roleList.find((r) => r.name === item.name)
+            || fourStarRoleList.find((r) => r.name === item.name);
           return (
             <View key={index} className={styles.listItem}>
               {role && !role?.englishName?.includes("NO-PIC-") ? (
                 <Image
                   className={styles.roleImage}
                   src={
-                    role.imageUrl ||
-                    `https://ys.appfeng.com/ui/avatar/UI_AvatarIcon_${role.englishName}.png`
+                    `https://ys.appfeng.com/ui/avatar/UI_AvatarIcon_${role.englishName}.webp`
                   }
                   mode="aspectFit"
                 />

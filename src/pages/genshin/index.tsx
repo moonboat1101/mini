@@ -6,12 +6,15 @@ import GoldTotal from "./components/GoldTotal";
 import { usePageShare } from "../../hooks/usePageShare";
 import { useKeyboardFloating } from "../../hooks/useKeyboardFloating";
 import { GachaType, GachaTypeKey } from "./constants";
+import { mockData } from "./mockData";
 
 import styles from "./index.module.less";
 
 const GENSHIN_GOLD_DATA_CACHE_KEY = "genshinGoldDisplayData";
 const GENSHIN_GOLD_DATA_CACHE_TIME_KEY = "genshinGoldDisplayDataTime";
 const PITY_NAME = "已垫";
+// 临时用于检查角色列表，测试结束后设为 false。
+const USE_MOCK_DATA = false;
 
 const formatCacheDate = (date: Date) =>
   `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
@@ -74,7 +77,9 @@ export default function Genshin() {
   const [tempData, setTempData] = useState<ObjectType[]>([]);
   const [fetchGoldData, setFetchGoldData] = useState<ObjectType[]>([]);
   const [inputValue, setInputValue] = useState("");
-  const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
+  const [allGoldData, setAllGoldData] = useState<ObjectType[]>(
+    USE_MOCK_DATA ? mockData : [],
+  );
   const [cacheTime, setCacheTime] = useState("");
   const exportCommand = `iex(irm 'https://img.lelaer.com/cn.ps1')`;
   const keyboardFloating = useKeyboardFloating("genshin-input-keyboard");
@@ -217,7 +222,7 @@ export default function Genshin() {
       if (curIndex === gachaList?.length - 1) {
         const mergedGoldData = mergeGoldDisplayData(
           nextFetchGoldData,
-          allGoldData,
+          USE_MOCK_DATA ? [] : allGoldData,
         );
 
         setAllGoldData(mergedGoldData);
@@ -246,6 +251,8 @@ export default function Genshin() {
   };
 
   useEffect(() => {
+    if (USE_MOCK_DATA) return;
+
     const cachedGoldData = Taro.getStorageSync(GENSHIN_GOLD_DATA_CACHE_KEY);
     const cachedCacheTime = Taro.getStorageSync(
       GENSHIN_GOLD_DATA_CACHE_TIME_KEY,
