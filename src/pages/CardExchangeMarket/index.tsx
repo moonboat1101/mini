@@ -155,6 +155,13 @@ function MarketPanel() {
       }
     }
   };
+  const copyContact = (contact: string) => {
+    Taro.setClipboardData({
+      data: contact,
+      success: () => Taro.showToast({ title: "复制成功", icon: "success" }),
+      fail: () => Taro.showToast({ title: "复制失败，请重试", icon: "none" }),
+    });
+  };
 
   const hidePost = async (post: CloudCardExchangeProfile) => {
     if (!isAdmin || !post._id || hiding.current) return;
@@ -253,8 +260,8 @@ function MarketPanel() {
 
             {post.contactA || post.contactB || post.activeTime ? <View className={styles.contactBox}>
               <View className={styles.contactTitle}><View className={styles.sectionTitleStar} /><Text>基础信息</Text></View>
-              {post.contactA ? <View className={styles.contactItem}><Text className={`iconfont ${styles.contactIcon}`}>{"\ue603"}</Text><Text>{post.contactA}</Text></View> : null}
-              {post.contactB ? <View className={styles.contactItem}><Text className={`iconfont ${styles.contactIcon}`}>{"\ue635"}</Text><Text>{post.contactB}</Text></View> : null}
+              {post.contactA ? <View className={styles.contactItem}><Text className={`iconfont ${styles.contactIcon}`}>{"\ue603"}</Text><Text className={styles.contactValue}>{post.contactA}</Text><View className={styles.contactCopyButton} onClick={() => copyContact(post.contactA)} aria-label="复制 QQ"><Text className={`iconfont ${styles.uidCopyIcon}`}>{"\ue636"}</Text></View></View> : null}
+              {post.contactB ? <View className={styles.contactItem}><Text className={`iconfont ${styles.contactIcon}`}>{"\ue635"}</Text><Text className={styles.contactValue}>{post.contactB}</Text><View className={styles.contactCopyButton} onClick={() => copyContact(post.contactB)} aria-label="复制微信"><Text className={`iconfont ${styles.uidCopyIcon}`}>{"\ue636"}</Text></View></View> : null}
               {post.activeTime ? <View className={styles.contactItem}><Text className={`iconfont ${styles.contactIcon} ${styles.clockIcon}`}>{"\ue614"}</Text><Text>{post.activeTime}</Text></View> : null}
             </View> : null}
             <View className={styles.exchangeBox}>
