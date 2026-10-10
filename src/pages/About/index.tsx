@@ -1,4 +1,5 @@
 import { Image, Text, View } from "@tarojs/components";
+import Taro from "@tarojs/taro";
 import { usePageShare } from "../../hooks/usePageShare";
 import douyinIcon from "../../assets/icons/douyin.svg";
 
@@ -13,6 +14,13 @@ const CONTACTS = [
 ] as const;
 
 export default function About() {
+  const copyContact = (value: string) => {
+    Taro.setClipboardData({
+      data: value,
+      success: () => Taro.showToast({ title: "复制成功", icon: "success" }),
+      fail: () => Taro.showToast({ title: "复制失败，请重试", icon: "none" }),
+    });
+  };
   usePageShare({
     title: "关于月舟",
     path: "/pages/About/index",
@@ -26,6 +34,7 @@ export default function About() {
         {CONTACTS.map((contact) => <View key={contact.label} className={styles.contactItem} aria-label={contact.label}>
           {"image" in contact ? <Image className={styles.contactIcon} src={contact.image} mode="aspectFit" /> : <Text className={`iconfont ${styles.contactIcon} ${styles[contact.variant]}`}>{contact.icon}</Text>}
           <Text>{contact.value}</Text>
+          <Text className={`iconfont ${styles.copyIcon}`} aria-label={`复制${contact.label}`} onClick={() => copyContact(contact.value)}>{"\ue636"}</Text>
         </View>)}
       </View>
     </View>
