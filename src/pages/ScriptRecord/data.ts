@@ -55,6 +55,7 @@ const normalizeWishlist = (item: unknown, index: number): WishlistRecord => {
     name: asString(value.name),
     desc: asString(value.desc),
     people: asNumber(value.people),
+    duration: Math.ceil(asNumber(value.duration)),
     img: asString(value.img),
   };
 };

@@ -1,10 +1,10 @@
 export const PLAYER_PIC: Record<string, string> = {
   WYZ: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3ndp2kRhyCoy1erkJegPZIffQ6kXUAAC_h8AAvda2VbX4pg6a3ZqNTsE.jpg",
-  WJL: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3n5p2kR-cyAXnPZGGFP0SkhBPF305gACBSAAAvda2VYsEmdKL_H_ajsE.jpg",
   TJJ: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3qFp2kXmkX3GM-rqcCNzf3XZdE05MAACLCAAAvda2Vbm_i5g12pEMDsE.jpg",
-  SZY: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3pJp2kTP8_vx-MtjKTyVibrSrcTkEAACGyAAAvda2Vaay0TfDgd3KTsE.jpg",
   CZH: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3p5p2kUDXhllRROPscUuqMnH8bDB7wACJyAAAvda2VY9dG4lPBoKSzsE.jpg",
   ZLW: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3p9p2kUVnT-QIvA-XrT-kvIoSgbAoAACKSAAAvda2VYu4nmHREmIbzsE.jpg",
+  SZY: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3pJp2kTP8_vx-MtjKTyVibrSrcTkEAACGyAAAvda2Vaay0TfDgd3KTsE.jpg",
+  WJL: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3n5p2kR-cyAXnPZGGFP0SkhBPF305gACBSAAAvda2VYsEmdKL_H_ajsE.jpg",
   YWL: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES3zFp2lEKIOWe4ArXn7XUaiZtTlFacQAC-yAAAvda2Vbb0FlOUafkhzsE.jpg",
   WGL: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAES35Zp2lMI0dCw7tAT3_ZZWTNl7FBasgACaCEAAvda2VYPHlq9bgjd-zsE.jpg",
   JJM: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEZqAZqia4fzg3566HHc5-ME_DTM0YXNAACuyMAAkreSVQWQTz-ToE2iT0E.jpg",
@@ -14,6 +14,7 @@ export type WishlistGame = {
   name: string;
   desc: string;
   people: number;
+  duration: number;
   img: string;
 };
 
@@ -32,51 +33,80 @@ export type ScriptGame = {
 export const wishlist: WishlistGame[] = [
   {
     name: "芥子：须陀界河",
+    duration: 9,
     desc: "在那弥望山岭深处，有一座村子名唤弥岭村。村前有一条大河，是为须陀河。据传，这弥岭村乃是由数百年前一支战败的明军所建立。他们为了躲避清军追捕而误入此地，却再也没能离开，只能在那松柏山头，日夜远望回不去的故乡。直到某日，从那须陀河里走出来一位菩萨。村民问菩萨要去往何处？菩萨曰：须弥山巅六欲天。村民请求菩萨带他们一起离开，菩萨摇了摇头。村民又问那他们该去往何处？菩萨答：你们当入无间地狱，历千万亿劫，求出无期。诡语三部曲终章下部，与上部《弥望之川》共同构成完整故事。",
     people: 8,
     img: "https://kimi-web-img.moonshot.cn/img/pic3.zhimg.com/5d13a42359920a2ccdc6e052e4b802bc63827ecd.jpg",
   },
   {
     name: "离家出走",
+    duration: 10,
     desc: "这座城市从来就没有光，唤醒人们的不是朝阳，而是炙热无比的欲望。我不知道自己在执着什么，但是我明白，或许是时候该做些什么了，为了那些尘封的过往。我行走在这光鲜亮丽的城市里，我睡在这座破落不堪的地狱中，我敲开了一扇又一扇紧闭的门。我还能走多远，我不知道，但我一定会查出所有的真相，给这个故事画上句号。总有一天，大家都会离开的，如果非要分一个先后的话，但愿下一个就是我。",
     people: 7,
     img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/499501eff6827bb4c566a9d3914379c9a0612279",
   },
   {
     name: "北宋奇案·汴京",
+    duration: 8,
     desc: "一段北宋时期耻辱的历史，两个南宋同朝为官的叔侄，三位曾经纠葛种种的帝王，竟与那四起未曾结案的密室斩首案深深牵扯。而那尘封于汴京城下的秘密，亦随着它的陨落，或被深埋，或欲出土。以本格密室为面、长逻辑推理为底，四起斩首密室案件环环相扣，在破解诡计之后，一条悖论将引出整段历史中被隐藏的权谋故事。",
     people: 6,
     img: "https://kimi-web-img.moonshot.cn/img/k.sinaimg.cn/6b630c953002bb19e1f692c04f7eea7e329f4501.jpg",
   },
   {
     name: "立方馆谋杀始末",
+    duration: 7,
     desc: "近日，警方在位于无人区的著名建筑「立方馆」中发现六具尸体，据调查均为前段时间一同前往立方馆的三男三女，全部遇难，无人生还。与此同时，天国之上，一位喜欢看推理小说的大天使，将这场无人生还的惨案，做成了推理游戏，祂呈现了六名死者的当时回忆，作为一次天国的考核。六名小天使们接到考核，要通过回忆帮助人类寻找难以找到的真相，而在推理的过程中，小天使们发现除了接二连三的杀人事件之外，在这些文字内容之中，竟藏有大天使绞尽脑汁设置的谜题。",
     people: 6,
     img: "https://kimi-web-img.moonshot.cn/img/cdn.store-assets.com/b1e43f1aa9689c2763728f7d2aefee1b107fce65.png",
   },
   {
     name: "持斧奥夫",
+    duration: 5,
     desc: '北欧传说，奥夫是一名上古疯魔战士，每到一处，必定大肆屠杀，亲手用斧头将所有人斩首。北欧小镇莫尼亚11路608号，曾出没过连环杀人魔，杀人魔将此作为秘密基地，于一月内秘密杀害数十人。有目击者见其持斧杀人，像极了传说中奥夫的模样，市民和媒体以恐惧神"奥夫"称呼代指此杀人魔。杀人魔杀害过数名工作人员，小镇上人心惶惶，惶惶不可终日。',
     people: 6,
     img: "https://kimi-web-img.moonshot.cn/img/img1.gamersky.com/08938ba06e923d6e0491d2cc46ec60dccfaf8054.jpg",
   },
   {
     name: "马丁内斯死在惊奇馆",
+    duration: 6,
     desc: '在布鲁日大陆的塞瓦林群岛上，有一本名为惊奇之卷的奇书，据说能赋予拥有者改变世界的力量。神秘人物马丁内斯以穿越屏障的神奇能力闻名，他将这本奇书藏匿在惊奇馆内，并向世界挑选了十位"候选人"来到塞瓦林群岛，参与赢取惊奇之卷的最后挑战。平地坠亡的死者，密室中消失的尸体，监控与雪地的双重牢笼，重物所封闭的门扉，岛上接连不断的诡谲考验冲击着你的内心。',
     people: 6,
     img: "https://kimi-web-img.moonshot.cn/img/www.dmyseo.com/fbea5a1474a2cf0429d75df1a2abb56635cc7081.jpg",
   },
   {
     name: "众念成形",
+    duration: 7,
     desc: '我，我是你15岁时，永远爱你的妈妈。我是与你相依为命长大的亲人。我是看不见的怪物和心中的恐惧。我是你所有"相信"与"看见"交媾的产物。你喂养我，用思念，用愧疚，用无法承受的孤独。于是我——从幼小的、畸形的、不存在的，长成了如今高大的、鲜红的、热切的、赤裸裸、剔肉见骨、不可抗拒、全盘托出的，我。你的念，造就了我。但现在，我不再属于你。众念，即将化形。',
     people: 6,
     img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/4308a1c9ed29ce7933e8d998ac2bfc6cc98f1c83.jpg",
   },
   {
     name: "鸦雀无生",
+    duration: 7,
     desc: "传说，湘西有三邪，养蛊，赶尸，落花洞女。而鸦雀城，更是其中一处极为偏远的山城。这里地貌奇特，与世隔绝，女子不外嫁，男子不出城。这里妖魔鬼怪横行，诡异案件频发。但总有人不信邪。六位侦探，山鸦，渡鸦，寒鸦，丝雀，朱雀，灰雀，应邀探明真相。路过白骨冢，薄雾中，隐约可见两个血红色的灯笼低挂着。一边一个灵字，一边一个酒字。守灵人酒肆，赫然出现在眼前。",
     people: 6,
     img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/24aac68a2608ca80c64b082c2b1d60647d8debe6.jpg",
+  },
+  {
+    name: "鬼河怒放",
+    duration: 9,
+    desc: "鬼河出现之后，死亡成为不断增长的数字，世界陷入绝望。研究者认为，鬼河是异世界夹缝中灵异力量汇聚而成的存在，当力量满溢，便会冲破壁垒、侵入现实。六位调查员深入被鬼河笼罩的红花镇，在诡异规则与重重案件中寻找真相。中式新本格推理，以信息差与智斗为核心。",
+    people: 6,
+    img: "https://okkmfpplnqhdoceyqpey.supabase.co/storage/v1/object/public/script-covers/qiandao/939563313346420729.jpg",
+  },
+  {
+    name: "无相人考古奇案",
+    duration: 8,
+    desc: "六位推理社学生受考古教授邀请，品鉴一部唐代出土的推理小说。通过摸顶秘术读取颅骨留下的记忆，玩家将探索无相人与阴阳眼的特殊设定，破解离奇案件，拼起人物关系与历史中的隐秘往事。表里山河汗青系列作品，以设定推理、故事还原与历史立意交织展开。",
+    people: 6,
+    img: "https://fanc-rotterdam.myshopify.com/cdn/shop/files/20251024193514_131_424_600x.png?v=1761327839",
+  },
+  {
+    name: "无相人2：画皮考古奇案",
+    duration: 8,
+    desc: "江南异人能够解衣换面、借皮还生，荒村旧迹与白骨之中藏着尚未解开的往事。一卷聊斋，写狐写鬼，也留下真假难辨的传闻。无相人系列第二部以画皮与聊斋志怪为引，作为独立平行篇章，将奇术设定、案件推理与故事还原融为一体。",
+    people: 6,
+    img: "https://wx1.sinaimg.cn/large/0072XVUSly1ihdbhbe7bhj30jn0rs78i.jpg",
   },
 ];
 
@@ -147,7 +177,7 @@ export const scriptGames: ScriptGame[] = [
     comment:
       "非常非常高质量的一个推理还原本，逻辑非常缜密，在有限的线索中一直发现新的问题，还可以一直解决，安美纳斯之下第一！",
     role: "王阳",
-    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "SZY", "YWL", "WGL"],
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "SZY", "WJL", "YWL", "WGL"],
   },
   {
     name: "头颅们的失眠夜",
@@ -158,7 +188,7 @@ export const scriptGames: ScriptGame[] = [
     img: "https://kimi-web-img.moonshot.cn/img/picx.zhimg.com/d952c7b53fae0ec80bd74020e775c4a00bfd6dc6.jpg",
     comment:
       "整体时间 5.5h 有点短了，戛然而止，而且这个崩坏不是很爽，推翻再盘一轮可能更好，参考死幻",
-    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "SZY"],
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "SZY", "WJL"],
   },
   {
     name: "月落洼",
@@ -179,7 +209,7 @@ export const scriptGames: ScriptGame[] = [
     desc: '我见到那载着麦草的马车，哥哥曾带我坐过。草堆软软的，我整个人都陷了进去。我听见哥哥慌乱地叫喊，黑暗中的我大笑。奇怪，他为何听不见我的笑声？我又听见了那奇怪的歌声：走马织草筐~筐里睡纸床~弥留间回望~须臾划阴阳~现代中式变格推理本，以道教理论为基础的世界观，融入佛教因果循环理论，充满"善恶阴阳、一念之差"的中式寓意，细思极恐的细节设计。',
     score: 8,
     img: "https://kimi-web-img.moonshot.cn/img/img1.gamersky.com/f505163a43de57535ae70b8b2b18c0eca4b310c0.jpg",
-    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "YWL"],
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "WJL", "YWL"],
   },
   {
     name: "弥留",
@@ -188,7 +218,7 @@ export const scriptGames: ScriptGame[] = [
     desc: "都市的某个夜晚，一曲凄婉的旋律、一滩殷红的血迹将一群看似平凡的人引入一个充满未知与恐惧的世界。命运如同周而复始的迷宫，人心则是深不可测的汪洋。现代硬核推理本，新本格与中式恐怖风格，4男3女可反串，约5.5小时。在探索真相的过程中，既感受到推理的乐趣，又体验到中式恐怖独有的氛围，关于命运与人心的深刻探讨。",
     score: 6,
     img: "https://kimi-web-img.moonshot.cn/img/img1.gamersky.com/d67edf2b7fc8a10fa8d97f95c4afcc890dc27ebb.jpg",
-    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "SZY", "WGL"],
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "SZY", "WJL", "WGL"],
   },
   {
     name: "安美纳斯DE死亡推想",
@@ -199,7 +229,7 @@ export const scriptGames: ScriptGame[] = [
     img: "https://kimi-web-img.moonshot.cn/img/80larpnew-1251545914.cos.ap-guangzhou.myqcloud.com/87b1e33fc8498f57f5031a11712b65af8269721b.jpg",
     comment:
       "降维打击！！！降维打击！！！降维打击！！！任何人不去玩我都会伤心的好么！",
-    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "YWL"],
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "WJL", "YWL"],
   },
   {
     name: "猫岛谋杀循环",
@@ -208,7 +238,7 @@ export const scriptGames: ScriptGame[] = [
     desc: '孤僻少年桃山优离奇自杀，为了追寻真相，心理教授将记载当年事件的六本日记启封，邀请了六位看似无关的客人来参加这场推理的饕餮晚宴。血缸中溺亡的人彘、铁架上残破的肢体、暴雨时离奇的断首、悬崖下模糊的头皮、熔炉里碳化的骨架、密室内蒸发的人影。无人生还的诅咒，是开启谋杀循环的源头。日式推理新本格，以"变态推理"与"逻辑循环"为核心。',
     score: 8,
     img: "https://kimi-web-img.moonshot.cn/img/80larpnew-1251545914.cos.ap-guangzhou.myqcloud.com/18f49981a6bd3047ffb3cedfb058c804c7800345.png",
-    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "SZY"],
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "SZY", "WJL"],
   },
   {
     name: "极乐密室",
@@ -217,7 +247,7 @@ export const scriptGames: ScriptGame[] = [
     desc: '一座浓雾环绕的小岛上，竟有一处犹如世外桃源一般的江南园林。然而，当你走进这座园林，你会发现这里空无一人，一片死寂。清朝末年，一位名叫唐志海的渔夫在遭遇海难之后，被海水冲到了这座孤岛上来，他无意之中看见了这处隐世园林，同时他还发现了这片美景之下所隐藏的十三口棺材……唐志海将园林取名为唐园，将自己封为这里的主人。民国四年（1915年），唐园的主人已换成唐志海的儿子唐伟杰。然而这唐园之内却并不太平，先有一男一女两名仆人失踪，尔后又有一名上岛游玩的富家小姐在园内人间蒸发，加之最近一年唐园不断地传出闹鬼事件。为了驱除厉鬼，唐伟杰请来了灵能教的教主万志龙前来捉鬼，同一天，上海赌场大亨的儿子赵文良也突然光临唐园，打算向唐伟杰的女儿唐雪漫提亲。然而，隐藏在岛上的"厉鬼"正静静地注视着这一切，地狱的罗网已经缓缓张开，两桩诡谲的密室杀人事件即将上演。民国本格硬核推理，双密室设计，逻辑严密，是五人本中的经典之作。',
     score: 6,
     img: "https://kimi-web-img.moonshot.cn/img/picx.zhimg.com/7649d5adf5f66d330b88c7653bd5fe994cad08d8.jpg",
-    players: ["WYZ", "TJJ", "WJL", "SZY", "WGL"],
+    players: ["WYZ", "TJJ", "SZY", "WJL", "WGL"],
   },
   {
     name: "病娇3：近乎正常的我们",
@@ -226,7 +256,7 @@ export const scriptGames: ScriptGame[] = [
     desc: "我叫萧何，拥有七个孤独且热闹的分裂人格。我们的生活如架上落满灰尘的书本，平淡到毫无波澜，从未被血腥的手掌拾起，也并没有人喜欢。但我想，我们曾经失去的东西，也会很难过地想要找回我们吧。现代惊悚还原本，病娇系列第三部，剧情上包含第一部《精分日记》的彩蛋，在情感羁绊方面推荐先玩第一部再体验本作，宁浩与萧何的羁绊会更加丰满和深刻。",
     score: 6,
     img: "https://kimi-web-img.moonshot.cn/img/cdn.store-assets.com/39cc1d8a9d55c3e695aee80a40d9de1631a96170.jpeg",
-    players: ["WYZ", "TJJ", "WJL", "CZH", "ZLW", "SZY"],
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "SZY", "WJL"],
   },
   {
     name: "雪乡连环杀人案件",
@@ -276,6 +306,6 @@ export const scriptGames: ScriptGame[] = [
     desc: "夜里，一辆车行驶在国道上，不知驶往何方。车里坐着一家五口人，父母与孩子之间的关系异常紧张。妈妈嘴里一直念叨着什么数着车后面的人，爸爸失了神一般开着车，三个孩子不清楚发生了什么。这个家究竟怎么了，是从什么时候开始这个家就不再正常了？现代惊悚推理本，氛围紧张压抑，探索家庭的秘密与真相。",
     score: 6,
     img: "https://kimi-web-img.moonshot.cn/img/pic1.zhimg.com/ad527969f3b4de46dcd67f28ea027b61e559d58f.jpg",
-    players: ["WYZ", "TJJ", "WJL", "CZH", "SZY"],
+    players: ["WYZ", "TJJ", "CZH", "SZY", "WJL"],
   },
 ];

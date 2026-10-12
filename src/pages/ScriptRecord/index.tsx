@@ -32,7 +32,14 @@ function splitPlayersByAvatar(
 ): { withPic: AvatarPlayer[]; withoutPic: string[] } {
   const withPic: AvatarPlayer[] = [];
   const withoutPic: string[] = [];
-  for (const player of players) {
+  const playerOrder = Object.keys(PLAYER_PIC);
+  const orderedPlayers = [...players].sort((a, b) => {
+    const aIndex = playerOrder.indexOf(a);
+    const bIndex = playerOrder.indexOf(b);
+    return (aIndex < 0 ? playerOrder.length : aIndex)
+      - (bIndex < 0 ? playerOrder.length : bIndex);
+  });
+  for (const player of orderedPlayers) {
     const src = getPlayerAvatarSrc(player, picMap);
     if (src) withPic.push({ id: player, src });
     else withoutPic.push(player);
@@ -278,7 +285,17 @@ export default function ScriptRecord() {
 
   const renderCardMeta = (item: ScriptListItem) => {
     if (item.type === "wishlist") {
-      return <Text className={styles.playTime}>{item.people ? `${item.people}人` : "人数待补充"}</Text>;
+      return (
+        <>
+          {item.duration ? (
+            <>
+              <Text className={styles.playTime}>{Math.ceil(item.duration)}h</Text>
+              <Text className={styles.metaDivider}>·</Text>
+            </>
+          ) : null}
+          <Text className={styles.playTime}>{item.people ? `${item.people}人` : "人数待补充"}</Text>
+        </>
+      );
     }
 
     const meta = [item.time?.trim(), item.score ? String(item.score) : ""].filter(Boolean);
@@ -297,12 +314,15 @@ export default function ScriptRecord() {
 
   const renderModalMeta = (item: ScriptListItem) => {
     const meta = item.type === "wishlist"
-      ? [{ label: "人数:", value: item.people ? `${item.people}人` : "" }]
+      ? [
+          { label: "人数:", value: item.people ? `${item.people}人` : "" },
+          { label: "时长:", value: item.duration ? `${Math.ceil(item.duration)}h` : "待补充" },
+        ]
       : [
-          { label: "游玩时间:", value: item.time?.trim() || "" },
+          { label: "时间:", value: item.time?.trim() || "" },
           { label: "评分:", value: item.score ? `${item.score}分` : "" },
-          { label: "DM:", value: item.dm?.trim() || "" },
           { label: "角色:", value: item.role?.trim() || "" },
+          { label: "DM:", value: item.dm?.trim() || "" },
         ];
 
     const visibleMeta = meta.filter(({ value }) => Boolean(value));
@@ -402,10 +422,10 @@ export default function ScriptRecord() {
                 />
                 <View className={styles.modalTopMeta}>
                   <Text className={styles.modalTitle}>{activeItem.name?.trim() || "未命名剧本"}</Text>
-                  {renderModalMeta(activeItem)}
                   {activeItem.type === "played" && activeItem.players?.length ? (
                     <ModalPlayersRow players={activeItem.players} />
                   ) : null}
+                  {renderModalMeta(activeItem)}
                 </View>
               </View>
             </View>
@@ -419,12 +439,12 @@ export default function ScriptRecord() {
                   : undefined
               }
             >
-              <Text className={styles.modalSectionTitle}>简介</Text>
+              <View className={styles.modalSectionTitle}><View className={styles.sectionTitleBar} /><Text>简介</Text></View>
               <Text className={styles.modalSynopsis}>{activeItem.desc?.trim() || "暂无简介"}</Text>
 
               {activeItem.type === "played" && activeItem.comment?.trim() ? (
                 <View className={styles.modalNoteBlock}>
-                  <Text className={styles.modalSectionTitle}>备注</Text>
+                  <View className={styles.modalSectionTitle}><View className={styles.sectionTitleBar} /><Text>备注</Text></View>
                   <Text className={styles.modalNoteText}>
                     {activeItem.comment.trim()}
                   </Text>
