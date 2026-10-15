@@ -175,6 +175,7 @@ export default function ScriptRecord() {
   const [filterType, setFilterType] = useState<FilterType>("time");
   const [activeNav, setActiveNav] = useState<ScriptRecordNav>("time");
   const [activeItem, setActiveItem] = useState<ScriptListItem | null>(null);
+  const [coverPreviewOpen, setCoverPreviewOpen] = useState(false);
   const [fullWidthDmItemId, setFullWidthDmItemId] = useState<string | null>(null);
   const [measuredDmItemId, setMeasuredDmItemId] = useState<string | null>(null);
   const dmFullWidth = Boolean(activeItem && fullWidthDmItemId === activeItem.id);
@@ -362,6 +363,7 @@ export default function ScriptRecord() {
         setFullWidthDmItemId(null);
         setMeasuredDmItemId(null);
         setModalScrollBodyPx(undefined);
+        setCoverPreviewOpen(false);
         setActiveItem(item);
       }}
     >
@@ -419,6 +421,7 @@ export default function ScriptRecord() {
                 <Image
                   className={styles.modalCover}
                   src={activeItem.img || DEFAULT_COVER}
+                  onClick={() => setCoverPreviewOpen(true)}
                 />
                 <View className={styles.modalTopMeta}>
                   <Text className={styles.modalTitle}>{activeItem.name?.trim() || "未命名剧本"}</Text>
@@ -452,6 +455,22 @@ export default function ScriptRecord() {
               ) : null}
             </ScrollView>
           </View>
+        </View>
+      )}
+      {activeItem && coverPreviewOpen && (
+        <View
+          className={styles.coverPreviewMask}
+          catchMove
+          onClick={(e) => {
+            e.stopPropagation();
+            setCoverPreviewOpen(false);
+          }}
+        >
+          <Image
+            className={styles.coverPreviewImage}
+            src={activeItem.img || DEFAULT_COVER}
+            mode="aspectFit"
+          />
         </View>
       )}
     </View>

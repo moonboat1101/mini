@@ -136,7 +136,7 @@ export const scriptGames: ScriptGame[] = [
   {
     name: "八十七仙图",
     time: "2026.9",
-    dm: "惊奇侦探-9.0 / 惊奇侦探-13.",
+    dm: "惊奇侦探-木偶 / 惊奇侦探-9.0",
     desc: "1937年，一场看似普通的画展即将在紫金港的威尔逊展馆举行。《八十七神仙卷》位列展品之首，一时间轰动全港。相传此画卷为唐代吴道子真迹，白描绘画巅峰之作，千百年来颠沛流离，几经辗转终于现世。今天，六名培英中学的学生随老师参加画展，却意外卷入了一场谋划千年的历史迷局之中。",
     score: 7,
     img: "https://kimi-web-img.moonshot.cn/img/80larpnew-1251545914.cos.ap-guangzhou.myqcloud.com/308a957e5ead2b69fe634aecc6c8d3e62f37e8bc.jpg",

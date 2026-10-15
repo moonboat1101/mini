@@ -198,6 +198,24 @@
     box-sizing: border-box;
   }
 
+  .coverPreviewMask {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, .92);
+    animation: modalMaskEnter 180ms ease-out both;
+  }
+
+  .coverPreviewImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
   .modalPanel {
     opacity: 0;
     transform-origin: center;
