@@ -69,6 +69,7 @@ npm run build:weapp
 2. 在“数据库”创建集合 `users`。每条记录对应一名微信用户的圣牌资料，`isPublished: true` 的记录会出现在市场列表中。
 3. 分别上传并部署下列云函数，选择“上传并部署：云端安装依赖”：
    - `cloudfunctions/cardExchangeUser`：登录、读取与保存个人资料；
+   - `cloudfunctions/cardExchangeMembership`：完整观看激励视频后发放会员；
    - `cloudfunctions/cardExchangeMarket`：读取市场公开资料；
    - `cloudfunctions/cardRarityRanking`：统计圣牌稀有度。
 4. 为 `users` 集合设置权限：
@@ -81,6 +82,14 @@ npm run build:weapp
 ```
 
 云函数以服务端身份按 `_openid` 读取和写入用户资料；应用会调用 `wx.cloud.init()` 使用当前绑定环境，无需在代码中写死环境 ID。
+
+### 圣牌会员
+
+“我的圣牌”底部广告前提供会员体系模块。激励视频广告位为 `adunit-989a980427c13fce`，配置于 `src/pages/CardExchangeMine/index.tsx` 中的 `MEMBERSHIP_AD_UNIT_ID`。
+
+`users` 集合新增 `membershipExpiresAt`（毫秒时间戳）和 `membershipAdCount`（累计完整观看次数），由独立的 `cardExchangeMembership` 云函数维护，普通资料保存不接受修改。已有记录缺少字段时视为未开通，首次领取时自动补齐，无需批量迁移。完整观看一次增加 30 天，未到期时顺延，过期时从领取时间重新计算；市场仅在有效期内显示等级标签（星级暖金、月级灰紫、日级赤陶色），1–2 次为 ✦ VIP，3–4 次为 ☾ VIP，5 次及以上为 ☀ VIP。
+
+会员功能只需新增部署 `cardExchangeMembership` 云函数（云端安装依赖），原有 `cardExchangeUser` 和 `cardExchangeMarket` 保持原样。无需创建额外集合。上线前在微信真机验证完整观看、提前关闭和广告加载失败。当前以客户端激励视频 `onClose.isEnded` 作为完成依据，完整观看后自动调用会员云函数，无临时广告凭据；尚未接入广告平台的服务端观看验证。
 
 ## 目录结构
 

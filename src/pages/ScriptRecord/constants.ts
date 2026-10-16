@@ -108,6 +108,20 @@ export const wishlist: WishlistGame[] = [
     people: 6,
     img: "https://wx1.sinaimg.cn/large/0072XVUSly1ihdbhbe7bhj30jn0rs78i.jpg",
   },
+  {
+    name: "王不见王",
+    duration: 10,
+    desc: "作家佐藤红叶的新书刚刚面世，便有一场直播命案将她推到审讯室中。她承认杀害爱人，却让案件的缘由更加难解。调查的线索逐渐汇入她笔下的《王不见王》，读者需要从规则与人物视角出发，循着层层逻辑审视这场智斗。引力弹弓发行的六人设定推理本，侧重长逻辑链与博弈推演，体验时长约 10 小时以上。",
+    people: 6,
+    img: "https://fanc-rotterdam.myshopify.com/cdn/shop/files/20260823122704.jpg?v=1787481105",
+  },
+  {
+    name: "阿比苏的玫瑰花",
+    duration: 7,
+    desc: "先锋哨队失联后，一名寻找父亲的少女走进阿比苏荒原，同伴循迹而来，最终抵达废弃修道院。月圆时玫瑰盛放，旧日钟声再起，众人需要面对往事，以及实现愿望所需付出的代价。蛛丝马迹发行、树大招风创作的架空新本格推理本，结合阵营博弈与人物情感，适合 3 男 3 女共 6 人体验，时长约 6–7 小时。",
+    people: 6,
+    img: "https://www.52jubensha.com/wp-content/uploads/2026/09/微信图片_2026-09-28_213746_814-212x300.jpg",
+  },
 ];
 
 export const scriptGames: ScriptGame[] = [

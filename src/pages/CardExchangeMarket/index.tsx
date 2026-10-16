@@ -6,6 +6,7 @@ import CardExchangeMine from "../CardExchangeMine";
 import CardCharacterAssociation from "../CardCharacterAssociation";
 import CardRarityRanking from "../CardRarityRanking";
 import CardTile from "./components/CardTile";
+import MembershipTag from "./components/MembershipTag";
 import { cardCatalog, getCardById } from "./mockData";
 import { getCardExchangeProfile } from "./profileStore";
 import { CardExchangeServerFilter, CloudCardExchangeProfile, getPublishedCardExchangeProfilesPage } from "../../services/cardExchangeCloud";
@@ -252,10 +253,10 @@ function MarketPanel() {
                     <Text className={styles.uid} onClick={() => copyUid(post)}>{post.uid}</Text>
                     <View className={styles.uidCopyButton} onClick={() => copyUid(post)} aria-label="复制 UID"><Text className={`iconfont ${styles.uidCopyIcon}`}>{"\ue636"}</Text></View>
                     <Text className={`${styles.serverTag} ${styles[`server${getServerType(post.uid)}`]}`}>{SERVER_LABEL[getServerType(post.uid)]}</Text>
-                    {isAdmin && post._id ? <View className={styles.hidePost} onClick={() => hidePost(post)} aria-label="隐藏"><Text className={`iconfont ${styles.hidePostIcon}`}>{"\ue65f"}</Text></View> : null}
+                    {Number(post.membershipExpiresAt) > Date.now() && Number(post.membershipAdCount) >= 1 ? <MembershipTag count={Number(post.membershipAdCount)} compact /> : null}
                   </View>
                 </View>
-                {formatUpdatedAt(post.updatedAt) ? <Text className={styles.updatedTime}>更新于 {formatUpdatedAt(post.updatedAt)}</Text> : null}
+                {formatUpdatedAt(post.updatedAt) ? <Text className={styles.updatedTime} onClick={isAdmin && post._id ? () => hidePost(post) : undefined}>更新于 {formatUpdatedAt(post.updatedAt)}</Text> : null}
               </View>
 
             {post.contactA || post.contactB || post.activeTime ? <View className={styles.contactBox}>

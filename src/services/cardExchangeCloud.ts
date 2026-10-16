@@ -12,6 +12,8 @@ export type CloudCardExchangeProfile = CardExchangeProfile & {
   _id?: string;
   avatarUrl: string;
   createdAt?: number;
+  membershipExpiresAt?: number;
+  membershipAdCount?: number;
 };
 
 export type CardExchangeProfilePage = {
@@ -108,7 +110,8 @@ export const getMyCardExchangeProfile = async (): Promise<CloudCardExchangeProfi
 };
 
 export const saveMyCardExchangeProfile = async (profile: CloudCardExchangeProfile) => {
-  const next = { ...profile, ...cleanProfile(profile), isAdmin: getCachedCardExchangeProfile()?.isAdmin === true, updatedAt: new Date().toISOString() };
+  const cached = getCachedCardExchangeProfile();
+  const next = { ...profile, ...cleanProfile(profile), membershipExpiresAt: cached?.membershipExpiresAt, membershipAdCount: cached?.membershipAdCount, isAdmin: cached?.isAdmin === true, updatedAt: new Date().toISOString() };
   if (!initCardExchangeCloud()) {
     cacheCardExchangeProfile(next);
     return next;
@@ -117,6 +120,14 @@ export const saveMyCardExchangeProfile = async (profile: CloudCardExchangeProfil
   next._id = result.result?._id || next._id;
   cacheCardExchangeProfile(next);
   return next;
+};
+
+export const claimMembershipReward = async (): Promise<CloudCardExchangeProfile> => {
+  if (!initCardExchangeCloud()) throw new Error("请在微信小程序中观看广告");
+  const result = await cloud().callFunction({ name: "cardExchangeMembership" });
+  if (!result.result?.profile) throw new Error("会员领取失败");
+  cacheCardExchangeProfile(result.result.profile);
+  return result.result.profile;
 };
 
 export const getPublishedCardExchangeProfilesPage = async (page = 0, pageSize = 10, ownedFilterIds: string[] = [], wantedFilterIds: string[] = [], serverFilter: CardExchangeServerFilter = "all"): Promise<CardExchangeProfilePage> => {
