@@ -1,4 +1,4 @@
-import { Ad, View, Text, Image } from "@tarojs/components";
+import { AdCustom, View, Text, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
@@ -179,7 +179,7 @@ export default function Index() {
         {renderAboutCard(aboutCard)}
         {process.env.TARO_ENV === "weapp" && !adFailed ? (
           <View className={styles.bottomAd}>
-            <Ad unitId="adunit-c1afd7f08e220e8c" onError={() => setAdFailed(true)} />
+            <AdCustom unitId="adunit-c1afd7f08e220e8c" onError={() => setAdFailed(true)} />
           </View>
         ) : null}
       </View>

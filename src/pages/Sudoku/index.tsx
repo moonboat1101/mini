@@ -1,6 +1,6 @@
 import { Button, Input, Text, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
 
 import styles from "./index.module.less";
@@ -238,8 +238,6 @@ export default function Sudoku() {
   const [isShowingAnswer, setIsShowingAnswer] = useState(false);
   const [isDifficultyModalVisible, setIsDifficultyModalVisible] = useState(false);
   const [difficultyInput, setDifficultyInput] = useState(String(DEFAULT_EMPTY_COUNT));
-  const [completeFlashIndex, setCompleteFlashIndex] = useState(-1);
-  const completeFlashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const statuses = useMemo(() => createStatuses(grid), [grid]);
   const availableNumbers = useMemo(() => {
     if (selectedIndex < 0 || puzzle.givens[selectedIndex]) {
@@ -255,37 +253,12 @@ export default function Sudoku() {
     return new Set(NUMBERS.filter((value) => canPlace(nextGrid, selectedIndex, value)));
   }, [grid, puzzle.givens, selectedIndex]);
 
-  useEffect(
-    () => () => {
-      if (completeFlashTimerRef.current) {
-        clearTimeout(completeFlashTimerRef.current);
-      }
-    },
-    []
-  );
-
-  const playCompleteFlash = (index: number) => {
-    if (completeFlashTimerRef.current) {
-      clearTimeout(completeFlashTimerRef.current);
-    }
-
-    setCompleteFlashIndex(-1);
-    setTimeout(() => {
-      setCompleteFlashIndex(index);
-      completeFlashTimerRef.current = setTimeout(() => {
-        setCompleteFlashIndex(-1);
-        completeFlashTimerRef.current = null;
-      }, 1180);
-    }, 16);
-  };
-
   const startNewPuzzle = (nextEmptyCount = emptyCount) => {
     const nextPuzzle = createPuzzle(nextEmptyCount);
     setPuzzle(nextPuzzle);
     setGrid([...nextPuzzle.puzzle]);
     setSelectedIndex(-1);
     setIsShowingAnswer(false);
-    setCompleteFlashIndex(-1);
   };
 
   const confirmReset = () => {
@@ -298,7 +271,6 @@ export default function Sudoku() {
         setGrid([...puzzle.puzzle]);
         setSelectedIndex(-1);
         setIsShowingAnswer(false);
-        setCompleteFlashIndex(-1);
       },
     });
   };
@@ -351,8 +323,13 @@ export default function Sudoku() {
     nextGrid[selectedIndex] = value;
     setGrid(nextGrid);
 
-    if (isSolved(nextGrid, puzzle.solution)) {
-      playCompleteFlash(selectedIndex);
+    if (isSolved(nextGrid, puzzle.solution) && !isSolved(grid, puzzle.solution)) {
+      Taro.showModal({
+        title: "恭喜你！",
+        content: "你已正确完成全部数独！",
+        showCancel: false,
+        confirmText: "太棒了",
+      });
       return;
     }
   };
@@ -369,7 +346,6 @@ export default function Sudoku() {
     const nextGrid = [...grid];
     nextGrid[selectedIndex] = 0;
     setGrid(nextGrid);
-    setCompleteFlashIndex(-1);
   };
 
   return (
@@ -418,9 +394,7 @@ export default function Sudoku() {
                   isSelected ? styles.selectedCell : ""
                 } ${
                   isRelated ? styles.relatedCell : ""
-                } ${statuses[index] === "conflict" ? styles.conflictCell : ""} ${
-                  completeFlashIndex === index ? styles.completeFlashCell : ""
-                }`}
+                } ${statuses[index] === "conflict" ? styles.conflictCell : ""}`}
                 onClick={() => {
                   if (!isGiven) {
                     setSelectedIndex((current) => (current === index ? -1 : index));

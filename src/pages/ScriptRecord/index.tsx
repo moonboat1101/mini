@@ -10,6 +10,7 @@ import {
 import { usePageShare } from "../../hooks/usePageShare";
 
 import styles from "./index.module.less";
+import SlidingNavigation from "../../components/SlidingNavigation";
 
 const MODAL_PANEL_ID = "script-record-modal-panel";
 const MODAL_HEADER_ID = "script-record-modal-header";
@@ -398,12 +399,16 @@ export default function ScriptRecord() {
         {visibleList.map((item) => renderScriptCard(item))}
       </View>
 
-      <View className={styles.bottomNavigation}>
-        <View className={styles.bottomNavigationIndicator} style={{ transform: `translateX(${activeNav === "time" ? "0" : activeNav === "rating" ? "100%" : "200%"})` }} />
-        <View className={`${styles.bottomNavigationItem} ${activeNav === "time" ? styles.bottomNavigationItemActive : ""}`} onClick={() => selectListTab("time")}>按时间</View>
-        <View className={`${styles.bottomNavigationItem} ${activeNav === "rating" ? styles.bottomNavigationItemActive : ""}`} onClick={() => selectListTab("rating")}>按评分</View>
-        <View className={`${styles.bottomNavigationItem} ${activeNav === "wishlist" ? styles.bottomNavigationItemActive : ""}`} onClick={() => selectListTab("wishlist")}>想玩</View>
-      </View>
+      <SlidingNavigation
+        className={styles.bottomNavigation}
+        value={activeNav}
+        items={[
+          { value: "time", label: "按时间" },
+          { value: "rating", label: "按评分" },
+          { value: "wishlist", label: "愿望单" },
+        ]}
+        onChange={(value) => selectListTab(value as FilterType)}
+      />
 
       {activeItem && (
         <View

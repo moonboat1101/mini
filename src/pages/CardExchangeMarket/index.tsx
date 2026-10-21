@@ -11,6 +11,7 @@ import { cardCatalog, getCardById } from "./mockData";
 import { getCardExchangeProfile } from "./profileStore";
 import { CardExchangeServerFilter, CloudCardExchangeProfile, getPublishedCardExchangeProfilesPage } from "../../services/cardExchangeCloud";
 import styles from "./index.module.less";
+import SlidingNavigation from "../../components/SlidingNavigation";
 import { getMyCardExchangeProfile, hideCardExchangeProfile } from "../../services/cardExchangeCloud";
 
 type FilterTarget = "owned" | "wanted" | null;
@@ -83,13 +84,17 @@ export default function CardExchangeMarket() {
         {activeTab === "mine" ? <CardExchangeMine /> : null}
         {activeTab === "association" ? <CardCharacterAssociation /> : null}
       </View>
-      <View className={styles.marketActions}>
-        <View className={styles.islandIndicator} style={{ transform: `translateX(${activeTab === "market" ? "0" : activeTab === "mine" ? "100%" : activeTab === "ranking" ? "200%" : "300%"})` }} />
-        <Button className={`${styles.islandTab} ${activeTab === "market" ? styles.islandTabActive : ""}`} onClick={() => switchTab("market")}>交换市场</Button>
-        <Button className={`${styles.islandTab} ${activeTab === "mine" ? styles.islandTabActive : ""}`} onClick={() => switchTab("mine")}>我的圣牌</Button>
-        <Button className={`${styles.islandTab} ${activeTab === "ranking" ? styles.islandTabActive : ""}`} onClick={() => switchTab("ranking")}>稀有排行</Button>
-        <Button className={`${styles.islandTab} ${activeTab === "association" ? styles.islandTabActive : ""}`} onClick={() => switchTab("association")}>角色关联</Button>
-      </View>
+      <SlidingNavigation
+        className={styles.marketActions}
+        value={activeTab}
+        items={[
+          { value: "market", label: "交换市场" },
+          { value: "mine", label: "我的圣牌" },
+          { value: "ranking", label: "稀有排行" },
+          { value: "association", label: "角色关联" },
+        ]}
+        onChange={(value) => switchTab(value as MarketTab)}
+      />
     </View>
   );
 }
