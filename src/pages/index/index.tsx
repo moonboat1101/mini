@@ -1,5 +1,6 @@
-import { View, Text, Image } from "@tarojs/components";
+import { Ad, View, Text, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
+import { useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
 import pokeballIcon from "../../assets/icons/pokeball.svg";
 
@@ -12,6 +13,7 @@ const SCRIPT_RECORD_HERO =
 const GACHA_RECORD_HERO = "https://img.remit.ee/i/VLKwKe6kgCCD";
 const CARD_EXCHANGE_HERO = "https://img.remit.ee/i/Nwt54gYGpSao";
 export default function Index() {
+  const [adFailed, setAdFailed] = useState(false);
   usePageShare({
     title: "月舟",
     path: "/pages/index/index",
@@ -175,7 +177,11 @@ export default function Index() {
         </View>
 
         {renderAboutCard(aboutCard)}
-
+        {process.env.TARO_ENV === "weapp" && !adFailed ? (
+          <View className={styles.bottomAd}>
+            <Ad unitId="adunit-c1afd7f08e220e8c" onError={() => setAdFailed(true)} />
+          </View>
+        ) : null}
       </View>
     </>
   );
