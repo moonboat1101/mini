@@ -5,6 +5,11 @@ const WIDTH = 360;
 const PIXEL_RATIO = 3;
 const CONTENT_X = 24;
 const CONTENT_WIDTH = 312;
+// Match the market's compact membership tag (78 × 34 in the 750px design).
+const TAG_SCALE = WIDTH / 750;
+const TAG_WIDTH = 78 * TAG_SCALE;
+const TAG_HEIGHT = 34 * TAG_SCALE;
+const TAG_RADIUS = 12 * TAG_SCALE;
 const QR_CODE = "/assets/mini-program-code.jpg";
 
 type CanvasNode = {
@@ -75,7 +80,16 @@ export const drawCardExchangePoster = async (canvasId: string, data: CardExchang
 
   context.fillStyle = "#ffffff"; context.fillRect(0, 0, WIDTH, outputHeight);
   context.font = "bold 20px sans-serif"; const uidWidth = context.measureText(data.uid).width; drawBoldText(context, data.uid, CONTENT_X, 45, 20, "#222222");
-  const server = serverInfo(data.uid); const tagX = Math.min(298, CONTENT_X + uidWidth + 6); roundedRect(context, tagX, 29, 38, 18, 5); context.fillStyle = server.background; context.fill(); context.font = "700 10px sans-serif"; context.fillStyle = server.color; context.textAlign = "center"; context.fillText(server.label, tagX + 19, 42);
+  const server = serverInfo(data.uid);
+  const tagX = Math.min(CONTENT_X + CONTENT_WIDTH - TAG_WIDTH, CONTENT_X + uidWidth + 6);
+  const tagY = 38 - TAG_HEIGHT / 2;
+  context.save();
+  roundedRect(context, tagX, tagY, TAG_WIDTH, TAG_HEIGHT, TAG_RADIUS);
+  context.fillStyle = server.background; context.fill();
+  context.font = `700 ${20 * TAG_SCALE}px sans-serif`; context.fillStyle = server.color;
+  context.textAlign = "center"; context.textBaseline = "middle";
+  context.fillText(server.label, tagX + TAG_WIDTH / 2, tagY + TAG_HEIGHT / 2);
+  context.restore();
 
   let y = 70;
   const contacts = [data.contactA ? { label: "企鹅", value: data.contactA } : null, data.contactB ? { label: "绿泡泡", value: data.contactB } : null, data.activeTime.trim() ? { label: "备注", value: data.activeTime.trim() } : null].filter((item): item is { label: string; value: string } => Boolean(item));
