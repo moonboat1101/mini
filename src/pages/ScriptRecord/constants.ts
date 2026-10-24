@@ -39,6 +39,45 @@ export const wishlist: WishlistGame[] = [
     img: "https://kimi-web-img.moonshot.cn/img/pic3.zhimg.com/5d13a42359920a2ccdc6e052e4b802bc63827ecd.jpg",
   },
   {
+    name: "无相人考古奇案",
+    duration: 8,
+    desc: "六位推理社学生受考古教授邀请，品鉴一部唐代出土的推理小说。通过摸顶秘术读取颅骨留下的记忆，玩家将探索无相人与阴阳眼的特殊设定，破解离奇案件，拼起人物关系与历史中的隐秘往事。表里山河汗青系列作品，以设定推理、故事还原与历史立意交织展开。",
+    people: 6,
+    img: "https://fanc-rotterdam.myshopify.com/cdn/shop/files/20251024193514_131_424_600x.png?v=1761327839",
+  },
+  {
+    name: "王不见王",
+    duration: 10,
+    desc: "作家佐藤红叶的新书刚刚面世，便有一场直播命案将她推到审讯室中。她承认杀害爱人，却让案件的缘由更加难解。调查的线索逐渐汇入她笔下的《王不见王》，读者需要从规则与人物视角出发，循着层层逻辑审视这场智斗。引力弹弓发行的六人设定推理本，侧重长逻辑链与博弈推演，体验时长约 10 小时以上。",
+    people: 6,
+    img: "https://fanc-rotterdam.myshopify.com/cdn/shop/files/20260823122704.jpg?v=1787481105",
+  },
+  {
+    name: "土狗",
+    duration: 8,
+    // 据公开简介改写：https://www.sohu.com/a/908528087_122378800
+    desc: "第一次独自调查案件，我走进了黄土村。风里裹着沙尘与煤灰，村民看向外来者的眼神里满是敌意。起初，我以为他们只是不了解村中藏着的罪恶，直到调查深入，才发现无知并不足以解释他们的态度。村中的人究竟在守护什么？那些纠缠不清的往事，又与眼前的案件有何关联？要看清这片黄土下埋藏的真相，得先读懂这里的人。",
+    people: 6,
+    img: "https://www.52jubensha.com/wp-content/uploads/2025/06/微信图片_20250628212057-179x300.jpg",
+  },
+  {
+    name: "幻想诸因",
+    duration: 8,
+    // 据公开介绍与玩家前言改写：https://www.165club.cn/jbsgl/15223.html
+    // https://qiandao.com/post?postId=979208179697102188
+    desc: "一群失去记忆的人被聚集在封闭的场所，面前是等待解答的离奇案件。文字、图像与看似寻常的叙述，都可能藏着被忽略的线索。众人循着故事追查，试图拼回真相，却还要面对推理禁忌与悖论构成的蜂巢谜局。案件之间究竟有着怎样的联系，遗失的记忆又将把他们带向何处？想要找到生路，必须先辨清眼前的虚构与真实。",
+    people: 6,
+    img: "https://www.52jubensha.com/wp-content/uploads/2026/04/微信图片_2026-04-09_211429_303-212x300.jpg",
+  },
+  {
+    name: "雪夜城谜案",
+    duration: 12,
+    // 据公开简介改写：https://spot-point.com/scripts/雪夜城謎案
+    desc: "应日渐衰弱的斯卡蒂女神之请，啜灵师们前往雪夜城，追查乌勒尔家族覆灭的缘由。等待他们的是三桩无法解释的惨案：家主死于高塔顶端，少女横尸雪地，人偶碎裂在小屋之中。不同的现场，同样不可能发生的杀戮，将调查引向孤城深处。雪夜里悄然浮现的复生迹象，以及双头巨蛇留下的最后一道谜题，似乎都在提醒来者：寻找答案时，切勿惊醒沉睡的存在。",
+    people: 6,
+    img: "https://jubenshacentral.com/_astro/the-snow-night-city-mystery-jubensha.CQLo3mbR_1RBT3A.webp",
+  },
+  {
     name: "北宋奇案·汴京",
     duration: 8,
     desc: "一段北宋时期耻辱的历史，两个南宋同朝为官的叔侄，三位曾经纠葛种种的帝王，竟与那四起未曾结案的密室斩首案深深牵扯。而那尘封于汴京城下的秘密，亦随着它的陨落，或被深埋，或欲出土。以本格密室为面、长逻辑推理为底，四起斩首密室案件环环相扣，在破解诡计之后，一条悖论将引出整段历史中被隐藏的权谋故事。",
@@ -88,32 +127,11 @@ export const wishlist: WishlistGame[] = [
     img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/24aac68a2608ca80c64b082c2b1d60647d8debe6.jpg",
   },
   {
-    name: "鬼河怒放",
-    duration: 9,
-    desc: "鬼河出现之后，死亡成为不断增长的数字，世界陷入绝望。研究者认为，鬼河是异世界夹缝中灵异力量汇聚而成的存在，当力量满溢，便会冲破壁垒、侵入现实。六位调查员深入被鬼河笼罩的红花镇，在诡异规则与重重案件中寻找真相。中式新本格推理，以信息差与智斗为核心。",
-    people: 6,
-    img: "https://okkmfpplnqhdoceyqpey.supabase.co/storage/v1/object/public/script-covers/qiandao/939563313346420729.jpg",
-  },
-  {
-    name: "无相人考古奇案",
-    duration: 8,
-    desc: "六位推理社学生受考古教授邀请，品鉴一部唐代出土的推理小说。通过摸顶秘术读取颅骨留下的记忆，玩家将探索无相人与阴阳眼的特殊设定，破解离奇案件，拼起人物关系与历史中的隐秘往事。表里山河汗青系列作品，以设定推理、故事还原与历史立意交织展开。",
-    people: 6,
-    img: "https://fanc-rotterdam.myshopify.com/cdn/shop/files/20251024193514_131_424_600x.png?v=1761327839",
-  },
-  {
     name: "无相人2：画皮考古奇案",
     duration: 8,
     desc: "江南异人能够解衣换面、借皮还生，荒村旧迹与白骨之中藏着尚未解开的往事。一卷聊斋，写狐写鬼，也留下真假难辨的传闻。无相人系列第二部以画皮与聊斋志怪为引，作为独立平行篇章，将奇术设定、案件推理与故事还原融为一体。",
     people: 6,
     img: "https://wx1.sinaimg.cn/large/0072XVUSly1ihdbhbe7bhj30jn0rs78i.jpg",
-  },
-  {
-    name: "王不见王",
-    duration: 10,
-    desc: "作家佐藤红叶的新书刚刚面世，便有一场直播命案将她推到审讯室中。她承认杀害爱人，却让案件的缘由更加难解。调查的线索逐渐汇入她笔下的《王不见王》，读者需要从规则与人物视角出发，循着层层逻辑审视这场智斗。引力弹弓发行的六人设定推理本，侧重长逻辑链与博弈推演，体验时长约 10 小时以上。",
-    people: 6,
-    img: "https://fanc-rotterdam.myshopify.com/cdn/shop/files/20260823122704.jpg?v=1787481105",
   },
   {
     name: "阿比苏的玫瑰花",
@@ -125,6 +143,16 @@ export const wishlist: WishlistGame[] = [
 ];
 
 export const scriptGames: ScriptGame[] = [
+  {
+    name: "鬼河怒放",
+    time: "2026.10",
+    dm: "惊奇侦探-暴君",
+    comment: "质量整体比较高，虽然设定比较多，但是设定完整，逻辑非常硬没有杠点，结尾略有瑕疵，不过可以直接忽略",
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "SZY", "YWL"],
+    desc: "鬼河出现之后，死亡成为不断增长的数字，世界陷入绝望。研究者认为，鬼河是异世界夹缝中灵异力量汇聚而成的存在，当力量满溢，便会冲破壁垒、侵入现实。六位调查员深入被鬼河笼罩的红花镇，在诡异规则与重重案件中寻找真相。中式新本格推理，以信息差与智斗为核心。",
+    score: 8,
+    img: "https://cqbiozfappfwfcahtxfm.supabase.co/storage/v1/render/image/public/studio-photos/covers/qiandao/939563313346420729/1784297615524.webp?width=360&resize=contain&quality=60",
+  },
   {
     name: "因火成烟",
     time: "2026.10",
