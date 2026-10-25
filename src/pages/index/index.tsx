@@ -33,7 +33,7 @@ export default function Index() {
     },
     {
       title: "剧本杀",
-      subtitle: "· 剧本简介\n· 评分\n· 简要复盘",
+      subtitle: "· 推理还原本测评\n· 个人打本记录\n· 好本安利",
       backgroundImage: SCRIPT_RECORD_HERO,
       url: "/pages/ScriptRecord/index",
     },

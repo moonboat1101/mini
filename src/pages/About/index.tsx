@@ -6,7 +6,7 @@ import douyinIcon from "../../assets/icons/douyin.svg";
 import styles from "./index.module.less";
 
 const ABOUT_CONTENT =
-  "　　月舟是我自用的一个非营利性小程序，小程序素材取用自官方网站、大型 Wiki、AI 生成等渠道，如权利方提出要求，会第一时间配合下架相关素材。平台仅提供信息展示，不参与、不担保、不介入任何实际行为。";
+  "　　月舟是自用为主的一个非商业化小程序，小程序部分素材取自官方网站、大型 Wiki、AI 生成等渠道，如权利方提出要求，会第一时间配合下架相关素材。平台仅提供信息展示，不参与、不担保、不介入任何实际行为。本小程序与米哈游等公司无关。";
 const CONTACTS = [
   { label: "邮箱", icon: "\ue633", value: "1025196468@qq.com", variant: "email" },
   { label: "小红书", icon: "\ue600", value: "5075116612", variant: "xiaohongshu" },

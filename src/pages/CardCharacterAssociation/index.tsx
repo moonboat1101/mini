@@ -1,8 +1,9 @@
-import { Button, Image, Text, View } from "@tarojs/components";
+import { AdCustom, Button, Image, Text, View } from "@tarojs/components";
 import { useState } from "react";
-import { getCharacterAvatar } from "./avatars";
+import { getCharacterAvatar, sortCharactersByRarityAndRecency } from "./avatars";
 import { cardCatalog } from "../CardExchangeMarket/mockData";
 import { cardCharacterAssociations, ElementId, elements } from "./data";
+import { getDefaultMonthlyElements } from "./monthlyElements";
 import marketStyles from "../CardExchangeMarket/index.module.less";
 import styles from "./index.module.less";
 
@@ -19,7 +20,8 @@ function CharacterAvatar({ name }: { name: string }) {
 }
 
 export default function CardCharacterAssociation() {
-  const [selected, setSelected] = useState<ElementId[]>(() => elements.map((element) => element.id));
+  const [adFailed, setAdFailed] = useState(false);
+  const [selected, setSelected] = useState<ElementId[]>(() => getDefaultMonthlyElements());
   const visibleElements = elements.filter((element) => selected.includes(element.id));
   const toggle = (id: ElementId) => setSelected((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
   return <View className={marketStyles.marketRoot}>
@@ -28,7 +30,7 @@ export default function CardCharacterAssociation() {
       <View className={styles.filters}>{elements.map((element) => <Button key={element.id} aria-label={`${element.name}元素${selected.includes(element.id) ? "，已选中" : "，未选中"}`} className={`${styles.elementButton} ${selected.includes(element.id) ? styles.elementSelected : ""}`} style={selected.includes(element.id) ? { backgroundColor: element.background } : undefined} onClick={() => toggle(element.id)}>
         <ElementIcon element={element} />
       </Button>)}</View>
-      <Button className={marketStyles.resetButton} onClick={() => setSelected(elements.map((element) => element.id))}>重置</Button>
+      <Button className={marketStyles.resetButton} onClick={() => setSelected(getDefaultMonthlyElements())}>重置</Button>
     </View>
     <View className={styles.list}>{visibleElements.length ? cardCatalog.map((card) => <View key={card.id} className={styles.cardBox}>
       <View className={styles.cardArtwork}>
@@ -36,12 +38,17 @@ export default function CardCharacterAssociation() {
         <Text className={styles.cardName}>{card.name}</Text>
       </View>
       <View className={styles.rows}>{visibleElements.map((element) => {
-        const names = cardCharacterAssociations[card.id][element.id];
+        const names = sortCharactersByRarityAndRecency(cardCharacterAssociations[card.id][element.id]);
         return <View key={element.id} className={styles.elementRow} style={{ backgroundColor: element.background }}>
           <ElementIcon element={element} />
           <View className={styles.characters}>{names.map((name) => <CharacterAvatar key={name} name={name} />)}</View>
         </View>;
       })}</View>
     </View>) : <View className={marketStyles.emptyState}>请选择要展示的元素</View>}</View>
+    {process.env.TARO_ENV === "weapp" && !adFailed ? (
+      <View className={styles.bottomAd}>
+        <AdCustom unitId="adunit-068666702b10bc4d" onError={() => setAdFailed(true)} />
+      </View>
+    ) : null}
   </View>;
 }

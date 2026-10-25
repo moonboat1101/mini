@@ -214,18 +214,17 @@ export default function CardExchangeMine() {
       {hasValidUid ? <Button className={styles.posterButton} onClick={createPoster}><Text className={`iconfont ${styles.posterButtonIcon}`}>{"\ue627"}</Text><Text>生成图片</Text></Button> : null}
       <View className={styles.membershipPanel}>
         <View className={styles.membershipHeader}>
-          <Text className={styles.sectionTitle}>会员体系</Text>
-          <Text className={styles.membershipDisclaimer}>娱乐玩法，不影响功能</Text>
-        </View>
-        <View className={styles.membershipStatusRow}>
-          <MembershipTag count={membershipAdCount} />
-          <View className={styles.membershipExpiry}>
-            <View className={`${styles.membershipStatusDot} ${membershipActive ? styles.membershipActiveDot : styles.membershipExpiredDot}`} />
-            <Text>{membershipActive ? membershipExpiryLabel : "已过期"}</Text>
+          <Text className={styles.sectionTitle}>会员</Text>
+          <View className={styles.membershipStatusRow}>
+            <View className={styles.membershipExpiry}>
+              <View className={`${styles.membershipStatusDot} ${membershipActive ? styles.membershipActiveDot : styles.membershipExpiredDot}`} />
+              <Text>{membershipActive ? membershipExpiryLabel : "已过期"}</Text>
+            </View>
+            <MembershipTag count={membershipAdCount} />
           </View>
         </View>
-        <Text className={styles.membershipCopy}>会员权益：市场信息展示时，多一些会员标识</Text>
-        <Text className={styles.membershipCopy}>会员获取：观看一条广告视频获取 30 天会员有效期</Text>
+        <Text className={styles.membershipCopy}>获取：观看一条广告视频获取 30 天会员有效期</Text>
+        <Text className={styles.membershipCopy}>权益：市场信息额外展示会员标识，并根据累计次数升级，<Text className={styles.membershipEmphasis}>功能上无区别</Text></Text>
         <View className={styles.membershipTable}>
           <View className={`${styles.membershipTableRow} ${styles.membershipTableHead}`}><Text>次数</Text><Text>会员标识</Text></View>
           {[{ count: "1–2 次", minimum: 1 }, { count: "3–4 次", minimum: 3 }, { count: "5 次及以上", minimum: 5 }].map((level) => (

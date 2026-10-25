@@ -1,6 +1,6 @@
-import { Button, Image, Picker, Text, View } from "@tarojs/components";
+import { AdCustom, Button, Image, Picker, Text, View } from "@tarojs/components";
 import Taro, { useReachBottom } from "@tarojs/taro";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { usePageShare } from "../../hooks/usePageShare";
 import CardExchangeMine from "../CardExchangeMine";
 import CardCharacterAssociation from "../CardCharacterAssociation";
@@ -20,6 +20,9 @@ type ServerType = "official" | "bilibili" | "overseas";
 type ServerFilter = CardExchangeServerFilter;
 // 云函数每页最多返回 20 条展示数据；比原先 10 条少一半翻页与云函数调用。
 const PAGE_SIZE = 20;
+const MARKET_AD_UNIT_ID = "adunit-2a8fb17005927eb1";
+const MARKET_SECOND_AD_UNIT_ID = "adunit-92848be61375c24e";
+const MARKET_THIRD_AD_UNIT_ID = "adunit-b0198258b4173b95";
 const getServerType = (uid: string): ServerType => {
   if (/^[1-4]\d{8}$/.test(uid)) return "official";
   if (/^5\d{8}$/.test(uid)) return "bilibili";
@@ -100,6 +103,9 @@ export default function CardExchangeMarket() {
 }
 
 function MarketPanel() {
+  const [adFailed, setAdFailed] = useState(false);
+  const [secondAdFailed, setSecondAdFailed] = useState(false);
+  const [thirdAdFailed, setThirdAdFailed] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     let cancelled = false;
@@ -250,8 +256,9 @@ function MarketPanel() {
       </View>
 
       <View className={styles.postList}>
-        {posts.map((post) => (
-          <View className={styles.postCard} key={post._id || post.uid}>
+        {posts.map((post, index) => (
+          <Fragment key={post._id || post.uid}>
+          <View className={styles.postCard}>
               <View className={styles.postMeta}>
                 <View className={styles.userInfo}>
                   <View className={styles.nameRow}>
@@ -283,6 +290,22 @@ function MarketPanel() {
               </View>
             </View>
           </View>
+          {index === 9 && process.env.TARO_ENV === "weapp" && !adFailed ? (
+            <View className={styles.marketAd}>
+              <AdCustom unitId={MARKET_AD_UNIT_ID} onError={() => setAdFailed(true)} />
+            </View>
+          ) : null}
+          {index === 19 && process.env.TARO_ENV === "weapp" && !secondAdFailed ? (
+            <View className={styles.marketAd}>
+              <AdCustom unitId={MARKET_SECOND_AD_UNIT_ID} onError={() => setSecondAdFailed(true)} />
+            </View>
+          ) : null}
+          {index === 29 && process.env.TARO_ENV === "weapp" && !thirdAdFailed ? (
+            <View className={styles.marketAd}>
+              <AdCustom unitId={MARKET_THIRD_AD_UNIT_ID} onError={() => setThirdAdFailed(true)} />
+            </View>
+          ) : null}
+          </Fragment>
         ))}
         {!loading && !posts.length ? <View className={styles.emptyState}><Text>暂时还没有符合条件的交换意愿</Text><Text className={styles.emptyStateHint}>完善并发布你的圣牌资料后，会出现在这里</Text></View> : null}
         {loading ? <View className={styles.emptyState}><Text>正在加载市场资料…</Text></View> : null}
