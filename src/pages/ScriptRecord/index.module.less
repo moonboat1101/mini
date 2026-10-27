@@ -23,11 +23,7 @@
   .moon-page-background();
   color: var(--color-text-primary);
 
-  .bottomNavigation { position: fixed; z-index: 30; right: 0; bottom: 32px; left: 50%; width: 420px; max-width: calc(100% - 56px); height: 88px; padding: 7px; box-sizing: border-box; display: flex; border-radius: 44px; overflow: hidden; background: var(--surface-navigation); box-shadow: var(--shadow-navigation); transform: translateX(-50%); }
-  .bottomNavigationIndicator { position: absolute; z-index: -1; top: 7px; bottom: 7px; left: 7px; width: calc((100% - 14px) / 3); transition: transform 280ms cubic-bezier(.2,.75,.3,1); &::before { content: ""; position: absolute; top: 3px; right: 5px; bottom: 3px; left: 5px; border-radius: 34px; background: var(--surface-navigation-active); box-shadow: none; } }
-  .bottomNavigationItem { position: relative; z-index: 1; flex: 1; height: 72px; padding-top: 2px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-radius: 37px; color: var(--color-text-secondary); font-size: @font-size-secondary; line-height: 72px; white-space: nowrap; transition: color 220ms ease, transform 220ms ease; }
-  .bottomNavigationItemActive { color: var(--color-text-muted); font-weight: 800; }
-  .bottomNavigationItem:active { transform: scale(.96); }
+  .bottomNavigation { position: fixed; z-index: 30; right: 0; bottom: 32px; left: 50%; width: 420px; max-width: calc(100% - 56px); height: 80px; padding: 4px; box-sizing: border-box; display: flex; border-radius: 44px; overflow: hidden; background: var(--surface-navigation); box-shadow: var(--shadow-navigation); transform: translateX(-50%); }
 
   .cardList {
     display: flex;
@@ -442,4 +438,4 @@
 
 .scriptRecord .playTime { color: var(--color-text-primary); }
 .scriptRecord .modalSectionTitle { color: #806943; }
-.scriptRecord .bottomNavigation { bottom: calc(24px + env(safe-area-inset-bottom)); }
+.scriptRecord .bottomNavigation { bottom: calc(16px + env(safe-area-inset-bottom)); }

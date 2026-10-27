@@ -20,10 +20,10 @@
 
 .pill {
   position: absolute;
-  inset: 3px 5px;
+  inset: 2px 3px;
   border-radius: 34px;
   background: var(--surface-navigation-active);
-  transition: transform 160ms ease;
+  transition: transform 160ms ease, background-color 160ms ease;
 }
 
 .dragging {
@@ -31,7 +31,10 @@
 }
 
 .pressed {
-  .pill { transform: scale(.94, .9); }
+  .pill {
+    transform: scale(.94, .9);
+    background: var(--surface-navigation-pressed);
+  }
 }
 
 .item {
