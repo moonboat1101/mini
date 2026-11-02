@@ -40,7 +40,7 @@ const roundedRect = (context: CanvasRenderingContext2D, x: number, y: number, wi
 };
 const drawText = (context: CanvasRenderingContext2D, text: string, x: number, y: number, size: number, color: string, weight = 400) => { context.font = `${weight} ${size}px sans-serif`; context.fillStyle = color; context.textAlign = "left"; context.fillText(text, x, y); };
 const drawBoldText = (context: CanvasRenderingContext2D, text: string, x: number, y: number, size: number, color: string) => { context.font = `bold ${size}px sans-serif`; context.fillStyle = color; context.textAlign = "left"; context.fillText(text, x, y); context.strokeStyle = color; context.lineWidth = .35; context.strokeText(text, x, y); };
-const serverInfo = (uid: string) => /^[1-4]\d{8}$/.test(uid) ? { label: "官服", color: "#966516", background: "#f8e8bd" } : /^5\d{8}$/.test(uid) ? { label: "B服", color: "#9b4a67", background: "#f8dce5" } : { label: "外服", color: "#70528e", background: "#e8def4" };
+const serverInfo = (uid: string) => /^[1-4]\d{8}$/.test(uid) ? { label: "官服", color: "#936a29", background: "#f5ead2" } : /^5\d{8}$/.test(uid) ? { label: "B服", color: "#9b4a67", background: "#f8dce5" } : { label: "外服", color: "#70528e", background: "#e8def4" };
 const section = (context: CanvasRenderingContext2D, text: string, y: number) => { context.fillStyle = "#806943"; roundedRect(context, CONTENT_X, y - 10, 4, 14, 2); context.fill(); drawText(context, text, CONTENT_X + 9, y + 2, 14, "#806943", 800); };
 
 const drawGrid = (context: CanvasRenderingContext2D, cards: CardCatalogItem[], y: number, images: Map<string, ReturnType<CanvasNode["createImage"]>>) => {
