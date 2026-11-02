@@ -5,6 +5,7 @@ import { elements } from "./data";
 export const MONTHLY_THEATER_ELEMENTS: Readonly<Record<string, readonly ElementId[]>> = {
   "2026-10": ["hydro", "cryo", "anemo"],
   "2026-11": ["hydro", "electro", "geo"],
+  "2026-12": ["hydro", "pyro", "geo"],
 };
 
 export function getDefaultMonthlyElements(date = new Date()): ElementId[] {
