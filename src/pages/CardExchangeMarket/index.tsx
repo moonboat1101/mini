@@ -21,8 +21,6 @@ type ServerFilter = CardExchangeServerFilter;
 // 云函数每页最多返回 20 条展示数据；比原先 10 条少一半翻页与云函数调用。
 const PAGE_SIZE = 20;
 const MARKET_AD_UNIT_ID = "adunit-2a8fb17005927eb1";
-const MARKET_SECOND_AD_UNIT_ID = "adunit-92848be61375c24e";
-const MARKET_THIRD_AD_UNIT_ID = "adunit-b0198258b4173b95";
 const getServerType = (uid: string): ServerType => {
   if (/^[1-4]\d{8}$/.test(uid)) return "official";
   if (/^5\d{8}$/.test(uid)) return "bilibili";
@@ -104,8 +102,6 @@ export default function CardExchangeMarket() {
 
 function MarketPanel() {
   const [adFailed, setAdFailed] = useState(false);
-  const [secondAdFailed, setSecondAdFailed] = useState(false);
-  const [thirdAdFailed, setThirdAdFailed] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     let cancelled = false;
@@ -293,16 +289,6 @@ function MarketPanel() {
           {index === 9 && process.env.TARO_ENV === "weapp" && !adFailed ? (
             <View className={styles.marketAd}>
               <AdCustom unitId={MARKET_AD_UNIT_ID} onError={() => setAdFailed(true)} />
-            </View>
-          ) : null}
-          {index === 19 && process.env.TARO_ENV === "weapp" && !secondAdFailed ? (
-            <View className={styles.marketAd}>
-              <AdCustom unitId={MARKET_SECOND_AD_UNIT_ID} onError={() => setSecondAdFailed(true)} />
-            </View>
-          ) : null}
-          {index === 29 && process.env.TARO_ENV === "weapp" && !thirdAdFailed ? (
-            <View className={styles.marketAd}>
-              <AdCustom unitId={MARKET_THIRD_AD_UNIT_ID} onError={() => setThirdAdFailed(true)} />
             </View>
           ) : null}
           </Fragment>
