@@ -317,14 +317,14 @@ export default function ScriptRecord() {
   const renderModalMeta = (item: ScriptListItem) => {
     const meta = item.type === "wishlist"
       ? [
-          { label: "人数:", value: item.people ? `${item.people}人` : "" },
-          { label: "时长:", value: item.duration ? `${Math.ceil(item.duration)}h` : "待补充" },
+          { label: "人数", value: item.people ? `${item.people}人` : "" },
+          { label: "时长", value: item.duration ? `${Math.ceil(item.duration)}h` : "待补充" },
         ]
       : [
-          { label: "时间:", value: item.time?.trim() || "" },
-          { label: "评分:", value: item.score ? `${item.score}分` : "" },
-          { label: "角色:", value: item.role?.trim() || "" },
-          { label: "DM:", value: item.dm?.trim() || "" },
+          { label: "时间", value: item.time?.trim() || "" },
+          { label: "评分", value: item.score ? `${item.score}分` : "" },
+          { label: "角色", value: item.role?.trim() || "" },
+          { label: "DM", value: item.dm?.trim() || "" },
         ];
 
     const visibleMeta = meta.filter(({ value }) => Boolean(value));
@@ -337,17 +337,17 @@ export default function ScriptRecord() {
           <View
             key={label}
             className={`${styles.modalMetaItem} ${
-              label === "DM:" && dmFullWidth
+              label === "DM" && dmFullWidth
                 ? styles.modalMetaItemFullWidth
                 : ""
             }`}
           >
             <Text className={styles.modalMetaLabel}>{label}</Text>
             <Text
-              id={label === "DM:" ? DM_VALUE_ID : undefined}
-              className={`${styles.modalMetaValue} ${label === "DM:" ? styles.modalDmValue : ""}`}
+              id={label === "DM" ? DM_VALUE_ID : undefined}
+              className={`${styles.modalMetaValue} ${label === "DM" ? styles.modalDmValue : ""}`}
             >{value}</Text>
-            {label === "DM:" ? (
+            {label === "DM" ? (
               <Text id={DM_PROBE_ID} className={`${styles.modalMetaValue} ${styles.modalDmProbe}`}>{value}</Text>
             ) : null}
           </View>
