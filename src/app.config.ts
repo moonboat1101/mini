@@ -2,6 +2,7 @@ export default defineAppConfig({
   lazyCodeLoading: "requiredComponents",
   pages: [
     "pages/index/index",
+    "pages/Shizhi/index",
     "pages/genshin/index",
     "pages/HanDou/index",
     "pages/Sudoku/index",

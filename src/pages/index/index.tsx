@@ -63,10 +63,11 @@ export default function Index() {
   ];
   const primaryCards = cards.slice(0, 2);
   const wideCards = cards.slice(2, 3);
+  const shizhiCard = { title: "拾枝", backgroundImage: "https://img.remit.ee/i/DYXXbX99ju7W", subtitle: "· 集原神卡\n· 集原魔卡", url: "/pages/Shizhi/index" };
   const funCards = cards.slice(3, 6);
   const aboutCard = cards[7];
 
-  const handleCardClick = (i: (typeof cards)[number]) => {
+  const handleCardClick = (i: { url: string }) => {
     Taro.navigateTo({
       url: i.url,
     });
@@ -85,7 +86,7 @@ export default function Index() {
   };
 
   const renderCard = (
-    i: (typeof cards)[number],
+    i: (typeof cards)[number] | typeof shizhiCard,
     variant: "primary" | "wide",
   ) => {
     const backgroundImage = "backgroundImage" in i ? i.backgroundImage : "";
@@ -95,7 +96,7 @@ export default function Index() {
       className={`${styles.card} ${
         variant === "primary"
           ? styles.primaryCard
-          : styles.wideCard
+          : i.title === "拾枝" ? styles.shizhiCard : styles.wideCard
       } ${backgroundImage ? styles.fixedBackgroundCard : ""}`}
       onClick={() => handleCardClick(i)}
     >
@@ -103,11 +104,11 @@ export default function Index() {
         {backgroundImage ? <>
           <Image className={styles.featureBackground} src={backgroundImage} mode="aspectFill" />
           <View className={styles.featureBackdrop} />
-        </> : <Image
+        </> : heroImage ? <Image
           className={`${styles.featureArtwork} ${i.title === "抽卡记录" ? styles.gachaFeatureArtwork : ""} ${i.title === "月谕圣牌" ? styles.cardExchangeFeatureArtwork : ""}`}
           src={heroImage}
           mode={variant === "primary" ? "aspectFit" : "aspectFill"}
-        />}
+        /> : null}
         <View className={styles.featureCopy}>
           <Text className={styles.cardTitle}>{i.title}</Text>
           <Text className={styles.featureHint}>{"subtitle" in i ? i.subtitle : ""}</Text>
@@ -163,6 +164,10 @@ export default function Index() {
       <View className={styles.cardSections}>
         <View className={`${styles.cardList} ${styles.primaryCardList}`}>
           {primaryCards.map((card) => renderCard(card, "primary"))}
+        </View>
+
+        <View className={`${styles.cardList} ${styles.wideCardList}`}>
+          {renderCard(shizhiCard, "wide")}
         </View>
 
         <View className={`${styles.cardList} ${styles.wideCardList}`}>

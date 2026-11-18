@@ -1,0 +1,734 @@
+[
+  {
+    "name": "空/荧",
+    "englishName": "",
+    "rarity": "rainbow",
+    "id": "0001"
+  },
+  {
+    "name": "莫娜",
+    "englishName": "Mona",
+    "rarity": "gold",
+    "id": "0002"
+  },
+  {
+    "name": "琴",
+    "englishName": "Qin",
+    "rarity": "gold",
+    "id": "0003"
+  },
+  {
+    "name": "七七",
+    "englishName": "Qiqi",
+    "rarity": "gold",
+    "id": "0004"
+  },
+  {
+    "name": "刻晴",
+    "englishName": "Keqing",
+    "rarity": "gold",
+    "id": "0005"
+  },
+  {
+    "name": "迪卢克",
+    "englishName": "Diluc",
+    "rarity": "gold",
+    "id": "0006"
+  },
+  {
+    "name": "温迪",
+    "englishName": "Venti",
+    "rarity": "rainbow",
+    "id": "0007"
+  },
+  {
+    "name": "可莉",
+    "englishName": "Klee",
+    "rarity": "gold",
+    "id": "0008"
+  },
+  {
+    "name": "达达利亚",
+    "englishName": "Tartaglia",
+    "rarity": "gold",
+    "id": "0009"
+  },
+  {
+    "name": "钟离",
+    "englishName": "Zhongli",
+    "rarity": "rainbow",
+    "id": "0010"
+  },
+  {
+    "name": "阿贝多",
+    "englishName": "Albedo",
+    "rarity": "gold",
+    "id": "0011"
+  },
+  {
+    "name": "甘雨",
+    "englishName": "Ganyu",
+    "rarity": "gold",
+    "id": "0012"
+  },
+  {
+    "name": "魈",
+    "englishName": "Xiao",
+    "rarity": "gold",
+    "id": "0013"
+  },
+  {
+    "name": "胡桃",
+    "englishName": "Hutao",
+    "rarity": "gold",
+    "id": "0014"
+  },
+  {
+    "name": "优菈",
+    "englishName": "Eula",
+    "rarity": "gold",
+    "id": "0015"
+  },
+  {
+    "name": "万叶",
+    "englishName": "Kazuha",
+    "rarity": "gold",
+    "id": "0016"
+  },
+  {
+    "name": "神里绫华",
+    "englishName": "Ayaka",
+    "rarity": "gold",
+    "id": "0017"
+  },
+  {
+    "name": "宵宫",
+    "englishName": "Yoimiya",
+    "rarity": "gold",
+    "id": "0018"
+  },
+  {
+    "name": "雷电将军",
+    "englishName": "Shougun",
+    "rarity": "rainbow",
+    "id": "0019"
+  },
+  {
+    "name": "珊瑚宫心海",
+    "englishName": "Kokomi",
+    "rarity": "gold",
+    "id": "0020"
+  },
+  {
+    "name": "荒泷一斗",
+    "englishName": "Itto",
+    "rarity": "gold",
+    "id": "0021"
+  },
+  {
+    "name": "申鹤",
+    "englishName": "Shenhe",
+    "rarity": "gold",
+    "id": "0022"
+  },
+  {
+    "name": "八重神子",
+    "englishName": "Yae",
+    "rarity": "gold",
+    "id": "0023"
+  },
+  {
+    "name": "神里绫人",
+    "englishName": "Ayato",
+    "rarity": "gold",
+    "id": "0024"
+  },
+  {
+    "name": "夜兰",
+    "englishName": "Yelan",
+    "rarity": "gold",
+    "id": "0025"
+  },
+  {
+    "name": "提纳里",
+    "englishName": "Tighnari",
+    "rarity": "gold",
+    "id": "0026"
+  },
+  {
+    "name": "妮露",
+    "englishName": "Nilou",
+    "rarity": "gold",
+    "id": "0027"
+  },
+  {
+    "name": "赛诺",
+    "englishName": "Cyno",
+    "rarity": "gold",
+    "id": "0028"
+  },
+  {
+    "name": "纳西妲",
+    "englishName": "Nahida",
+    "rarity": "rainbow",
+    "id": "0029"
+  },
+  {
+    "name": "流浪者",
+    "englishName": "Wanderer",
+    "rarity": "gold",
+    "id": "0030"
+  },
+  {
+    "name": "艾尔海森",
+    "englishName": "Alhatham",
+    "rarity": "gold",
+    "id": "0031"
+  },
+  {
+    "name": "迪希雅",
+    "englishName": "Dehya",
+    "rarity": "gold",
+    "id": "0032"
+  },
+  {
+    "name": "白术",
+    "englishName": "Baizhuer",
+    "rarity": "gold",
+    "id": "0033"
+  },
+  {
+    "name": "林尼",
+    "englishName": "Liney",
+    "rarity": "gold",
+    "id": "0034"
+  },
+  {
+    "name": "莱欧斯利",
+    "englishName": "Wriothesley",
+    "rarity": "gold",
+    "id": "0035"
+  },
+  {
+    "name": "那维莱特",
+    "englishName": "Neuvillette",
+    "rarity": "rainbow",
+    "id": "0036"
+  },
+  {
+    "name": "芙宁娜",
+    "englishName": "Furina",
+    "rarity": "rainbow",
+    "id": "0037"
+  },
+  {
+    "name": "娜维娅",
+    "englishName": "Navia",
+    "rarity": "gold",
+    "id": "0038"
+  },
+  {
+    "name": "闲云",
+    "englishName": "Liuyun",
+    "rarity": "gold",
+    "id": "0039"
+  },
+  {
+    "name": "千织",
+    "englishName": "Chiori",
+    "rarity": "gold",
+    "id": "0040"
+  },
+  {
+    "name": "阿蕾奇诺",
+    "englishName": "Arlecchino",
+    "rarity": "gold",
+    "id": "0041"
+  },
+  {
+    "name": "克洛琳德",
+    "englishName": "Clorinde",
+    "rarity": "gold",
+    "id": "0042"
+  },
+  {
+    "name": "希格雯",
+    "englishName": "Sigewinne",
+    "rarity": "gold",
+    "id": "0043"
+  },
+  {
+    "name": "艾梅莉埃",
+    "englishName": "Emilie",
+    "rarity": "gold",
+    "id": "0044"
+  },
+  {
+    "name": "玛拉妮",
+    "englishName": "Mualani",
+    "rarity": "gold",
+    "id": "0045"
+  },
+  {
+    "name": "基尼奇",
+    "englishName": "Kinich",
+    "rarity": "gold",
+    "id": "0046"
+  },
+  {
+    "name": "希诺宁",
+    "englishName": "Xilonen",
+    "rarity": "gold",
+    "id": "0047"
+  },
+  {
+    "name": "恰斯卡",
+    "englishName": "Chasca",
+    "rarity": "gold",
+    "id": "0048"
+  },
+  {
+    "name": "茜特菈莉",
+    "englishName": "Citlali",
+    "rarity": "gold",
+    "id": "0049"
+  },
+  {
+    "name": "玛薇卡",
+    "englishName": "Mavuika",
+    "rarity": "rainbow",
+    "id": "0050"
+  },
+  {
+    "name": "梦见月瑞希",
+    "englishName": "Mizuki",
+    "rarity": "gold",
+    "id": "0051"
+  },
+  {
+    "name": "瓦雷莎",
+    "englishName": "Varesa",
+    "rarity": "gold",
+    "id": "0052"
+  },
+  {
+    "name": "爱可菲",
+    "englishName": "Escoffier",
+    "rarity": "gold",
+    "id": "0053"
+  },
+  {
+    "name": "丝柯克",
+    "englishName": "SkirkNew",
+    "rarity": "gold",
+    "id": "0054"
+  },
+  {
+    "name": "伊涅芙",
+    "englishName": "Ineffa",
+    "rarity": "gold",
+    "id": "0055"
+  },
+  {
+    "name": "菈乌玛",
+    "englishName": "Lauma",
+    "rarity": "gold",
+    "id": "0056"
+  },
+  {
+    "name": "菲林斯",
+    "englishName": "Flins",
+    "rarity": "gold",
+    "id": "0057"
+  },
+  {
+    "name": "奈芙尔",
+    "englishName": "Nefer",
+    "rarity": "gold",
+    "id": "0058"
+  },
+  {
+    "name": "杜林",
+    "englishName": "Durin",
+    "rarity": "gold",
+    "id": "0059"
+  },
+  {
+    "name": "哥伦比娅",
+    "englishName": "Columbina",
+    "rarity": "rainbow",
+    "id": "0060"
+  },
+  {
+    "name": "兹白",
+    "englishName": "Zibai",
+    "rarity": "gold",
+    "id": "0061"
+  },
+  {
+    "name": "法尔伽",
+    "englishName": "Varka",
+    "rarity": "gold",
+    "id": "0062"
+  },
+  {
+    "name": "莉奈娅",
+    "englishName": "Linnea",
+    "rarity": "gold",
+    "id": "0063"
+  },
+  {
+    "name": "尼可",
+    "englishName": "Nicole",
+    "rarity": "gold",
+    "id": "0064"
+  },
+  {
+    "name": "洛恩",
+    "englishName": "Lohen",
+    "rarity": "gold",
+    "id": "0065"
+  },
+  {
+    "name": "桑多涅",
+    "englishName": "MarionetteNew",
+    "rarity": "gold",
+    "id": "0066"
+  },
+  {
+    "name": "奥黛塔",
+    "englishName": "Odette",
+    "rarity": "gold",
+    "id": "0067"
+  },
+  {
+    "name": "薇斯纳",
+    "englishName": "Vesna",
+    "rarity": "gold",
+    "id": "0068"
+  },
+  {
+    "name": "沃雅妮莎",
+    "englishName": "Vodyanitsa",
+    "rarity": "gold",
+    "id": "0069"
+  },
+  {
+    "name": "安柏",
+    "englishName": "Ambor",
+    "rarity": "purple",
+    "id": "1001"
+  },
+  {
+    "name": "凯亚",
+    "englishName": "Kaeya",
+    "rarity": "purple",
+    "id": "1002"
+  },
+  {
+    "name": "丽莎",
+    "englishName": "Lisa",
+    "rarity": "purple",
+    "id": "1003"
+  },
+  {
+    "name": "芭芭拉",
+    "englishName": "Barbara",
+    "rarity": "purple",
+    "id": "1004"
+  },
+  {
+    "name": "雷泽",
+    "englishName": "Razor",
+    "rarity": "purple",
+    "id": "1005"
+  },
+  {
+    "name": "香菱",
+    "englishName": "Xiangling",
+    "rarity": "purple",
+    "id": "1006"
+  },
+  {
+    "name": "北斗",
+    "englishName": "Beidou",
+    "rarity": "purple",
+    "id": "1007"
+  },
+  {
+    "name": "行秋",
+    "englishName": "Xingqiu",
+    "rarity": "purple",
+    "id": "1008"
+  },
+  {
+    "name": "凝光",
+    "englishName": "Ningguang",
+    "rarity": "purple",
+    "id": "1009"
+  },
+  {
+    "name": "菲谢尔",
+    "englishName": "Fischl",
+    "rarity": "purple",
+    "id": "1010"
+  },
+  {
+    "name": "班尼特",
+    "englishName": "Bennett",
+    "rarity": "purple",
+    "id": "1011"
+  },
+  {
+    "name": "诺艾尔",
+    "englishName": "Noel",
+    "rarity": "purple",
+    "id": "1012"
+  },
+  {
+    "name": "重云",
+    "englishName": "Chongyun",
+    "rarity": "purple",
+    "id": "1013"
+  },
+  {
+    "name": "砂糖",
+    "englishName": "Sucrose",
+    "rarity": "purple",
+    "id": "1014"
+  },
+  {
+    "name": "迪奥娜",
+    "englishName": "Diona",
+    "rarity": "purple",
+    "id": "1015"
+  },
+  {
+    "name": "辛焱",
+    "englishName": "Xinyan",
+    "rarity": "purple",
+    "id": "1016"
+  },
+  {
+    "name": "罗莎莉亚",
+    "englishName": "Rosaria",
+    "rarity": "purple",
+    "id": "1017"
+  },
+  {
+    "name": "烟绯",
+    "englishName": "Feiyan",
+    "rarity": "purple",
+    "id": "1018"
+  },
+  {
+    "name": "早柚",
+    "englishName": "Sayu",
+    "rarity": "purple",
+    "id": "1019"
+  },
+  {
+    "name": "九条裟罗",
+    "englishName": "Sara",
+    "rarity": "purple",
+    "id": "1020"
+  },
+  {
+    "name": "托马",
+    "englishName": "Tohma",
+    "rarity": "purple",
+    "id": "1021"
+  },
+  {
+    "name": "五郎",
+    "englishName": "Gorou",
+    "rarity": "purple",
+    "id": "1022"
+  },
+  {
+    "name": "云堇",
+    "englishName": "Yunjin",
+    "rarity": "purple",
+    "id": "1023"
+  },
+  {
+    "name": "久岐忍",
+    "englishName": "Shinobu",
+    "rarity": "purple",
+    "id": "1024"
+  },
+  {
+    "name": "鹿野院平藏",
+    "englishName": "Heizo",
+    "rarity": "purple",
+    "id": "1025"
+  },
+  {
+    "name": "柯莱",
+    "englishName": "Collei",
+    "rarity": "purple",
+    "id": "1026"
+  },
+  {
+    "name": "多莉",
+    "englishName": "Dori",
+    "rarity": "purple",
+    "id": "1027"
+  },
+  {
+    "name": "坎蒂丝",
+    "englishName": "Candace",
+    "rarity": "purple",
+    "id": "1028"
+  },
+  {
+    "name": "莱依拉",
+    "englishName": "Layla",
+    "rarity": "purple",
+    "id": "1029"
+  },
+  {
+    "name": "珐露珊",
+    "englishName": "Faruzan",
+    "rarity": "purple",
+    "id": "1030"
+  },
+  {
+    "name": "瑶瑶",
+    "englishName": "Yaoyao",
+    "rarity": "purple",
+    "id": "1031"
+  },
+  {
+    "name": "米卡",
+    "englishName": "Mika",
+    "rarity": "purple",
+    "id": "1032"
+  },
+  {
+    "name": "卡维",
+    "englishName": "Kaveh",
+    "rarity": "purple",
+    "id": "1033"
+  },
+  {
+    "name": "绮良良",
+    "englishName": "Momoka",
+    "rarity": "purple",
+    "id": "1034"
+  },
+  {
+    "name": "琳妮特",
+    "englishName": "Linette",
+    "rarity": "purple",
+    "id": "1035"
+  },
+  {
+    "name": "菲米尼",
+    "englishName": "Freminet",
+    "rarity": "purple",
+    "id": "1036"
+  },
+  {
+    "name": "夏洛蒂",
+    "englishName": "Charlotte",
+    "rarity": "purple",
+    "id": "1037"
+  },
+  {
+    "name": "夏沃蕾",
+    "englishName": "Chevreuse",
+    "rarity": "purple",
+    "id": "1038"
+  },
+  {
+    "name": "嘉明",
+    "englishName": "Gaming",
+    "rarity": "purple",
+    "id": "1039"
+  },
+  {
+    "name": "赛索斯",
+    "englishName": "Sethos",
+    "rarity": "purple",
+    "id": "1040"
+  },
+  {
+    "name": "卡齐娜",
+    "englishName": "Kachina",
+    "rarity": "purple",
+    "id": "1041"
+  },
+  {
+    "name": "欧洛伦",
+    "englishName": "Olorun",
+    "rarity": "purple",
+    "id": "1042"
+  },
+  {
+    "name": "蓝砚",
+    "englishName": "Lanyan",
+    "rarity": "purple",
+    "id": "1043"
+  },
+  {
+    "name": "伊安珊",
+    "englishName": "Iansan",
+    "rarity": "purple",
+    "id": "1044"
+  },
+  {
+    "name": "伊法",
+    "englishName": "Ifa",
+    "rarity": "purple",
+    "id": "1045"
+  },
+  {
+    "name": "塔利雅",
+    "englishName": "Dahlia",
+    "rarity": "purple",
+    "id": "1046"
+  },
+  {
+    "name": "爱诺",
+    "englishName": "Aino",
+    "rarity": "purple",
+    "id": "1047"
+  },
+  {
+    "name": "雅珂达",
+    "englishName": "Jahoda",
+    "rarity": "purple",
+    "id": "1048"
+  },
+  {
+    "name": "叶洛亚",
+    "englishName": "Illuga",
+    "rarity": "purple",
+    "id": "1049"
+  },
+  {
+    "name": "布伦妮",
+    "englishName": "Prune",
+    "rarity": "purple",
+    "id": "1050"
+  },
+  {
+    "name": "阿罗夏",
+    "englishName": "Alyosha",
+    "rarity": "purple",
+    "id": "1051"
+  },
+  {
+    "name": "米提亚",
+    "englishName": "Mitya",
+    "rarity": "gold",
+    "id": "0070"
+  },
+  {
+    "name": "瓦列里",
+    "englishName": "Valeriy",
+    "rarity": "purple",
+    "id": "1052"
+  }
+]

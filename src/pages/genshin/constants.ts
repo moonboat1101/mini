@@ -179,6 +179,7 @@ export const roleList = [
   },
   { name: "薇斯纳", englishName: "Vesna", version: "7.1" },
   { name: "沃雅妮莎", englishName: "Vodyanitsa", version: "7.1" },
+  { name: "米提亚", englishName: "Mitya", version: "7.2" },
 ];
 
 // 按登场顺序排列；englishName 用于拼接 UI_AvatarIcon 头像资源地址。
@@ -234,4 +235,5 @@ export const fourStarRoleList = [
   { name: "叶洛亚", englishName: "Illuga" },
   { name: "布伦妮", englishName: "Prune" },
   { name: "阿罗夏", englishName: "Alyosha" },
+  { name: "瓦列里", englishName: "Valeriy" },
 ];
