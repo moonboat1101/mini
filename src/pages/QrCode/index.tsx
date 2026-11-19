@@ -217,3 +217,7 @@ export default function QrCode() {
     </View>
   );
 }
+
+// 自定义分享 Hook 需要显式启用页面分享生命周期。
+QrCode.enableShareAppMessage = true;
+QrCode.enableShareTimeline = true;

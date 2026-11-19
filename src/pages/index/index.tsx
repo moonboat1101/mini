@@ -197,3 +197,7 @@ export default function Index() {
     </View>
   );
 }
+
+// 自定义分享 Hook 需要显式启用页面分享生命周期。
+Index.enableShareAppMessage = true;
+Index.enableShareTimeline = true;

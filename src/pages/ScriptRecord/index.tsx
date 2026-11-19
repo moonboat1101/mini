@@ -171,6 +171,7 @@ export default function ScriptRecord() {
   usePageShare({
     title: "剧本杀",
     path: "/pages/ScriptRecord/index",
+    imageUrl: "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaEnhqkZt-maeNLw-MbRC7GTcieiemvwACMSEAAmiKkVQEP-RhE-beCz0E.png",
   });
 
   const [filterType, setFilterType] = useState<FilterType>("time");
@@ -481,3 +482,7 @@ export default function ScriptRecord() {
     </View>
   );
 }
+
+// 自定义分享 Hook 需要显式启用页面分享生命周期。
+ScriptRecord.enableShareAppMessage = true;
+ScriptRecord.enableShareTimeline = true;

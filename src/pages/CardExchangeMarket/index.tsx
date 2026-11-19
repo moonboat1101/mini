@@ -222,7 +222,7 @@ function MarketPanel() {
     if (!loading && !loadingMore && hasMore) loadPage(nextPage);
   });
 
-  usePageShare({ title: "圣牌市场", path: "/pages/CardExchangeMarket/index" });
+  usePageShare({ title: "圣牌市场", path: "/pages/CardExchangeMarket/index", imageUrl: "https://img.remit.ee/i/Nwt54gYGpSao" });
 
   return (
     <View className={styles.marketRoot}>
@@ -302,3 +302,7 @@ function MarketPanel() {
     </View>
   );
 }
+
+// 自定义分享 Hook 需要显式启用页面分享生命周期。
+CardExchangeMarket.enableShareAppMessage = true;
+CardExchangeMarket.enableShareTimeline = true;

@@ -71,6 +71,7 @@ export default function Genshin() {
   usePageShare({
     title: "抽卡记录",
     path: "/pages/genshin/index",
+    imageUrl: "https://img.remit.ee/i/VLKwKe6kgCCD",
   });
 
   const [gachaParams, setGachaParams] = useState<ObjectType | undefined>();
@@ -347,3 +348,7 @@ export default function Genshin() {
     </View>
   );
 }
+
+// 自定义分享 Hook 需要显式启用页面分享生命周期。
+Genshin.enableShareAppMessage = true;
+Genshin.enableShareTimeline = true;

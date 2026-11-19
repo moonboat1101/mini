@@ -42,3 +42,7 @@ export default function About() {
     </View>
   );
 }
+
+// 自定义分享 Hook 需要显式启用页面分享生命周期。
+About.enableShareAppMessage = true;
+About.enableShareTimeline = true;

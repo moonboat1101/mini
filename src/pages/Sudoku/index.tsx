@@ -461,3 +461,7 @@ export default function Sudoku() {
     </View>
   );
 }
+
+// 自定义分享 Hook 需要显式启用页面分享生命周期。
+Sudoku.enableShareAppMessage = true;
+Sudoku.enableShareTimeline = true;

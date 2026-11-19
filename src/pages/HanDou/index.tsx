@@ -519,3 +519,7 @@ export default function HanDou() {
     </View>
   );
 }
+
+// 自定义分享 Hook 需要显式启用页面分享生命周期。
+HanDou.enableShareAppMessage = true;
+HanDou.enableShareTimeline = true;

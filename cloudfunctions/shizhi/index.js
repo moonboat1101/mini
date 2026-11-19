@@ -10,7 +10,7 @@ const chance = (numerator, denominator) => crypto.randomInt(denominator) < numer
 const cardLimit = card => card.id.startsWith('2') ? 1 : card.rarity === 'rainbow' ? 7 : 6;
 exports.main = async event => {
   if (!['get', 'claim', 'draw', 'exchange'].includes(event.action)) throw new Error('操作无效');
-  if (event.action === 'claim' && event.source !== 'daily' && event.source !== 'ad') throw new Error('领取来源无效');
+  if (event.action === 'claim' && event.source !== 'daily' && event.source !== 'ad' && event.source !== 'share') throw new Error('领取来源无效');
   if (event.action === 'exchange' && !catalog.some(c => c.id === event.cardId)) throw new Error('卡牌不存在或已经拥有');
   const { OPENID } = cloud.getWXContext();
   if (!OPENID) throw new Error('无法获取用户身份');
@@ -22,10 +22,10 @@ exports.main = async event => {
       if (e.errCode !== -1 && e.errCode !== -502001 && !/not exist|不存在/i.test(e.errMsg || e.message || '')) throw e;
     }
     const exists = Boolean(state);
-    if (!state) state = { _openid: OPENID, chances: 0, lastDaily: '', lastAd: '', ownedIds: [], wildcards: 0, drawCount: 0, introWildcard: false };
+    if (!state) state = { _openid: OPENID, chances: 0, lastDaily: '', lastAd: '', lastShare: '', ownedIds: [], wildcards: 0, drawCount: 0, introWildcard: false };
     let result = null;
     if (event.action === 'claim') {
-      const field = event.source === 'daily' ? 'lastDaily' : 'lastAd';
+      const field = { daily: 'lastDaily', ad: 'lastAd', share: 'lastShare' }[event.source];
       if (state[field] === today()) throw new Error('今天已经领取过了');
       state.chances++; state[field] = today();
     } else if (event.action === 'draw') {
@@ -68,7 +68,7 @@ exports.main = async event => {
       if (state.wildcards < 1) throw new Error('万能卡不足');
       state.wildcards--; state.ownedIds.push(card.id); result = { card };
     } else if (event.action !== 'get') throw new Error('操作无效');
-    const data = { _openid: OPENID, chances: state.chances, lastDaily: state.lastDaily, lastAd: state.lastAd, ownedIds: state.ownedIds, wildcards: state.wildcards, drawCount: state.drawCount, introWildcard: Boolean(state.introWildcard) };
+    const data = { _openid: OPENID, chances: state.chances, lastDaily: state.lastDaily, lastAd: state.lastAd, lastShare: state.lastShare || '', ownedIds: state.ownedIds, wildcards: state.wildcards, drawCount: state.drawCount, introWildcard: Boolean(state.introWildcard) };
     if (!exists) await ref.set({ data });
     else if (event.action !== 'get') await ref.update({ data });
     return { state: data, result, today: today() };

@@ -8,7 +8,7 @@ import { getCharacterArtwork, getCharacterCardImage } from "../CardCharacterAsso
 import catalog from "./catalog.json";
 import styles from "./index.module.less";
 
-type State = { chances: number; lastDaily: string; lastAd: string; ownedIds: string[]; wildcards: number; drawCount: number };
+type State = { chances: number; lastDaily: string; lastAd: string; lastShare: string; ownedIds: string[]; wildcards: number; drawCount: number };
 type Card = typeof catalog[number];
 const rarityGroups = [
   { key: "rainbow", rarity: "rainbow", cards: catalog.filter((card) => card.rarity === "rainbow" && !card.id.startsWith("2")) },
@@ -30,7 +30,7 @@ function PreviewCardFace({ card, owned, className = "", onAnimationEnd }: { card
   </View>;
 }
 export default function Shizhi() {
-  usePageShare({ title: "拾枝 · 收集你的原神角色卡", path: "/pages/Shizhi/index" });
+  usePageShare({ title: "拾枝 · 集原神卡", path: "/pages/Shizhi/index", imageUrl: "https://img.remit.ee/i/DYXXbX99ju7W" });
   const [tab, setTab] = useState("draw");
   const [nameOffsets, setNameOffsets] = useState<Record<string, number>>({});
   useEffect(() => {
@@ -80,7 +80,8 @@ export default function Shizhi() {
     setBusy(true); setError("");
     const loadingTitle = data.action === "draw" ? "正在拾枝" : data.action === "claim" ? "正在领取" : data.action === "exchange" ? "正在兑换" : "正在加载";
     let feedback: { title: string; icon: "success" | "none" } | null = null;
-    Taro.showLoading({ title: loadingTitle, mask: true });
+    const isShareClaim = data.action === "claim" && data.source === "share";
+    if (!isShareClaim) Taro.showLoading({ title: loadingTitle, mask: true });
     try {
       if (!initCardExchangeCloud()) throw new Error("云服务不可用");
       const response = await (globalThis as any).wx.cloud.callFunction({ name: "shizhi", data });
@@ -91,14 +92,14 @@ export default function Shizhi() {
         const drawnCard = catalog.find((card) => card.id === value.result.card?.id);
         setResult({ ...value.result, card: drawnCard || { id: String(value.result.card?.id || ""), name: value.result.wildcard ? "万能卡" : "未知角色", englishName: "", rarity: value.result.wildcard ? "rainbow" : value.result.card?.rarity || "purple" } });
       }
-      if (data.action === "claim") feedback = { title: "领取成功", icon: "success" };
+      if (data.action === "claim" && !isShareClaim) feedback = { title: "领取成功", icon: "success" };
       if (data.action === "exchange") { setExchangeRevealed(false); setExchangeAnimationId(data.cardId); }
     } catch (e) {
       const message = (e as Error)?.message || "操作失败，请稍后重试";
       if (data.action === "get") setError(message);
       else feedback = { title: message, icon: "none" };
     } finally {
-      Taro.hideLoading();
+      if (!isShareClaim) Taro.hideLoading();
       requestLock.current = false;
       setBusy(false);
       if (feedback) Taro.showToast(feedback);
@@ -136,7 +137,7 @@ export default function Shizhi() {
         <View className={styles.cardStage}>{result ? <View key={state?.drawCount} className={styles.reveal}><View className={`${styles.drawCard} ${styles.cardBack}`}><Image className={styles.backArtwork} src="https://img.remit.ee/i/KKjwwt5ETIml" mode="aspectFill" /></View><View className={`${styles.drawCard} ${styles.cardFront} ${styles.floatingCard} ${result.wildcard ? styles.wildcardCard : styles[result.card.rarity]}`}>{result.wildcard ? <Image className={styles.wildcardArtwork} src="https://img.remit.ee/i/td1og5N6V6CU" mode="aspectFill" /> : <Image className={`${styles.resultImage} ${hasPaddedArtwork(result.card) ? styles.paddedArtwork : ""}`} src={getCardImage(result.card)} mode="aspectFit" />}<View className={styles.resultLabel}><Text className={styles.resultName}>{result.wildcard ? "万能卡" : result.card.name}</Text></View>{result.wildcard && <Text className={styles.hint}>可兑换任意未拥有的卡牌</Text>}</View></View> : <View className={`${styles.drawCard} ${styles.floatingCard} ${styles.initialCard}`}><Image className={styles.backArtwork} src="https://img.remit.ee/i/KKjwwt5ETIml" mode="aspectFill" /></View>}</View>
         <Button className={`${styles.primary} ${!state || !!error || busy || adBusy || !state.chances ? styles.primaryDisabled : ""}`} hoverClass={styles.primaryPressed} onClick={() => { if (state && !error && !busy && !adBusy && state.chances) void call({ action: "draw" }); }}><Text className={styles.drawButtonTitle}>拾枝</Text><Text className={styles.drawButtonCount}>剩余 {state?.chances ?? 0} 次</Text></Button>
       </View>
-      <View className={styles.tasks}><View className={styles.sectionHeading}><View className={styles.sectionMarker} /><Text className={styles.sectionTitle}>每日任务</Text></View><View className={styles.task}><View><Text className={styles.taskTitle}>每日签到 · 拾枝次数+1</Text></View><Button className={styles.taskButton} disabled={!state || !!error || busy || adBusy || state.lastDaily === today} onClick={() => call({ action: "claim", source: "daily" })}>{state?.lastDaily === today && today ? "已领取" : "领取"}</Button></View><View className={styles.task}><View><Text className={styles.taskTitle}>观看广告 · 拾枝次数+1</Text></View><Button className={styles.taskButton} disabled={!state || !!error || busy || adBusy || state.lastAd === today} onClick={watchAd}>{state?.lastAd === today && today ? "已领取" : adBusy ? "加载中" : "观看"}</Button></View></View>
+      <View className={styles.tasks}><View className={styles.sectionHeading}><View className={styles.sectionMarker} /><Text className={styles.sectionTitle}>每日任务</Text></View><View className={styles.task}><View><Text className={styles.taskTitle}>每日签到 · 拾枝次数+1</Text></View><Button className={styles.taskButton} disabled={!state || !!error || busy || adBusy || state.lastDaily === today} onClick={() => call({ action: "claim", source: "daily" })}>{state?.lastDaily === today && today ? "已领取" : "领取"}</Button></View><View className={styles.task}><View><Text className={styles.taskTitle}>转发小程序 · 拾枝次数+1</Text></View><Button className={styles.taskButton} openType="share" disabled={!state || !!error || busy || adBusy || state.lastShare === today} onClick={() => { void call({ action: "claim", source: "share" }); }}>{state?.lastShare === today && today ? "已领取" : "转发"}</Button></View><View className={styles.task}><View><Text className={styles.taskTitle}>观看广告 · 拾枝次数+1</Text></View><Button className={styles.taskButton} disabled={!state || !!error || busy || adBusy || state.lastAd === today} onClick={watchAd}>{state?.lastAd === today && today ? "已领取" : adBusy ? "加载中" : "观看"}</Button></View></View>
     </> : <View className={styles.collection}><View className={styles.groups}>{rarityGroups.map(group => <View key={group.key} className={styles.grid}>{group.key === "rainbow" && <View className={`${styles.card} ${styles.wildcardTile} ${styles.rainbow} ${!displayedWildcards ? styles.unowned : ""}`} onClick={() => setPreviewWildcard(true)}>{displayedWildcards > 1 && <Text className={styles.cardCount}>{displayedWildcards - 1}</Text>}<Image className={styles.wildcardTileArtwork} src="https://img.remit.ee/i/td1og5N6V6CU" mode="aspectFill" /><View className={styles.cardLabel}><Text className={styles.cardName}>万能卡</Text></View></View>}{group.cards.map(card => { const copies = state?.ownedIds.filter((id) => id === card.id).length ?? 0; const owned = isDisplayOwned(card); const avatar = getCardImage(card); return <View key={card.id} className={`${styles.card} ${styles[card.rarity]} ${!owned ? styles.unowned : ""}`} onClick={() => { setExchangeAnimationId(null); setPreviewCard(card); }}>{copies > 1 && <Text className={styles.cardCount}>{copies - 1}</Text>}{avatar ? <Image className={`${styles.avatar} ${hasCardArtwork(card) ? styles.artwork : ""} ${hasPaddedArtwork(card) ? styles.paddedArtwork : ""}`} src={avatar} mode="aspectFit" lazyLoad /> : <View className={styles.avatarFallback}>{card.name.slice(0, 1)}</View>}<View className={`${styles.cardLabel} ${styles.nameWindow} ${nameOffsets[card.id] ? styles.nameWindowScrolling : ""} shizhi-name-window`} data-id={card.id}><View className={`${styles.cardName} shizhi-name-text ${nameOffsets[card.id] ? styles.nameScrolling : ""}`} data-id={card.id} style={nameOffsets[card.id] ? { "--name-offset": `-${nameOffsets[card.id]}px` } as React.CSSProperties : undefined}>{card.name}</View></View></View>; })}</View>)}</View></View>}
     {previewWildcard && <View className={styles.previewMask} catchMove onTouchMove={(event) => { event.stopPropagation(); event.preventDefault(); }} onClick={() => setPreviewWildcard(false)}><View className={styles.previewContent} onClick={(event) => event.stopPropagation()}><View className={`${styles.drawCard} ${styles.previewCard} ${styles.wildcardCard} ${!displayedWildcards ? styles.previewWildcardUnowned : ""}`}><Image className={styles.wildcardArtwork} src="https://img.remit.ee/i/td1og5N6V6CU" mode="aspectFill" /><View className={styles.resultLabel}><Text className={styles.resultName}>万能卡</Text></View><Text className={styles.hint}>可兑换任意未拥有的卡牌</Text></View></View></View>}
     {previewCard && <View className={styles.previewMask} catchMove onTouchMove={(event) => { event.stopPropagation(); event.preventDefault(); }} onClick={() => { setPreviewCard(null); setExchangeAnimationId(null); }}>
@@ -149,3 +150,7 @@ export default function Shizhi() {
     <SlidingNavigation className={styles.navigation} items={[{ value: "draw", label: "拾枝" }, { value: "mine", label: "我的" }]} value={tab} onChange={(value) => { Taro.pageScrollTo({ scrollTop: 0, duration: 0 }); setTab(value); }} />
   </View>;
 }
+
+// 分享回调通过自定义 Hook 注册，需要显式启用对应页面生命周期。
+Shizhi.enableShareAppMessage = true;
+Shizhi.enableShareTimeline = true;
