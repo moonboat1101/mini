@@ -7,6 +7,7 @@ const collection = 'shizhi_users';
 const today = () => new Date(Date.now() + 8 * 3600000).toISOString().slice(0, 10);
 const pick = items => items[crypto.randomInt(items.length)];
 const chance = (numerator, denominator) => crypto.randomInt(denominator) < numerator;
+const cardLimit = card => card.id.startsWith('2') ? 1 : card.rarity === 'rainbow' ? 7 : 6;
 exports.main = async event => {
   if (!['get', 'claim', 'draw', 'exchange'].includes(event.action)) throw new Error('操作无效');
   if (event.action === 'claim' && event.source !== 'daily' && event.source !== 'ad') throw new Error('领取来源无效');
@@ -47,7 +48,7 @@ exports.main = async event => {
       const pool = catalog.filter(c => c.rarity === rarity);
       const owned = pool.filter(c => state.ownedIds.includes(c.id) && (rarity === 'rainbow' || copiesOf(c) < 6));
       const missing = pool.filter(c => !state.ownedIds.includes(c.id));
-      const availableRainbow = rarity === 'rainbow' ? pool.filter(card => copiesOf(card) < 7) : [];
+      const availableRainbow = rarity === 'rainbow' ? pool.filter(card => copiesOf(card) < cardLimit(card)) : [];
       const duplicate = rarity !== 'rainbow' && owned.length > 0 && (!missing.length || chance(1, 5));
       // 万能卡始终作为一个独立选项，与每张未满额的彩卡等概率。
       const card = introHit ? null : rarity === 'rainbow' ? pick([...availableRainbow, null]) : pick(duplicate ? owned : missing);
@@ -56,7 +57,7 @@ exports.main = async event => {
       if (!card) { state.wildcards++; result = { wildcard: true }; }
       else {
         const copies = copiesOf(card);
-        const limit = rarity === 'rainbow' ? 7 : 6;
+        const limit = cardLimit(card);
         if (copies >= limit) throw new Error('卡池配置异常');
         state.ownedIds.push(card.id);
         result = { card, duplicate: copies > 0 };

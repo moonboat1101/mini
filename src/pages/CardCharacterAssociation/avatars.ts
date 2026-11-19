@@ -23,7 +23,7 @@ export function sortCharactersByRarityAndRecency(names: string[]): string[] {
 
 const protagonistImage = "https://act-upload.hoyoverse.com/event-ugc-hoyowiki/2025/01/05/157749474/75bb898fe1c3b4ed29a2931829ddb845_998097527747088629.png";
 const additionalArtwork: Record<string, string> = {
-  "埃洛伊": "https://wiki.hoyolab.com/_ipx/f_webp/https://bbs.hoyolab.com/hoyowiki/picture/character/%25E5%259F%2583%25E6%25B4%259B%25E4%25BC%258A/avatar.png",
+  "埃洛伊": "https://bbs.hoyolab.com/hoyowiki/picture/character/%E5%9F%83%E6%B4%9B%E4%BC%8A/avatar.png",
 };
 
 export function getCharacterAvatar(name: string): string {
@@ -31,7 +31,7 @@ export function getCharacterAvatar(name: string): string {
   const normalizedName = avatarNames[name] || name;
   const role = roleList.find((item) => item.name === normalizedName)
     || fourStarRoleList.find((item) => item.name === normalizedName);
-  const id = role?.englishName;
+  const id = role?.englishName || (normalizedName === "埃洛伊" ? "Aloy" : "");
   return id && !id.includes("NO-PIC-") ? `https://ys.appfeng.com/ui/avatar/UI_AvatarIcon_${id}.webp` : "";
 }
 
@@ -39,7 +39,9 @@ export function getCharacterArtwork(name: string): string {
   const normalizedName = avatarNames[name] || name;
   const role = roleList.find((item) => item.name === normalizedName)
     || fourStarRoleList.find((item) => item.name === normalizedName);
-  return (role && "artwork" in role ? role.artwork : undefined) || additionalArtwork[normalizedName] || "";
+  const artwork = (role && "artwork" in role ? role.artwork : undefined) || additionalArtwork[normalizedName] || "";
+  // 老角色的图鉴原图体积过大，暂时使用头像，保留立绘地址供后续压缩使用。
+  return artwork.startsWith("https://bbs.hoyolab.com/hoyowiki/picture/character/") ? "" : artwork;
 }
 
 export function getCharacterCardImage(name: string): string {

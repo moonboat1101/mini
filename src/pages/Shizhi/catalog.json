@@ -730,5 +730,96 @@
     "englishName": "Valeriy",
     "rarity": "purple",
     "id": "1052"
+  },
+  {
+    "id": "2001",
+    "name": "裂空的魔龙",
+    "englishName": "Stormterror",
+    "rarity": "rainbow",
+    "artwork": "https://bbs.hoyolab.com/hoyowiki/picture/enemy/Stormterror_icon.png"
+  },
+  {
+    "id": "2002",
+    "name": "北风的王狼",
+    "englishName": "Lupus Boreas",
+    "rarity": "rainbow",
+    "artwork": "https://bbs.hoyolab.com/hoyowiki/picture/enemy/Lupus%20Boreas,%20Dominator%20of%20Wolves_icon.png"
+  },
+  {
+    "id": "2003",
+    "name": "「公子」",
+    "englishName": "Childe",
+    "rarity": "rainbow",
+    "artwork": "https://bbs.hoyolab.com/hoyowiki/picture/enemy/Childe_icon.png"
+  },
+  {
+    "id": "2004",
+    "name": "若陀龙王",
+    "englishName": "Azhdaha",
+    "rarity": "rainbow",
+    "artwork": "https://bbs.hoyolab.com/hoyowiki/picture/enemy/Azhdaha_icon.png"
+  },
+  {
+    "id": "2005",
+    "name": "「女士」",
+    "englishName": "La Signora",
+    "rarity": "rainbow",
+    "artwork": "https://bbs.hoyolab.com/hoyowiki/picture/enemy/La%20Signora_icon.png"
+  },
+  {
+    "id": "2006",
+    "name": "「雷电将军」",
+    "englishName": "Magatsu Mitake Narukami no Mikoto",
+    "rarity": "rainbow",
+    "artwork": "https://bbs.hoyolab.com/hoyowiki/picture/enemy/header_Magatsu%20Mitake%20Narukami%20no%20Mikoto_icon.png"
+  },
+  {
+    "id": "2007",
+    "name": "「正机之神」",
+    "englishName": "Shouki no Kami",
+    "rarity": "rainbow",
+    "artwork": "https://upload-static.hoyoverse.com/hoyolab-wiki/2022/11/03/36540823/a58ebf908dbf998503ab9c2f5def4175_6402299760254249507.png?x-oss-process=image%2Fformat%2Cwebp"
+  },
+  {
+    "id": "2008",
+    "name": "绿洲守望者",
+    "englishName": "Guardian of Apep’s Oasis",
+    "rarity": "rainbow",
+    "artwork": "https://upload-static.hoyoverse.com/hoyolab-wiki/2023/07/31/88072335/42ef72974a3afdc4c83cb0edae9d79cc_880047519767182246.png?x-oss-process=image%2Fformat%2Cwebp"
+  },
+  {
+    "id": "2009",
+    "name": "吞星之鲸",
+    "englishName": "All-Devouring Narwhal",
+    "rarity": "rainbow",
+    "artwork": "https://act-upload.hoyoverse.com/event-ugc-hoyowiki/2023/12/26/157749474/7fc9c536074a921e57134bc296a26fee_6165415112967271666.png?x-oss-process=image%2Fformat%2Cwebp"
+  },
+  {
+    "id": "2010",
+    "name": "「仆人」",
+    "englishName": "The Knave",
+    "rarity": "rainbow",
+    "artwork": "https://act-upload.hoyoverse.com/event-ugc-hoyowiki/2024/04/24/157749474/6b4b116756d981200b75df997877efd7_2559029294027749724.png?x-oss-process=image%2Fformat%2Cwebp"
+  },
+  {
+    "id": "2011",
+    "name": "蚀灭源焰之主",
+    "englishName": "Lord of Eroded Primal Fire",
+    "rarity": "rainbow",
+    "artwork": "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2024/12/26/b4317e98e513ab901f6b9504ec2fcc38_6097332495522279984.png?x-oss-process=image%2Fformat%2Cwebp"
+  },
+  {
+    "id": "2012",
+    "name": "门扉前的弈局",
+    "englishName": "Game Before the Gate",
+    "rarity": "rainbow",
+    "artwork": "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2025/04/24/fba8f5e6fc34f18421bb00b2a734884a_8113248538323096732.png?x-oss-process=image%2Fformat%2Cwebp"
+  },
+  {
+    "id": "2013",
+    "name": "多托雷",
+    "englishName": "Dottore",
+    "rarity": "rainbow",
+    "artwork": "https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2026/05/15/1128ce5dd822b36609883ebb9ade504c_4571699314011214332.png?x-oss-process=image%2Fformat%2Cwebp"
   }
 ]
