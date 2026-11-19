@@ -8,6 +8,9 @@ const today = () => new Date(Date.now() + 8 * 3600000).toISOString().slice(0, 10
 const pick = items => items[crypto.randomInt(items.length)];
 const chance = (numerator, denominator) => crypto.randomInt(denominator) < numerator;
 exports.main = async event => {
+  if (!['get', 'claim', 'draw', 'exchange'].includes(event.action)) throw new Error('操作无效');
+  if (event.action === 'claim' && event.source !== 'daily' && event.source !== 'ad') throw new Error('领取来源无效');
+  if (event.action === 'exchange' && !catalog.some(c => c.id === event.cardId)) throw new Error('卡牌不存在或已经拥有');
   const { OPENID } = cloud.getWXContext();
   if (!OPENID) throw new Error('无法获取用户身份');
   const id = crypto.createHash('sha256').update(OPENID).digest('hex');
@@ -21,7 +24,6 @@ exports.main = async event => {
     if (!state) state = { _openid: OPENID, chances: 0, lastDaily: '', lastAd: '', ownedIds: [], wildcards: 0, drawCount: 0, introWildcard: false };
     let result = null;
     if (event.action === 'claim') {
-      if (event.source !== 'daily' && event.source !== 'ad') throw new Error('领取来源无效');
       const field = event.source === 'daily' ? 'lastDaily' : 'lastAd';
       if (state[field] === today()) throw new Error('今天已经领取过了');
       state.chances++; state[field] = today();
@@ -66,7 +68,8 @@ exports.main = async event => {
       state.wildcards--; state.ownedIds.push(card.id); result = { card };
     } else if (event.action !== 'get') throw new Error('操作无效');
     const data = { _openid: OPENID, chances: state.chances, lastDaily: state.lastDaily, lastAd: state.lastAd, ownedIds: state.ownedIds, wildcards: state.wildcards, drawCount: state.drawCount, introWildcard: Boolean(state.introWildcard) };
-    if (exists) await ref.update({ data }); else await ref.set({ data });
+    if (!exists) await ref.set({ data });
+    else if (event.action !== 'get') await ref.update({ data });
     return { state: data, result, today: today() };
   });
 };
