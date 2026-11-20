@@ -70,7 +70,7 @@ const mergeGoldDisplayData = (
 export default function Genshin() {
   usePageShare({
     title: "抽卡记录",
-    path: "/pages/genshin/index",
+    path: "/pages/Genshin/index",
     imageUrl: "https://img.remit.ee/i/VLKwKe6kgCCD",
   });
 

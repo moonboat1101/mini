@@ -3,12 +3,11 @@ export default defineAppConfig({
   pages: [
     "pages/index/index",
     "pages/Shizhi/index",
-    "pages/genshin/index",
+    "pages/Genshin/index",
     "pages/HanDou/index",
     "pages/Sudoku/index",
     "pages/Pokemon/index",
     "pages/ScriptRecord/index",
-    "pages/QrCode/index",
     "pages/CardExchangeMarket/index",
     "pages/About/index",
   ],

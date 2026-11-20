@@ -86,9 +86,6 @@ importers:
       vite:
         specifier: 4.5.10
         version: 4.5.10(@types/node@26.0.1)(less@4.6.7)(sass@1.101.0)(terser@5.48.0)
-      weapp-qrcode:
-        specifier: ^1.0.0
-        version: 1.0.0
 
 packages:
 
@@ -4444,9 +4441,6 @@ packages:
 
   wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
-
-  weapp-qrcode@1.0.0:
-    resolution: {integrity: sha512-4sa3W0rGDVJ9QaeZpAKlAuUxVyjhDwiUqHyGK/jJMsRMXnhb4yO8qWU/pZruMo+iT5J6CraS67lDMFb1VY+RaA==}
 
   webpack-merge@5.10.0:
     resolution: {integrity: sha512-+4zXKdx7UnO+1jaN4l2lHVD+mFvnlZQP/6ljaJVb4SZiwIKeUnrT5l0gkT8z+n4hKpC+jpOv6O9R+gLtag7pSA==}
@@ -9319,10 +9313,6 @@ snapshots:
   wcwidth@1.0.1:
     dependencies:
       defaults: 1.0.4
-
-  weapp-qrcode@1.0.0:
-    dependencies:
-      extend: 3.0.2
 
   webpack-merge@5.10.0:
     dependencies:

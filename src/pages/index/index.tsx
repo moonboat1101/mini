@@ -29,7 +29,7 @@ export default function Index() {
       title: "抽卡记录",
       subtitle: "· 统计\n· 分析\n· 本地缓存",
       heroImage: GACHA_RECORD_HERO,
-      url: "/pages/genshin/index",
+      url: "/pages/Genshin/index",
     },
     {
       title: "剧本杀",
@@ -53,10 +53,6 @@ export default function Index() {
       url: "/pages/Sudoku/index",
     },
     {
-      title: "生成二维码",
-      url: "/pages/QrCode/index",
-    },
-    {
       title: "关于",
       url: "/pages/About/index",
     },
@@ -65,7 +61,7 @@ export default function Index() {
   const wideCards = cards.slice(2, 3);
   const shizhiCard = { title: "拾枝", backgroundImage: "https://img.remit.ee/i/DYXXbX99ju7W", subtitle: "· 集原神卡\n· 集原魔卡", url: "/pages/Shizhi/index" };
   const funCards = cards.slice(3, 6);
-  const aboutCard = cards[7];
+  const aboutCard = cards[6];
 
   const handleCardClick = (i: { url: string }) => {
     Taro.navigateTo({

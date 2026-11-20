@@ -75,7 +75,7 @@ export const wishlist: WishlistGame[] = [
     // 据公开简介改写：https://spot-point.com/scripts/雪夜城謎案
     desc: "应日渐衰弱的斯卡蒂女神之请，啜灵师们前往雪夜城，追查乌勒尔家族覆灭的缘由。等待他们的是三桩无法解释的惨案：家主死于高塔顶端，少女横尸雪地，人偶碎裂在小屋之中。不同的现场，同样不可能发生的杀戮，将调查引向孤城深处。雪夜里悄然浮现的复生迹象，以及双头巨蛇留下的最后一道谜题，似乎都在提醒来者：寻找答案时，切勿惊醒沉睡的存在。",
     people: 6,
-    img: "https://jubenshacentral.com/_astro/the-snow-night-city-mystery-jubensha.CQLo3mbR_1RBT3A.webp",
+    img: "https://kimi-web-img.moonshot.cn/img/cqbiozfappfwfcahtxfm.supabase.co/339100867a648b0cc2be0cd329532706a2e011dd.webp",
   },
   {
     name: "北宋奇案·汴京",
@@ -131,7 +131,7 @@ export const wishlist: WishlistGame[] = [
     duration: 8,
     desc: "江南异人能够解衣换面、借皮还生，荒村旧迹与白骨之中藏着尚未解开的往事。一卷聊斋，写狐写鬼，也留下真假难辨的传闻。无相人系列第二部以画皮与聊斋志怪为引，作为独立平行篇章，将奇术设定、案件推理与故事还原融为一体。",
     people: 6,
-    img: "https://wx1.sinaimg.cn/large/0072XVUSly1ihdbhbe7bhj30jn0rs78i.jpg",
+    img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/e7ff5d453cd4e2775ac8a89d82d00c56175e6013.jpg",
   },
   {
     name: "阿比苏的玫瑰花",
@@ -151,7 +151,7 @@ export const scriptGames: ScriptGame[] = [
     players: ["WYZ", "TJJ", "CZH", "ZLW", "SZY", "YWL"],
     desc: "鬼河出现之后，死亡成为不断增长的数字，世界陷入绝望。研究者认为，鬼河是异世界夹缝中灵异力量汇聚而成的存在，当力量满溢，便会冲破壁垒、侵入现实。六位调查员深入被鬼河笼罩的红花镇，在诡异规则与重重案件中寻找真相。中式新本格推理，以信息差与智斗为核心。",
     score: 8,
-    img: "https://cqbiozfappfwfcahtxfm.supabase.co/storage/v1/render/image/public/studio-photos/covers/qiandao/939563313346420729/1784297615524.webp?width=360&resize=contain&quality=60",
+    img: "https://kimi-web-img.moonshot.cn/img/cqbiozfappfwfcahtxfm.supabase.co/35ab47be3eb05e4bdb70560c4aed8fcfa8044d6f.webp",
   },
   {
     name: "因火成烟",

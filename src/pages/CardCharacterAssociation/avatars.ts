@@ -1,4 +1,4 @@
-import { roleList, fourStarRoleList } from "../genshin/constants";
+import { roleList, fourStarRoleList } from "../Genshin/constants";
 
 // 仅用于查找头像，页面仍显示 Sheet1 中的原始角色名。
 const avatarNames: Record<string, string> = { "干织": "千织", "少女": "哥伦比娅", "枫原万叶": "万叶" };
@@ -23,7 +23,7 @@ export function sortCharactersByRarityAndRecency(names: string[]): string[] {
 
 const protagonistImage = "https://act-upload.hoyoverse.com/event-ugc-hoyowiki/2025/01/05/157749474/75bb898fe1c3b4ed29a2931829ddb845_998097527747088629.png";
 const additionalArtwork: Record<string, string> = {
-  "埃洛伊": "https://bbs.hoyolab.com/hoyowiki/picture/character/%E5%9F%83%E6%B4%9B%E4%BC%8A/avatar.png",
+  "埃洛伊": "https://i0.hdslb.com/bfs/article/3a8a96f9469eb739a4723a6f35ca39f36552df5e.png@600w.webp",
 };
 
 export function getCharacterAvatar(name: string): string {
@@ -40,8 +40,7 @@ export function getCharacterArtwork(name: string): string {
   const role = roleList.find((item) => item.name === normalizedName)
     || fourStarRoleList.find((item) => item.name === normalizedName);
   const artwork = (role && "artwork" in role ? role.artwork : undefined) || additionalArtwork[normalizedName] || "";
-  // 老角色的图鉴原图体积过大，暂时使用头像，保留立绘地址供后续压缩使用。
-  return artwork.startsWith("https://bbs.hoyolab.com/hoyowiki/picture/character/") ? "" : artwork;
+  return artwork;
 }
 
 export function getCharacterCardImage(name: string): string {

@@ -17,10 +17,9 @@ const rarityGroups = [
 ];
 
 const getCardImage = (card: Card) => ("artwork" in card && typeof card.artwork === "string" ? card.artwork : getCharacterCardImage(card.name));
-// 前五张原魔目前只有头像，按头像尺寸展示。
-const hasCardArtwork = (card: Card) => !["2001", "2002", "2003", "2004", "2005"].includes(card.id) && (("artwork" in card && Boolean(card.artwork)) || Boolean(getCharacterArtwork(card.name)));
+const hasCardArtwork = (card: Card) => ("artwork" in card && Boolean(card.artwork)) || Boolean(getCharacterArtwork(card.name));
 const cardLimit = (card: Card) => card.id.startsWith("2") ? 1 : card.rarity === "rainbow" ? 7 : 6;
-const hasPaddedArtwork = (card: Card) => card.name === "雷电将军" || getCardImage(card).startsWith("https://patchwiki.biligame.com/images/ys/");
+const hasPaddedArtwork = (card: Card) => card.name === "雷电将军" || (!card.id.startsWith("2") && getCardImage(card).startsWith("https://patchwiki.biligame.com/images/ys/"));
 
 function PreviewCardFace({ card, owned, className = "", onAnimationEnd }: { card: Card; owned: boolean; className?: string; onAnimationEnd?: () => void }) {
   const avatar = getCardImage(card);

@@ -158,7 +158,6 @@ type WishlistItem = WishlistRecord & { type: "wishlist" };
 
 type ScriptListItem = ScriptRecordItem | WishlistItem;
 
-const DEFAULT_COVER = "https://ts1.tc.mm.bing.net/th/id/OIP-C.66t7nMF0i-oUPJ9qVhzmfwHaHa";
 
 const parsePlayTime = (time: string) => {
   const [yearStr, monthStr] = time.split(".");
@@ -369,7 +368,7 @@ export default function ScriptRecord() {
         setActiveItem(item);
       }}
     >
-      <Image className={styles.cover} src={item.img || DEFAULT_COVER} />
+      {item.img ? <Image className={styles.cover} src={item.img} /> : <View className={styles.cover} />}
 
       <View className={styles.cardRight}>
         <View className={styles.cardHeaderRow}>
@@ -424,11 +423,9 @@ export default function ScriptRecord() {
           >
             <View id={MODAL_HEADER_ID} className={styles.modalHeader} catchMove>
               <View className={styles.modalTop}>
-                <Image
-                  className={styles.modalCover}
-                  src={activeItem.img || DEFAULT_COVER}
-                  onClick={() => setCoverPreviewOpen(true)}
-                />
+                {activeItem.img ? (
+                  <Image className={styles.modalCover} src={activeItem.img} onClick={() => setCoverPreviewOpen(true)} />
+                ) : <View className={styles.modalCover} />}
                 <View className={styles.modalTopMeta}>
                   <Text className={styles.modalTitle}>{activeItem.name?.trim() || "未命名剧本"}</Text>
                   {activeItem.type === "played" && activeItem.players?.length ? (
@@ -463,7 +460,7 @@ export default function ScriptRecord() {
           </View>
         </View>
       )}
-      {activeItem && coverPreviewOpen && (
+      {activeItem?.img && coverPreviewOpen && (
         <View
           className={styles.coverPreviewMask}
           catchMove
@@ -474,7 +471,7 @@ export default function ScriptRecord() {
         >
           <Image
             className={styles.coverPreviewImage}
-            src={activeItem.img || DEFAULT_COVER}
+            src={activeItem.img}
             mode="aspectFit"
           />
         </View>
