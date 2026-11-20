@@ -64,7 +64,7 @@ exports.main = async event => {
       }
     } else if (event.action === 'exchange') {
       const card = catalog.find(c => c.id === event.cardId);
-      if (!card || state.ownedIds.includes(card.id)) throw new Error('卡牌不存在或已经拥有');
+      if (!card || state.ownedIds.filter(id => id === card.id).length >= cardLimit(card)) throw new Error('卡牌不存在或已满额');
       if (state.wildcards < 1) throw new Error('万能卡不足');
       state.wildcards--; state.ownedIds.push(card.id); result = { card };
     } else if (event.action !== 'get') throw new Error('操作无效');
