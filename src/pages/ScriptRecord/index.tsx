@@ -322,8 +322,9 @@ export default function ScriptRecord() {
         ]
       : [
           { label: "时间", value: item.time?.trim() || "" },
-          { label: "评分", value: item.score ? `${item.score}分` : "" },
           { label: "角色", value: item.role?.trim() || "" },
+          { label: "评分", value: item.score ? `${item.score}分` : "" },
+          { label: "团队均分", value: item.teamScore != null ? `${item.teamScore}分` : "" },
           { label: "DM", value: item.dm?.trim() || "" },
         ];
 

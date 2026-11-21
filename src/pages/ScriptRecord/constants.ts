@@ -23,6 +23,7 @@ export type ScriptGame = {
   time: string;
   desc: string;
   score: number;
+  teamScore?: number;
   img: string;
   comment?: string;
   role?: string;
@@ -39,35 +40,46 @@ export const wishlist: WishlistGame[] = [
     img: "https://kimi-web-img.moonshot.cn/img/pic3.zhimg.com/5d13a42359920a2ccdc6e052e4b802bc63827ecd.jpg",
   },
   {
-    name: "无相人考古奇案",
-    duration: 8,
-    desc: "六位推理社学生受考古教授邀请，品鉴一部唐代出土的推理小说。通过摸顶秘术读取颅骨留下的记忆，玩家将探索无相人与阴阳眼的特殊设定，破解离奇案件，拼起人物关系与历史中的隐秘往事。表里山河汗青系列作品，以设定推理、故事还原与历史立意交织展开。",
-    people: 6,
-    img: "https://fanc-rotterdam.myshopify.com/cdn/shop/files/20251024193514_131_424_600x.png?v=1761327839",
-  },
-  {
     name: "王不见王",
-    duration: 10,
-    desc: "作家佐藤红叶的新书刚刚面世，便有一场直播命案将她推到审讯室中。她承认杀害爱人，却让案件的缘由更加难解。调查的线索逐渐汇入她笔下的《王不见王》，读者需要从规则与人物视角出发，循着层层逻辑审视这场智斗。引力弹弓发行的六人设定推理本，侧重长逻辑链与博弈推演，体验时长约 10 小时以上。",
+    duration: 8,
+    desc: "作家佐藤红叶的新书刚刚面世，便有一场直播命案将她推到审讯室中。她承认杀害爱人，却让案件的缘由更加难解。调查的线索逐渐汇入她笔下的《王不见王》，读者需要从规则与人物视角出发，循着层层逻辑审视这场智斗。引力弹弓发行的六人设定推理本，侧重长逻辑链与博弈推演，体验时长约 8 小时。",
     people: 6,
-    img: "https://fanc-rotterdam.myshopify.com/cdn/shop/files/20260823122704.jpg?v=1787481105",
+    img: "https://kimi-web-img.moonshot.cn/img/cqbiozfappfwfcahtxfm.supabase.co/86a47085ba6bda57bdc524d3e9eddb801d9ddb72.webp",
   },
   {
-    name: "土狗",
-    duration: 8,
-    // 据公开简介改写：https://www.sohu.com/a/908528087_122378800
-    desc: "第一次独自调查案件，我走进了黄土村。风里裹着沙尘与煤灰，村民看向外来者的眼神里满是敌意。起初，我以为他们只是不了解村中藏着的罪恶，直到调查深入，才发现无知并不足以解释他们的态度。村中的人究竟在守护什么？那些纠缠不清的往事，又与眼前的案件有何关联？要看清这片黄土下埋藏的真相，得先读懂这里的人。",
+    name: "死亡回响",
+    duration: 7,
+    desc: "大山深处藏着一座名为怨鬼村的隐世山村。神秘传闻与离奇死亡交织，留下等待解开的谜团。灰烬工作室发行的日式推理本，属于阴阳师山背秋彦系列，以案件推理与故事还原展开。",
     people: 6,
-    img: "https://www.52jubensha.com/wp-content/uploads/2025/06/微信图片_20250628212057-179x300.jpg",
+    img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/5e01a079b60d0fcf0925de5b4f8cc9fa86cd6edb.jpg",
   },
   {
-    name: "幻想诸因",
+    name: "关于Y的奇迹",
     duration: 8,
-    // 据公开介绍与玩家前言改写：https://www.165club.cn/jbsgl/15223.html
-    // https://qiandao.com/post?postId=979208179697102188
-    desc: "一群失去记忆的人被聚集在封闭的场所，面前是等待解答的离奇案件。文字、图像与看似寻常的叙述，都可能藏着被忽略的线索。众人循着故事追查，试图拼回真相，却还要面对推理禁忌与悖论构成的蜂巢谜局。案件之间究竟有着怎样的联系，遗失的记忆又将把他们带向何处？想要找到生路，必须先辨清眼前的虚构与真实。",
+    desc: "奇迹与传说笼罩着故事中的谜团，数起案件将众人引向层层交织的真相。灰烬工作室发行的六人设定推理本，以密室、长逻辑链和故事还原为核心，在推理中探寻关于命运与选择的答案。",
     people: 6,
-    img: "https://www.52jubensha.com/wp-content/uploads/2026/04/微信图片_2026-04-09_211429_303-212x300.jpg",
+    img: "https://kimi-web-img.moonshot.cn/img/fanc-rotterdam.myshopify.com/f37f6d9b01c193763c41493267d26bc30927969f.jpg",
+  },
+  {
+    name: "六角馆の谋杀鉴赏",
+    duration: 7,
+    desc: "一位作家与六角馆内发生的谋杀案件，将众人卷入一场推理游戏。馆中的建筑与看似寻常的细节都可能成为破案的关键。剧游方舟发行的六人推理还原本，以建筑诡计和案件推理为核心。",
+    people: 6,
+    img: "https://kimi-web-img.moonshot.cn/img/80larpnew-1251545914.cos.ap-guangzhou.myqcloud.com/89093ed29f37f35c13597979da50f8ec593c3bee.jpg",
+  },
+  {
+    name: "北宋奇案·汴京",
+    duration: 8,
+    desc: "一段北宋时期耻辱的历史，两个南宋同朝为官的叔侄，三位曾经纠葛种种的帝王，竟与那四起未曾结案的密室斩首案深深牵扯。而那尘封于汴京城下的秘密，亦随着它的陨落，或被深埋，或欲出土。以本格密室为面、长逻辑推理为底，四起斩首密室案件环环相扣，在破解诡计之后，一条悖论将引出整段历史中被隐藏的权谋故事。",
+    people: 6,
+    img: "https://kimi-web-img.moonshot.cn/img/k.sinaimg.cn/6b630c953002bb19e1f692c04f7eea7e329f4501.jpg",
+  },
+  {
+    name: "立方馆谋杀始末",
+    duration: 7,
+    desc: "近日，警方在位于无人区的著名建筑「立方馆」中发现六具尸体，据调查均为前段时间一同前往立方馆的三男三女，全部遇难，无人生还。与此同时，天国之上，一位喜欢看推理小说的大天使，将这场无人生还的惨案，做成了推理游戏，祂呈现了六名死者的当时回忆，作为一次天国的考核。六名小天使们接到考核，要通过回忆帮助人类寻找难以找到的真相，而在推理的过程中，小天使们发现除了接二连三的杀人事件之外，在这些文字内容之中，竟藏有大天使绞尽脑汁设置的谜题。",
+    people: 6,
+    img: "https://kimi-web-img.moonshot.cn/img/cdn.store-assets.com/b1e43f1aa9689c2763728f7d2aefee1b107fce65.png",
   },
   {
     name: "雪夜城谜案",
@@ -78,11 +90,21 @@ export const wishlist: WishlistGame[] = [
     img: "https://kimi-web-img.moonshot.cn/img/cqbiozfappfwfcahtxfm.supabase.co/339100867a648b0cc2be0cd329532706a2e011dd.webp",
   },
   {
-    name: "北宋奇案·汴京",
+    name: "土狗",
     duration: 8,
-    desc: "一段北宋时期耻辱的历史，两个南宋同朝为官的叔侄，三位曾经纠葛种种的帝王，竟与那四起未曾结案的密室斩首案深深牵扯。而那尘封于汴京城下的秘密，亦随着它的陨落，或被深埋，或欲出土。以本格密室为面、长逻辑推理为底，四起斩首密室案件环环相扣，在破解诡计之后，一条悖论将引出整段历史中被隐藏的权谋故事。",
+    // 据公开简介改写：https://www.sohu.com/a/908528087_122378800
+    desc: "第一次独自调查案件，我走进了黄土村。风里裹着沙尘与煤灰，村民看向外来者的眼神里满是敌意。起初，我以为他们只是不了解村中藏着的罪恶，直到调查深入，才发现无知并不足以解释他们的态度。村中的人究竟在守护什么？那些纠缠不清的往事，又与眼前的案件有何关联？要看清这片黄土下埋藏的真相，得先读懂这里的人。",
     people: 6,
-    img: "https://kimi-web-img.moonshot.cn/img/k.sinaimg.cn/6b630c953002bb19e1f692c04f7eea7e329f4501.jpg",
+    img: "https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/a0700d836f1ec8ba3506a1c04c02a74aa8eb6837.jpg",
+  },
+  {
+    name: "幻想诸因",
+    duration: 8,
+    // 据公开介绍与玩家前言改写：https://www.165club.cn/jbsgl/15223.html
+    // https://qiandao.com/post?postId=979208179697102188
+    desc: "一群失去记忆的人被聚集在封闭的场所，面前是等待解答的离奇案件。文字、图像与看似寻常的叙述，都可能藏着被忽略的线索。众人循着故事追查，试图拼回真相，却还要面对推理禁忌与悖论构成的蜂巢谜局。案件之间究竟有着怎样的联系，遗失的记忆又将把他们带向何处？想要找到生路，必须先辨清眼前的虚构与真实。",
+    people: 6,
+    img: "https://kimi-web-img.moonshot.cn/img/img.alicdn.com/a4e9ecce884254fccb823c0b55d67d4ecb9cf948.jpg",
   },
   {
     name: "离家出走",
@@ -90,13 +112,6 @@ export const wishlist: WishlistGame[] = [
     desc: "这座城市从来就没有光，唤醒人们的不是朝阳，而是炙热无比的欲望。我不知道自己在执着什么，但是我明白，或许是时候该做些什么了，为了那些尘封的过往。我行走在这光鲜亮丽的城市里，我睡在这座破落不堪的地狱中，我敲开了一扇又一扇紧闭的门。我还能走多远，我不知道，但我一定会查出所有的真相，给这个故事画上句号。总有一天，大家都会离开的，如果非要分一个先后的话，但愿下一个就是我。",
     people: 7,
     img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/499501eff6827bb4c566a9d3914379c9a0612279",
-  },
-  {
-    name: "立方馆谋杀始末",
-    duration: 7,
-    desc: "近日，警方在位于无人区的著名建筑「立方馆」中发现六具尸体，据调查均为前段时间一同前往立方馆的三男三女，全部遇难，无人生还。与此同时，天国之上，一位喜欢看推理小说的大天使，将这场无人生还的惨案，做成了推理游戏，祂呈现了六名死者的当时回忆，作为一次天国的考核。六名小天使们接到考核，要通过回忆帮助人类寻找难以找到的真相，而在推理的过程中，小天使们发现除了接二连三的杀人事件之外，在这些文字内容之中，竟藏有大天使绞尽脑汁设置的谜题。",
-    people: 6,
-    img: "https://kimi-web-img.moonshot.cn/img/cdn.store-assets.com/b1e43f1aa9689c2763728f7d2aefee1b107fce65.png",
   },
   {
     name: "持斧奥夫",
@@ -119,32 +134,31 @@ export const wishlist: WishlistGame[] = [
     people: 6,
     img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/4308a1c9ed29ce7933e8d998ac2bfc6cc98f1c83.jpg",
   },
-  {
-    name: "鸦雀无生",
-    duration: 7,
-    desc: "传说，湘西有三邪，养蛊，赶尸，落花洞女。而鸦雀城，更是其中一处极为偏远的山城。这里地貌奇特，与世隔绝，女子不外嫁，男子不出城。这里妖魔鬼怪横行，诡异案件频发。但总有人不信邪。六位侦探，山鸦，渡鸦，寒鸦，丝雀，朱雀，灰雀，应邀探明真相。路过白骨冢，薄雾中，隐约可见两个血红色的灯笼低挂着。一边一个灵字，一边一个酒字。守灵人酒肆，赫然出现在眼前。",
-    people: 6,
-    img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/24aac68a2608ca80c64b082c2b1d60647d8debe6.jpg",
-  },
-  {
-    name: "无相人2：画皮考古奇案",
-    duration: 8,
-    desc: "江南异人能够解衣换面、借皮还生，荒村旧迹与白骨之中藏着尚未解开的往事。一卷聊斋，写狐写鬼，也留下真假难辨的传闻。无相人系列第二部以画皮与聊斋志怪为引，作为独立平行篇章，将奇术设定、案件推理与故事还原融为一体。",
-    people: 6,
-    img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/e7ff5d453cd4e2775ac8a89d82d00c56175e6013.jpg",
-  },
-  {
-    name: "阿比苏的玫瑰花",
-    duration: 7,
-    desc: "先锋哨队失联后，一名寻找父亲的少女走进阿比苏荒原，同伴循迹而来，最终抵达废弃修道院。月圆时玫瑰盛放，旧日钟声再起，众人需要面对往事，以及实现愿望所需付出的代价。蛛丝马迹发行、树大招风创作的架空新本格推理本，结合阵营博弈与人物情感，适合 3 男 3 女共 6 人体验，时长约 6–7 小时。",
-    people: 6,
-    img: "https://www.52jubensha.com/wp-content/uploads/2026/09/微信图片_2026-09-28_213746_814-212x300.jpg",
-  },
+  // {
+  //   name: "无相人2：画皮考古奇案",
+  //   duration: 8,
+  //   desc: "江南异人能够解衣换面、借皮还生，荒村旧迹与白骨之中藏着尚未解开的往事。一卷聊斋，写狐写鬼，也留下真假难辨的传闻。无相人系列第二部以画皮与聊斋志怪为引，作为独立平行篇章，将奇术设定、案件推理与故事还原融为一体。",
+  //   people: 6,
+  //   img: "https://kimi-web-img.moonshot.cn/img/treasure.qiandaocdn.com/e7ff5d453cd4e2775ac8a89d82d00c56175e6013.jpg",
+  // },
 ];
 
 export const scriptGames: ScriptGame[] = [
   {
+    name: "无相人考古奇案",
+    teamScore: 8.8,
+    time: "2026.11",
+    dm: "惊奇侦探-Yao",
+    role: "1",
+    comment: "案件只有三个，但是盘的很顺，我们推土机车基本不用扶，后续的连续反转重盘也很爽，还有结局写的也不错，根据车友反馈应该可以给到9分，但我盘累挂机了一会扣一分嘿嘿",
+    players: ["WYZ", "TJJ", "CZH", "ZLW", "SZY", "YWL"],
+    desc: "六位推理社学生受考古教授邀请，品鉴一部唐代出土的推理小说。通过摸顶秘术读取颅骨留下的记忆，玩家将探索无相人与阴阳眼的特殊设定，破解离奇案件，拼起人物关系与历史中的隐秘往事。表里山河汗青系列作品，以设定推理、故事还原与历史立意交织展开。",
+    score: 8,
+    img: "https://kimi-web-img.moonshot.cn/img/cqbiozfappfwfcahtxfm.supabase.co/02ce847bf1795a5e63efb2fb5d6e1620efd0e828.webp",
+  },
+  {
     name: "鬼河怒放",
+    teamScore: 8.4,
     time: "2026.10",
     dm: "惊奇侦探-暴君",
     comment: "质量整体比较高，虽然设定比较多，但是设定完整，逻辑非常硬没有杠点，结尾略有瑕疵，不过可以直接忽略",
@@ -155,6 +169,7 @@ export const scriptGames: ScriptGame[] = [
   },
   {
     name: "因火成烟",
+    teamScore: 8.3,
     time: "2026.10",
     dm: "惊奇侦探-13.",
     role: "二",
@@ -166,6 +181,7 @@ export const scriptGames: ScriptGame[] = [
   },
   {
     name: "此时彼刻之人",
+    teamScore: 7.2,
     time: "2026.10",
     dm: "惊奇侦探-Yao",
     role: "星司",
@@ -177,6 +193,7 @@ export const scriptGames: ScriptGame[] = [
   },
   {
     name: "八十七仙图",
+    teamScore: 7.4,
     time: "2026.9",
     dm: "惊奇侦探-木偶 / 惊奇侦探-9.0",
     desc: "1937年，一场看似普通的画展即将在紫金港的威尔逊展馆举行。《八十七神仙卷》位列展品之首，一时间轰动全港。相传此画卷为唐代吴道子真迹，白描绘画巅峰之作，千百年来颠沛流离，几经辗转终于现世。今天，六名培英中学的学生随老师参加画展，却意外卷入了一场谋划千年的历史迷局之中。",
@@ -188,6 +205,7 @@ export const scriptGames: ScriptGame[] = [
   },
   {
     name: "山鬼母",
+    teamScore: 6.5,
     time: "2026.8",
     dm: "惊奇侦探-隐",
     desc: "山鬼母，披花布，背着麻袋山后住；山鬼母，勿惹怒，惹怒掐脖摔下路！许多年前，南方数省都在流传这首儿歌，据传见过山鬼母的人都会在不久之后失踪或死亡。1914年10月11日，浙江金华山麓的台麓村中，一户姓甘的人家住在离地十多米的峭壁上，随着峭壁上传来碰的声响，有人坠落！民国背景下的豪门惊情系列第46部，以山鬼母传说为引，围绕甘家与村中各户错综复杂的关系展开，失忆、拐童旧案与多具尸体的真相等待被揭开。",
@@ -200,6 +218,7 @@ export const scriptGames: ScriptGame[] = [
   },
   {
     name: "虚构推理",
+    teamScore: 8.0,
     time: "2026.7",
     dm: "惊奇侦探-13.",
     desc: "灵异电台、无人列车、怨婴……12个令人匪夷所思的故事，在虚构与真实之间抽丝剥茧，获得令人难以置信的真相。你以为已经结束了？不，一切才刚刚开始。",
@@ -211,6 +230,7 @@ export const scriptGames: ScriptGame[] = [
   },
   {
     name: "芥子：弥望之川",
+    teamScore: 9.4,
     time: "2026.5",
     dm: "惊奇侦探-9.0",
     desc: '在那弥望山岭深处，有一座村子名唤"弥岭村"。村前有一条大河，是为"须陀河"。据传，这弥岭村乃是由数百年前一支战败的明军所建立。他们为了躲避清军追捕而误入此地，却再也没能离开，只能在那松柏山头，日夜远望回不去的故乡。直到某日，从那须陀河里走出来一位菩萨。村民问菩萨要去往何处？菩萨曰：须弥山巅六欲天。村民请求菩萨带他们一起离开，菩萨摇了摇头。村民又问那他们该去往何处？菩萨答：你们当入无间地狱，历千万亿劫，求出无期...',
@@ -223,6 +243,7 @@ export const scriptGames: ScriptGame[] = [
   },
   {
     name: "头颅们的失眠夜",
+    teamScore: 6.9,
     time: "2026.4",
     dm: "惊奇侦探-13.",
     desc: '在京都一处偏僻的郊外，有一间只在雨天出现的神秘二层酒馆，被人们称为"雾雨酒馆"。昭和末年，推理小说家昨日非门因病去世，其生前完成的最后一部作品在死后被编纂出版。平成十年的一个雨夜，神秘男人只身前往废弃的雾雨酒馆，酒馆二楼的窗边，六颗头颅早已在圆桌上静候着他的到来。日式崩坏推理城限本，以五起尘封的密室斩首事件为核心，玩家扮演六颗觉醒的头颅，共同破解昨日先生最后的谜题。',
@@ -330,6 +351,7 @@ export const scriptGames: ScriptGame[] = [
   },
   {
     name: "青楼",
+    comment: "娱乐本，有点一般",
     time: "2024.9",
     desc: '长安有一间名叫玉满楼的青楼，是无数大臣小相、富家公子、贤人雅士都流连忘返之地。玩家将化身不同身份的客人与花魁，展开一场爱恨交织、权谋交锋的精彩演绎。集古风、情感、阵营、机制与欢乐剧情于一体，采用"双面身份+阵营博弈"机制，剧情层层递进，结局常让人惊呼"原来我一直在演别人"。',
     score: 4,
@@ -337,6 +359,7 @@ export const scriptGames: ScriptGame[] = [
   },
   {
     name: "搞钱",
+    comment: "娱乐本，有点一般",
     time: "2024.2",
     desc: "国家级医疗养生产业园即将落户平安市，本地大富豪们纷纷摩拳擦掌，准备大展拳脚，让资产腾飞。此时，神秘的散财童子老金突然出现，以产业园竞标胜负为准，邀请胜者加入世界级财团——金氏集团。大富豪们将亲历笑里藏刀、同伙背刺、坑蒙拐骗等尔虞我诈的商业竞争，最终谁能笑到最后，获得阶级跃迁，左右世界格局。",
     score: 4,

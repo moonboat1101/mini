@@ -40,6 +40,7 @@ const normalizePlayed = (item: unknown, index: number): PlayedScriptRecord => {
     time: asString(value.time),
     desc: asString(value.desc),
     score: asNumber(value.score),
+    teamScore: value.teamScore == null || value.teamScore === "" ? undefined : asNumber(value.teamScore),
     img: asString(value.img),
     comment: asString(value.comment),
     role: asString(value.role),
